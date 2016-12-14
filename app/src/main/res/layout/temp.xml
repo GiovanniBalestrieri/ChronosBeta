@@ -1,0 +1,303 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pokeroom"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:background="#dcdcdc" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#89969F">
+
+            <!-- Thumbnail Image   -->
+            <!-- <com.android.volley.toolbox.NetworkImageView -->
+            <ImageView
+                android:id="@+id/thumbnail_offer"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:adjustViewBounds="true"
+                android:layout_centerInParent="true"
+                android:maxHeight="250dp"
+                android:background="@drawable/shop_wall"
+                android:clickable="true"
+                android:scaleType="centerCrop"/>
+            <!--
+                android:background="?attr/selectableItemBackgroundBorderless"-->
+
+
+            <!-- android:scaleType="centerCrop" -->
+
+
+            <LinearLayout
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/title_quiz"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:background="@color/quiz1_overlay">
+
+                    <ImageButton
+                        android:layout_weight="0.5"
+                        android:background="@color/quiz1_overlay"
+                        android:src="@drawable/ic_thumb_up_white_24dp"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="@dimen/shop_dialog_bar_padding_bottom"
+                        android:paddingTop="@dimen/shop_dialog_bar_padding_top" />
+
+                    <ImageButton
+                        android:layout_weight="0.5"
+                        android:background="@color/quiz1_overlay"
+                        android:src="@drawable/ic_favorite_white_24dp"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="@dimen/shop_dialog_bar_padding_bottom"
+                        android:paddingTop="@dimen/shop_dialog_bar_padding_top" />
+                    <!--
+                    <TextView
+                        android:background="@color/quiz1_overlay"
+                        android:id="@+id/bar_modal_title"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:text="20 %"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/offer_dialog_bar_padding_bottom"
+                        android:paddingTop="@dimen/offer_dialog_bar_padding_top"
+                        android:textColor="@color/quiz_title"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/title_quiz"/>
+
+                    -->
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordi"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp">
+
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15sp"
+                android:paddingTop="15sp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/borderphoto">
+
+                    <ImageView
+                        android:id="@+id/LogoRoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="Logo Pokeroom"
+                        android:maxHeight="150dp"
+                        android:maxWidth="150dp"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="2dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/shop_profile" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="4sp">
+
+                    <TextView
+                        android:id="@+id/pokerroomName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/name_shop"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/shop_name" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginLeft="4dp">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_marginRight="4dp">
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Comunicazioni_poker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="3sp"
+                android:paddingTop="25sp"
+                android:paddingLeft="10sp"
+                android:text="comunicazioni"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/shop_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingBottom="3sp"
+                android:paddingTop="15sp"
+                android:paddingLeft="10sp"
+                android:text="Info"
+                android:textColor="#000000"
+                android:textSize="17sp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#bebebe"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="8dp"
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/shop_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dummy_text"
+                    android:textColor="#808080"
+                    android:textSize="15sp"
+                    android:paddingBottom="5sp" />
+
+                </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/StatisticheText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingBottom="3sp"
+                android:paddingTop="15sp"
+                android:paddingLeft="10sp"
+                android:text="stats"
+                android:textSize="17sp"
+                android:textColor="#000000" />
+
+            <View
+                android:id="@+id/StatisticheView"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#bebebe"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:id="@+id/StatisticheData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical" >
+
+
+                <TextView
+                    android:id="@+id/avgPlayersText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dummy_text_short"
+                    android:textColor="#808080"
+                    android:textSize="15sp"
+                    android:paddingBottom="5sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingBottom="3sp"
+                android:paddingTop="25sp"
+                android:paddingLeft="10sp"
+                android:text="@string/location"
+                android:textSize="17sp"
+                android:textColor="#000000" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#bebebe"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="8dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
