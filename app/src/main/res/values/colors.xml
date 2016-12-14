@@ -40,7 +40,15 @@
     <color name="lic_card_overlay">#80000000</color>
 
 
-    <!-- Quiz Modal -->
+    <!-- Code -->
+
+
+
+    <!-- Green -->
+    <color name="green_temp">#23A96E</color>
+    <color name="green_dark">#159204</color>
+    <color name="bright_green">#02D8B0</color>
+    <color name="button_green">#10a54a</color>
 
     <color name="quiz1_overlay">#80000000</color>
     <color name="quiz_title">#fcfcfc</color>

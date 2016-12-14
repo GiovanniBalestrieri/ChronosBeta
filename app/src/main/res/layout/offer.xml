@@ -173,6 +173,7 @@
                     android:layout_marginRight="@dimen/quiz_content_padding_lateral"
                     android:layout_marginBottom="@dimen/quiz_content_padding_top_bot" />
 
+                <!--
                 <TextClock
                     android:gravity="center"
                     android:layout_width="match_parent"
@@ -180,7 +181,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginBottom="40dp"
                     android:id="@+id/textClock" />
-
+                -->
 
 
 
