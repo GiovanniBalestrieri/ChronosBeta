@@ -41,7 +41,14 @@ public class Code extends Activity {
                 if (start==CODE_LEN - 1) {
                     // TODO Remote Code check
                     Toast.makeText(getApplicationContext(),"yolo",Toast.LENGTH_SHORT).show();
-                    action.setVisibility(View.VISIBLE);
+                    //action.setVisibility(View.VISIBLE);
+
+
+                    Intent i;
+                    i = new Intent(Code.this, MainActivity.class);
+                    startActivity(i);
+                    finish();
+                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 }
             }
 
@@ -60,11 +67,6 @@ public class Code extends Activity {
             public void onClick(View v) {
                 // Perform action on click
 
-                Intent i;
-                i = new Intent(Code.this, MainActivity.class);
-                startActivity(i);
-                finish();
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
             }
         });
 
