@@ -12,6 +12,7 @@ public class Offer extends Article implements Parcelable {
     private String from;
     private String to;
     private String timeout;
+    private String discount;
     private int drawable_thumb;
 
     public Offer(String id, String title, int d, String cat) {
@@ -79,6 +80,9 @@ public class Offer extends Article implements Parcelable {
         super.setDescription(parcel.readString());
         super.setCategories(parcel.readString());
         this.drawable_thumb = Integer.parseInt(parcel.readString());
+        super.setPrice(parcel.readString());
+        this.discount = parcel.readString();
+        super.setShopId(parcel.readString());
     }
 
     @Override
@@ -96,6 +100,9 @@ public class Offer extends Article implements Parcelable {
         parcel.writeString(super.getDescription());
         parcel.writeString(super.getCategories());
         parcel.writeString(String.valueOf(this.drawable_thumb));
+        parcel.writeString(super.getPrice());
+        parcel.writeString(discount);
+        parcel.writeString(super.getShopId());
     }
 
     public static final Parcelable.Creator CREATOR  = new Parcelable.Creator() {
@@ -107,4 +114,12 @@ public class Offer extends Article implements Parcelable {
             return new Offer[size];
         }
     };
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
 }

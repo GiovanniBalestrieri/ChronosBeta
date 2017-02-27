@@ -135,34 +135,46 @@ public class OffersListFragment extends Fragment {
                     R.drawable.scarpa_d};
 
             Offer a = new Offer("1","Vogstyle Uomo Cappotto Trench Giacca", covers[0], "Abbigliamento Uomo");
-            a.setDescription(" Modello: Altezza:185cm,Peso:73 kg\n" +
+            a.setShopId("1");
+            a.setDescription("Modello: Altezza:185cm,Peso:73 kg\n" +
                     "Cotone\n" +
                     "XL:Lunghezza:28.9\",Manica:25.6\",Busto:48\",Spalla:18.5\"\n" +
                     "giacca blouson\n" +
                     "Materiale:90% Cotone,10% Altri ");
+            a.setPrice("240€");
+
             offerList.add(a);
 
             Offer a1 = new Offer("2","DELEY Autunno Giacca Slim Fit Elegante Ufficio ", covers[1], "Abbigliamento Donna");
+            a1.setShopId("1");
             a1.setDescription("\n" +
-                    "    Stile unico, creare l'illusione di curve mozzafiato\n" +
-                    "    Elegante, capace e di esperienza\n" +
-                    "    Cotone E Poliestere\n" +
-                    "    Confortevole e morbido, materiale, moda, lo stile europeo\n" +
-                    "    Adatta per: Sping/Autunno/Inverno\n" +
-                    "    Dimensione: Formato asiatico è più piccolo di formato di UE. Si prega di controllare i dettagli dimensioni nella descrizione qui sotto\n");
-
+                    "Stile unico, creare l'illusione di curve mozzafiato\n" +
+                    "Elegante, capace e di esperienza\n" +
+                    "Cotone E Poliestere\n" +
+                    "Confortevole e morbido, materiale, moda, lo stile europeo\n" +
+                    "Adatta per: Sping/Autunno/Inverno\n" +
+                    "Dimensione: Formato asiatico è più piccolo di formato di UE. Si prega di controllare i dettagli dimensioni nella descrizione qui sotto\n");
+            a1.setPrice("135€");
+            a1.setDiscount("12%");
             offerList.add(a1);
 
             Offer a2 = new Offer("3","Drone Syma X5SW 4CH 2.4G 6-Asse Giroscopio RC Wifi FPV ", covers[2], "Tech");
+            a2.setShopId("2");
             a2.setDescription("\n" +
-                    "    Il velivolo FPV può volare indoor o outdoor, 360 gradi di sostegno 3D rolling all-around.\n" +
-                    "    Versione Wi-Fi, foto e video, supporto agli utenti IOS/Android\n" +
-                    "    Aggiunta la funzione senza testa.\n" +
-                    "    Con 0.3 MP fotocamera HD.\n" +
-                    "    Pronto a volare (richiede solo 4 * batterie AA)\n");
+                    "Il velivolo FPV può volare indoor o outdoor,\n"+
+                    "360 gradi di sostegno 3D rolling all-around.\n" +
+                    "Versione Wi-Fi, foto e video, supporto agli utenti IOS/Android\n" +
+                    "Aggiunta la funzione senza testa.\n" +
+                    "Con 0.3 MP fotocamera HD.\n" +
+                    "Pronto a volare (richiede solo 4 * batterie AA)\n");
+            a2.setPrice("455€");
+            a2.setDiscount("21%");
             offerList.add(a2);
 
             Offer a3 = new Offer("4","Textile Scarpa tacco alto lavoro festa elegante", covers[3], "Scarpe Donna");
+            a3.setPrice("95€");
+            a3.setShopId("1");
+            a3.setDiscount("10%");
             a3.setDescription("scelta di colori come mostrato sopra\n" +
                     "\n" +
                     "* tomaia sintetica\n" +
