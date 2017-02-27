@@ -6,6 +6,11 @@
 
     <string name="action_settings">Settings</string>
 
+    <!-- NAvigation -->
+    <string name="collapsing_title">Titolo</string>
+
+
+
     <!-- Offer Page -->
 
     <string name="offer_title_main">Suits</string>

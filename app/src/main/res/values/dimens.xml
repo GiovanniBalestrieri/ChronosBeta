@@ -27,16 +27,17 @@
     <dimen name="ic_city_overflow_margin_top">5dp</dimen>
     <dimen name="ic_city_overflow_margin_right">3dp</dimen>
 
-    <!-- CardView Licence -->
+    <!-- CardView Offer -->
     <dimen name="lic_item_offset">10dp</dimen>
     <dimen name="lic_detail_backdrop_height">250dp</dimen>
     <dimen name="lic_backdrop_title">30dp</dimen>
     <dimen name="lic_backdrop_subtitle">18dp</dimen>
     <dimen name="lic_card_margin">5dp</dimen>
     <dimen name="lic_card_radius">3dp</dimen>
-    <dimen name="lic_cover_height">180dp</dimen>
+    <dimen name="offer_cover_height">260dp</dimen>
+    <dimen name="offer_overlay_height">60dp</dimen>
     <dimen name="lic_title_padding">10dp</dimen>
-    <dimen name="lic_title">19dp</dimen>
+    <dimen name="offer_title">24sp</dimen>
     <dimen name="lic_num_count_padding_bottom">5dp</dimen>
     <dimen name="lic_num_count">12dp</dimen>
     <dimen name="lic_ic_overflow_width">20dp</dimen>
@@ -74,6 +75,7 @@
 
     <!-- Code -->
     <dimen name="code_box_padding_top">24dp</dimen>
+    <dimen name="details_offer_padding_top">12dp</dimen>
 
 
     <!--NavDrawer-->
