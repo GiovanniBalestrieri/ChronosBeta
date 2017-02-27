@@ -55,7 +55,7 @@ public class SplashScreen extends Activity {
                 i = new Intent(SplashScreen.this, Code.class);
                 startActivity(i);
                 finish();
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                //overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 /*
                 if(sharePrefs.getIsFirstTimeUser()) {
                     i = new Intent(SplashScreen.this, MainActivity.class);

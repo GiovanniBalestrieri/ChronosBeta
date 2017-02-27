@@ -42,13 +42,10 @@ public class Code extends Activity {
                     // TODO Remote Code check
                     Toast.makeText(getApplicationContext(),"yolo",Toast.LENGTH_SHORT).show();
                     //action.setVisibility(View.VISIBLE);
-
-
-                    Intent i;
-                    i = new Intent(Code.this, MainActivity.class);
+                    Intent i = new Intent(Code.this, MainActivity.class);
                     startActivity(i);
                     finish();
-                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                    //overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 }
             }
 
@@ -60,6 +57,7 @@ public class Code extends Activity {
 
             @Override
             public void afterTextChanged(Editable s)  {
+                    Intent i;
             }
         });
 

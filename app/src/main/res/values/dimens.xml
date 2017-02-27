@@ -75,4 +75,10 @@
     <!-- Code -->
     <dimen name="code_box_padding_top">24dp</dimen>
 
+
+    <!--NavDrawer-->
+
+    <dimen name="TitleHeader">21sp</dimen>
+
+
 </resources>

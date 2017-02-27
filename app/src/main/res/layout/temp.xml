@@ -25,7 +25,7 @@
                 android:adjustViewBounds="true"
                 android:layout_centerInParent="true"
                 android:maxHeight="250dp"
-                android:background="@drawable/shop_wall"
+                android:background="@drawable/abitiuomo"
                 android:clickable="true"
                 android:scaleType="centerCrop"/>
             <!--
@@ -51,7 +51,7 @@
                     <ImageButton
                         android:layout_weight="0.5"
                         android:background="@color/quiz1_overlay"
-                        android:src="@drawable/ic_thumb_up_white_24dp"
+                        android:src="@drawable/like_icon"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:paddingBottom="@dimen/shop_dialog_bar_padding_bottom"
@@ -60,7 +60,7 @@
                     <ImageButton
                         android:layout_weight="0.5"
                         android:background="@color/quiz1_overlay"
-                        android:src="@drawable/ic_favorite_white_24dp"
+                        android:src="@drawable/fav_icon"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:paddingBottom="@dimen/shop_dialog_bar_padding_bottom"
@@ -92,7 +92,6 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bordi"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:layout_marginLeft="4dp"
@@ -109,8 +108,7 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/borderphoto">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/LogoRoom"
@@ -125,7 +123,7 @@
                         android:paddingRight="2dp"
                         android:paddingTop="2dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/shop_profile" />
+                        android:src="@drawable/fendi_logo" />
 
                 </LinearLayout>
 
