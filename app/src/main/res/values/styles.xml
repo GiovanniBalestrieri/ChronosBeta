@@ -13,4 +13,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/blue</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/green</item>
+        <item name="colorControlNormal">@color/darkblue</item>
+        <item name="colorControlActivated">@color/orange</item>
+        <item name="colorControlHighlight">@color/orange</item>
+    </style>
+
+    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
 </resources>

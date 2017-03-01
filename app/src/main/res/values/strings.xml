@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_search">Cerca</string>
 
     <!-- NAvigation -->
     <string name="collapsing_title">Titolo</string>
@@ -23,4 +24,15 @@
     <string name="indirizzo">Indirizzo</string>
     <string name="name_shop">Fendy</string>
     <string name="desc_shop">Descrizione</string>
+
+    <!-- Edit Text fields -->
+    <string name="hint_name">Nome e Cognomne</string>
+    <string name="hint_invito">Invito</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_sign_up">Registrati</string>
+    <string name="err_msg_name">Inserisci il tuo nome completo</string>
+    <string name="err_msg_email">Inserisci una mail valida</string>
+    <string name="err_msg_password">Inserisci la password</string>
+    <string name="err_msg_code">Inserisci il codice</string>
 </resources>

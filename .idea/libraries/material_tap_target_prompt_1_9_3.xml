@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="material-tap-target-prompt-1.9.3">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/uk.co.samuelwall/material-tap-target-prompt/1.9.3/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/uk.co.samuelwall/material-tap-target-prompt/1.9.3/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/uk.co.samuelwall/material-tap-target-prompt/1.9.3/dfba4d63fd80e922568013c2e28d0ba03cdfe3c3/material-tap-target-prompt-1.9.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

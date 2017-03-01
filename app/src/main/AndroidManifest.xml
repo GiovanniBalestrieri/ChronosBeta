@@ -41,6 +41,9 @@
             android:name=".UI.Code">
         </activity>
 
+        <activity
+            android:name=".Activities.IntroActivity"
+            android:theme="@style/Theme.Intro" />
 
 
     </application>

@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         initCollapsingToolbar();
-        //setSupportActionBar(toolbar);
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -146,6 +145,12 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search) {
             return true;
         }
 

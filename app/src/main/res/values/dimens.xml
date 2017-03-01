@@ -74,8 +74,10 @@
     <dimen name="shop_dialog_bar_margin">24dp</dimen>
 
     <!-- Code -->
-    <dimen name="code_box_padding_top">24dp</dimen>
+    <dimen name="code_box_padding_top">64dp</dimen>
+    <dimen name="logo_margin_bottom">64dp</dimen>
     <dimen name="details_offer_padding_top">12dp</dimen>
+    <dimen name="no_invito_padding_top">90dp</dimen>
 
 
     <!--NavDrawer-->
