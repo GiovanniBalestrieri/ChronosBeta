@@ -24,8 +24,6 @@ public class IntroActivity extends MaterialIntroActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         /*
         IntroView mIntroView = new IntroView(this);
 
