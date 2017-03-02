@@ -83,7 +83,7 @@ public class Code extends Activity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (start==CODE_LEN - 1) {
                 // TODO Remote Code check
-                Toast.makeText(getApplicationContext(),"yolo",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"yolo",Toast.LENGTH_SHORT).show();
                 //action.setVisibility(View.VISIBLE);
                 Intent i = new Intent(Code.this, IntroActivity.class);
                 startActivity(i);

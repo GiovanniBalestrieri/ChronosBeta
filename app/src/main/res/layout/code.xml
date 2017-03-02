@@ -113,7 +113,7 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="Procedi senza"
-                android:textColor="@color/orange"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_weight="1"

@@ -8,7 +8,7 @@
     <string name="action_search">Cerca</string>
 
     <!-- NAvigation -->
-    <string name="collapsing_title">Titolo</string>
+    <string name="collapsing_title"></string>
 
 
 
@@ -35,4 +35,19 @@
     <string name="err_msg_email">Inserisci una mail valida</string>
     <string name="err_msg_password">Inserisci la password</string>
     <string name="err_msg_code">Inserisci il codice</string>
+
+    <array name="titles">
+        <item>"Ciao"</item>
+        <item>"Ciao1"</item>
+        <item>"Ciao1"</item>
+        <item>"Ciuqaio2"</item>
+    </array>
+
+    <array name="texts">
+        <item>"Ciao"</item>
+        <item>"Ciao1"</item>
+        <item>"Ciao1"</item>
+        <item>"Ciuqaio2"</item>
+    </array>
+
 </resources>

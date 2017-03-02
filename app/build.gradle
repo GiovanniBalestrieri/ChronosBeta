@@ -21,6 +21,10 @@ android {
 }
 repositories {
     jcenter()
+
+    maven {
+        url "https://jitpack.io"
+    }
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -48,6 +52,8 @@ dependencies {
 
     // ShowCase
     compile 'agency.tango.android:material-intro-screen:0.0.5'
+
+    compile 'com.github.ihsanbal:SlidingIntoView:1.0.1'
 
 
 
