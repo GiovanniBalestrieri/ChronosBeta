@@ -30,6 +30,8 @@ import box.chronos.userk.chronos.UI.Code;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 
+import static box.chronos.userk.chronos.Settings.Intro.debugIntro;
+
 /**
  * Created by userK on 9/16/16.
  */
@@ -52,23 +54,25 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 Intent i;
-                i = new Intent(SplashScreen.this, Code.class);
-                startActivity(i);
-                finish();
-                //overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                /*
-                if(sharePrefs.getIsFirstTimeUser()) {
-                    i = new Intent(SplashScreen.this, MainActivity.class);
-                    startActivity(i);
-                    finish();
-                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                }else{
+                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                if (debugIntro) {
                     i = new Intent(SplashScreen.this, Code.class);
                     startActivity(i);
                     finish();
-                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                } else {
+
+                    if (sharePrefs.getIsFirstTimeUser()) {
+                        i = new Intent(SplashScreen.this, MainActivity.class);
+                        startActivity(i);
+                        finish();
+                        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                    } else {
+                        i = new Intent(SplashScreen.this, Code.class);
+                        startActivity(i);
+                        finish();
+                        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                    }
                 }
-                */
             }
         }, SPLASH_TIME_OUT);
     }
