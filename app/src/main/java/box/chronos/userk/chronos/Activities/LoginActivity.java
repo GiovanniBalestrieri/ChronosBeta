@@ -27,10 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activity);
 
 
+        /*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+*/
 
 
         Fragment fragment;

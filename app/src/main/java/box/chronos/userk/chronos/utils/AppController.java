@@ -66,6 +66,7 @@ public class AppController extends Application {
     }
 
     public static synchronized UserSharedPreference getPreference() {
+
         return preference;
     }
 
