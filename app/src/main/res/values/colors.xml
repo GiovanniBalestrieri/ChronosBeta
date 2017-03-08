@@ -48,6 +48,14 @@
     <color name="light_blue">#FF3F9FE0</color>
     <color name="dark_blue">#00008B</color>
 
+    <color name="white_opacity">#99FFFFFF</color>
+    <color name="white_opacity_50">#50FFFFFF</color>
+    <color name="white_opacity_90">#F2FFFFFF</color>
+
+    <color name="white_100_percent">#ffffff</color>
+    <color name="white_15_percent">#26ffffff</color>
+    <color name="white_30_percent">#4Dffffff</color>
+
     <color name="rounded_container_bg">#222222</color>
     <color name="rounded_container_border">#3b3f44</color>
     <color name="light_gray_header_color">#646663</color>
