@@ -11,6 +11,17 @@
     <string name="collapsing_title"></string>
 
 
+    <!-- Register Page -->
+    <string name="register_main_text">Registration</string>
+    <string name="register_main_action">Join</string>
+    <string name="register_form_email">Email</string>
+    <string name="register_form_user">User</string>
+    <string name="register_form_pass">Password</string>
+    <string name="register_form_pass_show">Show</string>
+    <string name="register_already_registered">Already registered?</string>
+
+
+    <!-- Login Page -->
 
     <!-- Offer Page -->
 

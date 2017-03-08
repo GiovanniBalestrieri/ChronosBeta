@@ -10,6 +10,18 @@
     <dimen name="app_bar_height">256dp</dimen>
     <dimen name="expanded_toolbar_title_margin_start">48dp</dimen>
 
+
+    <!-- Common -->
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="overlay_margin">8dp</dimen>
+    <dimen name="Zero">0dp</dimen>
+    <dimen name="VeryBig">26dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+
+
     <!-- CardView City -->
     <dimen name="item_offset">10dp</dimen>
     <dimen name="detail_backdrop_height">250dp</dimen>
@@ -91,6 +103,16 @@
     <dimen name="slide_title">30dp</dimen>
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
+
+
+    <!--Register-->
+
+    <dimen name="register_main_text_action">21sp</dimen>
+    <dimen name="register_main_text_margin">30dp</dimen>
+    <dimen name="register_field_width">240dp</dimen>
+    <dimen name="register_field_height">48dp</dimen>
+    <dimen name="register_space_between_editext">10dp</dimen>
+
 
 
 </resources>

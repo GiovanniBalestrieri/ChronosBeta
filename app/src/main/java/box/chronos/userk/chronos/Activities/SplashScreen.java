@@ -60,7 +60,6 @@ public class SplashScreen extends Activity {
                     startActivity(i);
                     finish();
                 } else {
-
                     if (sharePrefs.getIsFirstTimeUser()) {
                         i = new Intent(SplashScreen.this, MainActivity.class);
                         startActivity(i);

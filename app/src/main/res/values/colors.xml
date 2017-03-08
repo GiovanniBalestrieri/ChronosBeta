@@ -33,6 +33,20 @@
     <item name="darkgrey" type="color">#696464</item>
     <item name="white" type="color">#FFFFFF</item>
     <item name="black" type="color">#000000</item>
+    <color name="Blue">#191970</color>
+    <color name="Black">#000000</color>
+    <color name="Grey">#8F8F8F</color>
+    <color name="light_grey">#E8E8E8</color>
+    <color name="dark_grey">#383838</color>
+    <color name="turchese">#00CCFF</color>
+    <color name="transparent_blue">#80004488</color>
+    <color name="purple_light">#a276eb</color>
+    <color name="purple_middle">#8658ce</color>
+    <color name="purple_dark">#6a3ab2</color>
+    <color name="whitie">#F8F8F8</color>
+    <color name="white_dark">#F0F0F0</color>
+    <color name="light_blue">#FF3F9FE0</color>
+    <color name="dark_blue">#00008B</color>
 
     <color name="rounded_container_bg">#222222</color>
     <color name="rounded_container_border">#3b3f44</color>
