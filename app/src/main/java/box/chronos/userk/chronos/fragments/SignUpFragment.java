@@ -105,10 +105,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_Login_v2:
-                if (TextUtils.isEmpty(et_registredEmailId.getText().toString()) || TextUtils.isEmpty(et_registredPassword.getText().toString())) {
-                    if (TextUtils.isEmpty(et_registredEmailId.getText().toString())) {
+                if (TextUtils.isEmpty(etEmail.getText().toString()) || TextUtils.isEmpty(etPassword.getText().toString())) {
+                    if (TextUtils.isEmpty(etEmail.getText().toString())) {
                         Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(et_registredEmailId.getText().toString())) {
+                    } else if (TextUtils.isEmpty(etEmail.getText().toString())) {
                         Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -223,8 +223,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         img_Google = (ImageView) view.findViewById(R.id.img_Google);
         img_Facebook = (ImageView) view.findViewById(R.id.img_Facebook);
         ll_login = (LinearLayout) view.findViewById(R.id.tv_Login_v2);
-        et_registredEmailId = (EditText) view.findViewById(R.id.et_registredEmailId);
-        et_registredPassword = (EditText) view.findViewById(R.id.et_registredPassword);
+        etEmail = (EditText) view.findViewById(R.id.et_registredEmailId);
+        etPassword = (EditText) view.findViewById(R.id.et_registredPassword);
 
         tv_ForgotPassword = (TextView) view.findViewById(R.id.tv_ForgotPassword);
         tv_SignUp = (TextView) view.findViewById(R.id.tv_SignUp);
