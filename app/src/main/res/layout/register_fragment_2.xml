@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/red"
-    android:orientation="vertical" >
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/red">
+
+    <RelativeLayout
+        android:id="@+id/transparentOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/city_card_overlay" />
 
     <ScrollView
         android:id="@+id/profile_scroll"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignParentTop="true">
 
 
         <LinearLayout
+            android:layout_gravity="center_vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -43,8 +50,8 @@
                 android:gravity="center">
 
                 <EditText
-                    android:gravity="left"
                     android:id="@+id/registerName"
+                    android:gravity="left"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/register_field_height"
                     android:layout_marginBottom="4dp"

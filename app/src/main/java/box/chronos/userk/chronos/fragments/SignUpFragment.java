@@ -29,30 +29,32 @@ import box.chronos.userk.chronos.activities.LoginActivity;
 import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.BlurBuilder;
+import box.chronos.userk.chronos.utils.FieldsValidator;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 
 /**
  * Created by userk on 08/03/17.
  */
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class SignUpFragment extends Fragment implements View.OnClickListener {
 
-    private static String TAG = LoginFragment.class.getSimpleName();
+    private static String TAG = SignUpFragment.class.getSimpleName();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;private String mParam2;
     private ImageView img_Google, img_Facebook;
-    private EditText et_registredPassword, et_registredEmailId;
+    private FieldsValidator validator;
+    private EditText etPassword, etName, etEmail;
     private LinearLayout ll_login;
     private TextView tv_SignUp, tv_ForgotPassword;
     private UserSharedPreference sharePrefs;
 
-    public LoginFragment() {
+    public SignUpFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
+    public static SignUpFragment newInstance(String param1, String param2) {
+        SignUpFragment fragment = new SignUpFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,7 +77,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         final Activity activity = getActivity();
         final View content = activity.findViewById(android.R.id.content).getRootView();
 
-        View view = inflater.inflate(R.layout.login_fragment, container, false);
+        View view = inflater.inflate(R.layout.register_fragment_2, container, false);
         //LoginActivity.self.tv_TopHeading.setText(getResources().getString(R.string.login));
         sharePrefs = AppController.getPreference();
         findViews(view);
@@ -128,8 +130,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             case R.id.tv_ForgotPassword:
                 /*
+
                 ForgotPasswordFragment forgotPasswordFragment = new ForgotPasswordFragment();
                 LoginActivity.self.replaceFragment(forgotPasswordFragment);
+
                 */
                 break;
 

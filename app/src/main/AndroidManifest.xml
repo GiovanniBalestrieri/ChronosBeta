@@ -47,6 +47,11 @@
             android:theme="@style/Theme.Intro" />
 
 
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/Theme.Intro" />
+
+
     </application>
 
 </manifest>
