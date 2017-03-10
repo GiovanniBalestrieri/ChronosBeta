@@ -1,4 +1,4 @@
-package box.chronos.userk.chronos.Activities;
+package box.chronos.userk.chronos.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,11 +10,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import box.chronos.userk.chronos.Objects.Offer;
-import box.chronos.userk.chronos.Objects.Shop;
+import box.chronos.userk.chronos.objects.Offer;
+import box.chronos.userk.chronos.objects.Shop;
 import box.chronos.userk.chronos.R;
 
 /**

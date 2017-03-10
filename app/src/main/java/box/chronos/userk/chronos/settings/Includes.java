@@ -1,4 +1,4 @@
-package box.chronos.userk.chronos.Settings;
+package box.chronos.userk.chronos.settings;
 
 /**
  * Created by ChronosTeam on 27/02/2017.

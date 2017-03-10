@@ -1,14 +1,13 @@
-package box.chronos.userk.chronos.Activities;
+package box.chronos.userk.chronos.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import box.chronos.userk.chronos.Objects.Shop;
+import box.chronos.userk.chronos.objects.Shop;
 import box.chronos.userk.chronos.R;
 
 /**

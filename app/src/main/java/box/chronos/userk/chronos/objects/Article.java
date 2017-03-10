@@ -1,7 +1,5 @@
-package box.chronos.userk.chronos.Objects;
+package box.chronos.userk.chronos.objects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

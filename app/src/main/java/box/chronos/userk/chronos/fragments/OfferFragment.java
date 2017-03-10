@@ -1,14 +1,13 @@
-package box.chronos.userk.chronos.UI;
+package box.chronos.userk.chronos.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import box.chronos.userk.chronos.Activities.MainActivity;
+import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.R;
 
 /**

@@ -1,36 +1,16 @@
-package box.chronos.userk.chronos.Activities;
+package box.chronos.userk.chronos.activities;
 /**
  * Created by userk on 9/23/16.
  */
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.res.ResourcesCompat;
-import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
-import android.widget.ImageView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import box.chronos.userk.chronos.Activities.MainActivity;
 import box.chronos.userk.chronos.R;
-import box.chronos.userk.chronos.UI.Code;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
-
-import static box.chronos.userk.chronos.Settings.Intro.debugIntro;
 
 /**
  * Created by userK on 9/16/16.
@@ -54,7 +34,8 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 Intent i;
-                if (sharePrefs.getIsFirstTimeUser()) {
+                boolean a = sharePrefs.getIsFirstTimeUser();
+                if (a) {
                     i = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(i);
                     finish();

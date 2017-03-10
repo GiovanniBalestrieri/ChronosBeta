@@ -1,8 +1,7 @@
-package box.chronos.userk.chronos.UI;
+package box.chronos.userk.chronos.fragments;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -10,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,13 +21,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import box.chronos.userk.chronos.Activities.MainActivity;
-import box.chronos.userk.chronos.Activities.OfferPage;
-import box.chronos.userk.chronos.Adapters.OffersAdapter;
-import box.chronos.userk.chronos.Objects.Offer;
+import box.chronos.userk.chronos.activities.MainActivity;
+import box.chronos.userk.chronos.activities.OfferPage;
+import box.chronos.userk.chronos.adapters.OffersAdapter;
+import box.chronos.userk.chronos.objects.Offer;
 import box.chronos.userk.chronos.R;
-import box.chronos.userk.chronos.Settings.Includes;
-import box.chronos.userk.chronos.utils.AppController;
+import box.chronos.userk.chronos.settings.Includes;
 import box.chronos.userk.chronos.utils.RecycleItemClickListener;
 import box.chronos.userk.chronos.utils.VideoUtility;
 

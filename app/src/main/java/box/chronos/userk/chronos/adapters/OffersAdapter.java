@@ -1,9 +1,8 @@
-package box.chronos.userk.chronos.Adapters;
+package box.chronos.userk.chronos.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,12 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-
 import java.util.List;
 
-import box.chronos.userk.chronos.Objects.Offer;
+import box.chronos.userk.chronos.objects.Offer;
 import box.chronos.userk.chronos.R;
 
 /**

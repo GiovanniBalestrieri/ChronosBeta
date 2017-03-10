@@ -1,4 +1,4 @@
-package box.chronos.userk.chronos.UI;
+package box.chronos.userk.chronos.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,12 +11,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import box.chronos.userk.chronos.Activities.IntroActivity;
 import box.chronos.userk.chronos.R;
 
-import static box.chronos.userk.chronos.Settings.Intro.CODE_LEN;
+import static box.chronos.userk.chronos.settings.Intro.CODE_LEN;
 
 /**
  * Created by userk on 14/12/16.

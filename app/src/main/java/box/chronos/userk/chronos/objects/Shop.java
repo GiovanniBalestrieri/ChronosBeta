@@ -1,4 +1,4 @@
-package box.chronos.userk.chronos.Objects;
+package box.chronos.userk.chronos.objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,4 +1,4 @@
-package box.chronos.userk.chronos.Activities;
+package box.chronos.userk.chronos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,14 +6,11 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.ihsanbal.introview.IntroView;
-
 import agency.tango.materialintroscreen.MaterialIntroActivity;
 import agency.tango.materialintroscreen.MessageButtonBehaviour;
 import agency.tango.materialintroscreen.SlideFragmentBuilder;
 import agency.tango.materialintroscreen.animations.IViewTranslation;
 import box.chronos.userk.chronos.R;
-import box.chronos.userk.chronos.UI.Code;
 
 /**
  * Created by ChronosTeam on 01/03/2017.
