@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import box.chronos.userk.chronos.R;
+import box.chronos.userk.chronos.activities.Code;
 import box.chronos.userk.chronos.activities.LoginActivity;
 import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.utils.AppController;
@@ -142,6 +143,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     // request for login
     private void requestForLogin() {
+
+        Intent intent = new Intent(LoginActivity.self, Code.class);
+
+        LoginActivity.self.startActivity(intent);
+        LoginActivity.self.finish();
 
         /*
         Map<String, String> pairs = new HashMap<>();

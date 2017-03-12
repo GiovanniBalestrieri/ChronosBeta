@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.container_body, fragment);
-        fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        //fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         fragmentTransaction.commit();
     }
 

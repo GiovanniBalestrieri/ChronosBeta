@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import box.chronos.userk.chronos.R;
+import box.chronos.userk.chronos.activities.Code;
 import box.chronos.userk.chronos.activities.LoginActivity;
 import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.utils.AppController;
@@ -41,10 +43,11 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;private String mParam2;
+    private Button btn_login;
     private ImageView img_Google, img_Facebook;
     private FieldsValidator validator;
     private EditText etPassword, etName, etEmail;
-    private LinearLayout ll_login;
+    private LinearLayout ll_register;
     private TextView tv_SignUp, tv_ForgotPassword;
     private UserSharedPreference sharePrefs;
 
@@ -94,17 +97,16 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
 
     private void attachListeners() {
-        tv_ForgotPassword.setOnClickListener(this);
-        tv_SignUp.setOnClickListener(this);
         img_Google.setOnClickListener(this);
         img_Facebook.setOnClickListener(this);
-        ll_login.setOnClickListener(this);
+        ll_register.setOnClickListener(this);
+        btn_login.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_Login_v2:
+            case R.id.btnRegister:
                 if (TextUtils.isEmpty(etEmail.getText().toString()) || TextUtils.isEmpty(etPassword.getText().toString())) {
                     if (TextUtils.isEmpty(etEmail.getText().toString())) {
                         Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
@@ -128,24 +130,24 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 // ((LoginActivity)(getActivity())).doFblogin();
                 break;
 
-            case R.id.tv_ForgotPassword:
-                /*
 
-                ForgotPasswordFragment forgotPasswordFragment = new ForgotPasswordFragment();
-                LoginActivity.self.replaceFragment(forgotPasswordFragment);
 
-                */
+            case R.id.btnLinkToLoginScreen:
+                LoginFragment loginFragment = new LoginFragment();
+                LoginActivity.self.replaceFragment(loginFragment);
                 break;
 
-            case R.id.tv_SignUp:
-                SignUpFragment signUpFragment = new SignUpFragment();
-                LoginActivity.self.replaceFragment(signUpFragment);
-                break;
+
         }
     }
 
     // request for login
     private void requestForLogin() {
+
+        Intent intent = new Intent(LoginActivity.self, Code.class);
+
+        LoginActivity.self.startActivity(intent);
+        LoginActivity.self.finish();
 
         /*
         Map<String, String> pairs = new HashMap<>();
@@ -222,11 +224,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private void findViews(View view) {
         img_Google = (ImageView) view.findViewById(R.id.img_Google);
         img_Facebook = (ImageView) view.findViewById(R.id.img_Facebook);
-        ll_login = (LinearLayout) view.findViewById(R.id.tv_Login_v2);
-        etEmail = (EditText) view.findViewById(R.id.et_registredEmailId);
-        etPassword = (EditText) view.findViewById(R.id.et_registredPassword);
-
-        tv_ForgotPassword = (TextView) view.findViewById(R.id.tv_ForgotPassword);
-        tv_SignUp = (TextView) view.findViewById(R.id.tv_SignUp);
+        ll_register = (LinearLayout) view.findViewById(R.id.btnRegister);
+        etEmail = (EditText) view.findViewById(R.id.registerEmail);
+        etPassword = (EditText) view.findViewById(R.id.registerPassword);
+        etPassword = (EditText) view.findViewById(R.id.registerName);
+        btn_login = (Button) view.findViewById(R.id.btnLinkToLoginScreen);
     }
 }
