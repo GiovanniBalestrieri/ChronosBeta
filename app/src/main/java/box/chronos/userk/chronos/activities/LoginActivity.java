@@ -1,10 +1,18 @@
 package box.chronos.userk.chronos.activities;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.fragments.LoginFragment;
@@ -15,11 +23,14 @@ import box.chronos.userk.chronos.utils.UserSharedPreference;
  * Created by userk on 08/03/17.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements
+        GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private FragmentManager fragmentManager;
     private UserSharedPreference sharePrefs;
+    private GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 9001;
 
     public static LoginActivity self;
 
@@ -29,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activity);
         self = LoginActivity.this;
         sharePrefs = AppController.getPreference();
+
+
 
 
         /*
@@ -65,5 +78,36 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Google Sign In
+     */
+    private void requestForSighUP() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
 
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            // Make the call to GoogleApiClient
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .enableAutoManage(this, this  /* OnConnectionFailedListener */)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .build();
+        }
+
+    }
+
+
+    /**
+     * When G+ button is pressed
+     */
+    public void onGooglePlus() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }
