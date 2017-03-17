@@ -60,7 +60,8 @@ dependencies {
     // Google SignIn
     compile 'com.google.android.gms:play-services-auth:9.0.0'
 
-
+    // Google FireBase CrashReporting
+    compile 'com.google.firebase:firebase-crash:9.0.0'
 
 
     // Volley

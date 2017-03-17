@@ -8,16 +8,32 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.fragments.LoginFragment;
+import box.chronos.userk.chronos.utils.AppConstant;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
+import box.chronos.userk.chronos.utils.Utility;
 
 /**
  * Created by userk on 08/03/17.
@@ -31,6 +47,9 @@ public class LoginActivity extends AppCompatActivity implements
     private UserSharedPreference sharePrefs;
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
+    private String email, facebook_id, picture, userName, gender, age;
+    //private CallbackManager callbackmanager;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     public static LoginActivity self;
 
@@ -40,9 +59,11 @@ public class LoginActivity extends AppCompatActivity implements
         setContentView(R.layout.login_activity);
         self = LoginActivity.this;
         sharePrefs = AppController.getPreference();
+        initGoogleSignUp();
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
-
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         /*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -81,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements
     /**
      * Google Sign In
      */
-    private void requestForSighUP() {
+    private void initGoogleSignUp() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -109,5 +130,114 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        //callbackmanager.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        } else {
+            if (data != null) {
+                //callbackmanager.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+            userName = acct.getDisplayName();
+            email = acct.getEmail();
+            Toast.makeText(this,"Info: user " + userName + "Display: "+acct.getDisplayName(),Toast.LENGTH_SHORT);
+            //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            //updateUI(true);
+            loginRequest(userName,email,"",AppConstant.DEVICE_TYPE);
+        } else {
+            // Signed out, show unauthenticated UI.
+            Toast.makeText(this.getApplicationContext()," ERROR ",Toast.LENGTH_SHORT);
+            //updateUI(false);
+        }
+    }
+
+    // send request for facebook
+    private void loginRequest(String userName, String email, String gender, String type) {
+        Map<String, String> pairs = new HashMap<>();
+        pairs.put("method", "userSignUp");
+        pairs.put("username", userName);
+        pairs.put("email", email);
+        pairs.put("gender", gender);
+        pairs.put("birthday", "");
+        pairs.put("devicetype", AppConstant.DEVICE_TYPE);
+        pairs.put("devicetoken", sharePrefs.getDeviceToken());
+        pairs.put("latitude", sharePrefs.getLatitude());
+        pairs.put("longitude", sharePrefs.getLongitude());
+        pairs.put("usertype", "1");
+        pairs.put("option", type);
+        pairs.put("password", "");
+
+        /*
+
+        RestIntraction intraction = new RestIntraction(this);
+        intraction.setCallBack(new IAsyncResponse() {
+            @Override
+            public void onRestIntractionResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.getString("success").equalsIgnoreCase("1")) {
+                        //Utility.showAlertDialog(getActivity(), object.getString("message"));
+                        getJsonDataFromFacebook(object);
+                    } else {
+                        Utility.showAlertDialog(LoginActivity.this, object.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onRestIntractionError(String message) {
+                Utility.showAlertDialog(LoginActivity.this, message);
+            }
+        });
+        intraction.makeServiceRequest(AppUrl.COMMON_URL, pairs, TAG, "Dialog");
+        */
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Test di login");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+
+    private void hitGooglePlus() {
+        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+        if (opr.isDone()) {
+            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+            // and the GoogleSignInResult will be available instantly.
+            Log.d(TAG, "Got cached sign-in");
+            GoogleSignInResult result = opr.get();
+            handleSignInResult(result);
+        } else {
+            // If the user has not previously signed in on this device or the sign-in has expired,
+            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
+            // single sign-on will occur in this branch.
+            //showProgressDialog();
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(GoogleSignInResult googleSignInResult) {
+              //      hideProgressDialog();
+                    handleSignInResult(googleSignInResult);
+                }
+            });
+        }
     }
 }

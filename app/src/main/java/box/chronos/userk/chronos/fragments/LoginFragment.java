@@ -116,7 +116,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.img_Google:
-                //((LoginActivity) (getActivity())).onGooglePlus();
+                ((LoginActivity) (getActivity())).onGooglePlus();
                 break;
 
             case R.id.img_Facebook:
