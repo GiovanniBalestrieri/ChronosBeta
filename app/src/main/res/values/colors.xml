@@ -71,7 +71,8 @@
     <color name="lic_card_overlay">#80000000</color>
 
 
-    <!-- Code -->
+    <!-- HUd -->
+    <color name="full_transparent">#00000000</color>
 
 
 

@@ -24,6 +24,7 @@
     <dimen name="twelve_sp">12dp</dimen>
     <dimen name="fourteen_sp">14dp</dimen>
     <dimen name="thirty_dp">30dp</dimen>
+    <dimen name="fifteen_dp">15dp</dimen>
 
 
     <!-- CardView City -->

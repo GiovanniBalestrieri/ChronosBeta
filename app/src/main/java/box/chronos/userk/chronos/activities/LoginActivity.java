@@ -22,6 +22,7 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,7 +30,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import box.chronos.userk.chronos.R;
+import box.chronos.userk.chronos.callbacks.IAsyncResponse;
 import box.chronos.userk.chronos.fragments.LoginFragment;
+import box.chronos.userk.chronos.serverRequest.AppUrls;
+import box.chronos.userk.chronos.serverRequest.RestInteraction;
 import box.chronos.userk.chronos.utils.AppConstant;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
@@ -50,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements
     private String email, facebook_id, picture, userName, gender, age;
     //private CallbackManager callbackmanager;
     private FirebaseAnalytics mFirebaseAnalytics;
+    private boolean doubleBackToExitPressedOnce = false;
 
     public static LoginActivity self;
 
@@ -184,17 +189,16 @@ public class LoginActivity extends AppCompatActivity implements
         pairs.put("option", type);
         pairs.put("password", "");
 
-        /*
 
-        RestIntraction intraction = new RestIntraction(this);
+
+        RestInteraction intraction = new RestInteraction(this);
         intraction.setCallBack(new IAsyncResponse() {
             @Override
-            public void onRestIntractionResponse(String response) {
+            public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString("success").equalsIgnoreCase("1")) {
-                        //Utility.showAlertDialog(getActivity(), object.getString("message"));
-                        getJsonDataFromFacebook(object);
+                        getJsonData(object);
                     } else {
                         Utility.showAlertDialog(LoginActivity.this, object.getString("message"));
                     }
@@ -204,17 +208,71 @@ public class LoginActivity extends AppCompatActivity implements
             }
 
             @Override
-            public void onRestIntractionError(String message) {
+            public void onRestInteractionError(String message) {
                 Utility.showAlertDialog(LoginActivity.this, message);
             }
         });
-        intraction.makeServiceRequest(AppUrl.COMMON_URL, pairs, TAG, "Dialog");
-        */
+        intraction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
+
+
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Test di login");
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+    /**
+     * Saves Login information into shared Pref
+     */
+    private void getJsonData(JSONObject object) {
+        try {
+            JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
+            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+            sharePrefs.setUserId(jsonObject.getString("userid").toString());
+            sharePrefs.setUserName(jsonObject.getString("username").toString());
+            sharePrefs.setUserEmail(jsonObject.getString("email").toString());
+            sharePrefs.setSessionKey(jsonObject.getString("sessionkey").toString());
+            sharePrefs.setUserImage(jsonObject.getString("photo").toString());
+            sharePrefs.setGender(jsonObject.getString("gender").toString());
+            sharePrefs.setMaxOfferDistance(jsonObject.getString("maxofferdistance").toString());
+            sharePrefs.setMaxOfferView(jsonObject.getString("maxofferview").toString());
+            sharePrefs.setRepeatOffer(jsonObject.getString("repeatoffer").toString());
+            sharePrefs.setUserType(jsonObject.getString("usertype").toString());
+            sharePrefs.setBirthday(jsonObject.getString("birthday").toString());
+            sharePrefs.setSelectedCatrgory(jsonObject.getString("selctedcategory").toString());
+            sharePrefs.setDefaultAddress(jsonObject.getString("address").toString());
+            sharePrefs.setUserPhoneNumber(jsonObject.getString("phonenumber").toString());
+
+            sharePrefs.setIsFirstTimeUser(true);
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
+            LoginActivity.self.finish();
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = fragmentManager.getBackStackEntryCount();
+        /*if(count == 2){
+            back.setVisibility(View.GONE);
+        }*/
+        if (count == 1) {
+            this.doubleBackToExitPressedOnce = true;
+            if (doubleBackToExitPressedOnce) {
+                finish();
+                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                return;
+            }
+        } else {
+            super.onBackPressed();
+        }
     }
 
 

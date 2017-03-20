@@ -28,9 +28,13 @@ import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.activities.Code;
 import box.chronos.userk.chronos.activities.LoginActivity;
 import box.chronos.userk.chronos.activities.MainActivity;
+import box.chronos.userk.chronos.callbacks.IAsyncResponse;
+import box.chronos.userk.chronos.serverRequest.AppUrls;
+import box.chronos.userk.chronos.serverRequest.RestInteraction;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.BlurBuilder;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
+import box.chronos.userk.chronos.utils.Utility;
 
 /**
  * Created by userk on 08/03/17.
@@ -149,7 +153,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         LoginActivity.self.startActivity(intent);
         LoginActivity.self.finish();
 
-        /*
+
         Map<String, String> pairs = new HashMap<>();
         pairs.put("method", "userLogin");
         pairs.put("email", et_registredEmailId.getText().toString());
@@ -159,10 +163,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         pairs.put("latitude", sharePrefs.getLatitude());
         pairs.put("longitude", sharePrefs.getLongitude());
 
-        RestIntraction intraction = new RestIntraction(getActivity());
+        RestInteraction intraction = new RestInteraction(getActivity());
         intraction.setCallBack(new IAsyncResponse() {
             @Override
-            public void onRestIntractionResponse(String response) {
+            public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString("success").equalsIgnoreCase("1")) {
@@ -176,13 +180,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public void onRestIntractionError(String message) {
+            public void onRestInteractionError(String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
-        intraction.makeServiceRequest(AppUrl.COMMON_URL, pairs, TAG, "Dialog");
+        intraction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
 
-        */
+
     }
 
     // get json data
