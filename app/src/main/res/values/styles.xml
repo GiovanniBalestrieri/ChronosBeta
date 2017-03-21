@@ -46,6 +46,60 @@
     </style>
 
 
+    <style name="top_heading">
+        <item name="android:background">@color/white_100_percent</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/app_text_size</item>
+    </style>
+
+    <style name="simple_text_tweleve_threeLines">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:minLines">1</item>
+        <item name="android:textSize">@dimen/app_text_sub_heading_size</item>
+    </style>
+
+
+    <style name="top_heading_fourteen">
+        <!-- <item name="android:background">@color/white_100_percent</item> -->
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textSize">@dimen/app_text_size_small</item>
+    </style>
+
+    <style name="top_heading_twenty_white">
+        <item name="android:background">@color/full_transparent</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/app_text_title_bar_size</item>
+    </style>
+
+    <style name="simple_text_ten">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/app_med_hint_size</item>
+    </style>
+
+    <style name="simple_text_ten_white">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/white_100_percent</item>
+        <item name="android:textSize">@dimen/app_med_hint_size</item>
+    </style>
+
+    <style name="simple_text_ten_orange">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textSize">@dimen/app_med_hint_size</item>
+    </style>
+
+    <style name="simple_text">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/app_text_med_sub_heading_size</item>
+    </style>
+
+
     <style name="text_white_normal_style">
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/white_100_percent</item>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_100_percent"
+    android:minHeight="?attr/actionBarSize"
+    local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="10dp"
+        android:tag="@string/back_image"
+        android:src="@drawable/ic_left_arrow"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_tittle"
+        style="@style/top_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/categories"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/tv_toolBarEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:tag="@string/edit"
+        android:src="@drawable/ic_edit"/>
+
+    <ImageView
+        android:id="@+id/rightImage"
+        android:layout_width="@dimen/twenty_five_dp"
+        android:layout_height="@dimen/twenty_five_dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_edit"
+        android:tag="@string/edit"
+        android:visibility="gone"/>
+
+</android.support.v7.widget.Toolbar>

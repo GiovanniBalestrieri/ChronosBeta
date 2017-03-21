@@ -23,8 +23,21 @@
     <dimen name="twenty_dp">20dp</dimen>
     <dimen name="twelve_sp">12dp</dimen>
     <dimen name="fourteen_sp">14dp</dimen>
+    <dimen name="twenty_five_dp">25dp</dimen>
     <dimen name="thirty_dp">30dp</dimen>
     <dimen name="fifteen_dp">15dp</dimen>
+    <dimen name="hundred_dp">100dp</dimen>
+    <dimen name="app_text_size">16sp</dimen>
+    <dimen name="app_med_hint_size">10sp</dimen>
+    <dimen name="app_text_size_small">14sp</dimen>
+    <dimen name="app_text_sub_heading_size">12sp</dimen>
+    <dimen name="app_text_med_sub_heading_size">14sp</dimen>
+    <dimen name="app_text_title_bar_size">20sp</dimen>
+    <dimen name="app_text_heading_size">45sp</dimen>
+    <dimen name="app_box_double_size">112dp</dimen>
+    <dimen name="app_list_view_padding_clip">60dp</dimen>
+    <dimen name="plus_button_padding">16dp</dimen>
+    <dimen name="app_sides_padding">16dp</dimen>
 
 
     <!-- CardView City -->

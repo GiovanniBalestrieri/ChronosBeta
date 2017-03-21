@@ -9,6 +9,9 @@
 
     <!-- NAvigation -->
     <string name="collapsing_title"></string>
+    <string name="categories">CATEGORIES</string>
+    <string name="edit">edit</string>
+    <string name="back_image">Back Image</string>
 
 
     <!-- Register Page -->
