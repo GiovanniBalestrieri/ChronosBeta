@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -13,6 +14,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.NavigationView;
@@ -23,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity
     CoordinatorLayout coordinatorLayout;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private Toolbar mToolbar;
+    private InputMethodManager imm;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
@@ -74,21 +78,17 @@ public class MainActivity extends AppCompatActivity
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-
-        self = this;
-        sharePrefs = AppController.getPreference();
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            isReadContactPermissionGranted();
-        }
         initCollapsingToolbar();
+        setupEnvironment();
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        /*
+        final ActionBar actionBar = getSupportActionBar();
 
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        */
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -117,6 +117,27 @@ public class MainActivity extends AppCompatActivity
         toggle.onConfigurationChanged(newConfig);
     }
 
+    /**
+     * Setup environment
+     */
+    public void setupEnvironment() {
+        //stackFragment = new Stack<Fragment>();
+        self = this;
+        imm = (InputMethodManager) self.getSystemService(Context.INPUT_METHOD_SERVICE);
+        sharePrefs = AppController.getPreference();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            isReadContactPermissionGranted();
+        }
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
+                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        toggle.setDrawerIndicatorEnabled(true);
+
+    }
 
     /**
      * Initializing collapsing toolbar

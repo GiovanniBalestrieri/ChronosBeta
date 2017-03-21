@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity implements
                 .requestEmail()
                 .build();
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             // Make the call to GoogleApiClient
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -120,7 +119,6 @@ public class LoginActivity extends AppCompatActivity implements
                     .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                     .build();
         }
-
     }
 
 
@@ -247,7 +245,7 @@ public class LoginActivity extends AppCompatActivity implements
             sharePrefs.setUserPhoneNumber(jsonObject.getString("phonenumber").toString());
 
             sharePrefs.setIsFirstTimeUser(true);
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            Intent i = new Intent(LoginActivity.this, Code.class);
             startActivity(i);
             LoginActivity.self.finish();
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
