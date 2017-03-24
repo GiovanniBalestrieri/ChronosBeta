@@ -11,12 +11,29 @@ public class AppConstant {
 
     // Api methods
     public static final String LOGIN_METHOD = "userLogin";
+    public static final String CODE_VALIDATION_METHOD = "validateCode";
+    public static final String CODE_SKIP_METHOD = "skipCode";
 
     // Api responses
     public static final String DATA_RESP = "data";
     public static final String CODE_RESP = "code";
+    public static final String ERROR_RESP = "error";
+    public static final String MSG_RESP = "message";
     public static final String ZERO_RESP = "0";
     public static final String ONE_RESP = "1";
+
+    // API fields
+    public static final String METHOD_PARAM = "method";
+    public static final String USERID_PARAM = "userid";
+    public static final String UID_PARAM = "uid";
+    public static final String CODE_PARAM = "code";
+    public static final String PSS_PARAM = "password";
+    public static final String EMAIL_PARAM = "email";
+    public static final String DEV_TYPE_PARAM = "devicetype";
+    public static final String DEV_TOKEN_PARAM = "devicetoken";
+    public static final String LAT_PARAM = "latitude";
+    public static final String LON_PARAM = "longitude";
+
 
 
 
