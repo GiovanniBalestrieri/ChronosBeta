@@ -10,7 +10,7 @@
         android:layout_height="@dimen/app_box_size"
         android:gravity="center">
 
-        <com.chronos.utils.MyTextRalewayRegular
+        <TextView
             android:id="@+id/custom_alert_dialog_info"
             style="@style/text_white_normal_style"
             android:layout_width="match_parent"

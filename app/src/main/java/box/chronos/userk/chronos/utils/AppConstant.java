@@ -9,6 +9,18 @@ import java.util.List;
 
 public class AppConstant {
 
+    // Api methods
+    public static final String LOGIN_METHOD = "userLogin";
+
+    // Api responses
+    public static final String DATA_RESP = "data";
+    public static final String CODE_RESP = "code";
+    public static final String ZERO_RESP = "0";
+    public static final String ONE_RESP = "1";
+
+
+
+
     // Number of columns of Grid View
     public static final int NUM_OF_COLUMNS = 3;
 
@@ -47,4 +59,7 @@ public class AppConstant {
     public static final String FRENCH = "French";
     public static final String ITALIAN = "Italian";
     public static final String EURO = "\u20ac";
+
+
+
 }

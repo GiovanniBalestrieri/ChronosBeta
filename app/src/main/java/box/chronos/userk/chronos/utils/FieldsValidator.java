@@ -240,7 +240,6 @@ public class FieldsValidator {
 
     public synchronized boolean validatePasswordMatch(EditText password, EditText confirmPassword, String message) {
 
-
         if (!password.getText().toString().equalsIgnoreCase(confirmPassword.getText().toString())) {
             if (message == null || message.isEmpty())
                 message = "Password Mismatch";

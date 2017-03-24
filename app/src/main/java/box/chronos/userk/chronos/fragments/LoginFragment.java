@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,8 +34,19 @@ import box.chronos.userk.chronos.serverRequest.AppUrls;
 import box.chronos.userk.chronos.serverRequest.RestInteraction;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.BlurBuilder;
+import box.chronos.userk.chronos.utils.FieldsValidator;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
+
+import static box.chronos.userk.chronos.utils.AppConstant.CODE_RESP;
+import static box.chronos.userk.chronos.utils.AppConstant.DATA_RESP;
+import static box.chronos.userk.chronos.utils.AppConstant.DEVICE_TYPE;
+import static box.chronos.userk.chronos.utils.AppConstant.LOGIN_METHOD;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.chronos.utils.AppConstant.ZERO_RESP;
+import static box.chronos.userk.chronos.ux.AppMessage.CHECK_MAIL_MSG;
+import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_MAIL_MSG;
+import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_PASSWORD_MSG;
 
 /**
  * Created by userk on 08/03/17.
@@ -50,7 +62,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private LinearLayout ll_login;
     private TextView tv_SignUp, tv_ForgotPassword;
     private UserSharedPreference sharePrefs;
-
+    private FieldsValidator fv;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -81,13 +93,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         final View content = activity.findViewById(android.R.id.content).getRootView();
 
         View view = inflater.inflate(R.layout.login_fragment, container, false);
-        //LoginActivity.self.tv_TopHeading.setText(getResources().getString(R.string.login));
-        sharePrefs = AppController.getPreference();
-        findViews(view);
 
+        setupLoginFragment();
+        findViews(view);
         attachListeners();
 
-
+        // Setup Background
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test5c);
         Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(),bm);
         view.setBackground(new BitmapDrawable(activity.getResources(), image));
@@ -95,6 +106,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    private void setupLoginFragment() {
+        sharePrefs = AppController.getPreference();
+        fv = new FieldsValidator(getContext());
+    }
 
     private void attachListeners() {
         tv_ForgotPassword.setOnClickListener(this);
@@ -110,10 +125,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_Login_v2:
                 if (TextUtils.isEmpty(et_registredEmailId.getText().toString()) || TextUtils.isEmpty(et_registredPassword.getText().toString())) {
                     if (TextUtils.isEmpty(et_registredEmailId.getText().toString())) {
-                        Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(et_registredEmailId.getText().toString())) {
-                        Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), EMPTY_MAIL_MSG, Toast.LENGTH_SHORT).show();
+                    } else if (TextUtils.isEmpty(et_registredPassword.getText().toString())) {
+                        Toast.makeText(getActivity(), EMPTY_PASSWORD_MSG, Toast.LENGTH_SHORT).show();
                     }
+                } else if (fv.validateEmail(et_registredEmailId,et_registredEmailId.getText().toString())) {
+                    Toast.makeText(getActivity(), CHECK_MAIL_MSG, Toast.LENGTH_SHORT).show();
                 } else {
                     requestForLogin();
                 }
@@ -148,23 +165,24 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     // request for login
     private void requestForLogin() {
 
+        /*
         Intent intent = new Intent(LoginActivity.self, Code.class);
 
         LoginActivity.self.startActivity(intent);
         LoginActivity.self.finish();
 
-
+*/
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", "userLogin");
+        pairs.put("method", LOGIN_METHOD);
         pairs.put("email", et_registredEmailId.getText().toString());
         pairs.put("password", et_registredPassword.getText().toString());
-        pairs.put("devicetype", "2");
+        pairs.put("devicetype", DEVICE_TYPE);
         pairs.put("devicetoken", sharePrefs.getDeviceToken());
         pairs.put("latitude", sharePrefs.getLatitude());
         pairs.put("longitude", sharePrefs.getLongitude());
 
-        RestInteraction intraction = new RestInteraction(getActivity());
-        intraction.setCallBack(new IAsyncResponse() {
+        RestInteraction interaction = new RestInteraction(getActivity());
+        interaction.setCallBack(new IAsyncResponse() {
             @Override
             public void onRestInteractionResponse(String response) {
                 try {
@@ -184,8 +202,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
-        intraction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
-
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
 
     }
 
@@ -193,8 +210,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void getJsonData(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
-            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
+            JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String codeResp = jsonRootObject.getString(CODE_RESP);
 
             sharePrefs.setUserId(jsonObject.getString("userid").toString());
             sharePrefs.setUserName(jsonObject.getString("username").toString());
@@ -214,7 +232,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             sharePrefs.setIsFirstTimeUser(true);
             sharePrefs.setIsGroupActive(false);
 
-            Intent intent = new Intent(LoginActivity.self, MainActivity.class);
+            Intent intent;
+            if (codeResp.equals(ZERO_RESP)) {
+                intent = new Intent(LoginActivity.self, Code.class);
+            } else {
+                intent = new Intent(LoginActivity.self, MainActivity.class);
+            }
 
             LoginActivity.self.startActivity(intent);
             LoginActivity.self.finish();

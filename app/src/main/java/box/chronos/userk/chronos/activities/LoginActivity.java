@@ -39,6 +39,8 @@ import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
+import static box.chronos.userk.chronos.utils.AppConstant.DATA_RESP;
+
 /**
  * Created by userk on 08/03/17.
  */
@@ -62,6 +64,21 @@ public class LoginActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+
+        setupLoginActivity();
+
+        Fragment fragment = new LoginFragment();
+        //tv_TopHeading.setText(getResources().getString(R.string.login));
+        //back.setVisibility(View.GONE);
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.container_body, fragment);
+        fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        fragmentTransaction.commit();
+    }
+
+    void setupLoginActivity() {
         self = LoginActivity.this;
         sharePrefs = AppController.getPreference();
         initGoogleSignUp();
@@ -70,23 +87,6 @@ public class LoginActivity extends AppCompatActivity implements
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        */
-
-
-        Fragment fragment;
-        fragment = new LoginFragment();
-        //tv_TopHeading.setText(getResources().getString(R.string.login));
-        //back.setVisibility(View.GONE);
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container_body, fragment);
-        //fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
-        fragmentTransaction.commit();
     }
 
 
@@ -139,7 +139,6 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         //callbackmanager.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
@@ -226,7 +225,7 @@ public class LoginActivity extends AppCompatActivity implements
     private void getJsonData(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
-            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
+            JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
 
             sharePrefs.setUserId(jsonObject.getString("userid").toString());
