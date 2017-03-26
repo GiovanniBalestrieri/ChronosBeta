@@ -8,10 +8,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,6 +38,8 @@ import box.chronos.userk.chronos.utils.BlurBuilder;
 import box.chronos.userk.chronos.utils.FieldsValidator;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 
+import static box.chronos.userk.chronos.ux.AppMessage.CHECK_MAIL_MSG;
+
 /**
  * Created by userk on 08/03/17.
  */
@@ -50,6 +56,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private LinearLayout ll_register;
     private TextView tv_SignUp, tv_ForgotPassword;
     private UserSharedPreference sharePrefs;
+    private FieldsValidator fv;
+    private CheckBox mCbShowPwd;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -81,10 +89,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         final View content = activity.findViewById(android.R.id.content).getRootView();
 
         View view = inflater.inflate(R.layout.register_fragment_2, container, false);
-        //LoginActivity.self.tv_TopHeading.setText(getResources().getString(R.string.login));
-        sharePrefs = AppController.getPreference();
-        findViews(view);
 
+        setupSignupFragment();
+        findViews(view);
         attachListeners();
 
 
@@ -92,7 +99,31 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(),bm);
         view.setBackground(new BitmapDrawable(activity.getResources(), image));
 
+
+        // add onCheckedListener on checkbox
+        // when user clicks on this checkbox, this is the handler.
+        mCbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+
         return view;
+    }
+
+
+
+    private void setupSignupFragment() {
+        sharePrefs = AppController.getPreference();
+        fv = new FieldsValidator(getContext());
     }
 
 
@@ -107,19 +138,23 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnRegister:
-                if (TextUtils.isEmpty(etEmail.getText().toString()) || TextUtils.isEmpty(etPassword.getText().toString())) {
+                if (TextUtils.isEmpty(etEmail.getText().toString()) || TextUtils.isEmpty(etPassword.getText().toString()) || TextUtils.isEmpty(etName.getText().toString())) {
                     if (TextUtils.isEmpty(etEmail.getText().toString())) {
                         Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
                     } else if (TextUtils.isEmpty(etEmail.getText().toString())) {
                         Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
+                    } else if (TextUtils.isEmpty(etName.getText().toString())) {
+                        Toast.makeText(getActivity(), "Inserisci un nome utente", Toast.LENGTH_SHORT).show();
                     }
+                } else if (fv.validateEmail(etEmail,etEmail.getText().toString())) {
+                    Toast.makeText(getActivity(), CHECK_MAIL_MSG, Toast.LENGTH_SHORT).show();
                 } else {
                     requestForLogin();
                 }
                 break;
 
             case R.id.img_Google:
-                //((LoginActivity) (getActivity())).onGooglePlus();
+                ((LoginActivity) (getActivity())).onGooglePlus();
                 break;
 
             case R.id.img_Facebook:
@@ -227,7 +262,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         ll_register = (LinearLayout) view.findViewById(R.id.btnRegister);
         etEmail = (EditText) view.findViewById(R.id.registerEmail);
         etPassword = (EditText) view.findViewById(R.id.registerPassword);
-        etPassword = (EditText) view.findViewById(R.id.registerName);
+        etName = (EditText) view.findViewById(R.id.registerName);
         btn_login = (Button) view.findViewById(R.id.btnLinkToLoginScreen);
+        mCbShowPwd = (CheckBox) view.findViewById(R.id.cbShowPwd);
     }
 }

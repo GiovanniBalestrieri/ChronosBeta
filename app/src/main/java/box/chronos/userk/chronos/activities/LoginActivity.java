@@ -121,7 +121,6 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
-
     /**
      * When G+ button is pressed
      */
@@ -134,7 +133,6 @@ public class LoginActivity extends AppCompatActivity implements
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -185,8 +183,6 @@ public class LoginActivity extends AppCompatActivity implements
         pairs.put("usertype", "1");
         pairs.put("option", type);
         pairs.put("password", "");
-
-
 
         RestInteraction intraction = new RestInteraction(this);
         intraction.setCallBack(new IAsyncResponse() {
@@ -271,7 +267,6 @@ public class LoginActivity extends AppCompatActivity implements
             super.onBackPressed();
         }
     }
-
 
     private void hitGooglePlus() {
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
