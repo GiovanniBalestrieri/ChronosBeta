@@ -17,7 +17,6 @@
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true">
 
-
         <LinearLayout
             android:layout_gravity="center_vertical"
             android:layout_width="fill_parent"
@@ -25,17 +24,16 @@
             android:orientation="vertical" >
             <!--  View Title Label -->
 
-
             <!--  Name Label -->
 
             <!--  Name TextField -->
 
             <TextView
-                android:gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/register_field_height"
                 android:layout_marginBottom="@dimen/register_main_text_margin"
                 android:layout_marginTop="@dimen/register_main_text_margin"
+                android:gravity="center"
                 android:hint="@string/register_main_text"
                 android:textColor="@color/whitie"
                 android:textColorHint="@color/whitie"
@@ -104,9 +102,7 @@
                     android:textColor="@color/whitie"
                     android:textColorHint="@color/whitie" />
 
-
             </LinearLayout>
-
 
             <!--  Error message -->
 
@@ -127,6 +123,37 @@
                 android:layout_marginTop="20dip"
                 android:text="@string/register" />
                 -->
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/five_dp"
+                android:paddingRight="@dimen/five_dp">
+
+                <RadioGroup
+                    android:id="@+id/gender_rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/male_rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register_male" />
+
+                    <RadioButton
+                        android:id="@+id/female_rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/five_dp"
+                        android:text="@string/register_female" />
+
+                </RadioGroup>
+            </LinearLayout>
+
 
             <!--  Link to Login Screen -->
 
@@ -177,8 +204,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
 
     </ScrollView>
 

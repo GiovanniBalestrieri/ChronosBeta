@@ -19,6 +19,7 @@
     <dimen name="Zero">0dp</dimen>
     <dimen name="VeryBig">26dp</dimen>
     <dimen name="ten_dp">10dp</dimen>
+    <dimen name="two_dp">2dp</dimen>
     <dimen name="five_dp">5dp</dimen>
     <dimen name="twenty_dp">20dp</dimen>
     <dimen name="twelve_sp">12dp</dimen>
@@ -126,7 +127,7 @@
     <!--Register-->
 
     <dimen name="register_main_text_action">21sp</dimen>
-    <dimen name="register_main_text_margin">30dp</dimen>
+    <dimen name="register_main_text_margin">25dp</dimen>
     <dimen name="register_field_width">240dp</dimen>
     <dimen name="register_field_height">48dp</dimen>
     <dimen name="register_space_between_editext">10dp</dimen>

@@ -19,6 +19,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +35,22 @@ import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.activities.Code;
 import box.chronos.userk.chronos.activities.LoginActivity;
 import box.chronos.userk.chronos.activities.MainActivity;
+import box.chronos.userk.chronos.callbacks.IAsyncResponse;
+import box.chronos.userk.chronos.serverRequest.AppUrls;
+import box.chronos.userk.chronos.serverRequest.RestInteraction;
+import box.chronos.userk.chronos.utils.AppConstant;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.BlurBuilder;
 import box.chronos.userk.chronos.utils.FieldsValidator;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
+import box.chronos.userk.chronos.utils.Utility;
 
+import static box.chronos.userk.chronos.utils.AppConstant.SIGNUP_METHOD;
 import static box.chronos.userk.chronos.ux.AppMessage.CHECK_MAIL_MSG;
+import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_FIELD_MSG;
+import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_PASSWORD_MSG;
+import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_SEX_MSG;
+import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_USER_MSG;
 
 /**
  * Created by userk on 08/03/17.
@@ -48,9 +60,12 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private static String TAG = SignUpFragment.class.getSimpleName();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private String mParam1;private String mParam2;
+    private String mParam1, mParam2, gender;
     private Button btn_login;
     private ImageView img_Google, img_Facebook;
+    private RadioGroup gender_radioGroup;
+    private RadioButton rb;
+    private RadioButton male_rb, female_rb;
     private FieldsValidator validator;
     private EditText etPassword, etName, etEmail;
     private LinearLayout ll_register;
@@ -103,7 +118,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         // add onCheckedListener on checkbox
         // when user clicks on this checkbox, this is the handler.
         mCbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // checkbox status is changed from uncheck to checked.
                 if (!isChecked) {
@@ -116,6 +130,15 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        gender_radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    gender = rb.getText().toString().trim();
+                }
+            }
+        });
         return view;
     }
 
@@ -140,16 +163,24 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             case R.id.btnRegister:
                 if (TextUtils.isEmpty(etEmail.getText().toString()) || TextUtils.isEmpty(etPassword.getText().toString()) || TextUtils.isEmpty(etName.getText().toString())) {
                     if (TextUtils.isEmpty(etEmail.getText().toString())) {
-                        Toast.makeText(getActivity(), "Please enter email", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(etEmail.getText().toString())) {
-                        Toast.makeText(getActivity(), "Please enter password", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(etName.getText().toString())) {
-                        Toast.makeText(getActivity(), "Inserisci un nome utente", Toast.LENGTH_SHORT).show();
-                    }
+                        Toast.makeText(getActivity(), CHECK_MAIL_MSG, Toast.LENGTH_SHORT).show();
+                    } else if (TextUtils.isEmpty(etPassword.getText().toString())) {
+                        Toast.makeText(getActivity(), EMPTY_PASSWORD_MSG, Toast.LENGTH_SHORT).show();
+                    } else if (TextUtils.isEmpty(etName.getText().toString()))
+                        Toast.makeText(getActivity(), EMPTY_USER_MSG, Toast.LENGTH_SHORT).show();
                 } else if (fv.validateEmail(etEmail,etEmail.getText().toString())) {
                     Toast.makeText(getActivity(), CHECK_MAIL_MSG, Toast.LENGTH_SHORT).show();
-                } else {
-                    requestForLogin();
+                } else if (validator.validateUsernameSpace(etName, EMPTY_USER_MSG))
+                    return;
+                else if (validator.validateUsernameSpace(etPassword, EMPTY_FIELD_MSG))
+                    return;
+                else if (validator.validateUsernameSpace(etEmail, EMPTY_FIELD_MSG))
+                    return;
+                if (TextUtils.isEmpty(gender)) {
+                    Toast.makeText(getActivity(), EMPTY_SEX_MSG, Toast.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    requestSignUp();
                 }
                 break;
 
@@ -159,45 +190,37 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
             case R.id.img_Facebook:
                 //((LoginActivity) (getActivity())).onFblogin();
-
-
                 // ((LoginActivity)(getActivity())).onFbloginMethod();
                 // ((LoginActivity)(getActivity())).doFblogin();
                 break;
-
-
 
             case R.id.btnLinkToLoginScreen:
                 LoginFragment loginFragment = new LoginFragment();
                 LoginActivity.self.replaceFragment(loginFragment);
                 break;
-
-
         }
     }
 
-    // request for login
-    private void requestForLogin() {
-
-        Intent intent = new Intent(LoginActivity.self, Code.class);
-
-        LoginActivity.self.startActivity(intent);
-        LoginActivity.self.finish();
-
-        /*
+    // request for signup
+    private void requestSignUp() {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", "userLogin");
-        pairs.put("email", et_registredEmailId.getText().toString());
-        pairs.put("password", et_registredPassword.getText().toString());
-        pairs.put("devicetype", "2");
+        pairs.put("method", SIGNUP_METHOD);
+        pairs.put("username", etName.getText().toString().trim());
+        pairs.put("email", etEmail.getText().toString().trim());
+        pairs.put("gender", gender);
+        //pairs.put("birthday", et_dateBirth.getText().toString());
+        pairs.put("devicetype", AppConstant.DEVICE_TYPE);
         pairs.put("devicetoken", sharePrefs.getDeviceToken());
         pairs.put("latitude", sharePrefs.getLatitude());
         pairs.put("longitude", sharePrefs.getLongitude());
+        pairs.put("usertype", "1");
+        pairs.put("option", "3");
+        pairs.put("password", etPassword.getText().toString());
 
-        RestIntraction intraction = new RestIntraction(getActivity());
-        intraction.setCallBack(new IAsyncResponse() {
+        RestInteraction interaction = new RestInteraction(getActivity());
+        interaction.setCallBack(new IAsyncResponse() {
             @Override
-            public void onRestIntractionResponse(String response) {
+            public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString("success").equalsIgnoreCase("1")) {
@@ -209,18 +232,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                     e.printStackTrace();
                 }
             }
-
             @Override
-            public void onRestIntractionError(String message) {
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            public void onRestInteractionError(String message) {
+                Utility.showAlertDialog(getActivity(), message);
             }
         });
-        intraction.makeServiceRequest(AppUrl.COMMON_URL, pairs, TAG, "Dialog");
-
-        */
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
     }
 
-    // get json data
     private void getJsonData(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
@@ -230,27 +249,17 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             sharePrefs.setUserId(jsonObject.getString("userid").toString());
             sharePrefs.setUserName(jsonObject.getString("username").toString());
             sharePrefs.setUserEmail(jsonObject.getString("email").toString());
-            sharePrefs.setUserImage(jsonObject.getString("photo").toString());
             sharePrefs.setSessionKey(jsonObject.getString("sessionkey").toString());
             sharePrefs.setGender(jsonObject.getString("gender").toString());
             sharePrefs.setMaxOfferDistance(jsonObject.getString("maxofferdistance").toString());
             sharePrefs.setMaxOfferView(jsonObject.getString("maxofferview").toString());
             sharePrefs.setRepeatOffer(jsonObject.getString("repeatoffer").toString());
-            sharePrefs.setUserType(jsonObject.getString("usertype").toString());
-            sharePrefs.setBirthday(jsonObject.getString("birthday").toString());
-            sharePrefs.setDefaultAddress(jsonObject.getString("address").toString());
-            sharePrefs.setUserPhoneNumber(jsonObject.getString("phonenumber").toString());
-            sharePrefs.setSelectedCatrgory(jsonObject.getString("selctedcategory").toString());
 
-            sharePrefs.setIsFirstTimeUser(true);
-            sharePrefs.setIsGroupActive(false);
-
-            Intent intent = new Intent(LoginActivity.self, MainActivity.class);
-
-            LoginActivity.self.startActivity(intent);
             LoginActivity.self.finish();
-
-            getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+            Intent intent = new Intent(LoginActivity.self, MainActivity.class);
+            LoginActivity.self.startActivity(intent);
+            sharePrefs.setIsFirstTimeUser(true);
+            sharePrefs.setIsGroupActive(true);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -265,5 +274,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         etName = (EditText) view.findViewById(R.id.registerName);
         btn_login = (Button) view.findViewById(R.id.btnLinkToLoginScreen);
         mCbShowPwd = (CheckBox) view.findViewById(R.id.cbShowPwd);
+        gender_radioGroup = (RadioGroup) view.findViewById(R.id.gender_rg);
     }
 }

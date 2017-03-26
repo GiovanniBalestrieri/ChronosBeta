@@ -164,14 +164,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     // request for login
     private void requestForLogin() {
-
         /*
         Intent intent = new Intent(LoginActivity.self, Code.class);
-
         LoginActivity.self.startActivity(intent);
         LoginActivity.self.finish();
+        */
 
-*/
         Map<String, String> pairs = new HashMap<>();
         pairs.put("method", LOGIN_METHOD);
         pairs.put("email", et_registredEmailId.getText().toString());

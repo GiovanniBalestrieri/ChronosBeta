@@ -11,6 +11,7 @@ public class AppConstant {
 
     // Api methods
     public static final String LOGIN_METHOD = "userLogin";
+    public static final String SIGNUP_METHOD = "userSignUp";
     public static final String CODE_VALIDATION_METHOD = "validateCode";
     public static final String CODE_SKIP_METHOD = "skipCode";
 

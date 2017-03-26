@@ -22,6 +22,9 @@
     <string name="register_form_pass">Password</string>
     <string name="register_form_pass_show">Show</string>
     <string name="register_already_registered">Already registered?</string>
+    <string name="register_male">Uomo</string>
+    <string name="register_female">Donna</string>
+    <string name="register_gender">Sesso</string>
 
     <!-- Login Page -->
     <string name="login_main_text">Login</string>
@@ -69,5 +72,7 @@
         <item>"Ciao1"</item>
         <item>"Ciuqaio2"</item>
     </array>
+
+
 
 </resources>
