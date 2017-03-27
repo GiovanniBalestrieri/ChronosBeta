@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity
     private boolean doubleBackToExitPressedOnce = false;
     private UserSharedPreference sharePrefs;
     public static MainActivity self;
+    private String locationValue, latitudeValue, longitudeValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class MainActivity extends AppCompatActivity
 
         initCollapsingToolbar();
         setupEnvironment();
+        requestForGps();
+
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -143,9 +146,7 @@ public class MainActivity extends AppCompatActivity
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
-
     }
-
 
     public void lockHeader(boolean val){
         appBarLayout.setExpanded(val);
@@ -307,6 +308,26 @@ public class MainActivity extends AppCompatActivity
                     return false;
             }
         return true;
+    }
+
+    // request for gps
+    public void requestForGps() {
+
+        if (gps == null)
+            gps = new GpsTracker(this);
+
+        if (gps.canGetLocation()) {
+
+            locationValue = gps.getAddress();
+            latitudeValue = String.valueOf(gps.getLatitude());
+            longitudeValue = String.valueOf(gps.getLongitude());
+
+            sharePrefs.setLatitude(gps.getLatitude());
+            sharePrefs.setLongitude(gps.getLongitude());
+        } else {
+            gps.showSettingsAlert();
+            return;
+        }
     }
 
 }
