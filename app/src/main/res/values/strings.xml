@@ -35,6 +35,11 @@
     <string name="login_new_user">NEW?</string>
     <string name="login_forgot_pass">FORGOT PASSWORD</string>
 
+    <!-- Forgot Pass Page -->
+    <string name="forgot_main_text">Recover Credential</string>
+    <string name="forgot_main_action">Send</string>
+    <string name="forgot_form_email">Email</string>
+
     <!-- Offer Page -->
 
     <string name="offer_title_main">Suits</string>

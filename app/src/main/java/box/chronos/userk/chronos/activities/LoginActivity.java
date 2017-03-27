@@ -39,7 +39,9 @@ import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
+import static box.chronos.userk.chronos.utils.AppConstant.CODE_RESP;
 import static box.chronos.userk.chronos.utils.AppConstant.DATA_RESP;
+import static box.chronos.userk.chronos.utils.AppConstant.ZERO_RESP;
 
 /**
  * Created by userk on 08/03/17.
@@ -223,6 +225,7 @@ public class LoginActivity extends AppCompatActivity implements
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
             JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String codeResp = jsonRootObject.getString(CODE_RESP);
 
             sharePrefs.setUserId(jsonObject.getString("userid").toString());
             sharePrefs.setUserName(jsonObject.getString("username").toString());
@@ -240,9 +243,17 @@ public class LoginActivity extends AppCompatActivity implements
             sharePrefs.setUserPhoneNumber(jsonObject.getString("phonenumber").toString());
 
             sharePrefs.setIsFirstTimeUser(true);
-            Intent i = new Intent(LoginActivity.this, Code.class);
-            startActivity(i);
+
+            Intent intent;
+            if (codeResp.equals(ZERO_RESP)) {
+                intent = new Intent(LoginActivity.self, Code.class);
+            } else {
+                intent = new Intent(LoginActivity.self, MainActivity.class);
+            }
+
+            LoginActivity.self.startActivity(intent);
             LoginActivity.self.finish();
+
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
 
         } catch (JSONException e) {

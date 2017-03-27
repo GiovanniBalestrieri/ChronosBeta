@@ -14,6 +14,7 @@ public class AppConstant {
     public static final String SIGNUP_METHOD = "userSignUp";
     public static final String CODE_VALIDATION_METHOD = "validateCode";
     public static final String CODE_SKIP_METHOD = "skipCode";
+    public static final String FORGOT_PSS_METHOD = "forgotPassword";
 
     // Api responses
     public static final String DATA_RESP = "data";

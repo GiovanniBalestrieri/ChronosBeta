@@ -81,15 +81,6 @@ public class MainActivity extends AppCompatActivity
         initCollapsingToolbar();
         setupEnvironment();
 
-        /*
-        final ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        */
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 

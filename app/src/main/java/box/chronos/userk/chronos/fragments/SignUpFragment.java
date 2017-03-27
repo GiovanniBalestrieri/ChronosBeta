@@ -45,7 +45,9 @@ import box.chronos.userk.chronos.utils.FieldsValidator;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
+import static box.chronos.userk.chronos.utils.AppConstant.CODE_RESP;
 import static box.chronos.userk.chronos.utils.AppConstant.SIGNUP_METHOD;
+import static box.chronos.userk.chronos.utils.AppConstant.ZERO_RESP;
 import static box.chronos.userk.chronos.ux.AppMessage.CHECK_MAIL_MSG;
 import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_FIELD_MSG;
 import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_PASSWORD_MSG;
@@ -170,16 +172,16 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), EMPTY_USER_MSG, Toast.LENGTH_SHORT).show();
                 } else if (fv.validateEmail(etEmail,etEmail.getText().toString())) {
                     Toast.makeText(getActivity(), CHECK_MAIL_MSG, Toast.LENGTH_SHORT).show();
-                } else if (validator.validateUsernameSpace(etName, EMPTY_USER_MSG))
+                } else if (fv.validateUsernameSpace(etName, EMPTY_USER_MSG))
                     return;
-                else if (validator.validateUsernameSpace(etPassword, EMPTY_FIELD_MSG))
+                else if (fv.validateUsernameSpace(etPassword, EMPTY_FIELD_MSG))
                     return;
-                else if (validator.validateUsernameSpace(etEmail, EMPTY_FIELD_MSG))
+                else if (fv.validateUsernameSpace(etEmail, EMPTY_FIELD_MSG))
                     return;
-                if (TextUtils.isEmpty(gender)) {
+                else if (TextUtils.isEmpty(gender)) {
                     Toast.makeText(getActivity(), EMPTY_SEX_MSG, Toast.LENGTH_SHORT).show();
                     return;
-                }else {
+                } else {
                     requestSignUp();
                 }
                 break;
@@ -245,6 +247,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
             JSONArray jsonArray = jsonRootObject.optJSONArray("data");
             JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String codeResp = jsonRootObject.getString(CODE_RESP);
 
             sharePrefs.setUserId(jsonObject.getString("userid").toString());
             sharePrefs.setUserName(jsonObject.getString("username").toString());
@@ -255,9 +258,16 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             sharePrefs.setMaxOfferView(jsonObject.getString("maxofferview").toString());
             sharePrefs.setRepeatOffer(jsonObject.getString("repeatoffer").toString());
 
-            LoginActivity.self.finish();
-            Intent intent = new Intent(LoginActivity.self, MainActivity.class);
+            Intent intent;
+            if (codeResp.equals(ZERO_RESP)) {
+                intent = new Intent(LoginActivity.self, Code.class);
+            } else {
+                intent = new Intent(LoginActivity.self, MainActivity.class);
+            }
+
             LoginActivity.self.startActivity(intent);
+            LoginActivity.self.finish();
+
             sharePrefs.setIsFirstTimeUser(true);
             sharePrefs.setIsGroupActive(true);
         } catch (JSONException e) {

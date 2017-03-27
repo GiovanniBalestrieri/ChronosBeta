@@ -40,7 +40,7 @@ public class FieldsValidator {
         if (message == null || message.isEmpty())
             message = "Please enter a valid email";
 
-        ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+        ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
         SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
         ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(
@@ -56,7 +56,7 @@ public class FieldsValidator {
     public synchronized boolean validateNotEmpty(final TextView view, String message) {
         if (message == null || message.isEmpty())
             message = "This field should not be empty";
-        ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+        ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
         SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
         ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
         if (view.getText().toString().isEmpty()) {
@@ -77,7 +77,7 @@ public class FieldsValidator {
     public synchronized boolean validateNotEmpty(EditText view, String message) {
         if (message == null || message.isEmpty() || message.equalsIgnoreCase(""))
             message = "This field should not be empty";
-        ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+        ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
         SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
         ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
         if (view.getText().toString().isEmpty()) {
@@ -96,7 +96,7 @@ public class FieldsValidator {
             if (message == null || message.isEmpty())
                 message = "Input should be more than " + minLength
                         + " characters.";
-            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(
                     message);
             ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
@@ -109,7 +109,7 @@ public class FieldsValidator {
             if (message == null || message.isEmpty())
                 message = "Input should be less than " + maxLength
                         + " characters.";
-            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(
                     message);
             ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
@@ -128,7 +128,7 @@ public class FieldsValidator {
             if (message == null || message.isEmpty())
                 message = "Input should be more than " + minLength
                         + " characters.";
-            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(
                     message);
             ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
@@ -139,7 +139,7 @@ public class FieldsValidator {
             if (message == null || message.isEmpty())
                 message = "Input should be less than " + maxLength
                         + " characters.";
-            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(
                     message);
             ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
@@ -155,7 +155,7 @@ public class FieldsValidator {
         if (!pattern.matcher(view.getText().toString()).matches()) {
             if (message == null || message.isEmpty())
                 message = "This input does not fit the requiered pattern.";
-            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(
                     message);
             ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
@@ -172,7 +172,7 @@ public class FieldsValidator {
         if (view.getText().toString().toString().contains(" ")) {
             if (message == null || message.isEmpty())
                 message = "This input does not fit the requiered pattern.";
-            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
             ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
             view.requestFocus();
@@ -187,7 +187,7 @@ public class FieldsValidator {
         if (view.getText().toString().toString().trim().equalsIgnoreCase("")) {
             if (message == null || message.isEmpty())
                 message = "This field should not be empty.";
-            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
             ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
             view.requestFocus();
@@ -202,7 +202,7 @@ public class FieldsValidator {
         if (view.getText().toString().toString().trim().equalsIgnoreCase("")) {
             if (message == null || message.isEmpty())
                 message = "This field should not be empty.";
-            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.WHITE);
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan(Color.BLACK);
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
             ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
             view.requestFocus();

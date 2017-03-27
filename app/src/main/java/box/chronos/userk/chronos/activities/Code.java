@@ -232,7 +232,7 @@ public class Code extends Activity {
                     if (object.getString(ERROR_RESP).equals(ZERO_RESP)) {
                         getJsonData(object);
                     } else {
-                        Utility.showAlertDialog(getApplicationContext(), object.getString(MSG_RESP));
+                        Utility.showAlertDialog(Code.this, object.getString(MSG_RESP));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

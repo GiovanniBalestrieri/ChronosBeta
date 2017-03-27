@@ -148,11 +148,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 // ((LoginActivity)(getActivity())).doFblogin();
                 break;
 
+
             case R.id.tv_ForgotPassword:
-                /*
                 ForgotPasswordFragment forgotPasswordFragment = new ForgotPasswordFragment();
                 LoginActivity.self.replaceFragment(forgotPasswordFragment);
-                */
                 break;
 
             case R.id.tv_SignUp:
