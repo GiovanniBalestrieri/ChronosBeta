@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Utility.showAlertDialog(LoginActivity.this, "Sola Google");
     }
 
     @Override
