@@ -53,7 +53,6 @@ public class OffersListFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.offers_list_main, container, false);
 
-        ((MainActivity) getActivity()).loadInBackDrop(R.drawable.offer_list);
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_licences);
         recyclerView.setHasFixedSize(true);
@@ -80,10 +79,6 @@ public class OffersListFragment extends Fragment {
                     public void onItemClick(View view, int position) {
                         Offer lic = (Offer) offerList.get(position);
                         Log.d("YOLO", "Lincence: " + lic.getTitle() + " clicked");
-
-                        glideHeader = (ImageView) getActivity().findViewById(R.id.backdrop);
-                        Drawable headerActivity = ContextCompat.getDrawable(getActivity(), R.drawable.offer_list);
-                        glideHeader.setBackground(headerActivity);
 
 
 

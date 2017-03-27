@@ -39,7 +39,6 @@
 
 
         <activity
-            android:theme="@style/MyMaterialTheme"
             android:name=".activities.MainActivity">
         </activity>
 
