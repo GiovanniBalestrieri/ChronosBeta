@@ -46,7 +46,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
             super(view);
             title = (TextView) view.findViewById(R.id.title_card_offer);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail_card_offer);
-            overflow = (ImageView) view.findViewById(R.id.overflow_card_offer);
+            //overflow = (ImageView) view.findViewById(R.id.overflow_card_offer);
         }
     }
 

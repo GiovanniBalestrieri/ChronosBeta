@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity
         setupEnvironment();
         requestForGps();
 
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 

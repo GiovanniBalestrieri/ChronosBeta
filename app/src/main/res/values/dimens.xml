@@ -65,7 +65,9 @@
     <dimen name="lic_backdrop_subtitle">18dp</dimen>
     <dimen name="lic_card_margin">5dp</dimen>
     <dimen name="lic_card_radius">3dp</dimen>
-    <dimen name="offer_cover_height">260dp</dimen>
+    <dimen name="offer_cover_height">220dp</dimen>
+    <dimen name="offer_bottom_bar">80dp</dimen>
+    <dimen name="offer_bottom_bar_height">60dp</dimen>
     <dimen name="offer_overlay_height">60dp</dimen>
     <dimen name="lic_title_padding">10dp</dimen>
     <dimen name="offer_title">24sp</dimen>
@@ -83,6 +85,7 @@
     <!-- Quiz Modal -->
 
     <dimen name="title_quiz">20dp</dimen>
+    <dimen name="title_quiz_cat">18dp</dimen>
     <dimen name="quiz_content">18dp</dimen>
     <dimen name="quiz_multi">18dp</dimen>
     <dimen name="quiz_content_padding_top_bot">5dp</dimen>

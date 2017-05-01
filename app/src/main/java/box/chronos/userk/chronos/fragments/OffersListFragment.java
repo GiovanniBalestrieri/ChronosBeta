@@ -154,34 +154,31 @@ public class OffersListFragment extends Fragment {
             a2.setShopId("2");
             a2.setDescription("\n" +
                     "Il velivolo FPV può volare indoor o outdoor,\n"+
-                    "360 gradi di sostegno 3D rolling all-around.\n" +
+                    "3D rolling: 360 gradi di sostegno\n" +
                     "Versione Wi-Fi, foto e video, supporto agli utenti IOS/Android\n" +
-                    "Aggiunta la funzione senza testa.\n" +
                     "Con 0.3 MP fotocamera HD.\n" +
-                    "Pronto a volare (richiede solo 4 * batterie AA)\n");
+                    "Pronto a volare\n");
             a2.setPrice("455€");
             a2.setDiscount("21%");
             offerList.add(a2);
 
-            Offer a3 = new Offer("4","Textile Scarpa tacco alto lavoro festa elegante", covers[3], "Scarpe Donna");
-            a3.setPrice("95€");
+            Offer a3 = new Offer("4","Decollete in pelle bianca", covers[3], "Scarpe Donna");
+            a3.setPrice("59,90€");
             a3.setShopId("1");
             a3.setDiscount("10%");
-            a3.setDescription("scelta di colori come mostrato sopra\n" +
+            a3.setDescription("Altri colori disponibili" +
                     "\n" +
-                    "* tomaia sintetica\n" +
+                    "- sintetico soletta" +
                     "\n" +
-                    "* sintetico soletta\n" +
+                    "- sintetico suola" +
                     "\n" +
-                    "* sintetico suola\n" +
+                    "- sintetico fodera" +
                     "\n" +
-                    "* sintetico fodera\n" +
+                    "- 9,5 centimetri altezza tacco" +
                     "\n" +
-                    "* 11,5 centimetri (4,5 pollici) altezza tacco\n" +
+                    "- 9 centimetri larghezza suola" +
                     "\n" +
-                    "* 9 centimetri (3.5 pollici) suola larghezza\n" +
-                    "\n" +
-                    "* 7 cm (2,7 pollici) altezza albero\n" +
+                    "* 5 cm altezza albero" +
                     "\n" +
                     "* misure del prodotto sono state scattate con dimensioni della uk 7. si prega di notare che le misure di cui sopra possono variare in base alle dimensioni. ");
             offerList.add(a3);

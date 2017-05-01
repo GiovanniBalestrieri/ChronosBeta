@@ -42,15 +42,15 @@
 
                         <TextView
                             android:id="@+id/upper_bar_category_title"
-                            android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/city_title_padding"
-                            android:text="Abbigliamento Uomo "
+                            android:layout_weight="1"
                             android:gravity="center_vertical|right"
+                            android:paddingLeft="@dimen/city_title_padding"
+                            android:text="Scarpe Donna"
                             android:textColor="@color/quiz_title"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/car_title" />
+                            android:textSize="@dimen/car_title"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -69,9 +69,9 @@
                     android:id="@+id/thumbnail_offer"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/offer_cover_height"
-                    android:src="@drawable/scarpa_d"
                     android:clickable="true"
-                    android:scaleType="fitCenter"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/scarpa_d" />
                 <!--
                     android:background="?attr/selectableItemBackgroundBorderless"-->
 
@@ -126,30 +126,30 @@
 
                         <TextView
                             android:id="@+id/price_offer"
-                            android:gravity="center"
-                            android:layout_weight="0.9"
                             android:layout_width="0dip"
                             android:layout_height="match_parent"
+                            android:layout_weight="0.9"
+                            android:gravity="center"
+                            android:paddingBottom="@dimen/details_offer_padding_top"
                             android:paddingLeft="@dimen/city_title_padding"
-                            android:text="125€"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/title_quiz"
                             android:paddingTop="@dimen/details_offer_padding_top"
-                            android:paddingBottom="@dimen/details_offer_padding_top" />
+                            android:text="59,90€"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/title_quiz"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/discount_offer"
-                            android:layout_weight="0.6"
                             android:layout_width="0dip"
                             android:layout_height="match_parent"
-                            android:text="20 %"
+                            android:layout_weight="0.6"
                             android:gravity="center"
                             android:paddingBottom="@dimen/details_offer_padding_top"
                             android:paddingTop="@dimen/details_offer_padding_top"
+                            android:text="10 %"
                             android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/title_quiz"/>
+                            android:textSize="@dimen/title_quiz"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -190,24 +190,19 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="1dp"
-                        android:layout_marginBottom="6dp"
-                        />
-
+                        android:layout_marginBottom="6dp"/>
 
                     <TextView
                         android:id="@+id/offer_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/dummy_text"
-                        android:textSize="@dimen/quiz_content"
-                        android:textColor="@color/quiz_content"
-                        android:layout_marginTop="@dimen/quiz_content_padding_top_bot"
+                        android:layout_marginBottom="@dimen/quiz_content_padding_top_bot"
                         android:layout_marginLeft="@dimen/quiz_content_padding_lateral"
                         android:layout_marginRight="@dimen/quiz_content_padding_lateral"
-                        android:layout_marginBottom="@dimen/quiz_content_padding_top_bot" />
-
-
-
+                        android:layout_marginTop="@dimen/quiz_content_padding_top_bot"
+                        android:text="Decollete in pelle bianca a punta tacco alto e aperto in un lato."
+                        android:textColor="@color/quiz_content"
+                        android:textSize="@dimen/quiz_content" />
 
                     <!-- Please add the Clock here\
                     <TextClock
@@ -218,8 +213,6 @@
                         android:layout_marginBottom="40dp"
                         android:id="@+id/textClock" />
                     -->
-
-
 
                 </LinearLayout>
 
