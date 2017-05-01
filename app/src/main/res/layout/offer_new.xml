@@ -102,7 +102,7 @@
                             android:text="@string/offer_title_main"
                             android:textColor="@color/quiz_title"
                             android:textStyle="bold"
-                            android:textSize="@dimen/title_quiz"
+                            android:textSize="@dimen/article_title_article_page"
                             android:paddingTop="@dimen/offer_dialog_bar_padding_top"
                             android:paddingBottom="@dimen/offer_dialog_bar_padding_bottom" />
 
@@ -135,7 +135,7 @@
                             android:paddingTop="@dimen/details_offer_padding_top"
                             android:text="59,90€"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/title_quiz"
+                            android:textSize="@dimen/price_value_article_page"
                             android:textStyle="bold" />
 
                         <TextView
@@ -148,7 +148,7 @@
                             android:paddingTop="@dimen/details_offer_padding_top"
                             android:text="10 %"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/title_quiz"
+                            android:textSize="@dimen/discount_value_article_page"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -202,7 +202,7 @@
                         android:layout_marginTop="@dimen/quiz_content_padding_top_bot"
                         android:text="Decollete in pelle bianca a punta tacco alto e aperto in un lato."
                         android:textColor="@color/quiz_content"
-                        android:textSize="@dimen/quiz_content" />
+                        android:textSize="@dimen/article_content_article_page" />
 
                     <!-- Please add the Clock here\
                     <TextClock

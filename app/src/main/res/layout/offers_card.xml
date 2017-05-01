@@ -23,6 +23,81 @@
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_margin="@dimen/card_margin"
+                android:layout_below="@+id/thumbnail_card_offer"
+                android:id="@+id/top_info_card"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_weight="10"
+                android:layout_height="@dimen/offer_bottom_bar">
+
+                <LinearLayout
+                    android:layout_margin="@dimen/card_margin"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/shop_logo_card_article"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/logo"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#FF000000"/>
+
+                    <!--
+                    <ImageView
+                        android:id="@+id/shop_logo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="Logo"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/logo" />
+                        -->
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/card_margin"
+                    android:layout_width="0dip"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8">
+
+                    <TextView
+                        android:id="@+id/shop_top_card_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Nome negozio"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/shop_title_card"
+                        android:textStyle="bold" />
+
+                    <!--
+
+
+                    <TextView
+                        android:id="@+id/discount1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.7"
+                        android:gravity="center"
+                        android:text="Additional info"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/shop_title_card" />
+                        -->
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <RelativeLayout
                 android:layout_gravity="top"
                 android:layout_width="match_parent"
@@ -31,7 +106,7 @@
 
                 <!-- Thumbnail Image -->
                 <ImageView
-                    android:id="@+id/thumbnail_card_offer"
+                    android:id="@+id/thumbnail_card_article"
                     android:scaleType="fitCenter"
                     android:layout_width="match_parent"
                     android:background="@color/white"
@@ -40,6 +115,7 @@
                     android:clickable="true"
                     android:padding="0dp"/>
 
+                <!--
                 <LinearLayout
                     android:layout_below="@id/thumbnail_card_offer"
                     android:orientation="horizontal"
@@ -68,36 +144,10 @@
                             android:textColor="@color/offer_title"
                             android:textStyle="bold"
                             android:textSize="@dimen/offer_title" />
-
-                        <!--
-
-                            <TextView
-                                android:id="@+id/count"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/title"
-                                android:textColor="@color/lic_title"
-                                android:paddingBottom="@dimen/num_count_padding_bottom"
-                                android:paddingLeft="@dimen/city_title_padding"
-                                android:paddingRight="@dimen/city_title_padding"
-                                android:textSize="@dimen/num_count" />
-    -->
-
                     </LinearLayout>
 
-                    <!--
-                    <ImageView
-                        android:id="@+id/overflow_card_offer"
-                        android:layout_width="@dimen/lic_ic_overflow_width"
-                        android:layout_height="@dimen/lic_ic_overflow_height"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="@dimen/lic_ic_overflow_margin_top"
-                        android:layout_marginRight="@dimen/lic_ic_overflow_margin_right"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/dots" />
-                    -->
-
                 </LinearLayout>
+                        -->
 
             </RelativeLayout>
 
@@ -114,6 +164,7 @@
                 android:layout_weight="10"
                 android:layout_height="@dimen/offer_bottom_bar">
 
+                <!--
                 <LinearLayout
                     android:layout_margin="@dimen/card_margin"
                     android:layout_width="0dip"
@@ -133,6 +184,8 @@
 
                 </LinearLayout>
 
+                -->
+
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -142,27 +195,25 @@
                     android:layout_weight="0.7">
 
                     <TextView
-                        android:id="@+id/discount1"
+                        android:id="@+id/title_card_offer"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="0.7"
                         android:gravity="center"
                         android:text="Titolo Offerta"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/title_quiz"
+                        android:textSize="@dimen/article_title_card"
                         android:textStyle="bold" />
 
-
-
                     <TextView
-                        android:id="@+id/discount"
+                        android:id="@+id/category_card_article"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="0.7"
                         android:gravity="center"
                         android:text="Titolo Offerta"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/title_quiz" />
+                        android:textSize="@dimen/article_cat_card" />
 
                 </LinearLayout>
 

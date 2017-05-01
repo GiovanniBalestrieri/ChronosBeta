@@ -82,11 +82,14 @@
 
     <dimen name="car_title">22dp</dimen>
 
-    <!-- Quiz Modal -->
+    <!-- Article Card -->
 
-    <dimen name="title_quiz">20dp</dimen>
-    <dimen name="title_quiz_cat">18dp</dimen>
-    <dimen name="quiz_content">18dp</dimen>
+    <dimen name="article_title_card">18sp</dimen>
+    <dimen name="shop_title_card">18sp</dimen>
+    <dimen name="article_cat_card">16sp</dimen>
+    <dimen name="article_content">16dp</dimen>
+
+
     <dimen name="quiz_multi">18dp</dimen>
     <dimen name="quiz_content_padding_top_bot">5dp</dimen>
     <dimen name="quiz_dialog_bar_padding_top_bot">5dp</dimen>
@@ -99,7 +102,13 @@
 
     <dimen name="shop_name">24dp</dimen>
 
-    <!-- Offer -->
+    <!-- Article View -->
+
+    <dimen name="article_title_article_page">18dp</dimen>
+    <dimen name="discount_value_article_page">18dp</dimen>
+    <dimen name="price_value_article_page">18dp</dimen>
+
+    <dimen name="article_content_article_page">16dp</dimen>
 
     <dimen name="offer_dialog_bar_padding_top">15dp</dimen>
     <dimen name="offer_dialog_bar_padding_bottom">15dp</dimen>

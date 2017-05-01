@@ -4,10 +4,8 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,9 +19,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.activities.OfferPage;
-import box.chronos.userk.chronos.adapters.OffersAdapter;
+import box.chronos.userk.chronos.adapters.ArticleAdapter;
 import box.chronos.userk.chronos.objects.Offer;
 import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.settings.Includes;
@@ -34,7 +31,7 @@ import box.chronos.userk.chronos.utils.VideoUtility;
  * Created by ChronosTeam on 27/02/2017.
  */
 public class OffersListFragment extends Fragment {
-    private OffersAdapter adapter;
+    private ArticleAdapter adapter;
     private List<Offer> offerList = new ArrayList<Offer>();
     private ImageView glideHeader;
 
@@ -58,7 +55,7 @@ public class OffersListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         offerList = new ArrayList<>();
-        adapter = new OffersAdapter(getActivity(), offerList, recyclerView);
+        adapter = new ArticleAdapter(getActivity(), offerList, recyclerView);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
