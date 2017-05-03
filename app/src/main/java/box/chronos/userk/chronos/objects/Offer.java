@@ -18,15 +18,6 @@ public class Offer extends Article implements Parcelable {
     private String discount;
     private int drawable_thumb;
     private boolean isChecked;
-    private HashMap<String,String> availablePictures;
-
-    public HashMap<String, String> getAvailablePictures() {
-        return availablePictures;
-    }
-
-    public void setAvailablePictures(HashMap<String, String> availablePictures) {
-        this.availablePictures = availablePictures;
-    }
 
     String category;
     String categoryid;
@@ -232,6 +223,17 @@ public class Offer extends Article implements Parcelable {
         super.setPrice(parcel.readString());
         this.discount = parcel.readString();
         super.setShopId(parcel.readString());
+    }
+
+
+    private HashMap<String,String> availablePictures;
+
+    public HashMap<String, String> getAvailablePictures() {
+        return availablePictures;
+    }
+
+    public void setAvailablePictures(HashMap<String, String> availablePictures) {
+        this.availablePictures = availablePictures;
     }
 
     @Override

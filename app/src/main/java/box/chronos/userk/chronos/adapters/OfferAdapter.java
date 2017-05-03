@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.Map;
 
 import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.objects.Offer;
@@ -70,7 +71,15 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         holder.cat.setText(off.getCategory());
         holder.shop_name.setText(off.getShop());
 
-        String urlImage = IMAGE_URL + offerList.get(position).getPhotoactive();
+
+        Map.Entry<String,String> entry=offerList.get(position).getAvailablePictures().entrySet().iterator().next();
+        String key= entry.getKey();
+        String value=entry.getValue();
+        System.out.println(key);
+        System.out.println(value);
+
+
+        String urlImage = IMAGE_URL + value;
 
         // loading City cover using Glide library
         Log.d("OFFFFF","PIC: " + Integer.toString(offerList.get(position).getDrawable_thumb()));

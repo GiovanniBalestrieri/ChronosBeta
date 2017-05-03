@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,8 +72,8 @@ public class OffersListFragment extends Fragment {
         super.onResume();
 
         setFields();
-        offerList.clear();
-        //requestAllGeoOffers();
+        //offerList.clear();
+        requestAllGeoOffers();
     }
 
     private void setFields() {
@@ -112,7 +113,6 @@ public class OffersListFragment extends Fragment {
 
         //triggerTutorial(rootView);
 
-
         recyclerView.addOnItemTouchListener(
 
                 new RecycleItemClickListener(getActivity(), new RecycleItemClickListener.OnItemClickListener() {
@@ -121,10 +121,7 @@ public class OffersListFragment extends Fragment {
                         Offer lic = (Offer) offerList.get(position);
                         Log.d("YOLO", "Lincence: " + lic.getTitle() + " clicked");
 
-
-
                         // Create new fragment and transaction
-
 
                         Toast.makeText(getActivity(),"Offer",Toast.LENGTH_SHORT);
                         Intent i = new Intent(getActivity(),OfferPage.class);
@@ -329,6 +326,19 @@ public class OffersListFragment extends Fragment {
                 ld.setCategoryid(jsonObject.getString("categoryid").toString());
                 ld.setCategory(jsonObject.getString("category").toString());
 
+
+
+                JSONArray picArray = jsonObject.optJSONArray("offerPictures");
+                if (picArray.length()>0) {
+                    HashMap<String, String> picMap=new LinkedHashMap<>();
+                    for (int j = 0; j < picArray.length(); j++) {
+                        JSONObject picObj = picArray.getJSONObject(j);
+                        String id = picObj.getString("offerpicId");
+                        String picPath = picObj.getString("offerPicture");
+                        picMap.put(id,picPath);
+                    }
+                    ld.setAvailablePictures(picMap);
+                }
                 ld.setCategoryphoto(jsonObject.getString("categoryphoto").toString());
                 ld.setPhotoactive(jsonObject.getString("photoactive").toString());
                 ld.setId_offer(jsonObject.getString("offerid").toString());
