@@ -51,7 +51,7 @@ public class ArticleListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.offers_list_main, container, false);
 
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_licences);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_offer);
         recyclerView.setHasFixedSize(true);
 
         offerList = new ArrayList<>();

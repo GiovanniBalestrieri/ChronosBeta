@@ -203,12 +203,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.shop_nav) {
-            Toast.makeText(this,"Shop",Toast.LENGTH_SHORT);
-            // Handle the camera action
-            Intent i = new Intent(getApplicationContext(),ShopPages.class);
-            startActivity(i);
-        } else if (id == R.id.categories) {
+        if (id == R.id.categories) {
             Toast.makeText(this,"Categories",Toast.LENGTH_SHORT);
 
             FragmentManager fragmentManager = getFragmentManager();
@@ -225,6 +220,17 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
             */
         } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_offers) {
+            Toast.makeText(this,"Intorno a te",Toast.LENGTH_SHORT);
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            OffersListFragment fragment = new OffersListFragment();
+            fragmentTransaction.replace(R.id.fragment_container, fragment,"Categories");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_manage) {
 

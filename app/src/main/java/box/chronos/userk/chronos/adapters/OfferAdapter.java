@@ -16,6 +16,8 @@ import java.util.List;
 import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.objects.Offer;
 
+import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
+
 
 /**
  * Created by ChronosTeam on 27/02/2017.
@@ -68,7 +70,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         holder.cat.setText(off.getCategory());
         holder.shop_name.setText(off.getShop());
 
-        //String urlImage = BASE_URL + LICENCES_IMG + lic.getId();
+        String urlImage = IMAGE_URL + offerList.get(position).getPhotoactive();
 
         // loading City cover using Glide library
         Log.d("OFFFFF","PIC: " + Integer.toString(offerList.get(position).getDrawable_thumb()));
@@ -111,6 +113,10 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         }
     }
     */
+
+    public void touchIt() {
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {

@@ -3,6 +3,9 @@ package box.chronos.userk.chronos.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
@@ -15,6 +18,16 @@ public class Offer extends Article implements Parcelable {
     private String discount;
     private int drawable_thumb;
     private boolean isChecked;
+    private HashMap<String,String> availablePictures;
+
+    public HashMap<String, String> getAvailablePictures() {
+        return availablePictures;
+    }
+
+    public void setAvailablePictures(HashMap<String, String> availablePictures) {
+        this.availablePictures = availablePictures;
+    }
+
     String category;
     String categoryid;
     String categoryphoto;

@@ -64,7 +64,7 @@
     <dimen name="cat_card_height">180dp</dimen>
     <dimen name="cat_title_padding">5dp</dimen>
     <dimen name="cat_title_size">18sp</dimen>
-    <dimen name="card_cat_radius">3dp</dimen>
+    <dimen name="card_cat_radius">5dp</dimen>
     <dimen name="card_cat_id_width">50dp</dimen>
 
     <!-- CardView Offer -->

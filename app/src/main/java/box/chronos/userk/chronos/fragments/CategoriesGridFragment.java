@@ -3,7 +3,10 @@ package box.chronos.userk.chronos.fragments;
 import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -41,6 +44,7 @@ import box.chronos.userk.chronos.serverRequest.AppUrls;
 import box.chronos.userk.chronos.serverRequest.RestInteraction;
 import box.chronos.userk.chronos.settings.Includes;
 import box.chronos.userk.chronos.utils.AppController;
+import box.chronos.userk.chronos.utils.BlurBuilder;
 import box.chronos.userk.chronos.utils.RecycleItemClickListener;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
@@ -136,6 +140,10 @@ public class CategoriesGridFragment extends Fragment {
         );
 
 
+        // Setup Background
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test9);
+        Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(),bm);
+        rootView.setBackground(new BitmapDrawable(getActivity().getResources(), image));
 
         return rootView;
     }
@@ -145,14 +153,14 @@ public class CategoriesGridFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setFields();
-        requestAllCategories();
+        prepareCategories();
     }
 
     private void setFields() {
         catList = new ArrayList<>();
         adapter = new CategoryAdapter(getActivity(),catList);
         recyclerView.setAdapter(adapter);
-        catList.clear();
+        //catList.clear();
         adapter.notifyDataSetChanged();
     }
 

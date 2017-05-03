@@ -28,6 +28,7 @@ import java.util.Map;
 import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.activities.OfferPage;
 import box.chronos.userk.chronos.adapters.ArticleAdapter;
+import box.chronos.userk.chronos.adapters.OfferAdapter;
 import box.chronos.userk.chronos.callbacks.IAsyncResponse;
 import box.chronos.userk.chronos.objects.Offer;
 import box.chronos.userk.chronos.R;
@@ -48,11 +49,12 @@ public class OffersListFragment extends Fragment {
     private static final String TAG = OffersListFragment.class.getSimpleName();
     ArrayList<OffersResponse> arrayListOffers;
     private String categoryid;
-    private ArticleAdapter adapter;
+    private OfferAdapter adapter;
     private List<Offer> offerList = new ArrayList<Offer>();
     ArrayList<OffersResponse> arrayListNotification;
     private UserSharedPreference sharePrefs;
     private ImageView glideHeader;
+    private RecyclerView recyclerView;
 
     public OffersListFragment() {
     }
@@ -75,7 +77,7 @@ public class OffersListFragment extends Fragment {
 
     private void setFields() {
         arrayListNotification = new ArrayList<>();
-        adapter = new ArticleAdapter(getActivity(), offerList);
+        adapter = new OfferAdapter(getActivity(), offerList,recyclerView);
         //rv_notification_list.setAdapter(dataAdapterNotification);
         offerList.clear();
         adapter.notifyDataSetChanged();
@@ -93,11 +95,11 @@ public class OffersListFragment extends Fragment {
         sharePrefs = AppController.getPreference();
 
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_licences);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_offer);
         recyclerView.setHasFixedSize(true);
 
         offerList = new ArrayList<>();
-        adapter = new ArticleAdapter(getActivity(), offerList, recyclerView);
+        adapter = new OfferAdapter(getActivity(), offerList, recyclerView);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -291,7 +293,7 @@ public class OffersListFragment extends Fragment {
             public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
-                    arrayListNotification.clear();
+                    offerList.clear();
                     if (response != null) {
                         if (object.getString("success").equalsIgnoreCase("1")) {
                             getJsonData(object);
@@ -326,6 +328,7 @@ public class OffersListFragment extends Fragment {
                 Offer ld = new Offer();
                 ld.setCategoryid(jsonObject.getString("categoryid").toString());
                 ld.setCategory(jsonObject.getString("category").toString());
+
                 ld.setCategoryphoto(jsonObject.getString("categoryphoto").toString());
                 ld.setPhotoactive(jsonObject.getString("photoactive").toString());
                 ld.setId_offer(jsonObject.getString("offerid").toString());
