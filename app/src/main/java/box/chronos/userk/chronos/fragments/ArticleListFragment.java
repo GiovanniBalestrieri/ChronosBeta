@@ -16,72 +16,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import box.chronos.userk.chronos.activities.MainActivity;
+import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.activities.OfferPage;
 import box.chronos.userk.chronos.adapters.ArticleAdapter;
-import box.chronos.userk.chronos.callbacks.IAsyncResponse;
 import box.chronos.userk.chronos.objects.Offer;
-import box.chronos.userk.chronos.R;
-import box.chronos.userk.chronos.objects.payloads.OffersResponse;
-import box.chronos.userk.chronos.serverRequest.AppUrls;
-import box.chronos.userk.chronos.serverRequest.RestInteraction;
 import box.chronos.userk.chronos.settings.Includes;
-import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.RecycleItemClickListener;
-import box.chronos.userk.chronos.utils.UserSharedPreference;
-import box.chronos.userk.chronos.utils.Utility;
 import box.chronos.userk.chronos.utils.VideoUtility;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
-public class OffersListFragment extends Fragment {
-    private static final String TAG = OffersListFragment.class.getSimpleName();
-    ArrayList<OffersResponse> arrayListOffers;
-    private String categoryid;
+public class ArticleListFragment extends Fragment {
     private ArticleAdapter adapter;
     private List<Offer> offerList = new ArrayList<Offer>();
-    ArrayList<OffersResponse> arrayListNotification;
-    private UserSharedPreference sharePrefs;
     private ImageView glideHeader;
 
-    public OffersListFragment() {
+    public ArticleListFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-
-        setFields();
-        offerList.clear();
-        requestAllGeoOffers();
-    }
-
-    private void setFields() {
-        arrayListNotification = new ArrayList<>();
-        adapter = new ArticleAdapter(getActivity(), offerList);
-        //rv_notification_list.setAdapter(dataAdapterNotification);
-        offerList.clear();
-        adapter.notifyDataSetChanged();
-    }
-
-
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -89,8 +49,6 @@ public class OffersListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.offers_list_main, container, false);
-
-        sharePrefs = AppController.getPreference();
 
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_licences);
@@ -224,7 +182,6 @@ public class OffersListFragment extends Fragment {
 
             adapter.notifyDataSetChanged();
         } else {
-            requestAllGeoOffers();
             // Retrieve from activity
             // Get Licences
 
@@ -275,76 +232,7 @@ public class OffersListFragment extends Fragment {
         }
     }
 
-    // request for all notifications
-    private void requestAllGeoOffers() {
-        Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", "getNotifications");
-        pairs.put("userid", sharePrefs.getUserId());
-        pairs.put("sessionkey", sharePrefs.getSessionKey());
-        pairs.put("latitude", /*"52.3905689"*/sharePrefs.getLatitude());
-        pairs.put("longitude", /*"13.0644729"*/sharePrefs.getLongitude());
-        pairs.put("categoryid", categoryid);
 
-        RestInteraction interaction = new RestInteraction(getActivity());
-        interaction.setCallBack(new IAsyncResponse() {
-            @Override
-            public void onRestInteractionResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    arrayListNotification.clear();
-                    if (response != null) {
-                        if (object.getString("success").equalsIgnoreCase("1")) {
-                            getJsonData(object);
-                        } else {
-                            Utility.showAlertDialog(getActivity(), object.getString("message"));
-                        }
-                    } else {
-                        Utility.showAlertDialog(getActivity(), object.getString("message"));
-                    }
-                    //dataAdapterNotification.setData(arrayListNotification);
-                    adapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onRestInteractionError(String message) {
-                Utility.showAlertDialog(getActivity(), message);
-            }
-        });
-        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
-    }
-
-    // get json data
-    private void getJsonData(JSONObject object) {
-        try {
-            JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
-            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                Offer ld = new Offer();
-                ld.setCategoryid(jsonObject.getString("categoryid").toString());
-                ld.setCategory(jsonObject.getString("category").toString());
-                ld.setCategoryphoto(jsonObject.getString("categoryphoto").toString());
-                ld.setPhotoactive(jsonObject.getString("photoactive").toString());
-                ld.setId_offer(jsonObject.getString("offerid").toString());
-                ld.setBusinessname(jsonObject.getString("businessname").toString());
-                ld.setLatitude(jsonObject.getString("latitude").toString());
-                ld.setLongitude(jsonObject.getString("longitude").toString());
-                ld.setBusinessphone(jsonObject.getString("businessphone").toString());
-                ld.setBusinessaddress(jsonObject.getString("businessaddress").toString());
-                ld.setOfferdescription(jsonObject.getString("offerdescription").toString());
-                ld.setDistance(jsonObject.getString("distance").toString());
-                ld.setTimeout(jsonObject.getString("timer").toString());
-                ld.setPrice(jsonObject.getString("price").toString());
-                ld.setDiscount(jsonObject.getString("discount").toString());
-                offerList.add(ld);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }

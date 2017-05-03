@@ -14,6 +14,142 @@ public class Offer extends Article implements Parcelable {
     private String timeout;
     private String discount;
     private int drawable_thumb;
+    private boolean isChecked;
+    String category;
+    String categoryid;
+    String categoryphoto;
+    String photoactive;
+    String businessname;
+    String businessphone;
+    String businessaddress;
+    String offerdescription;
+    String latitude;
+    String longitude;
+    String distance;
+    String price;
+    int progressValue;
+
+
+    public Offer(){
+        super();
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    @Override
+    public String getCategory() {
+        return category;
+    }
+
+    @Override
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategoryid() {
+        return categoryid;
+    }
+
+    public void setCategoryid(String categoryid) {
+        this.categoryid = categoryid;
+    }
+
+    public String getCategoryphoto() {
+        return categoryphoto;
+    }
+
+    public void setCategoryphoto(String categoryphoto) {
+        this.categoryphoto = categoryphoto;
+    }
+
+    public String getPhotoactive() {
+        return photoactive;
+    }
+
+    public void setPhotoactive(String photoactive) {
+        this.photoactive = photoactive;
+    }
+
+    public String getBusinessname() {
+        return businessname;
+    }
+
+    public void setBusinessname(String businessname) {
+        this.businessname = businessname;
+    }
+
+    public String getBusinessphone() {
+        return businessphone;
+    }
+
+    public void setBusinessphone(String businessphone) {
+        this.businessphone = businessphone;
+    }
+
+    public String getBusinessaddress() {
+        return businessaddress;
+    }
+
+    public void setBusinessaddress(String businessaddress) {
+        this.businessaddress = businessaddress;
+    }
+
+    public String getOfferdescription() {
+        return offerdescription;
+    }
+
+    public void setOfferdescription(String offerdescription) {
+        this.offerdescription = offerdescription;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    @Override
+    public String getPrice() {
+        return price;
+    }
+
+    @Override
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public int getProgressValue() {
+        return progressValue;
+    }
+
+    public void setProgressValue(int progressValue) {
+        this.progressValue = progressValue;
+    }
+
 
     public Offer(String id, String title, int d, String cat) {
         super(id,title,cat);

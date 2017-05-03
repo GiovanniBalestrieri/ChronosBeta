@@ -1,48 +1,39 @@
 package box.chronos.userk.chronos.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import box.chronos.userk.chronos.objects.Offer;
 import box.chronos.userk.chronos.R;
+import box.chronos.userk.chronos.objects.Offer;
 
 
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
-public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHolder>{
+public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder>{
 
     private Context mContext;
     private List<Offer> offerList;
-    //private final RecyclerView recyclerView;
+    private final RecyclerView recyclerView;
     //private ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
     }
 
-    public ArticleAdapter(Context mContext, List<Offer> mlicenceList, RecyclerView recyclerView) {
+    public OfferAdapter(Context mContext, List<Offer> mlicenceList, RecyclerView recyclerView) {
         this.mContext = mContext;
-        //this.recyclerView = recyclerView;
-        this.offerList = mlicenceList;
-    }
-
-    public ArticleAdapter(Context mContext, List<Offer> mlicenceList) {
-        this.mContext = mContext;
+        this.recyclerView = recyclerView;
         this.offerList = mlicenceList;
     }
 

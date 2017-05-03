@@ -5,5 +5,6 @@ package box.chronos.userk.chronos.settings;
  */
 
 public class Includes {
-    public static boolean staticContent = true;
+    // For testing purposes: set flag to true
+    public static boolean staticContent = false;
 }
