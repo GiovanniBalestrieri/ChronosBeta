@@ -70,7 +70,7 @@ public class OffersListFragment extends Fragment {
 
         setFields();
         offerList.clear();
-        requestAllGeoOffers();
+        //requestAllGeoOffers();
     }
 
     private void setFields() {
@@ -281,9 +281,9 @@ public class OffersListFragment extends Fragment {
         pairs.put("method", "getNotifications");
         pairs.put("userid", sharePrefs.getUserId());
         pairs.put("sessionkey", sharePrefs.getSessionKey());
-        pairs.put("latitude", /*"52.3905689"*/sharePrefs.getLatitude());
-        pairs.put("longitude", /*"13.0644729"*/sharePrefs.getLongitude());
-        pairs.put("categoryid", categoryid);
+        pairs.put("latitude", "41.886395"/*sharePrefs.getLatitude()*/);
+        pairs.put("longitude", "12.516753"/*sharePrefs.getLongitude()*/);
+        pairs.put("categoryid", sharePrefs.getSelectedCatrgory());
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {

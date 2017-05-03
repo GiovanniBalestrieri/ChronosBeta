@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_cat_margin"
+        android:padding="0dp"
+        android:elevation="@dimen/card_cat_elevation"
+        card_view:cardCornerRadius="@dimen/card_cat_radius">
+
+        <FrameLayout
+            android:id="@+id/layoutRecycleLicence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#89969F">
+
+                <!-- Thumbnail Image -->
+                <ImageView
+                    android:id="@+id/thumbnail_cat_card_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/cat_card_height"
+                    android:padding="0dp"
+                    android:scaleType="centerCrop"/>
+
+                <ImageView
+                    android:id="@+id/thumbnail_cat_card_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/cat_card_height"
+                    android:scaleType="centerInside"/>
+
+            </RelativeLayout>
+
+            <!--    android:background="@color/lic_card_overlay"
+                -->
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/lic_card_overlay"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/title_cat_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/cat_title_padding"
+                    android:paddingRight="@dimen/cat_title_padding"
+                    android:paddingTop="@dimen/cat_title_padding"
+                    android:paddingBottom="@dimen/cat_title_padding"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/cat_title_size" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/card_id_text_ll"
+                android:orientation="vertical"
+                android:background="@color/lic_card_overlay"
+                android:layout_gravity="top"
+                android:layout_width="@dimen/card_cat_id_width"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/card_id_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/cat_title_padding"
+                    android:paddingRight="@dimen/cat_title_padding"
+                    android:paddingTop="@dimen/cat_title_padding"
+                    android:paddingBottom="@dimen/cat_title_padding"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/cat_title_size" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

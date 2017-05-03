@@ -15,6 +15,8 @@ public class AppConstant {
     public static final String CODE_VALIDATION_METHOD = "validateCode";
     public static final String CODE_SKIP_METHOD = "skipCode";
     public static final String FORGOT_PSS_METHOD = "forgotPassword";
+    public static final String GET_CAT_METHOD = "getAllCategories";
+    public static final String GET_OFFERS_METHOD = "getNotifications";
 
     // Api responses
     public static final String DATA_RESP = "data";
@@ -35,6 +37,14 @@ public class AppConstant {
     public static final String DEV_TOKEN_PARAM = "devicetoken";
     public static final String LAT_PARAM = "latitude";
     public static final String LON_PARAM = "longitude";
+
+    // Categories
+    public static final String CAT_ID = "categoryid";
+    public static final String CAT_NAME = "category";
+    public static final String CAT_PHOTO_DEF = "categoryphoto";
+    public static final String CAT_PHOTO_ACTIVE = "photoactive";
+    public static final String CAT_SELECTED = "selected";
+
 
 
 

@@ -170,7 +170,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), EMPTY_PASSWORD_MSG, Toast.LENGTH_SHORT).show();
                     } else if (TextUtils.isEmpty(etName.getText().toString()))
                         Toast.makeText(getActivity(), EMPTY_USER_MSG, Toast.LENGTH_SHORT).show();
-                } else if (fv.validateEmail(etEmail,etEmail.getText().toString())) {
+                } else if (fv.isEmailInvalid(etEmail,etEmail.getText().toString())) {
                     Toast.makeText(getActivity(), CHECK_MAIL_MSG, Toast.LENGTH_SHORT).show();
                 } else if (fv.validateUsernameSpace(etName, EMPTY_USER_MSG))
                     return;

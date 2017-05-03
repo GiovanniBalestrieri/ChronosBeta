@@ -42,6 +42,7 @@ import java.util.Stack;
 
 import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.callbacks.IAsyncResponse;
+import box.chronos.userk.chronos.fragments.CategoriesGridFragment;
 import box.chronos.userk.chronos.fragments.OffersListFragment;
 import box.chronos.userk.chronos.serverRequest.AppUrls;
 import box.chronos.userk.chronos.serverRequest.RestInteraction;
@@ -87,10 +88,17 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         OffersListFragment fragment = new OffersListFragment();
-        fragmentTransaction.add(R.id.fragment_container, fragment,"Licence");
+        fragmentTransaction.add(R.id.fragment_container, fragment,"Offers");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        // Dismiss Dialog
+        ///Utility.showAlertDialog();
     }
 
     @Override
@@ -200,11 +208,22 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             Intent i = new Intent(getApplicationContext(),ShopPages.class);
             startActivity(i);
-        } else if (id == R.id.nav_gallery) {
-            Toast.makeText(this,"Offer",Toast.LENGTH_SHORT);
+        } else if (id == R.id.categories) {
+            Toast.makeText(this,"Categories",Toast.LENGTH_SHORT);
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            CategoriesGridFragment fragment = new CategoriesGridFragment();
+            fragmentTransaction.replace(R.id.fragment_container, fragment,"Categories");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+
+            /*
             Intent i = new Intent(getApplicationContext(),OfferPage.class);
             startActivity(i);
-
+            */
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -214,13 +233,15 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.nav_logout) {
-            sharePrefs.clearPrefrence();
+
+            requestForLogout();
             // FB
             //LoginManager.getInstance().logOut();
             AppController.currentMode = 1;
             Intent intent = new Intent(MainActivity.self, LoginActivity.class);
             startActivity(intent);
             finish();
+            sharePrefs.clearPrefrence();
             MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         } else if (id == R.id.nav_switch) {
             Toast.makeText(MainActivity.self,"SWITCH",Toast.LENGTH_SHORT);
@@ -239,26 +260,29 @@ public class MainActivity extends AppCompatActivity
         pairs.put("userid", sharePrefs.getUserId());
         pairs.put("sessionkey", sharePrefs.getSessionKey());
 
-        RestInteraction intraction = new RestInteraction(MainActivity.self);
-        intraction.setCallBack(new IAsyncResponse() {
+        RestInteraction interaction = new RestInteraction(MainActivity.self);
+        interaction.setCallBack(new IAsyncResponse() {
             @Override
             public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString("success").equalsIgnoreCase("1")) {
-                        sharePrefs.clearPrefrence();
 
                         // Facebook sync
                         //LoginManager.getInstance().logOut();
-                        AppController.currentMode = 1;
-                        Intent intent = new Intent(MainActivity.self, LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                        MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                        Utility.showAlertDialog(self, object.getString("message"));
+
                     } else {
-                        //Utility.showAlertDialog(self, object.getString("message"));
+                        Utility.showAlertDialog(self, object.getString("message"));
                     }
+
+                    AppController.currentMode = 1;
+                    Intent intent = new Intent(MainActivity.self, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    sharePrefs.clearPrefrence();
+                    MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -268,7 +292,7 @@ public class MainActivity extends AppCompatActivity
                 Utility.showAlertDialog(MainActivity.self, message);
             }
         });
-        intraction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "no");
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "no");
     }
 
     public void isReadContactPermissionGranted() {

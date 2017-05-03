@@ -13,6 +13,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    configurations {
+        //all*.exclude group: 'com.android.support', module: 'support-v4'
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -43,8 +47,10 @@ dependencies {
     compile files('libs/httpclient-4.3.1.jar')
     compile files('libs/nineoldandroids-2.4.0.jar')
 
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
+    compile('com.android.support:appcompat-v7:25.0.1'){
+        exclude module: 'support-v4'
+    }
+    //compile 'com.android.support:design:25.0.1'
     compile 'com.android.volley:volley:1.0.0'
     testCompile 'junit:junit:4.12'
 
@@ -55,10 +61,12 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     // CardView
-    compile 'com.android.support:cardview-v7:25.0.1'
+    compile 'com.android.support:cardview-v7:25.+'
+    compile 'com.android.support:recyclerview-v7:25.+'
+    //compile 'com.android.support:cardview-v7:25.0.1'
 
     // RecycleView
-    compile 'com.android.support:recyclerview-v7:25.0.1'
+    //compile 'com.android.support:recyclerview-v7:+'
 
     // Help TapTarget
     compile 'uk.co.samuelwall:material-tap-target-prompt:1.9.3'

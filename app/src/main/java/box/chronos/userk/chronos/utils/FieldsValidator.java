@@ -36,7 +36,7 @@ public class FieldsValidator {
 
     }
 
-    public synchronized boolean validateEmail(EditText view, String message) {
+    public synchronized boolean isEmailInvalid(EditText view, String message) {
         if (message == null || message.isEmpty())
             message = "Please enter a valid email";
 
@@ -44,7 +44,7 @@ public class FieldsValidator {
         SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
         ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(
-                view.getText().toString()).matches()) {
+                view.getText().toString().trim()).matches()) {
             view.requestFocus();
             view.setError(ssbuilder);
             clearError(view);

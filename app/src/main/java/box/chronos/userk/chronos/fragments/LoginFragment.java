@@ -129,7 +129,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     } else if (TextUtils.isEmpty(et_registredPassword.getText().toString())) {
                         Toast.makeText(getActivity(), EMPTY_PASSWORD_MSG, Toast.LENGTH_SHORT).show();
                     }
-                } else if (fv.validateEmail(et_registredEmailId,et_registredEmailId.getText().toString())) {
+                } else if (fv.isEmailInvalid(et_registredEmailId,et_registredEmailId.getText().toString())) {
                     Toast.makeText(getActivity(), CHECK_MAIL_MSG, Toast.LENGTH_SHORT).show();
                 } else {
                     requestForLogin();
@@ -171,7 +171,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         Map<String, String> pairs = new HashMap<>();
         pairs.put("method", LOGIN_METHOD);
-        pairs.put("email", et_registredEmailId.getText().toString());
+        pairs.put("email", et_registredEmailId.getText().toString().trim());
         pairs.put("password", et_registredPassword.getText().toString());
         pairs.put("devicetype", DEVICE_TYPE);
         pairs.put("devicetoken", sharePrefs.getDeviceToken());
