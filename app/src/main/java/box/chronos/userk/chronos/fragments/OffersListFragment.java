@@ -335,6 +335,7 @@ public class OffersListFragment extends Fragment {
                 ld.setId_offer(jsonObject.getString("offerid").toString());
                 ld.setBusinessname(jsonObject.getString("businessname").toString());
                 ld.setLatitude(jsonObject.getString("latitude").toString());
+                ld.setTitle(jsonObject.getString("offername").toString());
                 ld.setLongitude(jsonObject.getString("longitude").toString());
                 ld.setBusinessphone(jsonObject.getString("businessphone").toString());
                 ld.setBusinessaddress(jsonObject.getString("businessaddress").toString());

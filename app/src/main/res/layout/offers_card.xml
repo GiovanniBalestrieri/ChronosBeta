@@ -23,21 +23,27 @@
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
+
+
             <LinearLayout
-                android:layout_margin="@dimen/card_margin"
+                android:layout_marginTop="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
                 android:layout_below="@+id/thumbnail_card_offer"
                 android:id="@+id/top_info_card"
+
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_weight="10"
                 android:layout_height="@dimen/offer_bottom_bar">
 
                 <LinearLayout
-                    android:layout_margin="@dimen/card_margin"
+                    android:gravity="center_vertical"
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
                     android:layout_weight="0.15">
 
+                    <!--
                     <de.hdodenhof.circleimageview.CircleImageView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/shop_logo_card_article"
@@ -46,17 +52,16 @@
                         android:src="@drawable/logo"
                         app:civ_border_width="2dp"
                         app:civ_border_color="#FF000000"/>
+                    -->
 
-                    <!--
                     <ImageView
-                        android:id="@+id/shop_logo"
+                        android:id="@+id/shop_logo_card_article"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:contentDescription="Logo"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@drawable/logo" />
-                        -->
 
 
                 </LinearLayout>
@@ -98,6 +103,13 @@
 
             </LinearLayout>
 
+
+            <View android:id="@+id/separator"
+                android:background="@color/gray"
+                android:layout_width = "fill_parent"
+                android:layout_height="1dip"/>
+
+
             <RelativeLayout
                 android:layout_gravity="top"
                 android:layout_width="match_parent"
@@ -107,13 +119,13 @@
                 <!-- Thumbnail Image -->
                 <ImageView
                     android:id="@+id/thumbnail_card_article"
-                    android:scaleType="fitCenter"
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:layout_height="@dimen/offer_cover_height"
-                    android:src="@drawable/scarpa_d"
+                    android:background="@color/white"
                     android:clickable="true"
-                    android:padding="0dp"/>
+                    android:padding="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/abitiuomo" />
 
                 <!--
                 <LinearLayout
@@ -152,9 +164,6 @@
             </RelativeLayout>
 
 
-
-
-
             <LinearLayout
                 android:layout_margin="@dimen/card_margin"
                 android:layout_below="@+id/thumbnail_card_offer"
@@ -191,6 +200,7 @@
                     android:orientation="vertical"
                     android:layout_margin="@dimen/card_margin"
                     android:layout_width="0dip"
+                    android:gravity="center"
                     android:layout_height="match_parent"
                     android:layout_weight="0.7">
 
@@ -205,15 +215,44 @@
                         android:textSize="@dimen/article_title_card"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/category_card_article"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                    <LinearLayout
                         android:layout_weight="0.7"
+                        android:layout_width="match_parent"
                         android:gravity="center"
-                        android:text="Titolo Offerta"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/article_cat_card" />
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/category_card_article"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="abbigliamento"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/article_cat_card" />
+
+
+                        <TextView
+                            android:id="@+id/price_card_article"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/fifty_dp"
+                            android:gravity="center"
+                            android:text="34,34"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/article_cat_card" />
+
+                        <!--
+                        <ImageView
+                            android:id="@+id/thumbnail_card_article_cat"
+                            android:layout_width="@dimen/fifty_dp"
+                            android:layout_height="@dimen/offer_cover_height"
+                            android:background="@color/white"
+                            android:padding="0dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/abitiuomo" />
+                            -->
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

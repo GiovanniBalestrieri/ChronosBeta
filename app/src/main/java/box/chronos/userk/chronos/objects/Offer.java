@@ -12,6 +12,16 @@ import java.util.HashMap;
 
 public class Offer extends Article implements Parcelable {
     private String id_offer;
+    private String offer_name;
+
+    public String getOffer_name() {
+        return offer_name;
+    }
+
+    public void setOffer_name(String offer_name) {
+        this.offer_name = offer_name;
+    }
+
     private String from;
     private String to;
     private String timeout;
