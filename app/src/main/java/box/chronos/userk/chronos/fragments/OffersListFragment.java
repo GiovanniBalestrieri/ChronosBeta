@@ -2,6 +2,7 @@ package box.chronos.userk.chronos.fragments;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
@@ -126,10 +127,10 @@ public class OffersListFragment extends Fragment {
                         // Create new fragment and transaction
 
                         Toast.makeText(getActivity(),"Offer",Toast.LENGTH_SHORT);
-                        //Intent i = new Intent(getActivity(),OfferPage.class);
+                        Intent i = new Intent(getActivity(),OfferPage.class);
 
-                        //i.putExtra("Offer",offerList.get(position));
-                        //startActivity(i);
+                        i.putExtra("Offer",offerList.get(position));
+                        startActivity(i);
 
                         /*
                         OfferFragment newLoc = new OfferFragment();
@@ -142,7 +143,9 @@ public class OffersListFragment extends Fragment {
 
                         // Commit the transaction
                         transaction.commit();
+
                         */
+
                     }
                 }
 

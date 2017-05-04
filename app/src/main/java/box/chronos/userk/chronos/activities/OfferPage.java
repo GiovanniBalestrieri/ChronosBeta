@@ -11,10 +11,13 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import box.chronos.userk.chronos.objects.Offer;
 import box.chronos.userk.chronos.objects.Shop;
 import box.chronos.userk.chronos.R;
+
+import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
 
 /**
  * Created by userk on 10/12/16.
@@ -48,14 +51,35 @@ public class OfferPage extends Activity {
         offDesc = (TextView) findViewById(R.id.offer_description);
         offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
 
-        offCat.setText(offX.getCategories());
-        offDesc.setText(offX.getDescription());
+        offCat.setText(offX.getCategory());
+        offDesc.setText(offX.getOfferdescription());
         offTitle.setText(offX.getTitle());
         offPrice.setText(offX.getPrice());
         offDiscount.setText(offX.getDiscount());
 
         shopId = offX.getShopId();
-        Picasso.with(this).load(offX.getDrawable_thumb()).into( offImage);
+
+        String urlCat = IMAGE_URL + offX.getCategoryphoto();
+        //
+        // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
+        //Picasso.with(this).load(urlCat).into(shop_logo);
+
+        if (offX.hasPicture()) {
+            Map.Entry<String,String> entry = offX.getAvailablePictures().entrySet().iterator().next();
+            String key = entry.getKey();
+            String value = entry.getValue();
+            System.out.println(key);
+            System.out.println(value);
+
+            String urlImage = IMAGE_URL + value;
+
+            Picasso.with(this).load(urlImage).into(offImage); //.placeholder(R.drawable.piwo_48)
+
+        } else {
+            Picasso.with(this).load(R.drawable.empty).into(offImage);
+        }
+
+        //Picasso.with(this).load(offX.getDrawable_thumb()).into(offImage);
 
         checkInside.setOnClickListener(new View.OnClickListener(){
              @Override

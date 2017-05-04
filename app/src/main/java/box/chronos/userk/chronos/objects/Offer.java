@@ -232,6 +232,17 @@ public class Offer extends Article implements Parcelable {
         super.setPrice(parcel.readString());
         this.discount = parcel.readString();
         super.setShopId(parcel.readString());
+        this.category = parcel.readString();
+        this.categoryid = parcel.readString();
+        this.categoryphoto = parcel.readString();
+        this.photoactive = parcel.readString();
+        this.businessname = parcel.readString();
+        this.businessphone = parcel.readString();
+        this.businessaddress = parcel.readString();
+        this.offerdescription = parcel.readString();
+        this.latitude = parcel.readString();
+        this.longitude = parcel.readString();
+        this.distance = parcel.readString();
     }
 
 
@@ -272,6 +283,18 @@ public class Offer extends Article implements Parcelable {
         parcel.writeString(super.getPrice());
         parcel.writeString(discount);
         parcel.writeString(super.getShopId());
+        parcel.writeString(this.getCategory());
+        parcel.writeString(this.getCategoryid());
+        parcel.writeString(this.getCategoryphoto());
+        parcel.writeString(this.getPhotoactive());
+        parcel.writeString(this.getBusinessname());
+        parcel.writeString(this.getBusinessphone());
+        parcel.writeString(this.getBusinessaddress());
+        parcel.writeString(this.getCategoryphoto());
+        parcel.writeString(this.getOfferdescription());
+        parcel.writeString(this.getLatitude());
+        parcel.writeString(this.getLongitude());
+        parcel.writeString(this.getDistance());
     }
 
     public static final Parcelable.Creator CREATOR  = new Parcelable.Creator() {
