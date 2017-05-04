@@ -36,6 +36,7 @@ public class Offer extends Article implements Parcelable {
 
     public Offer(){
         super();
+        availablePictures = new HashMap<>();
     }
 
     public boolean isChecked() {
@@ -47,9 +48,7 @@ public class Offer extends Article implements Parcelable {
     }
 
     @Override
-    public String getCategory() {
-        return category;
-    }
+    public String getCategory() { return category; }
 
     @Override
     public void setCategory(String category) {
@@ -234,6 +233,15 @@ public class Offer extends Article implements Parcelable {
 
     public void setAvailablePictures(HashMap<String, String> availablePictures) {
         this.availablePictures = availablePictures;
+    }
+
+    public boolean hasPicture() {
+        boolean result = false;
+
+        if (!availablePictures.isEmpty())
+            result = true;
+
+        return result;
     }
 
     @Override

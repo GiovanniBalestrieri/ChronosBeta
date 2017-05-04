@@ -243,12 +243,12 @@ public class MainActivity extends AppCompatActivity
             requestForLogout();
             // FB
             //LoginManager.getInstance().logOut();
-            AppController.currentMode = 1;
-            Intent intent = new Intent(MainActivity.self, LoginActivity.class);
-            startActivity(intent);
-            finish();
-            sharePrefs.clearPrefrence();
-            MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+            //AppController.currentMode = 1;
+            //Intent intent = new Intent(MainActivity.self, LoginActivity.class);
+            //startActivity(intent);
+            //finish();
+            //sharePrefs.clearPrefrence();
+            //MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         } else if (id == R.id.nav_switch) {
             Toast.makeText(MainActivity.self,"SWITCH",Toast.LENGTH_SHORT);
             Log.d("NAVIGATION","Switch Selected");

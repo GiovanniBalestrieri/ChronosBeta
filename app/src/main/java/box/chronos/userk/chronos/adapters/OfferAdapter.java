@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Map;
@@ -72,36 +73,29 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         holder.shop_name.setText(off.getShop());
 
 
-        Map.Entry<String,String> entry=offerList.get(position).getAvailablePictures().entrySet().iterator().next();
-        String key= entry.getKey();
-        String value=entry.getValue();
-        System.out.println(key);
-        System.out.println(value);
+        if (off.hasPicture()) {
+            Map.Entry<String,String> entry = offerList.get(position).getAvailablePictures().entrySet().iterator().next();
+            String key = entry.getKey();
+            String value = entry.getValue();
+            System.out.println(key);
+            System.out.println(value);
 
+            String urlImage = IMAGE_URL + value;
 
-        String urlImage = IMAGE_URL + value;
+            // loading City cover using Picasso library
 
-        // loading City cover using Glide library
-        Log.d("OFFFFF","PIC: " + Integer.toString(offerList.get(position).getDrawable_thumb()));
-        Glide.with(mContext).load(offerList.get(position).getDrawable_thumb()).into(holder.thumbnail);
+            Picasso.with(mContext).load(urlImage).into(holder.thumbnail); //.placeholder(R.drawable.piwo_48)
 
-        /*
-            Glide.with(mContext)
-                    .load(offerList.get(position).getDrawable_thumb())
-                    //.placeholder(R.drawable.piwo_48)
-                    //.transform(new CircleTransform(context))
-                    .into(holder.thumbnail);
-
-                    */
-        /*
-    } else {
+        } else {
             // make sure Glide doesn't load anything into this view until told otherwise
-            Glide.clear(holder.imageView);
+            //Picasso.clear(holder.thumbnail);
             // remove the placeholder (optional); read comments below
-            holder.imageView.setImageDrawable(null);
+
+            Picasso.with(mContext).load(R.drawable.empty).into(holder.thumbnail);
+            //holder.thumbnail.setImageDrawable(null);
         }
 
-        */
+
 
         // thumbnail image
         //Log.d("ADAPTER", " URL: " + urlImage);

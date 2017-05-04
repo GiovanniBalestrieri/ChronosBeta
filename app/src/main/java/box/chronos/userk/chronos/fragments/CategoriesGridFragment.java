@@ -148,13 +148,14 @@ public class CategoriesGridFragment extends Fragment {
         return rootView;
     }
 
-
+/*
     @Override
     public void onResume() {
         super.onResume();
         setFields();
-        prepareCategories();
+        //prepareCategories();
     }
+    */
 
     private void setFields() {
         catList = new ArrayList<>();

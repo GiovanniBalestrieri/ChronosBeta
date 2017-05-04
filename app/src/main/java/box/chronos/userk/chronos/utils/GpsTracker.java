@@ -56,7 +56,7 @@ public class GpsTracker extends Service implements LocationListener {
 
     public Location getLocation() {
 
-        /*
+
         try {
             locationManager = (LocationManager) mContext
                     .getSystemService(LOCATION_SERVICE);
@@ -75,14 +75,28 @@ public class GpsTracker extends Service implements LocationListener {
                 this.canGetLocation = true;
                 // First get location from Network Provider
                 if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
+                    try {
+                        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        locationManager.requestLocationUpdates(
+                                LocationManager.NETWORK_PROVIDER,
+                                MIN_TIME_BW_UPDATES,
+                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                    }
                     Log.e("Network", "Network");
                     if (locationManager != null) {
-                        location = locationManager
-                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        try {
+                            location = locationManager
+                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        } catch (SecurityException e) {
+                            e.printStackTrace();
+                        }
                         if (location != null) {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
@@ -93,15 +107,23 @@ public class GpsTracker extends Service implements LocationListener {
                 // if GPS Enabled get lat/long using GPS Services
                 if (isGPSEnabled) {
                     if (location == null) {
-                        locationManager.requestLocationUpdates(
-                                LocationManager.GPS_PROVIDER,
-                                MIN_TIME_BW_UPDATES,
-                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                        Log.e("GPS Enabled", "GPS Enabled");
+                        try {
+                            locationManager.requestLocationUpdates(
+                                    LocationManager.GPS_PROVIDER,
+                                    MIN_TIME_BW_UPDATES,
+                                    MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                        } catch (SecurityException e) {
+                            e.printStackTrace();
+                        }
+                            Log.e("GPS Enabled", "GPS Enabled");
                         if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                            if (location != null) {
+                            try {
+                                location = locationManager
+                                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            } catch (SecurityException e) {
+                                e.printStackTrace();
+                            }
+                                if (location != null) {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
                                 Log.e("GPS Lat & Long", location + ":");
@@ -114,7 +136,7 @@ public class GpsTracker extends Service implements LocationListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-*/
+
         return location;
 
     }

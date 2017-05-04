@@ -67,6 +67,7 @@ public class OffersListFragment extends Fragment {
 
     }
 
+    /*
     @Override
     public void onResume(){
         super.onResume();
@@ -75,12 +76,13 @@ public class OffersListFragment extends Fragment {
         //offerList.clear();
         requestAllGeoOffers();
     }
+    */
 
     private void setFields() {
         arrayListNotification = new ArrayList<>();
         adapter = new OfferAdapter(getActivity(), offerList,recyclerView);
         //rv_notification_list.setAdapter(dataAdapterNotification);
-        offerList.clear();
+        //offerList.clear();
         adapter.notifyDataSetChanged();
     }
 
@@ -124,10 +126,10 @@ public class OffersListFragment extends Fragment {
                         // Create new fragment and transaction
 
                         Toast.makeText(getActivity(),"Offer",Toast.LENGTH_SHORT);
-                        Intent i = new Intent(getActivity(),OfferPage.class);
+                        //Intent i = new Intent(getActivity(),OfferPage.class);
 
-                        i.putExtra("Offer",offerList.get(position));
-                        startActivity(i);
+                        //i.putExtra("Offer",offerList.get(position));
+                        //startActivity(i);
 
                         /*
                         OfferFragment newLoc = new OfferFragment();
@@ -158,6 +160,7 @@ public class OffersListFragment extends Fragment {
      */
     private void prepareOffers() {
         if (Includes.staticContent) {
+            /*
             int[] covers = new int[]{
                     R.drawable.giacca_u,
                     R.drawable.giacca_d,
@@ -221,21 +224,10 @@ public class OffersListFragment extends Fragment {
                     "* misure del prodotto sono state scattate con dimensioni della uk 7. si prega di notare che le misure di cui sopra possono variare in base alle dimensioni. ");
             offerList.add(a3);
 
+            */
             adapter.notifyDataSetChanged();
         } else {
             requestAllGeoOffers();
-            // Retrieve from activity
-            // Get Licences
-
-            /*
-            String a = getActivity().getIntent().getStringExtra(TOT_LICENCES);
-            for (int j = 0; j < Integer.valueOf(a);j++) {
-                Licence licx = (Licence) getActivity().getIntent().getParcelableExtra(LICENCE_LIST + String.valueOf(j));
-                licenceList.add(licx);
-            }
-
-            adapter.notifyDataSetChanged();
-            */
         }
     }
 
@@ -280,8 +272,8 @@ public class OffersListFragment extends Fragment {
         pairs.put("method", "getNotifications");
         pairs.put("userid", sharePrefs.getUserId());
         pairs.put("sessionkey", sharePrefs.getSessionKey());
-        pairs.put("latitude", "41.886395"/*sharePrefs.getLatitude()*/);
-        pairs.put("longitude", "12.516753"/*sharePrefs.getLongitude()*/);
+        pairs.put("latitude", sharePrefs.getLatitude()); /*"41.886395"*/
+        pairs.put("longitude", sharePrefs.getLongitude()); /*"12.516753"*/
         pairs.put("categoryid", sharePrefs.getSelectedCatrgory());
 
         RestInteraction interaction = new RestInteraction(getActivity());
@@ -300,7 +292,6 @@ public class OffersListFragment extends Fragment {
                     } else {
                         Utility.showAlertDialog(getActivity(), object.getString("message"));
                     }
-                    //dataAdapterNotification.setData(arrayListNotification);
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -358,6 +349,4 @@ public class OffersListFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-
 }
