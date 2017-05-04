@@ -11,6 +11,7 @@
     <application
         android:name=".utils.AppController"
         android:allowBackup="true"
+        android:largeHeap="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"

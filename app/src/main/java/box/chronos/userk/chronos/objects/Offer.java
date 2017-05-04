@@ -46,7 +46,7 @@ public class Offer extends Article implements Parcelable {
 
     public Offer(){
         super();
-        availablePictures = new HashMap<>();
+        this.availablePictures = new HashMap<>();
     }
 
     public boolean isChecked() {
@@ -259,7 +259,7 @@ public class Offer extends Article implements Parcelable {
     public boolean hasPicture() {
         boolean result = false;
 
-        if (!availablePictures.isEmpty())
+        if (this.availablePictures.size()>0)
             result = true;
 
         return result;

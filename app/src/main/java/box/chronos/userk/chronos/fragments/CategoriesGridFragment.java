@@ -84,7 +84,6 @@ public class CategoriesGridFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
     }
 
 
@@ -148,14 +147,14 @@ public class CategoriesGridFragment extends Fragment {
         return rootView;
     }
 
-/*
+
     @Override
     public void onResume() {
         super.onResume();
-        setFields();
+        //setFields();
         //prepareCategories();
     }
-    */
+
 
     private void setFields() {
         catList = new ArrayList<>();
