@@ -31,8 +31,12 @@
 
         <activity
             android:theme="@style/MyMaterialTheme"
-            android:name=".activities.OfferPage">
+            android:name=".activities.OfferPage"
+            android:parentActivityName=".activities.MainActivity">
 
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
         </activity>
 
         <activity
@@ -58,6 +62,10 @@
 
         <activity
             android:name=".activities.LoginActivity"
+            android:theme="@style/Theme.Intro" />
+
+        <activity
+            android:name=".activities.FullImage"
             android:theme="@style/Theme.Intro" />
 
 

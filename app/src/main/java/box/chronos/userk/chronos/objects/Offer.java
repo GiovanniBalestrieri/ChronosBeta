@@ -230,9 +230,9 @@ public class Offer extends Article implements Parcelable {
         super.setDescription(parcel.readString());
         super.setCategories(parcel.readString());
         this.drawable_thumb = Integer.parseInt(parcel.readString());
-        super.setPrice(parcel.readString());
+        this.setPrice(parcel.readString());
         this.discount = parcel.readString();
-        super.setShopId(parcel.readString());
+        this.setShopId(parcel.readString());
         this.category = parcel.readString();
         this.categoryid = parcel.readString();
         this.categoryphoto = parcel.readString();
@@ -288,7 +288,7 @@ public class Offer extends Article implements Parcelable {
         parcel.writeString(super.getDescription());
         parcel.writeString(super.getCategories());
         parcel.writeString(String.valueOf(this.drawable_thumb));
-        parcel.writeString(super.getPrice());
+        parcel.writeString(this.getPrice());
         parcel.writeString(discount);
         parcel.writeString(super.getShopId());
         parcel.writeString(this.getCategory());

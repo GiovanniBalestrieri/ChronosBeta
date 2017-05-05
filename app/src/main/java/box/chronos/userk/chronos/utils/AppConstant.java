@@ -46,7 +46,11 @@ public class AppConstant {
     public static final String CAT_SELECTED = "selected";
 
 
+    // Utilities
 
+    public static final String EUR_SIGN = " €";
+    public static final String PERC_SIGN = " %";
+    public static final String ALL_CATS = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16";
 
 
 

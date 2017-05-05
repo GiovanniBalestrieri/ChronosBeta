@@ -45,6 +45,10 @@ import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 import box.chronos.userk.chronos.utils.VideoUtility;
 
+import static box.chronos.userk.chronos.settings.Includes.all_categories;
+import static box.chronos.userk.chronos.utils.AppConstant.ALL_CATS;
+import static box.chronos.userk.chronos.utils.AppConstant.GET_OFFERS_METHOD;
+
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
@@ -287,12 +291,15 @@ public class OffersListFragment extends Fragment {
     // request for all notifications
     private void requestAllGeoOffers() {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", "getNotifications");
+        pairs.put("method", GET_OFFERS_METHOD);
         pairs.put("userid", sharePrefs.getUserId());
         pairs.put("sessionkey", sharePrefs.getSessionKey());
         pairs.put("latitude", sharePrefs.getLatitude()); /*"41.886395"*/
         pairs.put("longitude", sharePrefs.getLongitude()); /*"12.516753"*/
-        pairs.put("categoryid", sharePrefs.getSelectedCatrgory());
+        if (all_categories)
+            pairs.put("categoryid", ALL_CATS);
+        else
+            pairs.put("categoryid", sharePrefs.getSelectedCatrgory());
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {

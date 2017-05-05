@@ -47,7 +47,7 @@ dependencies {
     compile files('libs/httpclient-4.3.1.jar')
     compile files('libs/nineoldandroids-2.4.0.jar')
 
-    compile('com.android.support:appcompat-v7:25.0.1'){
+    compile('com.android.support:appcompat-v7:25.3.1'){
         exclude module: 'support-v4'
     }
     //compile 'com.android.support:design:25.0.1'
@@ -61,8 +61,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     // CardView
-    compile 'com.android.support:cardview-v7:25.+'
-    compile 'com.android.support:recyclerview-v7:25.+'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     //compile 'com.android.support:cardview-v7:25.0.1'
 
     // RecycleView
@@ -93,4 +93,8 @@ dependencies {
 
     // Picasso library
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    // Pinch to Zoom
+
+    compile 'com.github.martinwithaar:PinchToZoom:6ed982fe58'
 }
