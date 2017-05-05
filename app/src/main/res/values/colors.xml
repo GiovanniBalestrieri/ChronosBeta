@@ -31,6 +31,7 @@
     <item name="darkred_trans" type="color">#80CC0000</item>
     <item name="bluegrey" type="color">#607d8b</item>
     <item name="darkgrey" type="color">#696464</item>
+    <item name="midgrey" type="color">#89969F</item>
     <item name="white" type="color">#FFFFFF</item>
     <item name="black" type="color">#000000</item>
     <item name="black_opacity_80" type="color">#cc000000</item>
@@ -99,7 +100,7 @@
     <color name="city_title">#fcfcfc</color>
     <color name="city_card_overlay">#80000000</color>
 
-    <!-- CardView Licence -->
+    <!-- CardView Offers -->
     <color name="lic_viewBg">#f1f5f8</color>
     <color name="offer_title">#fcfcfc</color>
     <color name="lic_card_overlay">#80000000</color>

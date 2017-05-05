@@ -62,6 +62,7 @@ public class OffersListFragment extends Fragment {
     private UserSharedPreference sharePrefs;
     private ImageView glideHeader;
     private RecyclerView recyclerView;
+    private String cat, world;
 
     public OffersListFragment() {
     }
@@ -117,6 +118,7 @@ public class OffersListFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        retrieveData();
         prepareOffers();
 
         ((MainActivity) getActivity()).requestForGps();
@@ -175,7 +177,19 @@ public class OffersListFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Retrieve intent data from activity
+     */
+    public void retrieveData(){
+        Bundle arguments = getArguments();
+        if (arguments != null && arguments.containsKey("cat")) {
+            cat = getArguments().getString("cat");
+        }
 
+        if (arguments != null && arguments.containsKey("world")) {
+            world  = getArguments().getString("world");
+        }
+    }
 
     /**
      * Adding few cities for testing -> Implement dynamic loading
@@ -294,12 +308,19 @@ public class OffersListFragment extends Fragment {
         pairs.put("method", GET_OFFERS_METHOD);
         pairs.put("userid", sharePrefs.getUserId());
         pairs.put("sessionkey", sharePrefs.getSessionKey());
+        if (world != null && !world.equals("")) {
+            pairs.put("world", "1");
+        }
         pairs.put("latitude", sharePrefs.getLatitude()); /*"41.886395"*/
         pairs.put("longitude", sharePrefs.getLongitude()); /*"12.516753"*/
-        if (all_categories)
-            pairs.put("categoryid", ALL_CATS);
-        else
-            pairs.put("categoryid", sharePrefs.getSelectedCatrgory());
+        if (cat != null && !cat.equals("")) {
+            pairs.put("categoryid", cat);
+        } else {
+            if (all_categories)
+                pairs.put("categoryid", ALL_CATS);
+            else
+                pairs.put("categoryid", sharePrefs.getSelectedCatrgory());
+        }
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {

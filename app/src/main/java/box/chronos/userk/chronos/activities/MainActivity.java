@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+
             OffersListFragment fragment = new OffersListFragment();
             fragmentTransaction.replace(R.id.fragment_container, fragment,"Categories");
             fragmentTransaction.addToBackStack(null);

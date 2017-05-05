@@ -2,6 +2,8 @@ package box.chronos.userk.chronos.fragments;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import box.chronos.userk.chronos.R;
+import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.activities.OfferPage;
 import box.chronos.userk.chronos.adapters.ArticleAdapter;
 import box.chronos.userk.chronos.adapters.CategoryAdapter;
@@ -50,6 +53,7 @@ import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 import box.chronos.userk.chronos.utils.VideoUtility;
 
+import static box.chronos.userk.chronos.settings.Includes.show_background_categories;
 import static box.chronos.userk.chronos.utils.AppConstant.CAT_ID;
 import static box.chronos.userk.chronos.utils.AppConstant.CAT_NAME;
 import static box.chronos.userk.chronos.utils.AppConstant.CAT_PHOTO_ACTIVE;
@@ -105,9 +109,9 @@ public class CategoriesGridFragment extends Fragment {
 
 
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),2);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(10,getActivity()), true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(1,getActivity()), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
@@ -126,7 +130,19 @@ public class CategoriesGridFragment extends Fragment {
                         String id = cat.getCat_id();
                         //String flag_color = cat.getFlag_dark();
 
-                        Log.d("Category", "Category: " + cat.getCat_name() + " clicked");
+                        Bundle data = new Bundle();
+                        data.putString("cat", id);
+                        data.putString("world", "1");
+
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        OffersListFragment fragment = new OffersListFragment();
+
+                        fragment.setArguments(data);
+                        fragmentTransaction.replace(R.id.fragment_container, fragment,"Categories");
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
 
                         /*
                         Intent i = new Intent(getActivity(), SingleCategoryQuizzes.class);
@@ -139,10 +155,12 @@ public class CategoriesGridFragment extends Fragment {
         );
 
 
-        // Setup Background
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test9);
-        Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(),bm);
-        rootView.setBackground(new BitmapDrawable(getActivity().getResources(), image));
+        if (show_background_categories) {
+            // Setup Background
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test9);
+            Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(), bm);
+            rootView.setBackground(new BitmapDrawable(getActivity().getResources(), image));
+        }
 
         return rootView;
     }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <!-- <com.android.volley.toolbox.NetworkImageView -->
+                <!-- Thumbnail Image   -->
+                <ImageView
+                    android:id="@+id/thumbnail_cat_card_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/cat_card_height"
+                    android:clickable="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/scarpa_d" />
+                <!--
+                    android:background="?attr/selectableItemBackgroundBorderless"-->
+
+
+                <!-- android:scaleType="centerCrop" -->
+
+
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/title_offer_layout"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_weight="10"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/title_cat_card"
+                    android:background="@color/quiz1_overlay"
+                    android:gravity="center"
+                    android:layout_weight="0.9"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/city_title_padding"
+                    android:text="@string/offer_title_main"
+                    android:textColor="@color/quiz_title"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/article_title_article_page"
+                    android:paddingTop="@dimen/offer_dialog_bar_padding_top"
+                    android:paddingBottom="@dimen/offer_dialog_bar_padding_bottom" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

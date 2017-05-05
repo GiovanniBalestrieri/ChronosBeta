@@ -72,7 +72,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.category_card_v1, parent, false);
+                .inflate(R.layout.category_card_v2, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -86,7 +86,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         String urlImage = IMAGE_URL + list.get(position).getCat_photo_active();
 
         // loading City cover using Glide library
-        Log.d("OFFFFF","Cat name: " + cat.getCat_name() + /*"\t id:"  +cat.getCat_id() + */"\t url: " + urlImage);
+        //Log.d("OFFFFF","Cat name: " + cat.getCat_name() + /*"\t id:"  +cat.getCat_id() + */"\t url: " + urlImage);
         Glide.with(mContext).load(urlImage).into(holder.thumbnail);
 
         /*
