@@ -347,6 +347,7 @@ public class MainActivity extends AppCompatActivity
 
         if (gps.canGetLocation()) {
 
+            gps.getLocation();
             locationValue = gps.getAddress();
             latitudeValue = String.valueOf(gps.getLatitude());
             longitudeValue = String.valueOf(gps.getLongitude());

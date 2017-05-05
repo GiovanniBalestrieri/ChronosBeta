@@ -1,8 +1,11 @@
 package box.chronos.userk.chronos.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,6 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +27,7 @@ import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
  * Created by userk on 10/12/16.
  */
 
-public class OfferPage extends Activity {
+public class OfferPage extends AppCompatActivity {
 
     TextView offCat;
     TextView offTitle;
@@ -40,9 +44,13 @@ public class OfferPage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.offer_new);
 
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         getShops();
 
         Offer offX = getIntent().getExtras().getParcelable("Offer");
+
         checkInside = (LinearLayout) findViewById(R.id.checkInsideLayout);
         offCat = (TextView) findViewById(R.id.upper_bar_category_title);
         offTitle = (TextView) findViewById(R.id.offer_title_overlay);
@@ -59,19 +67,18 @@ public class OfferPage extends Activity {
 
         shopId = offX.getShopId();
 
+        ArrayList<String> picList = getIntent().getStringArrayListExtra("pictures");
+
         String urlCat = IMAGE_URL + offX.getCategoryphoto();
         //
         // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
         //Picasso.with(this).load(urlCat).into(shop_logo);
 
-        if (offX.hasPicture()) {
-            Map.Entry<String,String> entry = offX.getAvailablePictures().entrySet().iterator().next();
-            String key = entry.getKey();
-            String value = entry.getValue();
-            System.out.println(key);
-            System.out.println(value);
+        if (picList.size()>0) {
 
-            String urlImage = IMAGE_URL + value;
+
+            String urlImage = IMAGE_URL + picList.get(0);
+
 
             Picasso.with(this).load(urlImage).into(offImage); //.placeholder(R.drawable.piwo_48)
 
@@ -114,5 +121,12 @@ public class OfferPage extends Activity {
         shops.put(s1.getShopId(),s1);
         shops.put(s2.getShopId(),s2);
         shops.put(s3.getShopId(),s3);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        //Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        //startActivityForResult(myIntent, 0);
+        return true;
+
     }
 }

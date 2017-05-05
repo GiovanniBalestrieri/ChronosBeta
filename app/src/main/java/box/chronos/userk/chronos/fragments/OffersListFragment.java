@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,7 @@ public class OffersListFragment extends Fragment {
 
         prepareOffers();
 
+        ((MainActivity) getActivity()).requestForGps();
         //triggerTutorial(rootView);
 
         recyclerView.addOnItemTouchListener(
@@ -130,6 +132,19 @@ public class OffersListFragment extends Fragment {
                         Intent i = new Intent(getActivity(),OfferPage.class);
 
                         i.putExtra("Offer",offerList.get(position));
+                        if (lic.hasPicture()) {
+                            List<String> list = new ArrayList<>();
+                            for (int j = 0; j < lic.getAvailablePictures().size(); j++) {
+                                Iterator it =lic.getAvailablePictures().entrySet().iterator();
+                                while (it.hasNext()) {
+                                    Map.Entry pair = (Map.Entry)it.next();
+                                    System.out.println(pair.getKey() + " = " + pair.getValue());
+                                    list.add((String) pair.getValue());
+                                }
+                                i.putStringArrayListExtra("pictures", (ArrayList<String>) list);
+
+                            }
+                        }
                         startActivity(i);
 
                         /*

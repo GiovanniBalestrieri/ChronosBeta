@@ -1,5 +1,6 @@
 package box.chronos.userk.chronos.objects;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -243,6 +244,13 @@ public class Offer extends Article implements Parcelable {
         this.latitude = parcel.readString();
         this.longitude = parcel.readString();
         this.distance = parcel.readString();
+
+        //Bundle b = parcel.readBundle();
+        //if(b != null) {
+         //   HashMap<String,String> a  =  (HashMap<String,String>) b.getSerializable("HashMap");
+          //  this.availablePictures = a;
+        //}
+
     }
 
 
@@ -259,7 +267,7 @@ public class Offer extends Article implements Parcelable {
     public boolean hasPicture() {
         boolean result = false;
 
-        if (this.availablePictures.size()>0)
+        if (this.availablePictures != null && this.availablePictures.size()>0)
             result = true;
 
         return result;
@@ -290,11 +298,13 @@ public class Offer extends Article implements Parcelable {
         parcel.writeString(this.getBusinessname());
         parcel.writeString(this.getBusinessphone());
         parcel.writeString(this.getBusinessaddress());
-        parcel.writeString(this.getCategoryphoto());
         parcel.writeString(this.getOfferdescription());
         parcel.writeString(this.getLatitude());
         parcel.writeString(this.getLongitude());
         parcel.writeString(this.getDistance());
+        //Bundle extras = new Bundle();
+        //    extras.putSerializable("HashMap",this.getAvailablePictures());
+        //parcel.writeBundle(extras);
     }
 
     public static final Parcelable.Creator CREATOR  = new Parcelable.Creator() {

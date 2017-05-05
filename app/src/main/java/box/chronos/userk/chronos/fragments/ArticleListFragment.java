@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import box.chronos.userk.chronos.R;
+import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.activities.OfferPage;
 import box.chronos.userk.chronos.adapters.ArticleAdapter;
 import box.chronos.userk.chronos.objects.Offer;
@@ -65,6 +66,7 @@ public class ArticleListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         prepareOffers();
+        ((MainActivity) getActivity()).requestForGps();
 
         //triggerTutorial(rootView);
 
