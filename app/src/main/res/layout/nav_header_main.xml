@@ -1,66 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:id="@+id/ll_nav_profile"
+    android:layout_width="wrap_content"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/tramatest"
+    android:background="@drawable/business_black"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-
-    <RelativeLayout
-        android:id="@+id/nav_header_container"
+    <LinearLayout
+        android:id="@+id/ly_PicProfileNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="@dimen/heighty_dp"
+            android:layout_height="@dimen/heighty_dp"
+            android:src="@drawable/user_dummy"
+            android:textColor="#CE1D23"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/ly_userName"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/hundred_dp"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/fifty_dp"
-            android:gravity="left|center"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/five_dp"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/userImage"
-                android:layout_width="@dimen/fifty_dp"
-                android:layout_height="@dimen/fifty_dp"
-                android:src="@drawable/user_dummy"
-                android:textColor="#CE1D23"
-                android:textSize="22sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/ten_dp"
-                android:gravity="center">
 
                 <TextView
+                    android:gravity="center"
                     android:id="@+id/tv_UserName"
-                    style="@style/top_heading_fourteen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="User name"
-                    android:textColor="@color/gray" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/tv_UserEmail"
+                    android:gravity="center"
                     style="@style/simple_text_tweleve_threeLines"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_UserName"
+                    android:textColor="@color/white"
                     android:layout_marginTop="@dimen/padding_small"
                     android:text="Email address" />
 
-            </RelativeLayout>
         </LinearLayout>
-    </RelativeLayout>
-
 
 </LinearLayout>

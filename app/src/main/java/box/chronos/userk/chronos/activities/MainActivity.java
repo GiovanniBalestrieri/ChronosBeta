@@ -25,14 +25,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +48,7 @@ import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.callbacks.IAsyncResponse;
 import box.chronos.userk.chronos.fragments.CategoriesGridFragment;
 import box.chronos.userk.chronos.fragments.OffersListFragment;
+import box.chronos.userk.chronos.fragments.ProfileFragment;
 import box.chronos.userk.chronos.serverRequest.AppUrls;
 import box.chronos.userk.chronos.serverRequest.RestInteraction;
 import box.chronos.userk.chronos.utils.AppController;
@@ -66,12 +71,14 @@ public class MainActivity extends AppCompatActivity
     private Toolbar mToolbar;
     private InputMethodManager imm;
     private DrawerLayout drawer;
+    private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private boolean doubleBackToExitPressedOnce = false;
     private UserSharedPreference sharePrefs;
     public static MainActivity self;
     private String locationValue, latitudeValue, longitudeValue;
+    LinearLayout profileNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +87,7 @@ public class MainActivity extends AppCompatActivity
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        initCollapsingToolbar();
+        //initCollapsingToolbar();
         setupEnvironment();
         requestForGps();
 
@@ -92,6 +99,22 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+
+        profileNav.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Log.d("NAVIGATION","\t\tPROFILE");
+
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+
+                ProfileFragment profileFragment = new ProfileFragment();
+                fragmentTransaction.add(R.id.fragment_container,profileFragment,"profile");
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
     }
 
     @Override
@@ -129,6 +152,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -137,11 +161,15 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setHomeButtonEnabled(true);
         toggle.syncState();
 
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View vv = navigationView.getHeaderView(0);
 
+        profileNav = (LinearLayout) vv.findViewById(R.id.ll_nav_profile);
+        TextView nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
+        TextView email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
+        email_u.setText(sharePrefs.getUserEmail());
+        nick_u.setText(sharePrefs.getUserDispayName());
     }
 
     /**

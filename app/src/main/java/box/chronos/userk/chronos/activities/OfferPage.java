@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -86,9 +87,8 @@ public class OfferPage extends Activity {
         if (picList.size()>0) {
             urlImage = IMAGE_URL + picList.get(0);
             Picasso.with(this).load(urlImage).into(offImage);
-
         } else {
-            Picasso.with(this).load(R.drawable.empty).into(offImage);
+            offImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.empty, null));
         }
 
         checkInside.setOnClickListener(new View.OnClickListener(){
