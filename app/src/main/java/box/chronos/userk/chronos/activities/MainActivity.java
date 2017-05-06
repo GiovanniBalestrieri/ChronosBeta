@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity
         profileNav = (LinearLayout) vv.findViewById(R.id.ll_nav_profile);
         TextView nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
         TextView email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
+
         email_u.setText(sharePrefs.getUserEmail());
         nick_u.setText(sharePrefs.getUserDispayName());
     }

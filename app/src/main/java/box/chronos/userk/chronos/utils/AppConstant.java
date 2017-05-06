@@ -17,6 +17,7 @@ public class AppConstant {
     public static final String FORGOT_PSS_METHOD = "forgotPassword";
     public static final String GET_CAT_METHOD = "getAllCategories";
     public static final String GET_OFFERS_METHOD = "getNotifications";
+    public static final String GET_PROFILE_INFO_METHOD = "viwProfile";
 
     // Api responses
     public static final String DATA_RESP = "data";
@@ -29,6 +30,14 @@ public class AppConstant {
     // API fields
     public static final String METHOD_PARAM = "method";
     public static final String USERID_PARAM = "userid";
+    public static final String USERNAME_PARAM = "username";
+    public static final String BIRTHDAY_PARAM = "birthday";
+    public static final String GENDER_PARAM = "gender";
+    public static final String PHOTO_PARAM = "photo";
+    public static final String BUSINESSNAME_PARAM = "businessname";
+    public static final String PHONE_PARAM = "phonenumber";
+    public static final String ADDRESS_PARAM = "address";
+    public static final String SESSION_KEY_PARAM = "sessionkey";
     public static final String UID_PARAM = "uid";
     public static final String CODE_PARAM = "code";
     public static final String PSS_PARAM = "password";
@@ -37,6 +46,9 @@ public class AppConstant {
     public static final String DEV_TOKEN_PARAM = "devicetoken";
     public static final String LAT_PARAM = "latitude";
     public static final String LON_PARAM = "longitude";
+    public static final String SUCCESS_PARAM = "success";
+    public static final String ERROR_PARAM = "error";
+    public static final String MSG_PARAM = "message";
 
     // Categories
     public static final String CAT_ID = "categoryid";
