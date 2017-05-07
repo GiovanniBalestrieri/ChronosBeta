@@ -39,6 +39,7 @@
     <dimen name="app_list_view_padding_clip">60dp</dimen>
     <dimen name="plus_button_padding">16dp</dimen>
     <dimen name="app_sides_padding">16dp</dimen>
+    <dimen name="squared_icon_dimension">38dp</dimen>
 
 
 
@@ -66,7 +67,7 @@
     <dimen name="cat_card_height">180dp</dimen>
     <dimen name="cat_title_padding">5dp</dimen>
     <dimen name="cat_title_size">18sp</dimen>
-    <dimen name="card_cat_radius">5dp</dimen>
+    <dimen name="card_cat_radius">0dp</dimen>
     <dimen name="card_cat_id_width">50dp</dimen>
 
     <!-- CardView Offer -->

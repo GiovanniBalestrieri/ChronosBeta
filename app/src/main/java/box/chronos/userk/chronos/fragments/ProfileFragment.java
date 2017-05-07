@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,7 @@ import box.chronos.userk.chronos.utils.FieldsValidator;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
+import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.chronos.utils.AppConstant.ADDRESS_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.BIRTHDAY_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.CODE_RESP;
@@ -52,6 +55,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.PHONE_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.PHOTO_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.UID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERNAME_PARAM;
@@ -135,7 +139,6 @@ public class ProfileFragment extends Fragment {
                     JSONObject object = new JSONObject(response);
                     if (object.getString("success").equalsIgnoreCase("1")) {
                         getJsonData(object);
-
                         fillViews();
                     } else {
                         Utility.showAlertDialog(getActivity(), object.getString("message"));
@@ -160,13 +163,12 @@ public class ProfileFragment extends Fragment {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
             JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            String codeResp = jsonRootObject.getString(CODE_RESP);
+            String succe = jsonRootObject.getString(SUCCESS_PARAM);
 
             sharePrefs.setUserId(jsonObject.getString(USERID_PARAM).toString());
             sharePrefs.setUserName(jsonObject.getString(USERNAME_PARAM).toString());
             sharePrefs.setUserEmail(jsonObject.getString(EMAIL_PARAM).toString());
             sharePrefs.setUserImage(jsonObject.getString(PHOTO_PARAM).toString());
-            sharePrefs.setSessionKey(jsonObject.getString(SESSION_KEY_PARAM).toString());
             sharePrefs.setGender(jsonObject.getString(GENDER_PARAM).toString());
             sharePrefs.setBirthday(jsonObject.getString(BIRTHDAY_PARAM).toString());
             sharePrefs.setDefaultAddress(jsonObject.getString(ADDRESS_PARAM).toString());
@@ -180,17 +182,22 @@ public class ProfileFragment extends Fragment {
     private void findViews(View view) {
         cover = (ImageView) view.findViewById(R.id.header_cover_image);
         editProfileBtn = (ImageView) view.findViewById(R.id.edit_profile_button);
-        profilePic = ( ImageView) view.findViewById(R.id.user_profile_photo);
+        profilePic = (ImageView) view.findViewById(R.id.user_profile_photo);
         shortBio = (TextView) view.findViewById(R.id.user_profile_short_bio);
         userName = (TextView) view.findViewById(R.id.user_profile_name);
         userEmail = (TextView) view.findViewById(R.id.tv_profile_user_email);
         //userName = (TextView) view.findViewById(R.id.user_profile_name);
-
-
     }
 
     private void fillViews() {
         userEmail.setText(sharePrefs.getUserEmail());
         userName.setText(sharePrefs.getUserDispayName());
+
+        String urlImage = IMAGE_URL + sharePrefs.getUserImage();
+
+
+        Picasso.with(getActivity()).load(urlImage).into(((MainActivity) getActivity()).profPic);
+
+        Picasso.with(getActivity()).load(urlImage).into(profilePic);
     }
 }

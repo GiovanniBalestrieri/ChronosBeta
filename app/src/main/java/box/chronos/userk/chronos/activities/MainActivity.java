@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,6 +58,7 @@ import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity
     public static MainActivity self;
     private String locationValue, latitudeValue, longitudeValue;
     LinearLayout profileNav;
+    public ImageView profPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,8 +172,12 @@ public class MainActivity extends AppCompatActivity
         TextView nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
         TextView email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
 
+        profPic = (ImageView) vv.findViewById(R.id.userImage);
         email_u.setText(sharePrefs.getUserEmail());
         nick_u.setText(sharePrefs.getUserDispayName());
+
+        String urlImage = IMAGE_URL + sharePrefs.getUserImage();
+        Picasso.with(this).load(urlImage).into(profPic);
     }
 
     /**

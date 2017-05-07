@@ -7,61 +7,66 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        >
+        android:layout_margin="@dimen/card_margin"
+        android:padding="0dp"
+        android:elevation="6dp"
+        card_view:cardCornerRadius="@dimen/card_cat_radius">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white">
-
-                <!-- <com.android.volley.toolbox.NetworkImageView -->
-                <!-- Thumbnail Image   -->
-                <ImageView
-                    android:id="@+id/thumbnail_cat_card_b"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/cat_card_height"
-                    android:clickable="true"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/scarpa_d" />
                 <!--
+                    android:layout_centerInParent="false"
+                -->
+
+
+                <!-- Thumbnail Image   -->
+            <ImageView
+                android:id="@+id/thumbnail_cat_card_b"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/cat_card_height"
+
+                android:adjustViewBounds="false"
+                android:background="@color/common_plus_signin_btn_text_dark_focused"
+                android:baselineAlignBottom="false"
+                android:clickable="true"
+                android:cropToPadding="false"
+                android:duplicateParentState="false"
+                android:fadeScrollbars="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/scarpa_d" />
+                <!--
+                    android:layout_height="@dimen/cat_card_height"
                     android:background="?attr/selectableItemBackgroundBorderless"-->
 
 
                 <!-- android:scaleType="centerCrop" -->
 
 
-
-            </FrameLayout>
-
-
             <LinearLayout
                 android:id="@+id/title_offer_layout"
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/title_cat_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
                     android:background="@color/quiz1_overlay"
                     android:gravity="center"
-                    android:layout_weight="0.9"
-                    android:layout_width="0dip"
-                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/offer_dialog_bar_padding_bottom"
                     android:paddingLeft="@dimen/city_title_padding"
+                    android:paddingTop="@dimen/offer_dialog_bar_padding_top"
                     android:text="@string/offer_title_main"
                     android:textColor="@color/quiz_title"
-                    android:textStyle="bold"
                     android:textSize="@dimen/article_title_article_page"
-                    android:paddingTop="@dimen/offer_dialog_bar_padding_top"
-                    android:paddingBottom="@dimen/offer_dialog_bar_padding_bottom" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

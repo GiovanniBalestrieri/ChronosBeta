@@ -40,7 +40,7 @@ public class AppController extends Application {
         currentMode = USER_MODE;
         threadDataBaseHandler=new Thread(runnable);
         threadDataBaseHandler.start();
-        currentLanguage = ENGLISH;
+        currentLanguage = ITALIAN;
     }
 
     protected void attachBaseContext(Context base) {

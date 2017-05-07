@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,9 +86,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         String urlImage = IMAGE_URL + list.get(position).getCat_photo_active();
 
-        // loading City cover using Glide library
-        //Log.d("OFFFFF","Cat name: " + cat.getCat_name() + /*"\t id:"  +cat.getCat_id() + */"\t url: " + urlImage);
-        Glide.with(mContext).load(urlImage).into(holder.thumbnail);
+        int width= mContext.getResources().getDisplayMetrics().widthPixels;
+        // loading Categories using Picasso library
+        Picasso.with(mContext).load(urlImage)
+                //.placeholder(R.drawable.scarpa_d)
+                .centerCrop().resize(width,width)
+                .into(holder.thumbnail);
 
         /*
             Glide.with(mContext)

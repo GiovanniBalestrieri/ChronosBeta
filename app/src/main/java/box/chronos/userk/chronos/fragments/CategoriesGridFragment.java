@@ -69,15 +69,9 @@ public class CategoriesGridFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
-    private View view;
     private UserSharedPreference sharePrefs;
-    ArrayList<Category> arrayListCategory;
     private CategoryAdapter adapter;
     private String commaValues;
-    private RelativeLayout rl_bottom, rl_top;
-    private String mParam1;
-    private String mParam2;
-    private String categoryId;
     private ArrayList<Category> catList;
 
 
@@ -102,16 +96,15 @@ public class CategoriesGridFragment extends Fragment {
 
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_categories);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(false);
 
         catList = new ArrayList<>();
         adapter = new CategoryAdapter(getActivity(), catList, recyclerView);
 
 
-
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(1,getActivity()), true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(10,getActivity()), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 

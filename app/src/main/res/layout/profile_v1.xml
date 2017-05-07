@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,7 +23,6 @@
             android:background="@color/black"
             android:elevation="0dp"
             android:paddingBottom="24dp">
-
 
             <ImageView
                 android:id="@+id/edit_profile_button"
@@ -50,7 +50,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="76dp"
                 android:text="Viral Android"
-                android:textColor="#fff"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -62,52 +62,111 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
                 android:text="Android free tutorials and example"
-                android:textColor="#fff"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
         </RelativeLayout>
 
 
-        <ImageButton
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_profile_photo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
             android:layout_below="@+id/header_cover_image"
+            android:layout_width="@dimen/app_box_double_size"
+            android:layout_height="@dimen/app_box_double_size"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="-60dp"
             android:background="@drawable/profile_circular_border_imageview"
             android:elevation="8dp"
             android:padding="20dp"
+            android:layout_marginTop="-60dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/user_dummy" />
+            android:src="@drawable/user_dummy"/>
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/ll_user_email_info"
             android:layout_below="@+id/profile_layout"
-            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:padding="20dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_profile_user_email"
+            <ImageView
+                android:layout_width="@dimen/squared_icon_dimension"
+                android:layout_height="@dimen/squared_icon_dimension"
+                android:layout_margin="5dp"
+                android:src="@drawable/fav_icon"/>
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:background="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:text="Android Profile UI Design" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/fifteen_dp"
-                android:layout_margin="1dp"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:textSize="@dimen/app_text_size_small"
-                android:text="email" />
+                <TextView
+                    android:id="@+id/tv_profile_user_email"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/app_text_size"
+                    android:elevation="4dp"
+                    android:text="Android Profile UI Design" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_margin="4dp"
+                    android:textSize="@dimen/app_text_size_small"
+                    android:text="email" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_user_gender_info"
+            android:layout_below="@+id/ll_user_email_info"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/squared_icon_dimension"
+                android:layout_height="@dimen/squared_icon_dimension"
+                android:layout_margin="5dp"
+                android:src="@drawable/fav_icon"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_profile_user_gender"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/app_text_size"
+                    android:elevation="4dp"
+                    android:text="Android Profile UI Design" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_margin="4dp"
+                    android:textSize="@dimen/app_text_size_small"
+                    android:text="sesso" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </RelativeLayout>
 </ScrollView>
