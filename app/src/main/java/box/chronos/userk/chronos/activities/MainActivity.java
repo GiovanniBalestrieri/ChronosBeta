@@ -174,10 +174,14 @@ public class MainActivity extends AppCompatActivity
 
         profPic = (ImageView) vv.findViewById(R.id.userImage);
         email_u.setText(sharePrefs.getUserEmail());
-        nick_u.setText(sharePrefs.getUserDispayName());
+        nick_u.setText(sharePrefs.getUserName());
+        updateProfilePictureNav();
+    }
 
+    public void updateProfilePictureNav(){
         String urlImage = IMAGE_URL + sharePrefs.getUserImage();
         Picasso.with(this).load(urlImage).into(profPic);
+        drawer.invalidate();
     }
 
     /**
@@ -363,6 +367,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
     private boolean addPermission(List<String> permissionsList, String permission) {
         if (Build.VERSION.SDK_INT >= 23)
 

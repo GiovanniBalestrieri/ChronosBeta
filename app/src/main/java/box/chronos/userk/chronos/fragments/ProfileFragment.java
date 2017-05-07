@@ -191,12 +191,13 @@ public class ProfileFragment extends Fragment {
 
     private void fillViews() {
         userEmail.setText(sharePrefs.getUserEmail());
-        userName.setText(sharePrefs.getUserDispayName());
+        userName.setText(sharePrefs.getUserName());
 
         String urlImage = IMAGE_URL + sharePrefs.getUserImage();
 
 
-        Picasso.with(getActivity()).load(urlImage).into(((MainActivity) getActivity()).profPic);
+        ((MainActivity) getActivity()).updateProfilePictureNav();
+        //Picasso.with(getActivity()).load(urlImage).into(((MainActivity) getActivity()).profPic);
 
         Picasso.with(getActivity()).load(urlImage).into(profilePic);
     }

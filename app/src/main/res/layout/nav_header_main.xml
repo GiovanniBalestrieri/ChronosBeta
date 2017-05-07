@@ -17,12 +17,9 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImage"
-            android:layout_below="@+id/header_cover_image"
             android:layout_width="@dimen/heighty_dp"
             android:layout_height="@dimen/heighty_dp"
-            android:layout_centerHorizontal="true"
             android:background="@drawable/profile_circular_border_imageview"
-            android:elevation="8dp"
             android:padding="20dp"
             android:layout_marginTop="-60dp"
             android:scaleType="centerCrop"

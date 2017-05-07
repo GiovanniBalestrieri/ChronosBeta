@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="@dimen/hundred_dp"
                 android:text="Viral Android"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -67,19 +67,19 @@
         </RelativeLayout>
 
 
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_profile_photo"
-            android:layout_below="@+id/header_cover_image"
             android:layout_width="@dimen/app_box_double_size"
             android:layout_height="@dimen/app_box_double_size"
+            android:layout_below="@+id/header_cover_image"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="-60dp"
+            android:adjustViewBounds="false"
             android:background="@drawable/profile_circular_border_imageview"
             android:elevation="8dp"
             android:padding="20dp"
-            android:layout_marginTop="-60dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/user_dummy"/>
+            android:src="@drawable/user_dummy" />
 
         <LinearLayout
             android:id="@+id/ll_user_email_info"
