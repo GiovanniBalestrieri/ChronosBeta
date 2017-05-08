@@ -317,10 +317,10 @@ public class MainActivity extends AppCompatActivity
 
                         // Facebook sync
                         //LoginManager.getInstance().logOut();
-                        Utility.showAlertDialog(self, object.getString("message"));
+                        //Utility.showAlertDialog(self, object.getString("message"));
 
                     } else {
-                        Utility.showAlertDialog(self, object.getString("message"));
+                        //Utility.showAlertDialog(self, object.getString("message"));
                     }
 
                     AppController.currentMode = 1;
