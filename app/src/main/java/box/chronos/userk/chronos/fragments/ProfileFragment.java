@@ -60,6 +60,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.UID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERNAME_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.ZERO_RESP;
+import static box.chronos.userk.chronos.utils.usertypes.TypeOfUsers.SHOP_USER;
 import static box.chronos.userk.chronos.ux.AppMessage.CHECK_MAIL_MSG;
 import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_MAIL_MSG;
 import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_PASSWORD_MSG;
@@ -76,7 +77,7 @@ public class ProfileFragment extends Fragment {
     private ImageView cover, editProfileBtn, profilePic;
     private EditText et_registredPassword, et_registredEmailId;
     private LinearLayout ll_login;
-    private TextView userName, userGender, shortBio, userEmail, birthdayUser, businessNameUser, phoneUser, addressUser;
+    private TextView userName, userGender, shortBio, userEmail, birthdayUser, userBusName, userBusAdd, userBusPhone;
     private UserSharedPreference sharePrefs;
 
     public ProfileFragment() {
@@ -188,20 +189,31 @@ public class ProfileFragment extends Fragment {
         userEmail = (TextView) view.findViewById(R.id.tv_profile_user_email);
         userGender = (TextView) view.findViewById(R.id.tv_profile_user_gender);
         birthdayUser = (TextView) view.findViewById(R.id.tv_profile_user_birth);
+
+
+        // Usertype 2 Shop
+        userBusName = (TextView) view.findViewById(R.id.tv_profile_bus_name);
+        userBusPhone = (TextView) view.findViewById(R.id.tv_profile_bus_phone);
+        userBusAdd = (TextView) view.findViewById(R.id.tv_profile_bus_address);
     }
 
     private void fillViews() {
+
+        String urlImage = IMAGE_URL + sharePrefs.getUserImage();
+        ((MainActivity) getActivity()).updateProfilePictureNav();
+        //Picasso.with(getActivity()).load(urlImage).into(((MainActivity) getActivity()).profPic);
+        Picasso.with(getActivity()).load(urlImage).into(profilePic);
+
         userEmail.setText(sharePrefs.getUserEmail());
         userName.setText(sharePrefs.getUserName());
         userGender.setText(sharePrefs.getGender());
         birthdayUser.setText(sharePrefs.getBirthday());
 
-        String urlImage = IMAGE_URL + sharePrefs.getUserImage();
+        if (sharePrefs.getUserType().equals(SHOP_USER)){
+            userBusAdd.setText(sharePrefs.getBusinessaddress());
+            userBusPhone.setText(sharePrefs.getBusinessphone());
+            userBusName.setText(sharePrefs.getBusinessname());
+        }
 
-
-        ((MainActivity) getActivity()).updateProfilePictureNav();
-        //Picasso.with(getActivity()).load(urlImage).into(((MainActivity) getActivity()).profPic);
-
-        Picasso.with(getActivity()).load(urlImage).into(profilePic);
     }
 }

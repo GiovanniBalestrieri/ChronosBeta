@@ -43,6 +43,21 @@ public class AppConstant {
     public static final String PSS_PARAM = "password";
     public static final String EMAIL_PARAM = "email";
     public static final String DEV_TYPE_PARAM = "devicetype";
+    public static final String MAX_OFF_DIST_PARAM = "maxofferdistance";
+    public static final String MAX_OFF_VIEW_PARAM = "maxofferview";
+    public static final String REPEAT_OFF_PARAM = "repeatoffer";
+    public static final String USER_TYPE_PARAM = "usertype";
+    public static final String SEL_CAT_PARAM = "selctedcategory";
+
+
+
+
+
+
+
+
+
+
     public static final String DEV_TOKEN_PARAM = "devicetoken";
     public static final String LAT_PARAM = "latitude";
     public static final String LON_PARAM = "longitude";
