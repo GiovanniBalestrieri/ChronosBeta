@@ -236,7 +236,7 @@ public class LoginActivity extends AppCompatActivity implements
     /**
      * Saves Login information into shared Pref
      */
-    private void getJsonData(JSONObject object) {
+    public void getJsonData(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
             JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
