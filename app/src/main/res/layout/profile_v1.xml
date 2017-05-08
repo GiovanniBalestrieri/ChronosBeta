@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/header_cover_image"
-            android:background="@color/black"
+            android:background="@color/white"
             android:elevation="0dp"
             android:paddingBottom="24dp">
 
@@ -30,7 +30,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_create_white_24dp" />
+                android:src="@drawable/ic_mode_edit_black_24dp" />
 
             <!--
             <ImageView
@@ -50,7 +50,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/hundred_dp"
                 android:text="Viral Android"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -82,6 +82,138 @@
             android:src="@drawable/user_dummy" />
 
         <LinearLayout
+            android:id="@+id/ll_user_bus_name"
+            android:layout_below="@+id/profile_layout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/squared_icon_dimension"
+                android:layout_height="@dimen/squared_icon_dimension"
+                android:layout_margin="5dp"
+                android:layout_marginRight="@dimen/twenty_dp"
+                android:src="@drawable/ic_business_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_profile_bus_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/app_text_size"
+                    android:elevation="4dp"
+                    android:text="Android Profile UI Design" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_margin="4dp"
+                    android:textSize="@dimen/app_text_size_small"
+                    android:text="Nome Attività" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_user_bus_phone"
+            android:layout_below="@+id/ll_user_bus_name"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/squared_icon_dimension"
+                android:layout_height="@dimen/squared_icon_dimension"
+                android:layout_margin="5dp"
+                android:layout_marginRight="@dimen/twenty_dp"
+                android:src="@drawable/ic_call_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_profile_bus_phone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/app_text_size"
+                    android:elevation="4dp"
+                    android:text="Android Profile UI Design" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_margin="4dp"
+                    android:textSize="@dimen/app_text_size_small"
+                    android:text="Telefono" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_user_bus_address"
+            android:layout_below="@+id/ll_user_bus_phone"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/squared_icon_dimension"
+                android:layout_height="@dimen/squared_icon_dimension"
+                android:layout_margin="5dp"
+                android:layout_marginRight="@dimen/twenty_dp"
+                android:src="@drawable/ic_location_on_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_profile_bus_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/app_text_size"
+                    android:elevation="4dp"
+                    android:text="Android Profile UI Design" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_margin="4dp"
+                    android:textSize="@dimen/app_text_size_small"
+                    android:text="Indirizzo Attività" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/ll_user_email_info"
             android:layout_below="@+id/profile_layout"
             android:orientation="horizontal"
@@ -93,7 +225,8 @@
                 android:layout_width="@dimen/squared_icon_dimension"
                 android:layout_height="@dimen/squared_icon_dimension"
                 android:layout_margin="5dp"
-                android:src="@drawable/fav_icon"/>
+                android:layout_marginRight="@dimen/twenty_dp"
+                android:src="@drawable/ic_email_black_24dp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -124,7 +257,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/ll_user_gender_info"
             android:layout_below="@+id/ll_user_email_info"
@@ -137,7 +269,7 @@
                 android:layout_width="@dimen/squared_icon_dimension"
                 android:layout_height="@dimen/squared_icon_dimension"
                 android:layout_margin="5dp"
-                android:src="@drawable/fav_icon"/>
+                android:src="@drawable/ic_wc_black_24dp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -163,6 +295,49 @@
                     android:layout_margin="4dp"
                     android:textSize="@dimen/app_text_size_small"
                     android:text="sesso" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_user_birthday_info"
+            android:layout_below="@+id/ll_user_gender_info"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/squared_icon_dimension"
+                android:layout_height="@dimen/squared_icon_dimension"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_cake_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_profile_user_birth"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/app_text_size"
+                    android:elevation="4dp"
+                    android:text="Android Profile UI Design" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_margin="4dp"
+                    android:textSize="@dimen/app_text_size_small"
+                    android:text="Compleanno" />
 
             </LinearLayout>
 

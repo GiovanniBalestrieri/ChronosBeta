@@ -76,7 +76,7 @@ public class ProfileFragment extends Fragment {
     private ImageView cover, editProfileBtn, profilePic;
     private EditText et_registredPassword, et_registredEmailId;
     private LinearLayout ll_login;
-    private TextView userName, shortBio, userEmail, birthdayUser, businessNameUser, phoneUser, addressUser;
+    private TextView userName, userGender, shortBio, userEmail, birthdayUser, businessNameUser, phoneUser, addressUser;
     private UserSharedPreference sharePrefs;
 
     public ProfileFragment() {
@@ -186,12 +186,15 @@ public class ProfileFragment extends Fragment {
         shortBio = (TextView) view.findViewById(R.id.user_profile_short_bio);
         userName = (TextView) view.findViewById(R.id.user_profile_name);
         userEmail = (TextView) view.findViewById(R.id.tv_profile_user_email);
-        //userName = (TextView) view.findViewById(R.id.user_profile_name);
+        userGender = (TextView) view.findViewById(R.id.tv_profile_user_gender);
+        birthdayUser = (TextView) view.findViewById(R.id.tv_profile_user_birth);
     }
 
     private void fillViews() {
         userEmail.setText(sharePrefs.getUserEmail());
         userName.setText(sharePrefs.getUserName());
+        userGender.setText(sharePrefs.getGender());
+        birthdayUser.setText(sharePrefs.getBirthday());
 
         String urlImage = IMAGE_URL + sharePrefs.getUserImage();
 
