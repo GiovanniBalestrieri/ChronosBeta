@@ -64,7 +64,7 @@ public class OfferPage extends Activity {
 
         getShops();
 
-        Offer offX = getIntent().getExtras().getParcelable("Offer");
+        final Offer offX = getIntent().getExtras().getParcelable("Offer");
 
         checkInside = (LinearLayout) findViewById(R.id.checkInsideLayout);
         finalPrice = (TextView) findViewById(R.id.final_price_offer_page);
@@ -113,12 +113,15 @@ public class OfferPage extends Activity {
 
 
 
-                 /*
-                 Intent i = new Intent(getApplicationContext(),ShopPages.class);
 
-                 i.putExtra("Shop",shops.get(shopId));
+                 Intent i = new Intent(getApplicationContext(),MapOffer.class);
+
+                 i.putExtra("latitude",offX.getLatitude());
+                 i.putExtra("address",offX.getBusinessaddress());
+                 i.putExtra("busname",offX.getBusinessname());
+                 i.putExtra("longitude",offX.getLongitude());
                  startActivity(i);
-                 */
+
              }
         });
 
