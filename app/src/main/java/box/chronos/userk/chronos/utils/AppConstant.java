@@ -11,6 +11,7 @@ public class AppConstant {
 
     // Api methods
     public static final String LOGIN_METHOD = "userLogin";
+    public static final String UPDATE_PROFILE_METHOD = "updateProfile";
     public static final String SIGNUP_METHOD = "userSignUp";
     public static final String CODE_VALIDATION_METHOD = "validateCode";
     public static final String CODE_SKIP_METHOD = "skipCode";
@@ -119,6 +120,12 @@ public class AppConstant {
     public static final String FRENCH = "French";
     public static final String ITALIAN = "Italian";
     public static final String EURO = "\u20ac";
+
+
+    public static final String MALE_STRING = "male";
+    public static final String FEMALE_STRING = "female";
+    public static final String MALE_STRING_IT = "uomo";
+    public static final String FEMALE_STRING_IT = "donna";
 
 
 

@@ -63,6 +63,9 @@
     <string name="err_msg_email">Inserisci una mail valida</string>
     <string name="err_msg_password">Inserisci la password</string>
     <string name="err_msg_code">Inserisci il codice</string>
+    <string name="profile_form_username">User Name</string>
+
+    <string name="profile_form_phone">Telefono</string>
 
     <array name="titles">
         <item>"Ciao"</item>
@@ -78,6 +81,10 @@
         <item>"Ciuqaio2"</item>
     </array>
 
+    <string-array name="android_dropdown_arrays">
+        <item>uomo</item>
+        <item>donna</item>
+    </string-array>
 
 
 </resources>

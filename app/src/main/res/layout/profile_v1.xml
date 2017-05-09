@@ -49,10 +49,22 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/hundred_dp"
-                android:text="Viral Android"
+                android:text="UserName"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/user_profile_name_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/hundred_dp"
+                android:hint="@string/profile_form_username"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"/>
 
             <TextView
                 android:id="@+id/user_profile_short_bio"
@@ -65,7 +77,6 @@
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </RelativeLayout>
-
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_profile_photo"
@@ -80,7 +91,6 @@
             android:padding="20dp"
             android:scaleType="centerCrop"
             android:src="@drawable/user_dummy" />
-
 
         <LinearLayout
             android:id="@+id/ll_user_email_info"
@@ -169,9 +179,41 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/ll_user_gender_info_edit"
+            android:layout_below="@+id/ll_user_gender_info"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="@dimen/squared_icon_dimension"
+            android:layout_height="@dimen/squared_icon_dimension"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_wc_black_24dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fifteen_dp"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/sp_profile_user_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/android_dropdown_arrays"
+                android:padding="5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_user_birthday_info"
-            android:layout_below="@+id/ll_user_gender_info"
+            android:layout_below="@+id/ll_user_gender_info_edit"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:padding="20dp"
@@ -301,8 +343,53 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_user_bus_address"
+            android:id="@+id/ll_user_bus_phone_edit"
             android:layout_below="@+id/ll_user_bus_phone"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/squared_icon_dimension"
+                android:layout_height="@dimen/squared_icon_dimension"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_call_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/fifteen_dp">
+
+                <EditText
+                    android:id="@+id/et_profile_user_phone_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:hint="@string/profile_form_phone"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"/>
+                <!--
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="true"
+                                    android:layout_margin="4dp"
+                                    android:textSize="@dimen/app_text_size_small"
+                                    android:text="email" />
+                                    -->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_user_bus_address"
+            android:layout_below="@+id/ll_user_bus_phone_edit"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:padding="20dp"

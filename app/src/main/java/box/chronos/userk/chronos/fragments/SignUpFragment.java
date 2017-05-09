@@ -45,8 +45,20 @@ import box.chronos.userk.chronos.utils.FieldsValidator;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
+import static box.chronos.userk.chronos.utils.AppConstant.ADDRESS_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.BIRTHDAY_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.CODE_RESP;
+import static box.chronos.userk.chronos.utils.AppConstant.EMAIL_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.GENDER_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.MAX_OFF_DIST_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.MAX_OFF_VIEW_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.PHOTO_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.REPEAT_OFF_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SEL_CAT_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SIGNUP_METHOD;
+import static box.chronos.userk.chronos.utils.AppConstant.USERNAME_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.USER_TYPE_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.ZERO_RESP;
 import static box.chronos.userk.chronos.ux.AppMessage.CHECK_MAIL_MSG;
 import static box.chronos.userk.chronos.ux.AppMessage.EMPTY_FIELD_MSG;
@@ -249,14 +261,30 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String codeResp = jsonRootObject.getString(CODE_RESP);
 
-            sharePrefs.setUserId(jsonObject.getString("userid").toString());
-            sharePrefs.setUserName(jsonObject.getString("username").toString());
-            sharePrefs.setUserEmail(jsonObject.getString("email").toString());
-            sharePrefs.setSessionKey(jsonObject.getString("sessionkey").toString());
-            sharePrefs.setGender(jsonObject.getString("gender").toString());
-            sharePrefs.setMaxOfferDistance(jsonObject.getString("maxofferdistance").toString());
-            sharePrefs.setMaxOfferView(jsonObject.getString("maxofferview").toString());
-            sharePrefs.setRepeatOffer(jsonObject.getString("repeatoffer").toString());
+            /*
+                sharePrefs.setUserId(jsonObject.getString("userid").toString());
+                sharePrefs.setUserName(jsonObject.getString("username").toString());
+                sharePrefs.setUserEmail(jsonObject.getString("email").toString());
+                sharePrefs.setSessionKey(jsonObject.getString("sessionkey").toString());
+                sharePrefs.setGender(jsonObject.getString("gender").toString());
+                sharePrefs.setMaxOfferDistance(jsonObject.getString("maxofferdistance").toString());
+                sharePrefs.setMaxOfferView(jsonObject.getString("maxofferview").toString());
+                sharePrefs.setRepeatOffer(jsonObject.getString("repeatoffer").toString());
+            */
+
+            sharePrefs.setUserName(jsonObject.getString(USERNAME_PARAM));
+            sharePrefs.setUserEmail(jsonObject.getString(EMAIL_PARAM));
+            sharePrefs.setSessionKey(jsonObject.getString(SESSION_KEY_PARAM));
+            sharePrefs.setUserImage(jsonObject.getString(PHOTO_PARAM));
+            sharePrefs.setGender(jsonObject.getString(GENDER_PARAM));
+            sharePrefs.setMaxOfferDistance(jsonObject.getString(MAX_OFF_DIST_PARAM));
+            sharePrefs.setMaxOfferView(jsonObject.getString(MAX_OFF_VIEW_PARAM));
+            sharePrefs.setRepeatOffer(jsonObject.getString(REPEAT_OFF_PARAM));
+            sharePrefs.setUserType(jsonObject.getString(USER_TYPE_PARAM));
+            sharePrefs.setBirthday(jsonObject.getString(BIRTHDAY_PARAM));
+            sharePrefs.setSelectedCatrgory(jsonObject.getString(SEL_CAT_PARAM));
+            sharePrefs.setDefaultAddress(jsonObject.getString(ADDRESS_PARAM));
+            sharePrefs.setSelectedCatrgory(jsonObject.getString(SEL_CAT_PARAM));
 
             Intent intent;
             if (codeResp.equals(ZERO_RESP)) {

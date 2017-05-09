@@ -95,6 +95,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
     // Pinch to Zoom
-
     compile 'com.github.martinwithaar:PinchToZoom:6ed982fe58'
+
+    // DateTime
+    compile 'com.wdullaer:materialdatetimepicker:3.2.0'
 }

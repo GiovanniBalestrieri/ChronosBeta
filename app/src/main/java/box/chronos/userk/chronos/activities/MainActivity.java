@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity
         TextView nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
         TextView email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
 
-        profPic = (ImageView) vv.findViewById(R.id.userImage);
+        //profPic = (ImageView) vv.findViewById(R.id.userImage);
         email_u.setText(sharePrefs.getUserEmail());
         nick_u.setText(sharePrefs.getUserName());
         updateProfilePictureNav();
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity
 
     public void updateProfilePictureNav(){
         String urlImage = IMAGE_URL + sharePrefs.getUserImage();
-        Picasso.with(this).load(urlImage).into(profPic);
+        //Picasso.with(this).load(urlImage).into(profPic);
         drawer.invalidate();
     }
 
@@ -401,5 +401,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
     }
+
+
 
 }
