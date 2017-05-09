@@ -79,7 +79,9 @@ public class AppConstant {
     public static final String EUR_SIGN = " €";
     public static final String PERC_SIGN = " %";
     public static final String ALL_CATS = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16";
-
+    public static final String ONE_KM = "1000";
+    public static final String MORE_THAN_ONE_KM = "1+ km";
+    public static final String METERS = " m";
 
 
     // Number of columns of Grid View

@@ -61,7 +61,7 @@ public class Utility {
 
             // Setting dialog view
             Window window = showDialog.getWindow();
-            window.setGravity(Gravity.BOTTOM);
+            window.setGravity(Gravity.TOP);
             window.getAttributes().windowAnimations = R.style.ActionDialogAnimation;
             window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             showDialog.setTitle(null);

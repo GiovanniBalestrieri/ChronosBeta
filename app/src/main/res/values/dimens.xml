@@ -116,9 +116,9 @@
 
     <!-- Article View -->
 
-    <dimen name="article_title_article_page">18dp</dimen>
-    <dimen name="discount_value_article_page">18dp</dimen>
-    <dimen name="price_value_article_page">18dp</dimen>
+    <dimen name="article_title_article_page">18sp</dimen>
+    <dimen name="discount_value_article_page">18sp</dimen>
+    <dimen name="price_value_article_page">18sp</dimen>
 
     <dimen name="article_content_article_page">16dp</dimen>
 

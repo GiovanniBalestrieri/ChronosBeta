@@ -3,10 +3,12 @@ package box.chronos.userk.chronos.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
+import android.util.FloatProperty;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,9 @@ import box.chronos.userk.chronos.R;
 
 import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.chronos.utils.AppConstant.EUR_SIGN;
+import static box.chronos.userk.chronos.utils.AppConstant.METERS;
+import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_ONE_KM;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.PERC_SIGN;
 
 /**
@@ -35,12 +40,14 @@ import static box.chronos.userk.chronos.utils.AppConstant.PERC_SIGN;
  */
 
 public class OfferPage extends Activity {
-
     TextView offCat;
     TextView offTitle;
+    TextView finalPrice;
     TextView offPrice;
     TextView offDesc;
     TextView offDiscount;
+    TextView doveShop;
+    TextView distance;
     ImageView offImage;
     LinearLayout checkInside;
     String urlImage;
@@ -60,11 +67,14 @@ public class OfferPage extends Activity {
         Offer offX = getIntent().getExtras().getParcelable("Offer");
 
         checkInside = (LinearLayout) findViewById(R.id.checkInsideLayout);
+        finalPrice = (TextView) findViewById(R.id.final_price_offer_page);
         offCat = (TextView) findViewById(R.id.upper_bar_category_title);
         offTitle = (TextView) findViewById(R.id.offer_title_overlay);
         offPrice = (TextView) findViewById(R.id.price_offer);
         offDiscount = (TextView) findViewById(R.id.discount_offer);
         offDesc = (TextView) findViewById(R.id.offer_description);
+        distance = (TextView) findViewById(R.id.distance_offer_page_tv);
+        doveShop = (TextView) findViewById(R.id.dove_si_trova);
         offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
 
         offCat.setText(offX.getCategory());
@@ -72,8 +82,13 @@ public class OfferPage extends Activity {
         offTitle.setText(offX.getTitle());
         offTitle.setTypeface(null, Typeface.BOLD);
 
+        doveShop.setText(offX.getBusinessname());
+        distance.setText(prepareDistance(offX.getDistance()));
+
         offPrice.setText(offX.getPrice() + EUR_SIGN);
+        offPrice.setPaintFlags(offPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         offDiscount.setText(offX.getDiscount() + PERC_SIGN);
+        finalPrice.setText(computeFinalPrice(offX.getPrice(), offX.getDiscount()));
 
         shopId = offX.getShopId();
 
@@ -95,10 +110,15 @@ public class OfferPage extends Activity {
              @Override
             public void onClick(View v) {
                  // StartActivity Shop and pass data
+
+
+
+                 /*
                  Intent i = new Intent(getApplicationContext(),ShopPages.class);
 
                  i.putExtra("Shop",shops.get(shopId));
                  startActivity(i);
+                 */
              }
         });
 
@@ -112,6 +132,26 @@ public class OfferPage extends Activity {
                 }
             });
         }
+    }
+
+    public String prepareDistance(String d) {
+        String res = MORE_THAN_ONE_KM;
+        float distance = Float.valueOf(d);
+        if ( distance > Float.valueOf(ONE_KM)){
+            res = MORE_THAN_ONE_KM;
+        } else {
+            res = String.format("%.0f", distance*1000) + METERS;
+        }
+        return res;
+    }
+
+    public String computeFinalPrice(String init, String sconto){
+        String res = "";
+        Float ini = Float.valueOf(init);
+        Float disc = Float.valueOf(sconto);
+        Float fin = ini*(1- disc/100.f);
+        res = String.format("%.2f",fin) + EUR_SIGN;
+        return res;
     }
 
     public void fullScreen() {

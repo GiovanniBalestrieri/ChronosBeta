@@ -127,10 +127,10 @@
                             android:id="@+id/price_offer"
                             android:layout_width="0dip"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.9"
+                            android:layout_weight="0.3"
                             android:gravity="center"
                             android:paddingBottom="@dimen/details_offer_padding_top"
-                            android:paddingLeft="@dimen/city_title_padding"
+                            android:paddingStart="@dimen/city_title_padding"
                             android:paddingTop="@dimen/details_offer_padding_top"
                             android:text="59,90€"
                             android:textColor="@color/black"
@@ -141,11 +141,25 @@
                             android:id="@+id/discount_offer"
                             android:layout_width="0dip"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.6"
+                            android:layout_weight="0.3"
                             android:gravity="center"
                             android:paddingBottom="@dimen/details_offer_padding_top"
                             android:paddingTop="@dimen/details_offer_padding_top"
                             android:text="10 %"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/discount_value_article_page"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/final_price_offer_page"
+                            android:layout_width="0dip"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:paddingBottom="@dimen/details_offer_padding_top"
+                            android:paddingTop="@dimen/details_offer_padding_top"
+                            android:text="130 €"
                             android:textColor="@color/black"
                             android:textSize="@dimen/discount_value_article_page"
                             android:textStyle="bold" />
@@ -159,26 +173,52 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="1dp"
-                        android:layout_marginBottom="6dp"
-                        />
+                        android:layout_marginBottom="6dp" />
+
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:text="DOVE SI TROVA"/>
 
                     <!-- This will be the link to the shop's profile. Ignore it for the moment-->
                     <LinearLayout
                         android:clickable="true"
                         android:id="@+id/checkInsideLayout"
-                        android:layout_width="match_parent"
                         android:layout_height="70dp"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="10"
                         android:gravity="left">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/dove_si_trova"
                             android:layout_gravity="center"
+                            android:layout_width="0dip"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
                             android:paddingLeft="16dp"
                             android:textColor="@color/blue"
                             android:textStyle="bold"
                             android:textSize="18dp"
-                            android:text="CHECK INSIDE"/>
+                            android:text="DOVE SI TROVA"/>
+
+
+                        <TextView
+                            android:id="@+id/distance_offer_page_tv"
+                            android:layout_width="0dip"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:text="20m"
+                            android:textColor="@color/orange2"
+                            android:textSize="@dimen/article_title_card"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 

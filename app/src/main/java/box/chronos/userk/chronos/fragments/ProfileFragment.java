@@ -228,24 +228,6 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
 
             updateProfileInfo();
 
-            editProfileBtn.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_mode_edit_black_24dp, null));
-
-            userName.setVisibility(View.VISIBLE);
-            userName.setText(unameET.getText());
-            unameET.setVisibility(View.GONE);
-
-
-            if (sharePrefs.getUserType().equals(SHOP_USER)) {
-
-                userBusPhoneLL.setVisibility(View.VISIBLE);
-                userBusPhoneEditLL.setVisibility(View.GONE);
-                userBusPhone.setText(busphoneET.getText());
-
-            }
-
-            userGenderEditLL.setVisibility(View.GONE);
-            userGenderLL.setVisibility(View.VISIBLE);
-            fillGender();
 
 
         }
@@ -267,7 +249,7 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
         pairs.put(BIRTHDAY_PARAM, birthdayUser.getText().toString());
         // TODO check if genderToSend is always valid
         pairs.put(GENDER_PARAM, genderToSend);
-        pairs.put(PHONE_PARAM, userBusPhone.getText().toString());
+        pairs.put(PHONE_PARAM, busphoneET.getText().toString());
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {
@@ -276,7 +258,7 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
                 try {
                     JSONObject object = new JSONObject(response);
                     getJsonData(object);
-                    //updateSharedPreferences();
+                    updateViews();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -291,8 +273,25 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
 
     }
 
-    private void updateSharedPreferences() {
+    private void updateViews() {
+        editProfileBtn.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_mode_edit_black_24dp, null));
 
+        userName.setVisibility(View.VISIBLE);
+        userName.setText(unameET.getText());
+        unameET.setVisibility(View.GONE);
+
+
+        if (sharePrefs.getUserType().equals(SHOP_USER)) {
+
+            userBusPhoneLL.setVisibility(View.VISIBLE);
+            userBusPhoneEditLL.setVisibility(View.GONE);
+            userBusPhone.setText(busphoneET.getText());
+
+        }
+
+        userGenderEditLL.setVisibility(View.GONE);
+        userGenderLL.setVisibility(View.VISIBLE);
+        fillGender();
     }
 
     /*
@@ -441,7 +440,7 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
                 sharePrefs.setGender(jsonObject.getString(GENDER_PARAM));
                 sharePrefs.setBirthday(jsonObject.getString(BIRTHDAY_PARAM));
                 sharePrefs.setDefaultAddress(jsonObject.getString(ADDRESS_PARAM));
-                sharePrefs.setUserPhoneNumber(jsonObject.getString(PHONE_PARAM));
+                sharePrefs.setBusinessphone(jsonObject.getString(PHONE_PARAM));
 
                 // Update Navigation drawer information
                 ((MainActivity) getActivity()).updateProfilePictureNav();

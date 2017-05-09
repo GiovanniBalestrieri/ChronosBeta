@@ -2,6 +2,7 @@ package box.chronos.userk.chronos.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.FloatProperty;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +22,9 @@ import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.objects.Offer;
 
 import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.chronos.utils.AppConstant.METERS;
+import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_ONE_KM;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM;
 
 
 /**
@@ -47,6 +53,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         public TextView shop_name;
         public ImageView thumbnail;
         public ImageView thumbnail_cat;
+        public TextView distance;
         public ImageView shop_logo;
         public TextView price;
 
@@ -56,6 +63,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             cat = (TextView) view.findViewById(R.id.category_card_article);
             shop_name = (TextView) view.findViewById(R.id.shop_top_card_info);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail_card_article);
+            distance = (TextView) view.findViewById(R.id.distance_logo_card_article);
             //thumbnail_cat = (ImageView) view.findViewById(R.id.thumbnail_card_article_cat);
             shop_logo = (ImageView) view.findViewById(R.id.shop_logo_card_article);
             price = (TextView) view.findViewById(R.id.price_card_article);
@@ -76,6 +84,8 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         holder.cat.setText(off.getCategory());
         holder.shop_name.setText(off.getBusinessname().toUpperCase());
         holder.price.setText(off.getPrice() + " €");
+
+        holder.distance.setText(prepareDistance(off.getDistance()));
 
 
         String urlCat = IMAGE_URL + off.getCategoryphoto();
@@ -99,6 +109,16 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         }
     }
 
+    public String prepareDistance(String d) {
+        String res = MORE_THAN_ONE_KM;
+        float distance = Float.valueOf(d);
+        if ( distance > Float.valueOf(ONE_KM)){
+            res = MORE_THAN_ONE_KM;
+        } else {
+            res = String.format("%.0f", distance*1000) + METERS;
+        }
+        return res;
+    }
 
     /*
     @Override
