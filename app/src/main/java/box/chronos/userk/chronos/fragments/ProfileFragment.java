@@ -30,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.util.Util;
 import com.squareup.picasso.Picasso;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -160,11 +161,12 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
         requestProfileInfo();
 
 
-        cover.setOnClickListener(new View.OnClickListener() {
+        profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //upload();
                 //clickpic();
+                Utility.showAlertDialog(getActivity(),"Ottieni più punti per modificare l'immagine del profilo");
             }
         });
 
@@ -243,7 +245,8 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
 
             userGenderEditLL.setVisibility(View.GONE);
             userGenderLL.setVisibility(View.VISIBLE);
-            userGender.setText(genderToSend);
+            fillGender();
+
 
         }
     }
@@ -255,12 +258,12 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
 
         Map<String, String> pairs = new HashMap<>();
         pairs.put(METHOD_PARAM, UPDATE_PROFILE_METHOD);
-        pairs.put(EMAIL_PARAM, sharePrefs.getUserEmail());
+        pairs.put(USERID_PARAM, sharePrefs.getUserId());
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
 
 
         // First upload new information then update sharedPreferences
-        pairs.put(USERNAME_PARAM, userName.getText().toString());
+        pairs.put(USERNAME_PARAM, unameET.getText().toString());
         pairs.put(BIRTHDAY_PARAM, birthdayUser.getText().toString());
         // TODO check if genderToSend is always valid
         pairs.put(GENDER_PARAM, genderToSend);
@@ -272,7 +275,8 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
             public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
-                    updateSharedPreferences();
+                    getJsonData(object);
+                    //updateSharedPreferences();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -377,7 +381,7 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
     */
 
 
-    // request for login
+    // request profile information
     private void requestProfileInfo() {
 
         Map<String, String> pairs = new HashMap<>();
@@ -417,25 +421,31 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
             JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            String succe = jsonRootObject.getString(SUCCESS_PARAM);
+            String success = jsonRootObject.getString(SUCCESS_PARAM);
 
-            String a = jsonObject.getString(USERID_PARAM);
-            String b = jsonObject.getString(USERNAME_PARAM);
-            String c = jsonObject.getString(EMAIL_PARAM);
-            String d = jsonObject.getString(PHOTO_PARAM);
-            String e = jsonObject.getString(GENDER_PARAM);
-            String f = jsonObject.getString(BIRTHDAY_PARAM);
-            String g = jsonObject.getString(ADDRESS_PARAM);
-            String h = jsonObject.getString(PHONE_PARAM);
+            // Update sharedPreferences iif success == 1
+            if (success.equals("1")) {
+                String a = jsonObject.getString(USERID_PARAM);
+                String b = jsonObject.getString(USERNAME_PARAM);
+                String c = jsonObject.getString(EMAIL_PARAM);
+                String d = jsonObject.getString(PHOTO_PARAM);
+                String e = jsonObject.getString(GENDER_PARAM);
+                String f = jsonObject.getString(BIRTHDAY_PARAM);
+                String g = jsonObject.getString(ADDRESS_PARAM);
+                String h = jsonObject.getString(PHONE_PARAM);
 
-            sharePrefs.setUserId(jsonObject.getString(USERID_PARAM));
-            sharePrefs.setUserName(jsonObject.getString(USERNAME_PARAM));
-            sharePrefs.setUserEmail(jsonObject.getString(EMAIL_PARAM));
-            sharePrefs.setUserImage(jsonObject.getString(PHOTO_PARAM));
-            sharePrefs.setGender(jsonObject.getString(GENDER_PARAM));
-            sharePrefs.setBirthday(jsonObject.getString(BIRTHDAY_PARAM));
-            sharePrefs.setDefaultAddress(jsonObject.getString(ADDRESS_PARAM));
-            sharePrefs.setUserPhoneNumber(jsonObject.getString(PHONE_PARAM));
+                sharePrefs.setUserId(jsonObject.getString(USERID_PARAM));
+                sharePrefs.setUserName(jsonObject.getString(USERNAME_PARAM));
+                sharePrefs.setUserEmail(jsonObject.getString(EMAIL_PARAM));
+                sharePrefs.setUserImage(jsonObject.getString(PHOTO_PARAM));
+                sharePrefs.setGender(jsonObject.getString(GENDER_PARAM));
+                sharePrefs.setBirthday(jsonObject.getString(BIRTHDAY_PARAM));
+                sharePrefs.setDefaultAddress(jsonObject.getString(ADDRESS_PARAM));
+                sharePrefs.setUserPhoneNumber(jsonObject.getString(PHONE_PARAM));
+
+                // Update Navigation drawer information
+                ((MainActivity) getActivity()).updateProfilePictureNav();
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -469,6 +479,8 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
         } else if (sharePrefs.getGender().equals(FEMALE_STRING)) {
             genderEdit.setSelection(1);
         }
+        fillGender();
+
 
         birthdayUser = (TextView) view.findViewById(R.id.tv_profile_user_birth);
 
@@ -516,12 +528,8 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
         userEmail.setText(sharePrefs.getUserEmail());
         userName.setText(sharePrefs.getUserName());
 
-        String[] genders = getResources().getStringArray(R.array.android_dropdown_arrays);
-        if (sharePrefs.getGender().equals(MALE_STRING)) {
-            userGender.setText(genders[0]);
-        } else if (sharePrefs.getGender().equals(FEMALE_STRING)) {
-            userGender.setText(genders[1]);
-        }
+        fillGender();
+
         birthdayUser.setText(sharePrefs.getBirthday());
 
         if (sharePrefs.getUserType().equals(SHOP_USER)){
@@ -531,6 +539,15 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
             userBusName.setText(sharePrefs.getBusinessname());
         }
 
+    }
+
+    private void fillGender(){
+        String[] genders = getResources().getStringArray(R.array.android_dropdown_arrays);
+        if (sharePrefs.getGender().equals(MALE_STRING)) {
+            userGender.setText(genders[0]);
+        } else if (sharePrefs.getGender().equals(FEMALE_STRING)) {
+            userGender.setText(genders[1]);
+        }
     }
 
     /*

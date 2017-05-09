@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity
     private UserSharedPreference sharePrefs;
     public static MainActivity self;
     private String locationValue, latitudeValue, longitudeValue;
+    public TextView nick_u, email_u;
     LinearLayout profileNav;
     public ImageView profPic;
 
@@ -169,16 +170,15 @@ public class MainActivity extends AppCompatActivity
         View vv = navigationView.getHeaderView(0);
 
         profileNav = (LinearLayout) vv.findViewById(R.id.ll_nav_profile);
-        TextView nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
-        TextView email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
+        nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
+        email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
 
-        //profPic = (ImageView) vv.findViewById(R.id.userImage);
-        email_u.setText(sharePrefs.getUserEmail());
-        nick_u.setText(sharePrefs.getUserName());
         updateProfilePictureNav();
     }
 
     public void updateProfilePictureNav(){
+        email_u.setText(sharePrefs.getUserEmail());
+        nick_u.setText(sharePrefs.getUserName());
         String urlImage = IMAGE_URL + sharePrefs.getUserImage();
         //Picasso.with(this).load(urlImage).into(profPic);
         drawer.invalidate();
