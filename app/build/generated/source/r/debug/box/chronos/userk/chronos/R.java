@@ -4598,7 +4598,7 @@ containing a value of this type.
         public static final int StatisticheText=0x7f0f01a1;
         public static final int StatisticheView=0x7f0f01a2;
         public static final int action0=0x7f0f013b;
-        public static final int action_add_favourite=0x7f0f01b8;
+        public static final int action_add_favourite=0x7f0f01b2;
         public static final int action_bar=0x7f0f00b5;
         public static final int action_bar_activity_content=0x7f0f0000;
         public static final int action_bar_container=0x7f0f00b4;
@@ -4616,9 +4616,9 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0f00b2;
         public static final int action_mode_bar_stub=0x7f0f00b1;
         public static final int action_mode_close_button=0x7f0f0094;
-        public static final int action_play_next=0x7f0f01b9;
-        public static final int action_search=0x7f0f01b7;
-        public static final int action_settings=0x7f0f01b6;
+        public static final int action_play_next=0x7f0f01b3;
+        public static final int action_search=0x7f0f01b1;
+        public static final int action_settings=0x7f0f01b0;
         public static final int action_text=0x7f0f013a;
         public static final int actions=0x7f0f0148;
         public static final int activity_chooser_view_content=0x7f0f0095;
@@ -4658,7 +4658,7 @@ containing a value of this type.
         public static final int card_id_text_ll=0x7f0f00d7;
         public static final int card_view=0x7f0f00d2;
         public static final int cast_notification_id=0x7f0f0004;
-        public static final int categories=0x7f0f01ae;
+        public static final int categories=0x7f0f01ad;
         public static final int category_card_article=0x7f0f016c;
         public static final int cbShowPwd=0x7f0f0194;
         public static final int center=0x7f0f0035;
@@ -4842,13 +4842,8 @@ containing a value of this type.
         public static final int monochrome=0x7f0f0090;
         public static final int monospace=0x7f0f001b;
         public static final int multiply=0x7f0f002d;
-        public static final int nav_logout=0x7f0f01b4;
-        public static final int nav_manage=0x7f0f01b1;
-        public static final int nav_offers=0x7f0f01af;
-        public static final int nav_send=0x7f0f01b3;
-        public static final int nav_share=0x7f0f01b2;
-        public static final int nav_slideshow=0x7f0f01b0;
-        public static final int nav_switch=0x7f0f01b5;
+        public static final int nav_logout=0x7f0f01af;
+        public static final int nav_offers=0x7f0f01ae;
         public static final int nav_view=0x7f0f00c5;
         public static final int navigation_header_container=0x7f0f00e9;
         public static final int navigation_view=0x7f0f00c9;
@@ -4906,7 +4901,6 @@ containing a value of this type.
         public static final int sandbox=0x7f0f007b;
         public static final int sans=0x7f0f001c;
         public static final int satellite=0x7f0f0060;
-        public static final int scopri_nav=0x7f0f01ad;
         public static final int screen=0x7f0f002e;
         public static final int scroll=0x7f0f002a;
         public static final int scrollIndicatorDown=0x7f0f00a4;

@@ -100,9 +100,8 @@ public class MainActivity extends AppCompatActivity
 
         OffersListFragment fragment = new OffersListFragment();
         fragmentTransaction.add(R.id.fragment_container, fragment,"Offers");
-        fragmentTransaction.addToBackStack(null);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
 
         profileNav.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -255,13 +254,10 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
 
-            /*
-            Intent i = new Intent(getApplicationContext(),OfferPage.class);
-            startActivity(i);
-            */
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_offers) {
+        } /*else if (id == R.id.nav_slideshow) {
+
+        } */else if (id == R.id.nav_offers) {
             Toast.makeText(this,"Intorno a te",Toast.LENGTH_SHORT);
 
             FragmentManager fragmentManager = getFragmentManager();
@@ -273,13 +269,12 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-        } else if (id == R.id.nav_manage) {
+        }
+        /*else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
-        } else if (id == R.id.nav_logout) {
+        }*/ else if (id == R.id.nav_logout) {
 
             requestForLogout();
             // FB
@@ -290,10 +285,10 @@ public class MainActivity extends AppCompatActivity
             //finish();
             //sharePrefs.clearPrefrence();
             //MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-        } else if (id == R.id.nav_switch) {
+        } /*else if (id == R.id.nav_switch) {
             Toast.makeText(MainActivity.self,"SWITCH",Toast.LENGTH_SHORT);
             Log.d("NAVIGATION","Switch Selected");
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
