@@ -10,20 +10,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
-        android:padding="0dp"
         android:elevation="6dp"
+        android:padding="0dp"
         card_view:cardCornerRadius="@dimen/card_cat_radius">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/layoutRecycleLicence"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
             android:orientation="vertical">
-                <!--
+            <!--
                     android:layout_centerInParent="false"
                 -->
 
 
-                <!-- Thumbnail Image   -->
+            <!-- Thumbnail Image   -->
             <ImageView
                 android:id="@+id/thumbnail_cat_card_b"
                 android:layout_width="wrap_content"
@@ -36,32 +39,32 @@
                 android:cropToPadding="false"
                 android:duplicateParentState="false"
                 android:fadeScrollbars="false"
-                android:scaleType="centerInside"
-                android:src="@drawable/scarpa_d" />
-                <!--
+                android:scaleType="centerCrop"
+                android:src="@drawable/tennis" />
+            <!--
                     android:layout_height="@dimen/cat_card_height"
                     android:background="?attr/selectableItemBackgroundBorderless"-->
 
 
-                <!-- android:scaleType="centerCrop" -->
+            <!-- android:scaleType="centerCrop" -->
 
 
             <LinearLayout
-                android:id="@+id/title_offer_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
-                android:orientation="horizontal">
+                android:layout_gravity="bottom"
+                android:background="@color/lic_card_overlay"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/title_cat_card"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:background="@color/quiz1_overlay"
                     android:gravity="center"
                     android:paddingBottom="@dimen/offer_dialog_bar_padding_bottom"
-                    android:paddingLeft="@dimen/city_title_padding"
+                    android:paddingStart="@dimen/city_title_padding"
                     android:paddingTop="@dimen/offer_dialog_bar_padding_top"
                     android:text="@string/offer_title_main"
                     android:textColor="@color/quiz_title"
@@ -70,7 +73,7 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+        </FrameLayout>
 
     </android.support.v7.widget.CardView>
 

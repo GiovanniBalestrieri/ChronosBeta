@@ -64,7 +64,7 @@
 
     <dimen name="card_cat_elevation">6dp</dimen>
     <dimen name="card_cat_margin">5dp</dimen>
-    <dimen name="cat_card_height">180dp</dimen>
+    <dimen name="cat_card_height">250dp</dimen>
     <dimen name="cat_title_padding">5dp</dimen>
     <dimen name="cat_title_size">18sp</dimen>
     <dimen name="card_cat_radius">0dp</dimen>
