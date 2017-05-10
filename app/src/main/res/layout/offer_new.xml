@@ -4,7 +4,6 @@
     android:layout_height="wrap_content">
 
     <ScrollView
-        android:layout_below="@+id/upper_offer_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fillViewport="true">

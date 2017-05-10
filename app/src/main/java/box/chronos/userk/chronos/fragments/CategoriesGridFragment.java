@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -154,6 +155,10 @@ public class CategoriesGridFragment extends Fragment {
             Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(), bm);
             rootView.setBackground(new BitmapDrawable(getActivity().getResources(), image));
         }
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Categorie");
+
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         return rootView;
     }

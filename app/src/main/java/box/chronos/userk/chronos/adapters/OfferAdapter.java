@@ -31,6 +31,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.FOURTY_5_MIN;
 import static box.chronos.userk.chronos.utils.AppConstant.METERS;
 import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_ONE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM_INT;
 import static box.chronos.userk.chronos.utils.AppConstant.PERC_SIGN;
 import static box.chronos.userk.chronos.utils.AppConstant.STRING_15_MIN;
 import static box.chronos.userk.chronos.utils.AppConstant.STRING_30_MIN;
@@ -148,7 +149,6 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         String res;
         if (min >= FOURTY_5_MIN){
             res = STRING_45_MIN;
-
         } else if (min < FOURTY_5_MIN && min >= FIFTEEN_MIN) {
             res = STRING_30_MIN;
         } else if (min < FIFTEEN_MIN) {
@@ -159,13 +159,10 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         return res;
     }
 
-
-
-
     private String prepareDistance(String d) {
         String res;
-        float distance = Float.valueOf(d);
-        if ( distance > Float.valueOf(ONE_KM)){
+        float distance = Float.valueOf(d)*1000;
+        if ( distance > ONE_KM_INT){
             res = MORE_THAN_ONE_KM;
         } else {
             res = String.format("%.0f", distance*1000) + METERS;

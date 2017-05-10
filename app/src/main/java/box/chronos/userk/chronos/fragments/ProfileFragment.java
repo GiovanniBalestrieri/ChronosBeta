@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -187,6 +188,8 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
             }
         });
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Profilo");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         return view;
     }
