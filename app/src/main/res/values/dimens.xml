@@ -77,7 +77,7 @@
     <dimen name="lic_backdrop_subtitle">18dp</dimen>
     <dimen name="lic_card_margin">5dp</dimen>
     <dimen name="lic_card_radius">3dp</dimen>
-    <dimen name="offer_cover_height">220dp</dimen>
+    <dimen name="offer_cover_height">260dp</dimen>
     <dimen name="offer_bottom_bar">80dp</dimen>
     <dimen name="offer_bottom_bar_height">60dp</dimen>
     <dimen name="offer_overlay_height">60dp</dimen>
@@ -97,7 +97,7 @@
     <!-- Article Card -->
 
     <dimen name="article_title_card">18sp</dimen>
-    <dimen name="shop_title_card">18sp</dimen>
+    <dimen name="shop_title_card">26sp</dimen>
     <dimen name="article_cat_card">16sp</dimen>
     <dimen name="article_content">16dp</dimen>
 

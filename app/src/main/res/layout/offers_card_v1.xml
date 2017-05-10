@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:baselineAligned="false">
@@ -23,111 +24,77 @@
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
-
-
             <LinearLayout
-                android:layout_marginTop="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_below="@+id/thumbnail_card_offer"
-                android:id="@+id/top_info_card"
-                android:orientation="horizontal"
+                android:id="@+id/top_info_card_ll"
                 android:layout_width="fill_parent"
+                android:layout_height="@dimen/offer_bottom_bar"
+                android:layout_below="@+id/thumbnail_card_offer"
                 android:layout_weight="10"
-                android:layout_height="@dimen/offer_bottom_bar">
+                android:orientation="horizontal"
+                tools:ignore="ObsoleteLayoutParam">
+
 
                 <LinearLayout
-                    android:gravity="center_vertical"
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2">
-
-                    <!--
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/shop_logo_card_article"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/logo"
-                        app:civ_border_width="2dp"
-                        app:civ_border_color="#FF000000"/>
-                    -->
-
-                    <ImageView
-                        android:id="@+id/shop_logo_card_article"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="Logo"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/logo" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_margin="@dimen/card_margin"
-                    android:layout_width="0dip"
+                    android:layout_weight="0.7"
                     android:gravity="center"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/shop_top_card_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Nome negozio"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/shop_title_card"
-                        android:textStyle="bold" />
-
-                    <!--
-
-
-                    <TextView
-                        android:id="@+id/discount1"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/top_info_card"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="0.7"
-                        android:gravity="center"
-                        android:text="Additional info"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/shop_title_card" />
-                        -->
+                        android:background="@color/top_card_timeout_red"
+                        android:gravity="center">
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/first_top_card_article"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
 
-                <LinearLayout
-                    android:gravity="center"
+                        <TextView
+                            android:id="@+id/second_top_card_article"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:text="45 min"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/register_main_text_margin"
+                            android:textStyle="bold" />
 
-                    android:layout_width="0dip"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2">
+                        <TextView
+                            android:id="@+id/third_top_card_article"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/distance_logo_card_article"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="20m"
-                        android:textColor="@color/orange2"
-                        android:textSize="@dimen/article_title_card"
-                        android:textStyle="bold" />
 
+                        <!--
+                        <ImageView
+                            android:id="@+id/thumbnail_card_article_cat"
+                            android:layout_width="@dimen/fifty_dp"
+                            android:layout_height="@dimen/offer_cover_height"
+                            android:background="@color/white"
+                            android:padding="0dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/abitiuomo" />
+                            -->
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
-
-
-            <View android:id="@+id/separator_top"
-                android:background="@color/gray"
-                android:layout_width = "fill_parent"
-                android:layout_height="1dip"/>
-
 
             <RelativeLayout
                 android:layout_gravity="top"
@@ -144,7 +111,7 @@
                     android:clickable="true"
                     android:padding="0dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/drone" />
+                    android:src="@drawable/test4" />
 
                 <!--
                 <LinearLayout
@@ -188,13 +155,94 @@
                 android:layout_height="1dip"/>
 
             <LinearLayout
+                android:id="@+id/top_info_card"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/offer_bottom_bar"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin"
+                android:layout_marginTop="@dimen/card_margin"
+                android:layout_weight="10"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/card_margin"
+                    android:layout_weight="0.8"
+                    android:gravity="left|center"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/five_dp">
+
+                    <TextView
+                        android:id="@+id/shop_top_card_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="lobster_regular"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/five_dp"
+                        android:text="L'atelier des penseurs"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/shop_title_card" />
+
+                    <!--
+
+
+                    <TextView
+                        android:id="@+id/discount1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.7"
+                        android:gravity="center"
+                        android:text="Additional info"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/shop_title_card" />
+                        -->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="bottom|right">
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dip"
+
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/distance_logo_card_article"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="20m"
+                        android:textColor="@color/orange2"
+                        android:textSize="@dimen/article_title_card"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_margin="@dimen/card_margin"
                 android:layout_below="@+id/thumbnail_card_offer"
                 android:id="@+id/mid_info_card"
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_weight="10"
-                android:layout_height="@dimen/offer_bottom_bar">
+                android:layout_height="@dimen/offer_bottom_bar"
+                tools:ignore="ObsoleteLayoutParam">
 
                 <!--
                 <LinearLayout
@@ -227,17 +275,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.7">
 
-                    <TextView
-                        android:id="@+id/title_card_offer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.7"
-                        android:gravity="center"
-                        android:text="Titolo Offerta"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/article_title_card"
-                        android:textStyle="bold" />
-
                     <LinearLayout
                         android:layout_weight="0.7"
                         android:layout_width="match_parent"
@@ -245,24 +282,36 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/category_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="abbigliamento"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/article_cat_card" />
-
-
-                        <TextView
                             android:id="@+id/price_card_article"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:paddingLeft="@dimen/fifty_dp"
+                            android:layout_weight="0.3"
                             android:gravity="center"
-                            android:text="34,34"
+                            android:text="34,34 €"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/article_cat_card" />
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_discount_offer_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:text="20 %"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/register_main_text_margin"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_final_price_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:text="28 €"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
 
                         <!--
                         <ImageView

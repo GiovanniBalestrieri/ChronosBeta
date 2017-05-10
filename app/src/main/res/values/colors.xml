@@ -106,6 +106,15 @@
     <color name="lic_card_overlay">#80000000</color>
 
 
+    <color name="top_card_timeout_green">#388E3C</color>
+    <color name="top_card_timeout_green_sec">#FFEB3B</color>
+    <color name="top_card_timeout_orange">#F57C00</color>
+    <color name="top_card_timeout_orange_sec">#FF5722</color>
+    <color name="top_card_timeout_red">#D32F2F</color>
+    <color name="top_card_timeout_red_sec">#FFC107</color>
+    #388E3C
+
+
     <!-- HUd -->
     <color name="full_transparent">#00000000</color>
 

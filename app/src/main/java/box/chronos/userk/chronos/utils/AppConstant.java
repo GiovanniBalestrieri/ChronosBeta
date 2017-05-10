@@ -39,11 +39,15 @@ public class AppConstant {
     public static final String PHONE_PARAM = "phonenumber";
     public static final String ADDRESS_PARAM = "address";
     public static final String SESSION_KEY_PARAM = "sessionkey";
+    public static final String WORLD_PARAM = "world";
+    public static final String ONE_KM_BOUND = "1";
+    public static final String SIX_KM_BOUND = "2";
     public static final String UID_PARAM = "uid";
     public static final String CODE_PARAM = "code";
     public static final String PSS_PARAM = "password";
     public static final String EMAIL_PARAM = "email";
     public static final String DEV_TYPE_PARAM = "devicetype";
+    public static final String CAT_ID_PARAM = "categoryid";
     public static final String MAX_OFF_DIST_PARAM = "maxofferdistance";
     public static final String MAX_OFF_VIEW_PARAM = "maxofferview";
     public static final String REPEAT_OFF_PARAM = "repeatoffer";
@@ -82,6 +86,10 @@ public class AppConstant {
     public static final String ONE_KM = "1000";
     public static final String MORE_THAN_ONE_KM = "1+ km";
     public static final String METERS = " m";
+    public static final String STRING_45_MIN = "45 min";
+    public static final String STRING_30_MIN = "30 min";
+    public static final String STRING_15_MIN = "15 min";
+    public static final String STRING_DUE = "10 min";
 
 
     // Number of columns of Grid View
@@ -128,6 +136,12 @@ public class AppConstant {
     public static final String FEMALE_STRING = "female";
     public static final String MALE_STRING_IT = "uomo";
     public static final String FEMALE_STRING_IT = "donna";
+
+
+    // Utility Int
+    public static int FOURTY_5_MIN = 45;
+    public static int FIFTEEN_MIN = 15;
+    public static int ZERO_MIN = 0;
 
 
 

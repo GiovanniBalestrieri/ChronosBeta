@@ -1,6 +1,8 @@
 package box.chronos.userk.chronos.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.FloatProperty;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,9 +25,17 @@ import box.chronos.userk.chronos.R;
 import box.chronos.userk.chronos.objects.Offer;
 
 import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.chronos.utils.AppConstant.EUR_SIGN;
+import static box.chronos.userk.chronos.utils.AppConstant.FIFTEEN_MIN;
+import static box.chronos.userk.chronos.utils.AppConstant.FOURTY_5_MIN;
 import static box.chronos.userk.chronos.utils.AppConstant.METERS;
 import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_ONE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM;
+import static box.chronos.userk.chronos.utils.AppConstant.PERC_SIGN;
+import static box.chronos.userk.chronos.utils.AppConstant.STRING_15_MIN;
+import static box.chronos.userk.chronos.utils.AppConstant.STRING_30_MIN;
+import static box.chronos.userk.chronos.utils.AppConstant.STRING_45_MIN;
+import static box.chronos.userk.chronos.utils.AppConstant.STRING_DUE;
 
 
 /**
@@ -56,16 +67,24 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         public TextView distance;
         public ImageView shop_logo;
         public TextView price;
+        public TextView discount;
+        public TextView finalPrice;
+        public TextView timeout;
+        public LinearLayout topLL;
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title_card_offer);
-            cat = (TextView) view.findViewById(R.id.category_card_article);
+            //title = (TextView) view.findViewById(R.id.title_card_offer);
+            //cat = (TextView) view.findViewById(R.id.category_card_article);
             shop_name = (TextView) view.findViewById(R.id.shop_top_card_info);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail_card_article);
             distance = (TextView) view.findViewById(R.id.distance_logo_card_article);
+            discount = (TextView) view.findViewById(R.id.tv_discount_offer_card);
+            timeout = (TextView) view.findViewById(R.id.second_top_card_article);
+            finalPrice = (TextView) view.findViewById(R.id.tv_final_price_card);
+            topLL = (LinearLayout) view.findViewById(R.id.top_info_card);
             //thumbnail_cat = (ImageView) view.findViewById(R.id.thumbnail_card_article_cat);
-            shop_logo = (ImageView) view.findViewById(R.id.shop_logo_card_article);
+            //shop_logo = (ImageView) view.findViewById(R.id.shop_logo_card_article);
             price = (TextView) view.findViewById(R.id.price_card_article);
         }
     }
@@ -73,25 +92,41 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.offers_card, parent, false);
+                .inflate(R.layout.offers_card_v1, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Offer off = offerList.get(position);
-        holder.title.setText(off.getTitle());
-        holder.cat.setText(off.getCategory());
-        holder.shop_name.setText(off.getBusinessname().toUpperCase());
-        holder.price.setText(off.getPrice() + " €");
+
+        holder.shop_name.setText(off.getBusinessname()/*.toUpperCase()*/);
+        holder.price.setText(off.getPrice() + EUR_SIGN);
+        holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.discount.setText(off.getDiscount()+ PERC_SIGN);
+        holder.finalPrice.setText(computeFinalPrice(off.getPrice(),off.getDiscount()));
 
         holder.distance.setText(prepareDistance(off.getDistance()));
+
+        String[] time = off.getTimeout().split ( ":" );
+        int min = Integer.parseInt ( time[0].trim() );
+        holder.timeout.setText(prepareTimeout(min));
+
+        if (min >= FOURTY_5_MIN){
+            holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+        } else if (min < FOURTY_5_MIN && min >= FIFTEEN_MIN) {
+            holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
+        } else if (min < FIFTEEN_MIN) {
+            holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
+        } else {
+            holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+        }
 
 
         String urlCat = IMAGE_URL + off.getCategoryphoto();
         //
         // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
-        Picasso.with(mContext).load(urlCat).into(holder.shop_logo);
+        //Picasso.with(mContext).load(urlCat).into(holder.shop_logo);
 
         if (off.hasPicture()) {
             Map.Entry<String,String> entry = offerList.get(position).getAvailablePictures().entrySet().iterator().next();
@@ -109,8 +144,26 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         }
     }
 
-    public String prepareDistance(String d) {
-        String res = MORE_THAN_ONE_KM;
+    private String prepareTimeout(int min) {
+        String res;
+        if (min >= FOURTY_5_MIN){
+            res = STRING_45_MIN;
+
+        } else if (min < FOURTY_5_MIN && min >= FIFTEEN_MIN) {
+            res = STRING_30_MIN;
+        } else if (min < FIFTEEN_MIN) {
+            res = STRING_15_MIN;
+        } else {
+            res = STRING_DUE;
+        }
+        return res;
+    }
+
+
+
+
+    private String prepareDistance(String d) {
+        String res;
         float distance = Float.valueOf(d);
         if ( distance > Float.valueOf(ONE_KM)){
             res = MORE_THAN_ONE_KM;
@@ -135,6 +188,16 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
     public void touchIt() {
         notifyDataSetChanged();
+    }
+
+    // Computes final price given an init and sconto string
+    public String computeFinalPrice(String init, String sconto){
+        String res = "";
+        Float ini = Float.valueOf(init);
+        Float disc = Float.valueOf(sconto);
+        Float fin = ini*(1- disc/100.f);
+        res = String.format("%.2f",fin) + EUR_SIGN;
+        return res;
     }
 
     @Override

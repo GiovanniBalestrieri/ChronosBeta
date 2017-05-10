@@ -47,7 +47,18 @@ import box.chronos.userk.chronos.utils.VideoUtility;
 
 import static box.chronos.userk.chronos.settings.Includes.all_categories;
 import static box.chronos.userk.chronos.utils.AppConstant.ALL_CATS;
+import static box.chronos.userk.chronos.utils.AppConstant.CAT_ID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.GET_OFFERS_METHOD;
+import static box.chronos.userk.chronos.utils.AppConstant.LAT_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.LON_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM_BOUND;
+import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SIX_KM_BOUND;
+import static box.chronos.userk.chronos.utils.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.WORLD_PARAM;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
@@ -305,21 +316,22 @@ public class OffersListFragment extends Fragment {
     // request for all notifications
     private void requestAllGeoOffers() {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", GET_OFFERS_METHOD);
-        pairs.put("userid", sharePrefs.getUserId());
-        pairs.put("sessionkey", sharePrefs.getSessionKey());
+        pairs.put(METHOD_PARAM, GET_OFFERS_METHOD);
+        pairs.put(USERID_PARAM, sharePrefs.getUserId());
+        pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
         if (world != null && !world.equals("")) {
-            pairs.put("world", "1");
+            //pairs.put("world", "1");
         }
-        pairs.put("latitude", sharePrefs.getLatitude()); /*"41.886395"*/
-        pairs.put("longitude", sharePrefs.getLongitude()); /*"12.516753"*/
+        pairs.put(WORLD_PARAM, SIX_KM_BOUND);
+        pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
+        pairs.put(LON_PARAM, sharePrefs.getLongitude()); /*"12.516753"*/
         if (cat != null && !cat.equals("")) {
-            pairs.put("categoryid", cat);
+            pairs.put(CAT_ID_PARAM, cat);
         } else {
             if (all_categories)
-                pairs.put("categoryid", ALL_CATS);
+                pairs.put(CAT_ID_PARAM, ALL_CATS);
             else
-                pairs.put("categoryid", sharePrefs.getSelectedCatrgory());
+                pairs.put(CAT_ID_PARAM, sharePrefs.getSelectedCatrgory());
         }
 
         RestInteraction interaction = new RestInteraction(getActivity());
@@ -330,7 +342,7 @@ public class OffersListFragment extends Fragment {
                     JSONObject object = new JSONObject(response);
                     offerList.clear();
                     if (response != null) {
-                        if (object.getString("success").equalsIgnoreCase("1")) {
+                        if (object.getString(SUCCESS_PARAM).equalsIgnoreCase("1")) {
                             getJsonData(object);
                         } else {
                             Utility.showAlertDialog(getActivity(), object.getString("message"));
