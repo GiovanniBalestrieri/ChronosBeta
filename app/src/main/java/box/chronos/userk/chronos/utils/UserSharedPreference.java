@@ -24,6 +24,9 @@ public class UserSharedPreference {
     public static final String UserPreference = "UserDetails";
     private static final String UserLoginByKey = "userLoginBy";
     private static final String UserNameKey = "userName";
+
+
+    private static final String code_status = "codeStatus";
     private static final String GcmId = "Gcm_Id";
     private static final String DeviceToken = "Device_Token";
     private static final String UserId = "userId";
@@ -441,6 +444,15 @@ public class UserSharedPreference {
     }
     public String getUserId() {
         return userPreference.getString(UserId, "");
+    }
+
+
+    public void setCodeStatus(String status) {
+        editor.putString(code_status, status);
+        editor.commit();
+    }
+    public String getCode_status() {
+        return userPreference.getString(code_status, "");
     }
 
     public void setDeviceToken(String deviceToken) {

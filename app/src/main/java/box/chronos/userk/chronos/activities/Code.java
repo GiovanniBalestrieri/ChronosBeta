@@ -56,7 +56,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.ZERO_RESP;
  */
 
 public class Code extends Activity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
+    private static final String TAG = Code.class.getSimpleName();
     Button action;
     private TextInputLayout codeInput;
     private LinearLayout procedi;
@@ -144,7 +144,7 @@ public class Code extends Activity {
 
     private boolean  validateCode(){
         if (codeString.getText().toString().trim().isEmpty()) {
-            codeInput.setError(getString(R.string.err_msg_code));
+//            codeInput.setError(getString(R.string.err_msg_code));
             requestFocus(codeString);
             return false;
         } else {
@@ -230,12 +230,15 @@ public class Code extends Activity {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString(ERROR_RESP).equals(ZERO_RESP)) {
+                        Log.d(TAG,"Richiesta associazione codice");
                         getJsonData(object);
                     } else {
                         Utility.showAlertDialog(Code.this, object.getString(MSG_RESP));
+                        Log.d(TAG,"Errore nella richiesta codice");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.d(TAG,"Errore nella richiesta codice");
                 }
             }
 
@@ -245,7 +248,6 @@ public class Code extends Activity {
             }
         });
         interaction.makeServiceRequest(AppUrls.CODE_URL, pairs, TAG, "Dialog");
-
     }
 
     // get json data
@@ -256,9 +258,9 @@ public class Code extends Activity {
             String errorResp = jsonRootObject.getString(ERROR_RESP);
 
             Intent intent;
-            intent = new Intent(LoginActivity.self, MainActivity.class);
+            intent = new Intent(this, MainActivity.class);
             if (errorResp.equals(ZERO_RESP)) {
-                Utility.showAlertDialog(this, "Welcome");
+                Utility.showAlertDialog(this, "Benvenuto");
             } else {
                 Utility.showAlertDialog(this, message);
             }

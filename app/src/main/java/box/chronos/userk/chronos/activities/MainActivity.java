@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private Toolbar mToolbar;
     private InputMethodManager imm;
-    private DrawerLayout drawer;
+    public DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;

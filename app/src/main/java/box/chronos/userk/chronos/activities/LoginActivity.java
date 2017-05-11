@@ -240,6 +240,8 @@ public class LoginActivity extends AppCompatActivity implements
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
             JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
+            String code_status = jsonRootObject.getString(CODE_RESP);
+            sharePrefs.setCodeStatus(code_status);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String codeResp = jsonRootObject.getString(CODE_RESP);
 

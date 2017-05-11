@@ -94,7 +94,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.offers_card_v2, parent, false);
+                .inflate(R.layout.offers_card_v3, parent, false);
         return new MyViewHolder(itemView);
     }
 

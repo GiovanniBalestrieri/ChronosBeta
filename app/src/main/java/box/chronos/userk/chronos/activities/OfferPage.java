@@ -30,9 +30,13 @@ import box.chronos.userk.chronos.R;
 
 import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.chronos.utils.AppConstant.EUR_SIGN;
+import static box.chronos.userk.chronos.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.METERS;
+import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_FIVE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_ONE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM_FLOAT;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM_INT;
 import static box.chronos.userk.chronos.utils.AppConstant.PERC_SIGN;
 
 /**
@@ -139,10 +143,10 @@ public class OfferPage extends Activity {
 
     public String prepareDistance(String d) {
         String res = MORE_THAN_ONE_KM;
-        float distance = Float.valueOf(d);
-        if ( distance > Float.valueOf(ONE_KM)){
-            res = MORE_THAN_ONE_KM;
-        } else {
+        float distance = Float.valueOf(d)*ONE_KM_FLOAT;
+        if ( distance > Float.valueOf(FIVE_KM)){
+            res = MORE_THAN_FIVE_KM;
+        }  else {
             res = String.format("%.0f", distance*1000) + METERS;
         }
         return res;

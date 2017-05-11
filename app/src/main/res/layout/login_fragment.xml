@@ -9,9 +9,9 @@
     <RelativeLayout
         android:id="@+id/transparentOverlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/city_card_overlay" />
+        android:layout_height="match_parent"/>
 
+    <!--android:background="@color/city_card_overlay" -->
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -20,7 +20,6 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00ffffff"
             android:layout_gravity="center_vertical">
 
             <!--

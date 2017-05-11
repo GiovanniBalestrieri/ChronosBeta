@@ -15,13 +15,13 @@
 
 
     <!-- Register Page -->
-    <string name="register_main_text">Registration</string>
+    <string name="register_main_text">Registrazione</string>
     <string name="register_main_action">Join</string>
     <string name="register_form_email">Email</string>
-    <string name="register_form_user">User</string>
+    <string name="register_form_user">Nome utente</string>
     <string name="register_form_pass">Password</string>
-    <string name="register_form_pass_show">Show</string>
-    <string name="register_already_registered">Already registered?</string>
+    <string name="register_form_pass_show">Mostra</string>
+    <string name="register_already_registered">Già registrato?</string>
     <string name="register_male">Uomo</string>
     <string name="register_female">Donna</string>
     <string name="register_gender">Sesso</string>
@@ -30,10 +30,10 @@
     <string name="login_main_text">Login</string>
     <string name="login_main_action">Sign In</string>
     <string name="login_form_email">Email</string>
-    <string name="login_form_user">User</string>
+    <string name="login_form_user">Nome utente</string>
     <string name="login_form_pass">Password</string>
     <string name="login_new_user">NEW?</string>
-    <string name="login_forgot_pass">FORGOT PASSWORD</string>
+    <string name="login_forgot_pass">DIMENTICATA?</string>
 
     <!-- Forgot Pass Page -->
     <string name="forgot_main_text">Recover Credential</string>

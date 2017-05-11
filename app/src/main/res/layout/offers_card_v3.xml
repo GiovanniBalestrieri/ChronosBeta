@@ -24,6 +24,88 @@
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:id="@+id/top_info_card_ll"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/thumbnail_card_offer"
+                android:layout_marginBottom="@dimen/five_dp"
+                android:layout_marginTop="@dimen/five_dp"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                tools:ignore="ObsoleteLayoutParam">
+
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/top_info_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/ten_dp"
+                        android:layout_marginTop="@dimen/ten_dp"
+                        android:layout_weight="0.7"
+                        android:background="@color/white"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/first_top_card_article"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:src="@drawable/ic_timer_black_18dp" />
+
+                        <TextView
+                            android:id="@+id/timeout_card_offer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:text="45 min"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/timer_text_size_card"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/third_top_card_article"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+
+                        <!--
+                        <ImageView
+                            android:id="@+id/thumbnail_card_article_cat"
+                            android:layout_width="@dimen/fifty_dp"
+                            android:layout_height="@dimen/offer_cover_height"
+                            android:background="@color/white"
+                            android:padding="0dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/abitiuomo" />
+                            -->
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_weight="10"
+                android:background="@color/gray" />
+
             <RelativeLayout
                 android:layout_gravity="top"
                 android:layout_width="match_parent"
@@ -154,6 +236,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/thumbnail_card_offer"
+                android:layout_marginBottom="@dimen/five_dp"
                 android:layout_weight="10"
                 android:orientation="horizontal"
                 tools:ignore="ObsoleteLayoutParam">
@@ -244,75 +327,50 @@
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="fill_parent"
-                android:layout_height="1dip"
-                android:layout_marginBottom="@dimen/five_dp"
-                android:layout_marginEnd="@dimen/twenty_dp"
-                android:layout_marginStart="@dimen/twenty_dp"
-                android:layout_marginTop="@dimen/five_dp"
-                android:background="@color/grey_lightx2" />
-
             <LinearLayout
-                android:id="@+id/top_info_card_ll"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/thumbnail_card_offer"
-                android:layout_weight="10"
-                android:orientation="horizontal"
-                tools:ignore="ObsoleteLayoutParam">
+                android:id="@+id/action_info_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/twenty_five_dp"
+                android:layout_marginTop="@dimen/twenty_dp"
+                android:layout_weight="0.7"
+                android:background="@color/white"
+                android:gravity="center">
 
+                <TextView
+                    android:id="@+id/first_action_card_article"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:gravity="left|center"
+                    android:paddingLeft="@dimen/fifteen_dp"
+                    android:paddingStart="@dimen/fifteen_dp"
+                    android:text="Prenota"
+                    android:textAllCaps="true"
+                    android:textColor="@color/blue2"
+                    android:textSize="@dimen/shop_title_card" />
 
-                <LinearLayout
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
+                <TextView
+                    android:id="@+id/second_action_card_article"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/register_main_text_margin"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:id="@+id/timer_info_card"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/ten_dp"
-                        android:layout_weight="0.7"
-                        android:background="@color/white"
-                        android:gravity="center">
-
-                        <TextView
-                            android:id="@+id/first_timer_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="left|center"
-                            android:paddingLeft="@dimen/twenty_dp"
-                            android:paddingStart="@dimen/twenty_dp"
-                            android:text="Scadenza offerta:"
-                            android:textColor="@color/grey_midx2"
-                            android:textSize="@dimen/timer_text_size_card" />
-
-                        <TextView
-                            android:id="@+id/second_timer_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/register_main_text_margin"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/third_timer_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/third_action_card_article"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
 
-                        <!--
+                <!--
                         <ImageView
                             android:id="@+id/thumbnail_card_article_cat"
                             android:layout_width="@dimen/fifty_dp"
@@ -322,118 +380,6 @@
                             android:scaleType="centerInside"
                             android:src="@drawable/abitiuomo" />
                             -->
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/top_info_card"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/ten_dp"
-                        android:layout_marginTop="@dimen/ten_dp"
-                        android:layout_weight="0.7"
-                        android:background="@color/white"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/first_top_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="center"
-                            android:src="@drawable/ic_timer_black_18dp" />
-
-                        <TextView
-                            android:id="@+id/timeout_card_offer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="center"
-                            android:text="45 min"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/timer_text_size_card"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/third_top_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-
-                        <!--
-                        <ImageView
-                            android:id="@+id/thumbnail_card_article_cat"
-                            android:layout_width="@dimen/fifty_dp"
-                            android:layout_height="@dimen/offer_cover_height"
-                            android:background="@color/white"
-                            android:padding="0dp"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/abitiuomo" />
-                            -->
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/action_info_card"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/twenty_five_dp"
-                        android:layout_marginTop="@dimen/twenty_dp"
-                        android:layout_weight="0.7"
-                        android:background="@color/white"
-                        android:gravity="center">
-
-                        <TextView
-                            android:id="@+id/first_action_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="left|center"
-                            android:paddingLeft="@dimen/fifteen_dp"
-                            android:paddingStart="@dimen/fifteen_dp"
-                            android:text="Prenota"
-                            android:textAllCaps="true"
-                            android:textColor="@color/blue2"
-                            android:textSize="@dimen/shop_title_card" />
-
-                        <TextView
-                            android:id="@+id/second_action_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/register_main_text_margin"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/third_action_card_article"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-
-                        <!--
-                        <ImageView
-                            android:id="@+id/thumbnail_card_article_cat"
-                            android:layout_width="@dimen/fifty_dp"
-                            android:layout_height="@dimen/offer_cover_height"
-                            android:background="@color/white"
-                            android:padding="0dp"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/abitiuomo" />
-                            -->
-
-                    </LinearLayout>
-
-                </LinearLayout>
 
             </LinearLayout>
 

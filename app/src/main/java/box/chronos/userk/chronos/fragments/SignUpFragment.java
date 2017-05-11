@@ -262,6 +262,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String codeResp = jsonRootObject.getString(CODE_RESP);
 
+
+            String code_status = jsonRootObject.getString(CODE_RESP);
+            sharePrefs.setCodeStatus(code_status);
+
             /*
                 sharePrefs.setUserId(jsonObject.getString("userid").toString());
                 sharePrefs.setUserName(jsonObject.getString("username").toString());

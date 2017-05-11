@@ -19,6 +19,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,6 +157,7 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
         final Activity activity = getActivity();
         final View content = activity.findViewById(android.R.id.content).getRootView();
 
+        ((MainActivity) getActivity()).drawer.closeDrawer(Gravity.LEFT);
 
         view = inflater.inflate(R.layout.profile_v1, container, false);
         findViews(view);
