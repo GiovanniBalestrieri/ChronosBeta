@@ -112,7 +112,15 @@
     <color name="top_card_timeout_orange_sec">#FF5722</color>
     <color name="top_card_timeout_red">#D32F2F</color>
     <color name="top_card_timeout_red_sec">#FFC107</color>
-    #388E3C
+
+
+    <color name="grey_lightx2">#e0e0e0</color>
+    <color name="grey_light">#bdbdbd</color>
+
+    <color name="grey_mid">#9e9e9e</color>
+    <color name="grey_midx2">#616161</color>
+
+
 
 
     <!-- HUd -->

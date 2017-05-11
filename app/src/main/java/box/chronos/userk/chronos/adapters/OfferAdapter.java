@@ -71,7 +71,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         public TextView discount;
         public TextView finalPrice;
         public TextView timeout;
-        public LinearLayout topLL;
+        public LinearLayout topLL, actionLL;
 
         public MyViewHolder(View view) {
             super(view);
@@ -81,9 +81,10 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail_card_article);
             distance = (TextView) view.findViewById(R.id.distance_logo_card_article);
             discount = (TextView) view.findViewById(R.id.tv_discount_offer_card);
-            timeout = (TextView) view.findViewById(R.id.second_top_card_article);
+            timeout = (TextView) view.findViewById(R.id.timeout_card_offer);
             finalPrice = (TextView) view.findViewById(R.id.tv_final_price_card);
-            topLL = (LinearLayout) view.findViewById(R.id.top_info_card);
+            //topLL = (LinearLayout) view.findViewById(R.id.top_info_card);
+            actionLL = (LinearLayout) view.findViewById(R.id.action_info_card);
             //thumbnail_cat = (ImageView) view.findViewById(R.id.thumbnail_card_article_cat);
             //shop_logo = (ImageView) view.findViewById(R.id.shop_logo_card_article);
             price = (TextView) view.findViewById(R.id.price_card_article);
@@ -93,7 +94,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.offers_card_v1, parent, false);
+                .inflate(R.layout.offers_card_v2, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -109,18 +110,26 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
         holder.distance.setText(prepareDistance(off.getDistance()));
 
+
+        // Visibility Gone Action
+        holder.actionLL.setVisibility(View.GONE);
+
         String[] time = off.getTimeout().split ( ":" );
         int min = Integer.parseInt ( time[0].trim() );
         holder.timeout.setText(prepareTimeout(min));
 
         if (min >= FOURTY_5_MIN){
-            holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+            //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+            holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
         } else if (min < FOURTY_5_MIN && min >= FIFTEEN_MIN) {
-            holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
+            //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
+            holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
         } else if (min < FIFTEEN_MIN) {
-            holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
+            //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
+            holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
         } else {
-            holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+            //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+            holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
         }
 
 

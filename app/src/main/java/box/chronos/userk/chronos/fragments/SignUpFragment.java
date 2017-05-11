@@ -57,6 +57,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.REPEAT_OFF_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SEL_CAT_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SIGNUP_METHOD;
+import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERNAME_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USER_TYPE_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.ZERO_RESP;
@@ -274,6 +275,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
             sharePrefs.setUserName(jsonObject.getString(USERNAME_PARAM));
             sharePrefs.setUserEmail(jsonObject.getString(EMAIL_PARAM));
+            sharePrefs.setUserId(jsonObject.getString(USERID_PARAM));
             sharePrefs.setSessionKey(jsonObject.getString(SESSION_KEY_PARAM));
             sharePrefs.setUserImage(jsonObject.getString(PHOTO_PARAM));
             sharePrefs.setGender(jsonObject.getString(GENDER_PARAM));

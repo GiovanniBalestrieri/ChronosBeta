@@ -98,6 +98,7 @@
 
     <dimen name="article_title_card">18sp</dimen>
     <dimen name="shop_title_card">26sp</dimen>
+    <dimen name="timer_text_size_card">24sp</dimen>
     <dimen name="article_cat_card">16sp</dimen>
     <dimen name="article_content">16dp</dimen>
 

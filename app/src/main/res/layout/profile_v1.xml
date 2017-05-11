@@ -417,7 +417,6 @@
                     android:clickable="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/app_text_size"
-                    android:elevation="4dp"
                     android:text="Android Profile UI Design" />
 
                 <TextView
