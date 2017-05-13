@@ -9,7 +9,7 @@
         android:id="@+id/transparentOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/city_card_no_overlay" />
+        android:background="@color/city_card_overlay" />
 
     <ScrollView
         android:id="@+id/profile_scroll"
