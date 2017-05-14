@@ -28,6 +28,15 @@
 
             <!--  Name TextField -->
 
+
+            <ImageView
+                android:layout_marginBottom="@dimen/logo_margin_bottom"
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/logo"/>
+
+
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/register_field_height"

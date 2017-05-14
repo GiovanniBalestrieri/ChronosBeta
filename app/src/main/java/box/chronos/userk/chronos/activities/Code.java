@@ -2,6 +2,9 @@ package box.chronos.userk.chronos.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
@@ -27,6 +30,7 @@ import box.chronos.userk.chronos.callbacks.IAsyncResponse;
 import box.chronos.userk.chronos.serverRequest.AppUrls;
 import box.chronos.userk.chronos.serverRequest.RestInteraction;
 import box.chronos.userk.chronos.utils.AppController;
+import box.chronos.userk.chronos.utils.BlurBuilder;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
@@ -87,6 +91,15 @@ public class Code extends Activity {
                 requestCodeCheck(1);
             }
         });
+
+
+        /*
+        // Setup Background
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.rome2);
+        Bitmap image = BlurBuilder.blur(this.getApplicationContext(),bm, 5.0f);
+        View v = procedi.getRootView();
+        v.setBackground(new BitmapDrawable(this.getResources(), image));
+        */
 
     }
 

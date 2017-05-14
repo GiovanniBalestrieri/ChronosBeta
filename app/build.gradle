@@ -32,6 +32,7 @@ android {
 }
 repositories {
     jcenter()
+    mavenCentral()
 
     maven {
         url "https://jitpack.io"
@@ -109,4 +110,7 @@ dependencies {
 
     // DateTime
     compile 'com.wdullaer:materialdatetimepicker:3.2.0'
+
+    // Facebook
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
 }
