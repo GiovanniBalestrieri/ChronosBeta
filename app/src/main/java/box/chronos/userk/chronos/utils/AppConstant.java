@@ -46,6 +46,7 @@ public class AppConstant {
     public static final String CODE_PARAM = "code";
     public static final String PSS_PARAM = "password";
     public static final String EMAIL_PARAM = "email";
+    public static final String PASS_PARAM = "password";
     public static final String DEV_TYPE_PARAM = "devicetype";
     public static final String CAT_ID_PARAM = "categoryid";
     public static final String MAX_OFF_DIST_PARAM = "maxofferdistance";

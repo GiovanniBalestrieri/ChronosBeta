@@ -139,6 +139,13 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="FacebookLoginButton">
+        <item name="android:textSize">@dimen/app_text_size_small</item>
+        <item name="android:background">@drawable/fb_new</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
 
 
 </resources>

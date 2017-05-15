@@ -2,27 +2,49 @@ package box.chronos.userk.chronos.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import box.chronos.userk.chronos.R;
@@ -38,23 +60,32 @@ import box.chronos.userk.chronos.utils.FieldsValidator;
 import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
+import static android.R.attr.id;
 import static box.chronos.userk.chronos.utils.AppConstant.ADDRESS_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.BIRTHDAY_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.BUSINESSNAME_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.CODE_RESP;
 import static box.chronos.userk.chronos.utils.AppConstant.DATA_RESP;
 import static box.chronos.userk.chronos.utils.AppConstant.DEVICE_TYPE;
+import static box.chronos.userk.chronos.utils.AppConstant.DEV_TOKEN_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.DEV_TYPE_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.EMAIL_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.GENDER_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.LAT_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.LOGIN_METHOD;
+import static box.chronos.userk.chronos.utils.AppConstant.LON_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.MAX_OFF_DIST_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.MAX_OFF_VIEW_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.MESSAGE_KEY;
+import static box.chronos.userk.chronos.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.chronos.utils.AppConstant.PASS_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.PHONE_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.PHOTO_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.REPEAT_OFF_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SEL_CAT_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERNAME_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USER_TYPE_PARAM;
@@ -74,11 +105,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;private String mParam2;
     private ImageView img_Google, img_Facebook;
+    LoginButton loginButton;
     private EditText et_registredPassword, et_registredEmailId;
     private LinearLayout ll_login;
     private TextView tv_SignUp, tv_ForgotPassword;
     private UserSharedPreference sharePrefs;
     private FieldsValidator fv;
+    CallbackManager callbackManager;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -100,7 +133,34 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                        Log.d(TAG,"FACEBOOK OK ATTEMPT");
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                        Log.d(TAG,"FACEBOOK ATTEMPT CANCELLED");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                        Log.d(TAG,"FACEBOOK ATTEMPT ERROR");
+                    }
+                });
+
+        //FacebookSdk.sdkInitialize(getApplicationContext());
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -118,6 +178,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test5c);
         Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(),bm);
         view.setBackground(new BitmapDrawable(activity.getResources(), image));
+
 
         return view;
     }
@@ -158,7 +219,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             case R.id.img_Facebook:
                 //((LoginActivity) (getActivity())).onFblogin();
-
+                    loginButton.performClick();
 
                 // ((LoginActivity)(getActivity())).onFbloginMethod();
                 // ((LoginActivity)(getActivity())).doFblogin();
@@ -186,13 +247,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         */
 
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", LOGIN_METHOD);
-        pairs.put("email", et_registredEmailId.getText().toString().trim());
-        pairs.put("password", et_registredPassword.getText().toString());
-        pairs.put("devicetype", DEVICE_TYPE);
-        pairs.put("devicetoken", sharePrefs.getDeviceToken());
-        pairs.put("latitude", sharePrefs.getLatitude());
-        pairs.put("longitude", sharePrefs.getLongitude());
+        pairs.put(METHOD_PARAM, LOGIN_METHOD);
+        pairs.put(EMAIL_PARAM, et_registredEmailId.getText().toString().trim());
+        pairs.put(PASS_PARAM, et_registredPassword.getText().toString());
+        pairs.put(DEV_TYPE_PARAM, DEVICE_TYPE);
+        pairs.put(DEV_TOKEN_PARAM, sharePrefs.getDeviceToken());
+        pairs.put(LAT_PARAM, sharePrefs.getLatitude());
+        pairs.put(LON_PARAM, sharePrefs.getLongitude());
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {
@@ -200,10 +261,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.getString("success").equalsIgnoreCase("1")) {
+                    if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                         getJsonData(object);
                     } else {
-                        Utility.showAlertDialog(getActivity(), object.getString("message"));
+                        Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -281,5 +342,113 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         tv_ForgotPassword = (TextView) view.findViewById(R.id.tv_ForgotPassword);
         tv_SignUp = (TextView) view.findViewById(R.id.tv_SignUp);
+
+        loginButton = (LoginButton) view.findViewById(R.id.login_button);
+
+
+        List<String> permissionNeeds = Arrays.asList("user_photos", "email",
+                "user_birthday", "public_profile", "AccessToken");
+        loginButton.setReadPermissions("email");
+        // If using in a fragment
+        loginButton.setFragment(this);
+
+
+        // Other app specific specialization
+        loginButton.registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+
+                        System.out.println("onSuccess");
+
+                        String accessToken = loginResult.getAccessToken()
+                                .getToken();
+                        Log.i("accessToken", accessToken);
+
+                        GraphRequest request = GraphRequest.newMeRequest(
+                                loginResult.getAccessToken(),
+                                new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(JSONObject object,
+                                                            GraphResponse response) {
+
+                                        Log.i("LoginActivity",
+                                                response.toString());
+                                        /*
+                                        if (response.getError() != null) {
+                                            System.out.println("ERROR");
+                                        } else {
+                                            System.out.println("Success");
+                                            try {
+                                                JSONObject data = response.getJSONObject();
+                                                if (data.has("picture")) {
+                                                    String profPic = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                                }
+                                                String jsonresult = String.valueOf(json);
+                                                System.out.println("JSON Result" + jsonresult);
+
+                                                if (json.has("email")) {
+                                                    email = json.getString("email");
+                                                }
+                                                facebook_id = json.getString("id");
+                                                //String str_firstname = json.getString("first_name");
+                                                //String str_lastname = json.getString("last_name");
+                                                userName = json.getString("name");
+                                                gender = json.getString("gender");
+                                                //birthday = json.getString("birthday");
+                                                age = json.getString("age_range");
+
+                                                sendRequestForFacebookLogin(userName, email, gender, AppConstant.FACEBOOK);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                        */
+                                        try {
+                                            String id = object.getString("id");
+                                            try {
+                                                URL profile_pic = new URL(
+                                                        "http://graph.facebook.com/" + id + "/picture?type=large");
+                                                Log.i("profile_pic",
+                                                        profile_pic + "");
+
+                                            } catch (MalformedURLException e) {
+                                                e.printStackTrace();
+                                            }
+                                            String name = object.getString("name");
+                                            String email = object.getString("email");
+                                            String gender = object.getString("gender");
+                                            String birthday = object.getString("birthday");
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields","id,name,email,gender,birthday,age_range,picture");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        System.out.println("onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        System.out.println("onError");
+                        Log.v("LoginActivity", exception.getCause().toString());
+                    }
+                });
+
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

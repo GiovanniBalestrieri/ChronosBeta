@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="material-tap-target-prompt-1.9.3">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/f8a8eedb3c648a627c80ba6ff28b04685372b740/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/f8a8eedb3c648a627c80ba6ff28b04685372b740/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/5d70a305e1a642a2335074d5cc954b3f3c28b5d7/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/5d70a305e1a642a2335074d5cc954b3f3c28b5d7/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

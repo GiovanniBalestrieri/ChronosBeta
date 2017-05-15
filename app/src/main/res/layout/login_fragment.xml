@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fb="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/red"
     android:layout_width="wrap_content"
@@ -9,7 +10,8 @@
     <RelativeLayout
         android:id="@+id/transparentOverlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/city_card_overlay" />
 
     <!--android:background="@color/city_card_overlay" -->
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,26 +19,26 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            android:orientation="vertical">
 
 
             <ImageView
-                    android:layout_marginBottom="@dimen/logo_margin_bottom"
-                    android:gravity="center"
-                    android:layout_width="fill_parent"
-                    android:layout_height="150dp"
-                    android:src="@drawable/logo"/>
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/logo_height"
+                android:layout_marginBottom="@dimen/logo_margin_bottom"
+                android:layout_marginTop="@dimen/logo_margin_bottom"
+                android:gravity="center"
+                android:src="@drawable/logo" />
 
 
             <TextView
-                android:gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/register_field_height"
                 android:layout_marginBottom="@dimen/register_main_text_margin"
                 android:layout_marginTop="@dimen/register_main_text_margin"
+                android:gravity="center"
                 android:hint="@string/login_main_text"
                 android:textColor="@color/whitie"
                 android:textColorHint="@color/whitie"
@@ -44,13 +46,13 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:gravity="left"
                 android:id="@+id/et_registredEmailId"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/register_field_height"
                 android:layout_marginBottom="4dp"
-                android:layout_marginRight="24dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:gravity="left"
                 android:hint="@string/login_form_email"
                 android:inputType="text"
                 android:textColor="@color/white"
@@ -90,13 +92,13 @@
             -->
 
             <EditText
-                android:gravity="left"
                 android:id="@+id/et_registredPassword"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/register_field_height"
                 android:layout_marginBottom="4dp"
-                android:layout_marginRight="24dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:gravity="left"
                 android:hint="@string/register_form_pass"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
@@ -116,12 +118,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/ten_dp"
-                android:paddingTop="@dimen/ten_dp"
                 android:paddingBottom="@dimen/ten_dp"
+                android:paddingLeft="@dimen/ten_dp"
                 android:paddingRight="@dimen/ten_dp"
-                android:layout_weight="1">
+                android:paddingTop="@dimen/ten_dp">
 
                 <ImageView
                     android:id="@+id/img_Google"
@@ -132,18 +134,57 @@
                     android:gravity="center"
                     android:src="@drawable/google" />
 
+                <FrameLayout
+                    android:id="@+id/FrameLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" >
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+
+
+
+                    <ImageView
+                        android:id="@+id/img_Facebook"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/five_dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:src="@drawable/fb_new"/>
+                </FrameLayout>
+
+
+
+
                 <!--
-                  <com.facebook.login.widget.LoginButton
+                    <Button
+                        android:id="@+id/fb"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#416BC1"
+                        android:onClick="onClick"
+                        android:text="FaceBook"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        />
+
+                <com.facebook.login.widget.LoginButton
                       android:id="@+id/login_button"
-                      android:layout_width="wrap_content"
+                      android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:layout_gravity="center_horizontal"
-                      android:layout_marginTop="30dp"
-                      android:layout_marginBottom="30dp" />-->
-
-                -->
-
-
+                      android:layout_weight="1"
+                      android:gravity="center"
+                      style="@style/FacebookLoginButton"
+                      />
+                      android:layout_marginLeft="@dimen/five_dp"
+                      fb:login_text="@string/loginFacebookButton"
+                      fb:logout_text=""
                 <ImageView
                     android:id="@+id/img_Facebook"
                     android:layout_width="match_parent"
@@ -152,6 +193,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:src="@drawable/fb_new" />
+                -->
             </LinearLayout>
 
             <LinearLayout
@@ -163,26 +205,26 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:gravity="center"
                     android:id="@+id/tv_ForgotPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:padding="@dimen/five_dp"
                     android:text="@string/login_forgot_pass"
-                    android:textStyle="bold"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_SignUp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:padding="@dimen/five_dp"
                     android:text="@string/login_new_user"
-                    android:textStyle="bold"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

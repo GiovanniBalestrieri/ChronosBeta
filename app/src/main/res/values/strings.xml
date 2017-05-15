@@ -33,6 +33,8 @@
     <string name="login_form_user">Nome utente</string>
     <string name="login_form_pass">Password</string>
     <string name="login_new_user">NEW?</string>
+    <string name="login_fb_txt">LOGIN con FB</string>
+    <string name="logout_fb_txt">LOG PUT</string>
     <string name="login_forgot_pass">DIMENTICATA?</string>
 
     <!-- Forgot Pass Page -->
