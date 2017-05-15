@@ -273,9 +273,9 @@ public class Code extends Activity {
             Intent intent;
             intent = new Intent(this, MainActivity.class);
             if (errorResp.equals(ZERO_RESP)) {
-                Utility.showAlertDialog(this, "Benvenuto");
+                //Utility.showAlertDialog(this, "Benvenuto");
             } else {
-                Utility.showAlertDialog(this, message);
+                //Utility.showAlertDialog(this, message);
             }
 
             startActivity(intent);
