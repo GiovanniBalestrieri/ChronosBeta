@@ -439,7 +439,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onError(FacebookException exception) {
                         System.out.println("onError");
-                        Log.d("LoginActivity", exception.getCause().toString());
+                        //Log.d("LoginActivity", exception.getCause().toString());
                     }
                 });
 
@@ -448,7 +448,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        try {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        } catch (Exception e) {
+            Log.d(TAG,e.toString());
+        }
     }
 
 }
