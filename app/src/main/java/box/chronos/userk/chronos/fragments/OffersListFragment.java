@@ -324,6 +324,7 @@ public class OffersListFragment extends Fragment {
         pairs.put(METHOD_PARAM, GET_OFFERS_METHOD);
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
+        // If world not empty
         if (world != null && !world.equals("")) {
             //pairs.put("world", "1");
         }

@@ -143,11 +143,11 @@ public class OfferPage extends Activity {
 
     public String prepareDistance(String d) {
         String res = MORE_THAN_ONE_KM;
-        float distance = Float.valueOf(d)*ONE_KM_FLOAT;
-        if ( distance > Float.valueOf(FIVE_KM)){
+        float distance_km = Float.valueOf(d)*ONE_KM_FLOAT;
+        if ( distance_km > Float.valueOf(FIVE_KM)){
             res = MORE_THAN_FIVE_KM;
         }  else {
-            res = String.format("%.0f", distance*1000) + METERS;
+            res = String.format("%.0f", distance_km) + METERS;
         }
         return res;
     }

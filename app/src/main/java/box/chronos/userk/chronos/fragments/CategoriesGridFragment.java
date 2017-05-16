@@ -61,6 +61,12 @@ import static box.chronos.userk.chronos.utils.AppConstant.CAT_PHOTO_ACTIVE;
 import static box.chronos.userk.chronos.utils.AppConstant.CAT_PHOTO_DEF;
 import static box.chronos.userk.chronos.utils.AppConstant.CAT_SELECTED;
 import static box.chronos.userk.chronos.utils.AppConstant.GET_CAT_METHOD;
+import static box.chronos.userk.chronos.utils.AppConstant.MESSAGE_KEY;
+import static box.chronos.userk.chronos.utils.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
@@ -243,9 +249,9 @@ public class CategoriesGridFragment extends Fragment {
     // request for all notifications
     private void requestAllCategories() {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", GET_CAT_METHOD);
-        pairs.put("userid", sharePrefs.getUserId());
-        pairs.put("sessionkey", sharePrefs.getSessionKey());
+        pairs.put(METHOD_PARAM, GET_CAT_METHOD);
+        pairs.put(USERID_PARAM, sharePrefs.getUserId());
+        pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {
@@ -255,10 +261,10 @@ public class CategoriesGridFragment extends Fragment {
                     JSONObject object = new JSONObject(response);
                     catList.clear();
                     if (response != null) {
-                        if (object.getString("success").equalsIgnoreCase("1")) {
+                        if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                             getJsonData(object);
                         } else {
-                            Utility.showAlertDialog(getActivity(), object.getString("message"));
+                            Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                         }
                     } else {
                         Utility.showAlertDialog(getActivity(), object.getString("message"));

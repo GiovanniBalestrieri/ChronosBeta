@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="SlidingIntoView-1.0.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/b23616116a5620d4cd4231f385970ed97345dd5e/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/b23616116a5620d4cd4231f385970ed97345dd5e/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/18f2cfcf6f90718cba1c98d221c8b28876fee490/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/18f2cfcf6f90718cba1c98d221c8b28876fee490/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
