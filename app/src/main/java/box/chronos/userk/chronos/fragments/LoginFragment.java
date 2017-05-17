@@ -86,6 +86,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.PHOTO_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.REPEAT_OFF_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SEL_CAT_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SIGNUP_METHOD;
 import static box.chronos.userk.chronos.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERNAME_PARAM;
@@ -442,8 +443,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                     @Override
                     public void onError(FacebookException exception) {
+                        Log.d("LoginActivity", exception.toString());
                         System.out.println("onError");
-                        //Log.d("LoginActivity", exception.getCause().toString());
                     }
                 });
 
@@ -453,18 +454,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     // send request for facebook
     private void sendRequestForFacebookLogin(String userName, String email, String gender, String type) {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", "userSignUp");
+        pairs.put("method", SIGNUP_METHOD);
         pairs.put("username", userName);
         pairs.put("email", email);
         pairs.put("gender", gender);
-        pairs.put("birthday", "");
+        pairs.put("birthday", "0000-00-00");
+        // TODO
         pairs.put("devicetype", DEVICE_TYPE);
+        pairs.put("usertype", "4");
         pairs.put("devicetoken", sharePrefs.getDeviceToken());
         pairs.put("latitude", sharePrefs.getLatitude());
         pairs.put("longitude", sharePrefs.getLongitude());
-        pairs.put("usertype", "1");
         pairs.put("option", type);
-        pairs.put("password", "");
 
         RestInteraction intraction = new RestInteraction(getActivity());
         intraction.setCallBack(new IAsyncResponse() {

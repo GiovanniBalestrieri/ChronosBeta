@@ -228,7 +228,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         pairs.put("devicetoken", sharePrefs.getDeviceToken());
         pairs.put("latitude", sharePrefs.getLatitude());
         pairs.put("longitude", sharePrefs.getLongitude());
-        pairs.put("usertype", "1");
+        pairs.put("usertype", "4");
         pairs.put("option", "3");
         pairs.put("password", etPassword.getText().toString());
 
