@@ -54,6 +54,7 @@ import box.chronos.userk.chronos.activities.MainActivity;
 import box.chronos.userk.chronos.callbacks.IAsyncResponse;
 import box.chronos.userk.chronos.serverRequest.AppUrls;
 import box.chronos.userk.chronos.serverRequest.RestInteraction;
+import box.chronos.userk.chronos.utils.AppConstant;
 import box.chronos.userk.chronos.utils.AppController;
 import box.chronos.userk.chronos.utils.BlurBuilder;
 import box.chronos.userk.chronos.utils.FieldsValidator;
@@ -157,7 +158,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         Log.d(TAG,"FACEBOOK ATTEMPT ERROR");
                     }
                 });
+        try {;
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo(
+                    "com.example.packagename",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
 
+        } catch (NoSuchAlgorithmException e) {
+
+        }
         //FacebookSdk.sdkInitialize(getApplicationContext());
     }
 
@@ -374,38 +388,26 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                                         Log.i("LoginActivity",
                                                 response.toString());
-                                        /*
-                                        if (response.getError() != null) {
-                                            System.out.println("ERROR");
-                                        } else {
-                                            System.out.println("Success");
-                                            try {
-                                                JSONObject data = response.getJSONObject();
-                                                if (data.has("picture")) {
-                                                    String profPic = data.getJSONObject("picture").getJSONObject("data").getString("url");
-                                                }
-                                                String jsonresult = String.valueOf(json);
-                                                System.out.println("JSON Result" + jsonresult);
-
-                                                if (json.has("email")) {
-                                                    email = json.getString("email");
-                                                }
-                                                facebook_id = json.getString("id");
-                                                //String str_firstname = json.getString("first_name");
-                                                //String str_lastname = json.getString("last_name");
-                                                userName = json.getString("name");
-                                                gender = json.getString("gender");
-                                                //birthday = json.getString("birthday");
-                                                age = json.getString("age_range");
-
-                                                sendRequestForFacebookLogin(userName, email, gender, AppConstant.FACEBOOK);
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
+/*
+                                        if (json.has("email")) {
+                                            email = json.getString("email");
                                         }
-                                        */
+                                        facebook_id = json.getString("id");
+                                        //String str_firstname = json.getString("first_name");
+                                        //String str_lastname = json.getString("last_name");
+                                        userName = json.getString("name");
+                                        gender = json.getString("gender");
+                                        //birthday = json.getString("birthday");
+                                        age = json.getString("age_range");
+*/
+                                        //sendRequestForFacebookLogin(userName, email, gender, AppConstant.FACEBOOK);
+
+
                                         try {
                                             String id = object.getString("id");
+                                            if (object.has("picture")) {
+                                                String picture = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                                            }
                                             try {
                                                 URL profile_pic = new URL(
                                                         "http://graph.facebook.com/" + id + "/picture?type=large");
@@ -418,7 +420,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                             String name = object.getString("name");
                                             String email = object.getString("email");
                                             String gender = object.getString("gender");
-                                            String birthday = object.getString("birthday");
+                                            //String birthday = object.getString("birthday");
+
+                                            sendRequestForFacebookLogin(name, email, gender, AppConstant.FACEBOOK);
 
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -426,7 +430,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields","id,name,email,gender,birthday,age_range,picture");
+                        parameters.putString("fields","id,name,email,gender,age_range,picture");
                         request.setParameters(parameters);
                         request.executeAsync();
                     }
@@ -443,6 +447,105 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
+    }
+
+
+    // send request for facebook
+    private void sendRequestForFacebookLogin(String userName, String email, String gender, String type) {
+        Map<String, String> pairs = new HashMap<>();
+        pairs.put("method", "userSignUp");
+        pairs.put("username", userName);
+        pairs.put("email", email);
+        pairs.put("gender", gender);
+        pairs.put("birthday", "");
+        pairs.put("devicetype", DEVICE_TYPE);
+        pairs.put("devicetoken", sharePrefs.getDeviceToken());
+        pairs.put("latitude", sharePrefs.getLatitude());
+        pairs.put("longitude", sharePrefs.getLongitude());
+        pairs.put("usertype", "1");
+        pairs.put("option", type);
+        pairs.put("password", "");
+
+        RestInteraction intraction = new RestInteraction(getActivity());
+        intraction.setCallBack(new IAsyncResponse() {
+            @Override
+            public void onRestInteractionResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.getString("success").equalsIgnoreCase("1")) {
+                        //Utility.showAlertDialog(getActivity(), object.getString("message"));
+                        getJsonDataFromFacebook(object);
+                    } else {
+                        Utility.showAlertDialog(getActivity(), object.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onRestInteractionError(String message) {
+                Utility.showAlertDialog(getActivity(), message);
+            }
+        });
+        intraction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
+    }
+
+    // get data from facebook login
+    private void getJsonDataFromFacebook(JSONObject object) {
+        try {
+            JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
+            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String codeResp = jsonRootObject.getString(CODE_RESP);
+
+
+            String code_status = jsonRootObject.getString(CODE_RESP);
+            sharePrefs.setCodeStatus(code_status);
+
+
+            sharePrefs.setUserId(jsonObject.getString("userid").toString());
+            sharePrefs.setUserName(jsonObject.getString("username").toString());
+            sharePrefs.setUserEmail(jsonObject.getString("email").toString());
+            sharePrefs.setSessionKey(jsonObject.getString("sessionkey").toString());
+            sharePrefs.setUserImage(jsonObject.getString("photo").toString());
+            sharePrefs.setGender(jsonObject.getString("gender").toString());
+            sharePrefs.setMaxOfferDistance(jsonObject.getString("maxofferdistance").toString());
+            sharePrefs.setMaxOfferView(jsonObject.getString("maxofferview").toString());
+            sharePrefs.setRepeatOffer(jsonObject.getString("repeatoffer").toString());
+            sharePrefs.setUserType(jsonObject.getString("usertype").toString());
+            sharePrefs.setBirthday(jsonObject.getString("birthday").toString());
+            sharePrefs.setSelectedCatrgory(jsonObject.getString("selctedcategory").toString());
+            sharePrefs.setDefaultAddress(jsonObject.getString("address").toString());
+            sharePrefs.setUserPhoneNumber(jsonObject.getString("phonenumber").toString());
+
+
+
+            if (sharePrefs.getUserType().equals(SHOP_USER)) {
+                // set personal phone to business phone
+                sharePrefs.setBusinessphone(jsonObject.getString(PHONE_PARAM));
+                sharePrefs.setBusinessaddress(jsonObject.getString(ADDRESS_PARAM));
+                sharePrefs.setBusinessname(jsonObject.getString(BUSINESSNAME_PARAM));
+            }
+            sharePrefs.setIsGroupActive(false);
+
+            sharePrefs.setIsFirstTimeUser(true);
+
+            Intent intent;
+            if (codeResp.equals(ZERO_RESP)) {
+                intent = new Intent(LoginActivity.self, Code.class);
+            } else {
+                intent = new Intent(LoginActivity.self, MainActivity.class);
+            }
+
+            LoginActivity.self.startActivity(intent);
+            LoginActivity.self.finish();
+
+            getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

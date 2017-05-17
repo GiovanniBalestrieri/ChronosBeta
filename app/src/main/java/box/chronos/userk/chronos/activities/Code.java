@@ -260,7 +260,7 @@ public class Code extends Activity {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
-        interaction.makeServiceRequest(AppUrls.CODE_URL, pairs, TAG, "Dialog");
+        interaction.makeServiceRequest(AppUrls.CODE_URL, pairs, TAG, "Code");
     }
 
     // get json data
