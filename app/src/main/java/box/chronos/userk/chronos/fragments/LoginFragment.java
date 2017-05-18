@@ -372,7 +372,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         List<String> permissionNeeds = Arrays.asList("user_photos", "email",
                 "user_birthday", "public_profile", "AccessToken");
-        loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
+        //login_button.setReadPermissions(Arrays.asList("public_profile","email"));
         // If using in a fragment
         loginButton.setFragment(this);
 
@@ -535,7 +536,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             LoginActivity.self.finish();
 
             getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -550,5 +550,4 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             Log.d(TAG,e.toString());
         }
     }
-
 }
