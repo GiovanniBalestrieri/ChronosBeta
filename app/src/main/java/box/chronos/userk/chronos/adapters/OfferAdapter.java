@@ -147,10 +147,10 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
             String urlImage = IMAGE_URL + value;
 
-            Picasso.with(mContext).load(urlImage).into(holder.thumbnail); //.placeholder(R.drawable.piwo_48)
+            Picasso.with(mContext).load(urlImage).placeholder(R.drawable.progress_animation).into(holder.thumbnail);
 
         } else {
-            Picasso.with(mContext).load(R.drawable.empty).into(holder.thumbnail);
+            Picasso.with(mContext).load(R.drawable.empty).placeholder(R.drawable.progress_animation).into(holder.thumbnail);
         }
     }
 

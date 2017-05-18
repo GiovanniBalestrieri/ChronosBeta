@@ -38,6 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -287,8 +288,8 @@ public class MainActivity extends AppCompatActivity
         }*/ else if (id == R.id.nav_logout) {
 
             requestForLogout();
-            // FB
-            //LoginManager.getInstance().logOut();
+
+            LoginManager.getInstance().logOut();
             //AppController.currentMode = 1;
             //Intent intent = new Intent(MainActivity.self, LoginActivity.class);
             //startActivity(intent);

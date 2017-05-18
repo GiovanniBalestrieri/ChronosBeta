@@ -248,7 +248,6 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
 
-
         // First upload new information then update sharedPreferences
         pairs.put(USERNAME_PARAM, unameET.getText().toString());
         pairs.put(BIRTHDAY_PARAM, birthdayUser.getText().toString());

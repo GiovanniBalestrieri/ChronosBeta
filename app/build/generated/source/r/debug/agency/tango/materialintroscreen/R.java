@@ -693,8 +693,8 @@ public final class R {
         public static final int notification_bg_normal = 0x7f02011e;
         public static final int notification_bg_normal_pressed = 0x7f02011f;
         public static final int notification_icon_background = 0x7f020120;
-        public static final int notification_template_icon_bg = 0x7f020164;
-        public static final int notification_template_icon_low_bg = 0x7f020165;
+        public static final int notification_template_icon_bg = 0x7f020167;
+        public static final int notification_template_icon_low_bg = 0x7f020168;
         public static final int notification_tile_bg = 0x7f020121;
         public static final int notify_panel_notification_icon_bg = 0x7f020122;
     }
@@ -968,9 +968,9 @@ public final class R {
         public static final int appbar_scrolling_view_behavior = 0x7f080078;
         public static final int bottom_sheet_behavior = 0x7f08007a;
         public static final int character_counter_pattern = 0x7f080080;
-        public static final int grant_permissions = 0x7f080091;
-        public static final int impassable_slide = 0x7f080096;
-        public static final int please_grant_permissions = 0x7f0800c0;
+        public static final int grant_permissions = 0x7f080096;
+        public static final int impassable_slide = 0x7f08009b;
+        public static final int please_grant_permissions = 0x7f0800c5;
         public static final int search_menu_title = 0x7f080063;
         public static final int status_bar_notification_info_overflow = 0x7f080064;
     }

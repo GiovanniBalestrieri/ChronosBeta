@@ -105,7 +105,9 @@ public class OfferPage extends Activity {
 
         if (picList.size()>0) {
             urlImage = IMAGE_URL + picList.get(0);
-            Picasso.with(this).load(urlImage).into(offImage);
+            Picasso.with(this).load(urlImage)
+                    .placeholder(R.drawable.progress_animation)
+                    .into(offImage);
         } else {
             offImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.empty, null));
         }

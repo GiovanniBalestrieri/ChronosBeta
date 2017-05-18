@@ -201,6 +201,7 @@ public class LoginActivity extends AppCompatActivity implements
 
             userName = acct.getDisplayName();
             email = acct.getEmail();
+            email = acct.getEmail();
             Toast.makeText(this,"Info: user " + userName + "Display: "+acct.getDisplayName(),Toast.LENGTH_SHORT);
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             //updateUI(true);

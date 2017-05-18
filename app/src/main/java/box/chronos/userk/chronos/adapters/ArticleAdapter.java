@@ -81,7 +81,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
 
         // loading City cover using Glide library
         Log.d("OFFFFF","PIC: " + Integer.toString(offerList.get(position).getDrawable_thumb()));
-        Glide.with(mContext).load(offerList.get(position).getDrawable_thumb()).into(holder.thumbnail);
+        Glide.with(mContext).load(offerList.get(position).getDrawable_thumb()).
+                        placeholder(R.drawable.progress_animation).into(holder.thumbnail);
 
         /*
             Glide.with(mContext)
@@ -100,7 +101,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         }
 
         */
-
         // thumbnail image
         //Log.d("ADAPTER", " URL: " + urlImage);
         //holder.thumbnail.setImageResource(offerList.get(position).getDrawable_thumb());

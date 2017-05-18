@@ -653,7 +653,7 @@ public final class R {
         public static final int mr_ic_pause_light = 0x7f020113;
         public static final int mr_ic_play_dark = 0x7f020114;
         public static final int mr_ic_play_light = 0x7f020115;
-        public static final int notification_template_icon_bg = 0x7f020164;
+        public static final int notification_template_icon_bg = 0x7f020167;
         public static final int places_ic_clear = 0x7f020125;
         public static final int places_ic_search = 0x7f020126;
         public static final int powered_by_google_dark = 0x7f020127;
@@ -939,12 +939,12 @@ public final class R {
         public static final int place_autocomplete_clear_button = 0x7f080061;
         public static final int place_autocomplete_search_hint = 0x7f080062;
         public static final int status_bar_notification_info_overflow = 0x7f080064;
-        public static final int store_picture_message = 0x7f0800cd;
-        public static final int store_picture_title = 0x7f0800ce;
-        public static final int tagmanager_preview_dialog_button = 0x7f0800cf;
-        public static final int tagmanager_preview_dialog_message = 0x7f0800d0;
-        public static final int tagmanager_preview_dialog_title = 0x7f0800d1;
-        public static final int wallet_buy_button_place_holder = 0x7f0800d2;
+        public static final int store_picture_message = 0x7f0800d2;
+        public static final int store_picture_title = 0x7f0800d3;
+        public static final int tagmanager_preview_dialog_button = 0x7f0800d4;
+        public static final int tagmanager_preview_dialog_message = 0x7f0800d5;
+        public static final int tagmanager_preview_dialog_title = 0x7f0800d6;
+        public static final int wallet_buy_button_place_holder = 0x7f0800d7;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0a00aa;

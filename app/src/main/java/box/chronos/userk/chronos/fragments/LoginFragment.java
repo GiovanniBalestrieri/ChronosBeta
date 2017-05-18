@@ -24,7 +24,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookAuthorizationException;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
@@ -114,6 +116,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private UserSharedPreference sharePrefs;
     private FieldsValidator fv;
     CallbackManager callbackManager;
+    private Activity activity;
+    private View view;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -135,7 +139,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -176,24 +179,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         //FacebookSdk.sdkInitialize(getApplicationContext());
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final Activity activity = getActivity();
-        final View content = activity.findViewById(android.R.id.content).getRootView();
+        activity = getActivity();
+        //content = activity.findViewById(android.R.id.content).getRootView();
 
-        View view = inflater.inflate(R.layout.login_fragment, container, false);
+        view = inflater.inflate(R.layout.login_fragment, container, false);
 
         setupLoginFragment();
         findViews(view);
+        setupLoginBtnFB();
         attachListeners();
 
-        // Setup Background
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test5c);
-        Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(),bm);
-        view.setBackground(new BitmapDrawable(activity.getResources(), image));
-
+        customizeBackground();
 
         return view;
     }
@@ -240,7 +239,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 // ((LoginActivity)(getActivity())).doFblogin();
                 break;
 
-
             case R.id.tv_ForgotPassword:
                 ForgotPasswordFragment forgotPasswordFragment = new ForgotPasswordFragment();
                 LoginActivity.self.replaceFragment(forgotPasswordFragment);
@@ -253,7 +251,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    // request for login
+    // request for login: STD
     private void requestForLogin() {
         /*
         Intent intent = new Intent(LoginActivity.self, Code.class);
@@ -295,7 +293,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    // get json data
+    // get json data STD
     private void getJsonData(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
@@ -348,6 +346,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    // Setup Background
+    private void customizeBackground() {
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test5c);
+        Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(), bm);
+        view.setBackground(new BitmapDrawable(activity.getResources(), image));
+    }
+
     private void findViews(View view) {
         img_Google = (ImageView) view.findViewById(R.id.img_Google);
         img_Facebook = (ImageView) view.findViewById(R.id.img_Facebook);
@@ -361,6 +366,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
 
 
+    }
+
+    private void setupLoginBtnFB() {
+
         List<String> permissionNeeds = Arrays.asList("user_photos", "email",
                 "user_birthday", "public_profile", "AccessToken");
         loginButton.setReadPermissions("email");
@@ -373,48 +382,28 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-
-                        System.out.println("onSuccess");
-
-                        String accessToken = loginResult.getAccessToken()
-                                .getToken();
+                        System.out.println("Facebook Success");
+                        String accessToken = loginResult.getAccessToken().getToken();
                         Log.i("accessToken", accessToken);
-
                         GraphRequest request = GraphRequest.newMeRequest(
                                 loginResult.getAccessToken(),
                                 new GraphRequest.GraphJSONObjectCallback() {
                                     @Override
                                     public void onCompleted(JSONObject object,
                                                             GraphResponse response) {
-
-                                        Log.i("LoginActivity",
-                                                response.toString());
-/*
-                                        if (json.has("email")) {
-                                            email = json.getString("email");
-                                        }
-                                        facebook_id = json.getString("id");
-                                        //String str_firstname = json.getString("first_name");
-                                        //String str_lastname = json.getString("last_name");
-                                        userName = json.getString("name");
-                                        gender = json.getString("gender");
-                                        //birthday = json.getString("birthday");
-                                        age = json.getString("age_range");
-*/
-                                        //sendRequestForFacebookLogin(userName, email, gender, AppConstant.FACEBOOK);
-
+                                        Log.i("LoginActivity",response.toString());
 
                                         try {
                                             String id = object.getString("id");
                                             if (object.has("picture")) {
                                                 String picture = object.getJSONObject("picture").getJSONObject("data").getString("url");
                                             }
+
                                             try {
                                                 URL profile_pic = new URL(
                                                         "http://graph.facebook.com/" + id + "/picture?type=large");
                                                 Log.i("profile_pic",
                                                         profile_pic + "");
-
                                             } catch (MalformedURLException e) {
                                                 e.printStackTrace();
                                             }
@@ -439,18 +428,25 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onCancel() {
                         System.out.println("onCancel");
+                        if (AccessToken.getCurrentAccessToken() != null) {
+                            LoginManager.getInstance().logOut();
+                        }
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         Log.d("LoginActivity", exception.toString());
                         System.out.println("onError");
+                        if (exception instanceof FacebookAuthorizationException) {
+                            if (AccessToken.getCurrentAccessToken() != null) {
+                                Log.i("Errore Facebook", "4");
+                                LoginManager.getInstance().logOut();
+                            }
+                        }
                     }
                 });
 
     }
-
-
     // send request for facebook
     private void sendRequestForFacebookLogin(String userName, String email, String gender, String type) {
         Map<String, String> pairs = new HashMap<>();
@@ -459,16 +455,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         pairs.put("email", email);
         pairs.put("gender", gender);
         pairs.put("birthday", "0000-00-00");
-        // TODO
-        pairs.put("devicetype", DEVICE_TYPE);
+        // TODO change usertype
         pairs.put("usertype", "4");
+        pairs.put("devicetype", DEVICE_TYPE);
         pairs.put("devicetoken", sharePrefs.getDeviceToken());
         pairs.put("latitude", sharePrefs.getLatitude());
         pairs.put("longitude", sharePrefs.getLongitude());
         pairs.put("option", type);
 
-        RestInteraction intraction = new RestInteraction(getActivity());
-        intraction.setCallBack(new IAsyncResponse() {
+        RestInteraction interaction = new RestInteraction(getActivity());
+        interaction.setCallBack(new IAsyncResponse() {
             @Override
             public void onRestInteractionResponse(String response) {
                 try {
@@ -489,7 +485,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 Utility.showAlertDialog(getActivity(), message);
             }
         });
-        intraction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
     }
 
     // get data from facebook login
@@ -503,8 +499,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             String code_status = jsonRootObject.getString(CODE_RESP);
             sharePrefs.setCodeStatus(code_status);
-
-
             sharePrefs.setUserId(jsonObject.getString("userid").toString());
             sharePrefs.setUserName(jsonObject.getString("username").toString());
             sharePrefs.setUserEmail(jsonObject.getString("email").toString());
@@ -519,8 +513,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             sharePrefs.setSelectedCatrgory(jsonObject.getString("selctedcategory").toString());
             sharePrefs.setDefaultAddress(jsonObject.getString("address").toString());
             sharePrefs.setUserPhoneNumber(jsonObject.getString("phonenumber").toString());
-
-
 
             if (sharePrefs.getUserType().equals(SHOP_USER)) {
                 // set personal phone to business phone

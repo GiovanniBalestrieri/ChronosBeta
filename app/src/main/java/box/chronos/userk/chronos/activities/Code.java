@@ -157,7 +157,7 @@ public class Code extends Activity {
 
     private boolean  validateCode(){
         if (codeString.getText().toString().trim().isEmpty()) {
-//            codeInput.setError(getString(R.string.err_msg_code));
+        // codeInput.setError(getString(R.string.err_msg_code));
             requestFocus(codeString);
             return false;
         } else {
@@ -273,9 +273,9 @@ public class Code extends Activity {
             Intent intent;
             intent = new Intent(this, MainActivity.class);
             if (errorResp.equals(ZERO_RESP)) {
-                //Utility.showAlertDialog(this, "Benvenuto");
+                Utility.showAlertDialog(this.getApplication(), "Benvenuto");
             } else {
-                //Utility.showAlertDialog(this, message);
+                Utility.showAlertDialog(this, message);
             }
 
             startActivity(intent);
