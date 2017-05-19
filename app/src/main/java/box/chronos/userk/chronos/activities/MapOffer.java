@@ -1,8 +1,10 @@
 package box.chronos.userk.chronos.activities;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import box.chronos.userk.chronos.Manifest;
 import box.chronos.userk.chronos.R;
 
 /**
@@ -57,7 +60,6 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -119,6 +121,29 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+        } else {
+            Toast.makeText(getApplicationContext(), "You have to accept to enjoy all app's services!", Toast.LENGTH_LONG).show();
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                googleMap.setMyLocationEnabled(true);
+            }
+        }
+
+
+        //googleMap.setMyLocationEnabled(true);
+
+
+/*
+        if (ContextCompat.checkSelfPermission(this,)
+                == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+        } else {
+            // Show rationale and request permission.
+        }
+*/
 
     }
 
