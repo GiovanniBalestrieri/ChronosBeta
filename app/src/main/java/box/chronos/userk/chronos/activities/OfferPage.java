@@ -31,6 +31,7 @@ import box.chronos.userk.chronos.R;
 import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.chronos.utils.AppConstant.EUR_SIGN;
 import static box.chronos.userk.chronos.utils.AppConstant.FIVE_KM;
+import static box.chronos.userk.chronos.utils.AppConstant.K_METERS;
 import static box.chronos.userk.chronos.utils.AppConstant.METERS;
 import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_FIVE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_ONE_KM;
@@ -148,8 +149,11 @@ public class OfferPage extends Activity {
         float distance_km = Float.valueOf(d);
         if ( distance_km > Float.valueOf(FIVE_KM)){
             res = MORE_THAN_FIVE_KM;
-        }  else {
-            res = String.format("%.0f", distance_km) + METERS;
+        }  else if ( distance_km < Float.valueOf(FIVE_KM) && distance_km > Float.valueOf(ONE_KM)){
+            res = String.format("%.0f", distance_km) + K_METERS;
+        } else if ( distance_km < Float.valueOf(ONE_KM)){
+            Log.d("AAAA",Float.toString(distance_km*1000.0f));
+            res = String.format("%.0f", distance_km*1000.0f) + METERS;
         }
         return res;
     }

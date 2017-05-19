@@ -28,8 +28,11 @@ import box.chronos.userk.chronos.objects.Offer;
 import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.chronos.utils.AppConstant.EUR_SIGN;
 import static box.chronos.userk.chronos.utils.AppConstant.FIFTEEN_MIN;
+import static box.chronos.userk.chronos.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.FOURTY_5_MIN;
+import static box.chronos.userk.chronos.utils.AppConstant.K_METERS;
 import static box.chronos.userk.chronos.utils.AppConstant.METERS;
+import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_FIVE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_ONE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM_INT;
@@ -170,12 +173,15 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
     }
 
     private String prepareDistance(String d) {
-        String res;
-        float distance = Float.valueOf(d);
-        if ( distance > ONE_KM_INT){
-            res = MORE_THAN_ONE_KM;
-        } else {
-            res = String.format("%.0f", distance) + METERS;
+        String res = "0";
+        float distance_km = Float.valueOf(d);
+        if ( distance_km > Float.valueOf(FIVE_KM)){
+            res = MORE_THAN_FIVE_KM;
+        }  else if ( distance_km < Float.valueOf(FIVE_KM) && distance_km > Float.valueOf(ONE_KM)){
+            res = String.format("%.0f", distance_km) + K_METERS;
+        } else if ( distance_km < Float.valueOf(ONE_KM)){
+            Log.d("AAAA",Float.toString(distance_km*1000.0f));
+            res = String.format("%.0f", distance_km*1000.0f) + METERS;
         }
         return res;
     }
