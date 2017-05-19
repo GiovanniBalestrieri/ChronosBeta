@@ -33,7 +33,7 @@
                 android:layout_height="@dimen/cat_card_height"
 
                 android:adjustViewBounds="false"
-                android:background="@color/common_plus_signin_btn_text_dark_focused"
+                android:background="@color/grey_chat_color"
                 android:baselineAlignBottom="false"
                 android:clickable="true"
                 android:cropToPadding="false"

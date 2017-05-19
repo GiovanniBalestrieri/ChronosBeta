@@ -217,6 +217,7 @@
                     android:layout_weight="0.2"
                     android:gravity="left|center">
 
+
                     <TextView
                         android:id="@+id/distance_logo_card_article"
                         android:layout_width="wrap_content"
@@ -237,7 +238,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/thumbnail_card_offer"
-                android:layout_marginBottom="@dimen/five_dp"
+                android:layout_marginBottom="@dimen/twenty_five_dp"
                 android:layout_weight="10"
                 android:orientation="horizontal"
                 tools:ignore="ObsoleteLayoutParam">
@@ -264,67 +265,94 @@
 
                 -->
 
-
                 <LinearLayout
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.4"
                     android:gravity="center"
                     android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/card_margin"
-                        android:layout_weight="0.7"
-                        android:gravity="center">
 
                         <TextView
                             android:id="@+id/price_card_article"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.3"
                             android:gravity="center"
                             android:text="34,34 €"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
+                    </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:gravity="left|center"
+                    android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/tv_discount_offer_card"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.3"
                             android:gravity="center"
                             android:text="20 %"
                             android:textColor="@color/black"
                             android:textSize="@dimen/register_main_text_margin"
                             android:textStyle="bold" />
 
+                    </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:gravity="left|center"
+                    android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/tv_final_price_card"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.3"
                             android:gravity="center"
                             android:text="28 €"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
 
-
-                        <!--
-                        <ImageView
-                            android:id="@+id/thumbnail_card_article_cat"
-                            android:layout_width="@dimen/fifty_dp"
-                            android:layout_height="@dimen/offer_cover_height"
-                            android:background="@color/white"
-                            android:padding="0dp"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/abitiuomo" />
-                            -->
-
                     </LinearLayout>
+                <!--
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/card_margin"
+                    android:layout_weight="0.7"
+                    android:gravity="center">
+
+
+
+                    <ImageView
+                        android:id="@+id/thumbnail_card_article_cat"
+                        android:layout_width="@dimen/fifty_dp"
+                        android:layout_height="@dimen/offer_cover_height"
+                        android:background="@color/white"
+                        android:padding="0dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/abitiuomo" />
 
                 </LinearLayout>
+
+
+                </LinearLayout>
+            -->
 
             </LinearLayout>
 
@@ -333,7 +361,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/twenty_five_dp"
-                android:layout_marginTop="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/fifteen_dp"
                 android:layout_weight="0.7"
                 android:background="@color/white"
                 android:gravity="center">
