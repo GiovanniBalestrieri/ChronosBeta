@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -170,11 +171,11 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
     private String prepareDistance(String d) {
         String res;
-        float distance = Float.valueOf(d)*1000;
+        float distance = Float.valueOf(d);
         if ( distance > ONE_KM_INT){
             res = MORE_THAN_ONE_KM;
         } else {
-            res = String.format("%.0f", distance*1000) + METERS;
+            res = String.format("%.0f", distance) + METERS;
         }
         return res;
     }

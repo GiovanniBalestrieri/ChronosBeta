@@ -1,14 +1,19 @@
 package box.chronos.userk.chronos.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,10 +35,14 @@ import box.chronos.userk.chronos.R;
 public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
     // Google Map
     private GoogleMap googleMap;
-    LatLng shop;
+    LatLng shop,mine;
     String mess;
+    String provider;
+    Location myLocation;
     private static final LatLng SYDNEY = new LatLng(-33.88,151.21);
+    LocationManager locationManager;
 
+    Criteria criteria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +66,13 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
             mapFragment.getMapAsync(this);
 
 
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+            criteria = new Criteria();
+            provider = locationManager.getBestProvider(criteria,true);
+            // Get Current Location
+            // getting GPS status
+            // Create a criteria object to retrieve provider
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,6 +113,15 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
                 shop, 17);
 
         //googleMap.animateCamera(location);
+/*
+        LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+        myLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        double longitude = myLocation.getLongitude();
+        double latitude = myLocation.getLatitude();
+*/
+        //mine = new LatLng(myLocation.getLatitude(), location.getLongitude());
+
 
 
 
@@ -121,14 +146,18 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
+
+
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
+            myLocation = locationManager.getLastKnownLocation(provider);
         } else {
             Toast.makeText(getApplicationContext(), "You have to accept to enjoy all app's services!", Toast.LENGTH_LONG).show();
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 googleMap.setMyLocationEnabled(true);
+                myLocation = locationManager.getLastKnownLocation(provider);
             }
         }
 
@@ -151,5 +180,11 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
     protected void onResume() {
         super.onResume();
     }
+
+    private final LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            mine = new LatLng(myLocation.getLatitude(), location.getLongitude());
+        }
+    };
 
 }
