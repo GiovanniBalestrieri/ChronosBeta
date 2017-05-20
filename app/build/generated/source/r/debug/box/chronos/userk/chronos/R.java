@@ -5855,7 +5855,7 @@ containing a value of this type.
         public static final int content_main=0x7f10012f;
         public static final int content_quiz=0x7f1001b1;
         public static final int controllers=0x7f1000f4;
-        public static final int coordinator_layout_slide=0x7f1000e6;
+        public static final int coordinator_layout_slide=0x7f1000e7;
         public static final int crash_reporting_present=0x7f100011;
         public static final int custom=0x7f1000c5;
         public static final int customPanel=0x7f1000c4;
@@ -5983,7 +5983,7 @@ containing a value of this type.
         public static final int luogoPokPage=0x7f1001b3;
         public static final int ly_userName=0x7f100192;
         public static final int male_rb=0x7f100207;
-        public static final int map=0x7f1000e5;
+        public static final int map=0x7f1000e6;
         public static final int masked=0x7f10021b;
         public static final int match_global_nicknames=0x7f100084;
         public static final int match_parent=0x7f100094;
@@ -6056,7 +6056,7 @@ containing a value of this type.
         public static final int nav_offers=0x7f10021d;
         public static final int nav_view=0x7f1000e4;
         public static final int navigation_header_container=0x7f100137;
-        public static final int navigation_view=0x7f1000e8;
+        public static final int navigation_view=0x7f1000e5;
         public static final int never=0x7f10007a;
         public static final int never_display=0x7f1000ae;
         public static final int no_invito=0x7f100121;
@@ -6257,7 +6257,7 @@ containing a value of this type.
         public static final int view=0x7f1001d2;
         public static final int view2=0x7f1001dc;
         public static final int view_offset_helper=0x7f10001d;
-        public static final int view_pager_slides=0x7f1000e7;
+        public static final int view_pager_slides=0x7f1000e8;
         public static final int visible=0x7f10021a;
         public static final int volume_item_container=0x7f100189;
         public static final int wide=0x7f100089;

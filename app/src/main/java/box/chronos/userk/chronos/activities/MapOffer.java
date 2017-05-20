@@ -17,6 +17,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -58,11 +59,15 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
         shop = new LatLng(Double.parseDouble(lat),Double.parseDouble(lon));
         try {
             // Loading map
-
             // Get the SupportMapFragment and request notification
             // when the map is ready to be used.
+
+            GoogleMapOptions options = new GoogleMapOptions();
+            options.liteMode(true).mapToolbarEnabled(true);
+
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
+            mapFragment.newInstance(options);
             mapFragment.getMapAsync(this);
 
 
@@ -128,11 +133,11 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
         // Move the camera instantly to Sydney with a zoom of 15.
         //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SYDNEY, 15));
 
-// Zoom in, animating the camera.
+        // Zoom in, animating the camera.
         googleMap.animateCamera(CameraUpdateFactory.zoomIn());
 
-// Zoom out to zoom level 10, animating with a duration of 2 seconds.
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
 // Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -142,7 +147,7 @@ public class MapOffer extends AppCompatActivity implements OnMapReadyCallback {
                 .tilt(60)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
 
-        googleMap.addMarker(new MarkerOptions().position(shop).title(mess));
+        googleMap.addMarker(new MarkerOptions().position(shop).title(mess)).showInfoWindow();
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 

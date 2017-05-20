@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -106,9 +108,13 @@ public class OfferPage extends Activity {
 
         if (picList.size()>0) {
             urlImage = IMAGE_URL + picList.get(0);
+            Glide.with(this).load(urlImage).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(offImage);//placeholder(R.drawable.progress_animation)
+
+            /*
             Picasso.with(this).load(urlImage)
                     .placeholder(R.drawable.progress_animation)
                     .into(offImage);
+            */
         } else {
             offImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.empty, null));
         }
@@ -117,9 +123,6 @@ public class OfferPage extends Activity {
              @Override
             public void onClick(View v) {
                  // StartActivity Shop and pass data
-
-
-
 
                  Intent i = new Intent(getApplicationContext(),MapOffer.class);
 

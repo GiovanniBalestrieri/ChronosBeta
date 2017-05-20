@@ -26,6 +26,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -190,7 +191,7 @@ public class MainActivity extends AppCompatActivity
         email_u.setText(sharePrefs.getUserEmail());
         nick_u.setText(sharePrefs.getUserName());
         String urlImage = IMAGE_URL + sharePrefs.getUserImage();
-        //Picasso.with(this).load(urlImage).into(profPic);
+        //Glide.with(this).load(urlImage).into(profPic);
         drawer.invalidate();
     }
 
@@ -238,11 +239,20 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
 
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             return true;
         }
+
+        if (id==android.R.id.home){
+            if (drawer.isDrawerOpen(Gravity.RIGHT)) {
+                drawer.closeDrawer(Gravity.RIGHT);
+            } else {
+                drawer.openDrawer(Gravity.RIGHT);
+            }
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

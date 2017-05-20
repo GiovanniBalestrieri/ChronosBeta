@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -41,6 +42,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.STRING_15_MIN;
 import static box.chronos.userk.chronos.utils.AppConstant.STRING_30_MIN;
 import static box.chronos.userk.chronos.utils.AppConstant.STRING_45_MIN;
 import static box.chronos.userk.chronos.utils.AppConstant.STRING_DUE;
+import static box.chronos.userk.chronos.utils.algebra.MathUtils.fixFloatFormat;
 
 
 /**
@@ -48,6 +50,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.STRING_DUE;
  */
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder>{
 
+    private String TAG = "OfferAdapter";
     private Context mContext;
     private List<Offer> offerList;
     private final RecyclerView recyclerView;
@@ -104,10 +107,13 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
+
+        Log.d(TAG,"Item position: " + Integer.toString(position));
         Offer off = offerList.get(position);
 
         holder.shop_name.setText(off.getBusinessname()/*.toUpperCase()*/);
         holder.price.setText(off.getPrice() + EUR_SIGN);
+
         holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.discount.setText(off.getDiscount()+ PERC_SIGN);
         holder.finalPrice.setText(computeFinalPrice(off.getPrice(),off.getDiscount()));
@@ -142,6 +148,11 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
         //Picasso.with(mContext).load(urlCat).into(holder.shop_logo);
 
+
+        Log.d(TAG,"Price:\t" + off.getPrice());
+        Log.d(TAG,"BusinessName:\t" + off.getBusinessname());
+        Log.d(TAG,"Discount:\t" + off.getDiscount());
+
         if (off.hasPicture()) {
             Map.Entry<String,String> entry = offerList.get(position).getAvailablePictures().entrySet().iterator().next();
             String key = entry.getKey();
@@ -150,12 +161,14 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             System.out.println(value);
 
             String urlImage = IMAGE_URL + value;
+            Log.d(TAG,"Image:\t" + urlImage);
 
-            Picasso.with(mContext).load(urlImage).placeholder(R.drawable.progress_animation).into(holder.thumbnail);
+            Glide.with(mContext).load(urlImage).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);//placeholder(R.drawable.progress_animation)
 
         } else {
-            Picasso.with(mContext).load(R.drawable.empty).placeholder(R.drawable.progress_animation).into(holder.thumbnail);
+            Glide.with(mContext).load(R.drawable.empty).placeholder(R.drawable.progress_animation).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);
         }
+
     }
 
     private String prepareTimeout(int min) {
@@ -206,7 +219,8 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
     // Computes final price given an init and sconto string
     public String computeFinalPrice(String init, String sconto){
         String res = "";
-        Float ini = Float.valueOf(init);
+
+        Float ini = Float.valueOf(fixFloatFormat(init));
         Float disc = Float.valueOf(sconto);
         Float fin = ini*(1- disc/100.f);
         res = String.format("%.2f",fin) + EUR_SIGN;
