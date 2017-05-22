@@ -325,9 +325,9 @@ public class OffersListFragment extends Fragment {
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
         // If world not empty
         if (world != null && !world.equals("")) {
-            //pairs.put("world", "1");
+            pairs.put("world", SIX_KM_BOUND);
         }
-        pairs.put(WORLD_PARAM, SIX_KM_BOUND);
+        // pairs.put(WORLD_PARAM, SIX_KM_BOUND);
         pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
         pairs.put(LON_PARAM, sharePrefs.getLongitude()); /*"12.516753"*/
         if (cat != null && !cat.equals("")) {

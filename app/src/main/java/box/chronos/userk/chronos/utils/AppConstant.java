@@ -19,6 +19,7 @@ public class AppConstant {
     public static final String GET_CAT_METHOD = "getAllCategories";
     public static final String GET_OFFERS_METHOD = "getNotifications";
     public static final String GET_PROFILE_INFO_METHOD = "viwProfile";
+    public static final String SPENT_MORE_THAN_TEN_METHOD = "spentTimeMoreThanTenSecOnOffer";
 
     // Api responses
     public static final String DATA_RESP = "data";
@@ -54,6 +55,7 @@ public class AppConstant {
     public static final String REPEAT_OFF_PARAM = "repeatoffer";
     public static final String USER_TYPE_PARAM = "usertype";
     public static final String SEL_CAT_PARAM = "selctedcategory";
+    public static final String OFF_ID_PARAM = "offerid";
 
 
 
@@ -148,6 +150,7 @@ public class AppConstant {
     public static int FOURTY_5_MIN = 45;
     public static int FIFTEEN_MIN = 15;
     public static int ZERO_MIN = 0;
+    public static int DELAY_TEN_SEC = 10000;
 
 
 

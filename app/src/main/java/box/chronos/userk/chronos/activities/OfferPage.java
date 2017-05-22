@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.FloatProperty;
 import android.util.Log;
@@ -15,32 +16,46 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import box.chronos.userk.chronos.callbacks.IAsyncResponse;
 import box.chronos.userk.chronos.objects.Offer;
 import box.chronos.userk.chronos.objects.Shop;
 import box.chronos.userk.chronos.R;
+import box.chronos.userk.chronos.serverRequest.AppUrls;
+import box.chronos.userk.chronos.serverRequest.RestInteraction;
+import box.chronos.userk.chronos.utils.AppController;
+import box.chronos.userk.chronos.utils.UserSharedPreference;
+import box.chronos.userk.chronos.utils.Utility;
 
 import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.chronos.utils.AppConstant.DELAY_TEN_SEC;
 import static box.chronos.userk.chronos.utils.AppConstant.EUR_SIGN;
 import static box.chronos.userk.chronos.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.K_METERS;
 import static box.chronos.userk.chronos.utils.AppConstant.METERS;
+import static box.chronos.userk.chronos.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_FIVE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.MORE_THAN_ONE_KM;
+import static box.chronos.userk.chronos.utils.AppConstant.OFF_ID_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM_FLOAT;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM_INT;
+import static box.chronos.userk.chronos.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.chronos.utils.AppConstant.PERC_SIGN;
+import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SPENT_MORE_THAN_TEN_METHOD;
+import static box.chronos.userk.chronos.utils.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.chronos.utils.AppController.TAG;
 
 /**
  * Created by userk on 10/12/16.
@@ -60,6 +75,9 @@ public class OfferPage extends Activity {
     String urlImage;
     HashMap<String,Shop> shops;
     String shopId;
+    String offId;
+    private UserSharedPreference sharePrefs;
+    final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,62 +86,26 @@ public class OfferPage extends Activity {
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        hitApiAfterDelay();
 
+        setupOfferPage();
         getShops();
+        getViews();
+
+        // TODO request for gps
 
         final Offer offX = getIntent().getExtras().getParcelable("Offer");
 
-        checkInside = (LinearLayout) findViewById(R.id.checkInsideLayout);
-        finalPrice = (TextView) findViewById(R.id.final_price_offer_page);
-        offCat = (TextView) findViewById(R.id.upper_bar_category_title);
-        offTitle = (TextView) findViewById(R.id.offer_title_overlay);
-        offPrice = (TextView) findViewById(R.id.price_offer);
-        offDiscount = (TextView) findViewById(R.id.discount_offer);
-        offDesc = (TextView) findViewById(R.id.offer_description);
-        distance = (TextView) findViewById(R.id.distance_offer_page_tv);
-        doveShop = (TextView) findViewById(R.id.dove_si_trova);
-        offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
-
-        offCat.setText(offX.getCategory());
-        offDesc.setText(offX.getOfferdescription());
-        offTitle.setText(offX.getTitle());
-        offTitle.setTypeface(null, Typeface.BOLD);
-
-        doveShop.setText(offX.getBusinessname());
-        distance.setText(prepareDistance(offX.getDistance()));
-
-        offPrice.setText(offX.getPrice() + EUR_SIGN);
-        offPrice.setPaintFlags(offPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        offDiscount.setText(offX.getDiscount() + PERC_SIGN);
-        finalPrice.setText(computeFinalPrice(offX.getPrice(), offX.getDiscount()));
+        fillViews(offX);
 
         shopId = offX.getShopId();
+        offId = offX.getId_offer();
 
-        ArrayList<String> picList = getIntent().getStringArrayListExtra("pictures");
-
-        String urlCat = IMAGE_URL + offX.getCategoryphoto();
-        //
-        // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
-        //Picasso.with(this).load(urlCat).into(shop_logo);
-
-        if (picList.size()>0) {
-            urlImage = IMAGE_URL + picList.get(0);
-            Glide.with(this).load(urlImage).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(offImage);//placeholder(R.drawable.progress_animation)
-
-            /*
-            Picasso.with(this).load(urlImage)
-                    .placeholder(R.drawable.progress_animation)
-                    .into(offImage);
-            */
-        } else {
-            offImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.empty, null));
-        }
 
         checkInside.setOnClickListener(new View.OnClickListener(){
              @Override
             public void onClick(View v) {
                  // StartActivity Shop and pass data
-
                  Intent i = new Intent(getApplicationContext(),MapOffer.class);
 
                  i.putExtra("latitude",offX.getLatitude());
@@ -145,6 +127,107 @@ public class OfferPage extends Activity {
                 }
             });
         }
+    }
+
+    private void hitApiAfterDelay() {
+        handler.postDelayed(new Runnable() {
+            /*
+             * Showing Delay api hit screen with ten second delay timer.
+             */
+            @Override
+            public void run() {
+                apiHitForParticularOfferDelay();
+            }
+        }, DELAY_TEN_SEC);
+    }
+
+    private void getViews(){
+        checkInside = (LinearLayout) findViewById(R.id.checkInsideLayout);
+        finalPrice = (TextView) findViewById(R.id.final_price_offer_page);
+        offCat = (TextView) findViewById(R.id.upper_bar_category_title);
+        offTitle = (TextView) findViewById(R.id.offer_title_overlay);
+        offPrice = (TextView) findViewById(R.id.price_offer);
+        offDiscount = (TextView) findViewById(R.id.discount_offer);
+        offDesc = (TextView) findViewById(R.id.offer_description);
+        distance = (TextView) findViewById(R.id.distance_offer_page_tv);
+        doveShop = (TextView) findViewById(R.id.dove_si_trova);
+        offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
+
+    }
+
+    private void fillViews(Offer offX) {
+        offCat.setText(offX.getCategory());
+        offDesc.setText(offX.getOfferdescription());
+        offTitle.setText(offX.getTitle());
+        offTitle.setTypeface(null, Typeface.BOLD);
+
+        doveShop.setText(offX.getBusinessname());
+        distance.setText(prepareDistance(offX.getDistance()));
+
+        offPrice.setText(offX.getPrice() + EUR_SIGN);
+        offPrice.setPaintFlags(offPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        offDiscount.setText(offX.getDiscount() + PERC_SIGN);
+        finalPrice.setText(computeFinalPrice(offX.getPrice(), offX.getDiscount()));
+
+
+        ArrayList<String> picList = getIntent().getStringArrayListExtra("pictures");
+
+        String urlCat = IMAGE_URL + offX.getCategoryphoto();
+        //
+        // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
+        //Picasso.with(this).load(urlCat).into(shop_logo);
+
+        if (picList.size()>0) {
+            urlImage = IMAGE_URL + picList.get(0);
+            Glide.with(this).load(urlImage).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(offImage);//placeholder(R.drawable.progress_animation)
+        } else {
+            offImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.empty, null));
+        }
+
+
+    }
+
+    // Get user and session info
+    private void setupOfferPage() {
+        sharePrefs = AppController.getPreference();
+    }
+
+    // api hit view timer not used for android
+    private void apiHitForParticularOfferDelay() {
+        Map<String, String> pairs = new HashMap<>();
+        pairs.put(METHOD_PARAM, SPENT_MORE_THAN_TEN_METHOD);
+        pairs.put(USERID_PARAM, sharePrefs.getUserId());
+        pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
+        pairs.put(OFF_ID_PARAM, offId);
+
+        RestInteraction interaction = new RestInteraction(this);
+        interaction.setCallBack(new IAsyncResponse() {
+            @Override
+            public void onRestInteractionResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
+                        Log.d("1= SEC","RICEVUTO");
+                    } else {
+                        Utility.showAlertDialog(getApplicationContext(), object.getString("message"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onRestInteractionError(String message) {
+                Utility.showAlertDialog(getApplicationContext(), message);
+            }
+        });
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "hit");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
     }
 
     public String prepareDistance(String d) {
