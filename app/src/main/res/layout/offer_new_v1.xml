@@ -1,7 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/offer_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -13,59 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/offer_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
-                android:elevation="4dp"
-                android:background="?attr/colorPrimary"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-            <LinearLayout
-                android:id="@+id/upper_title_quiz"
-                android:visibility="visible"
-                android:orientation="horizontal"
-                android:layout_gravity="bottom"
-                android:background="@color/indigo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/offer_dialog_bar_padding_top"
-                android:paddingBottom="@dimen/offer_dialog_bar_padding_bottom">
-
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_gravity="bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/upper_bar_category_title"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|right"
-                            android:paddingLeft="@dimen/city_title_padding"
-                            android:text="Scarpe Donna"
-                            android:textColor="@color/quiz_title"
-                            android:textSize="@dimen/car_title"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -188,6 +145,7 @@
 
                     <TextView
                         android:layout_gravity="center"
+                        android:id="@+id/offer_page_shop_name"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="16dp"
@@ -213,8 +171,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:paddingLeft="16dp"
-                            android:textColor="@color/blue"
-                            android:textStyle="bold"
+                            android:textColor="@color/grey_midx2"
+                            android:textStyle="normal"
                             android:textSize="18dp"
                             android:text="DOVE SI TROVA"/>
 
@@ -269,4 +227,4 @@
 
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>

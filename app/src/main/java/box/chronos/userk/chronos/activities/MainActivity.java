@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity
 
         OffersListFragment fragment = new OffersListFragment();
         fragmentTransaction.add(R.id.fragment_container, fragment,"Offers");
-        //fragmentTransaction.addToBackStack(null);
+
         fragmentTransaction.commit();
 
         profileNav.setOnClickListener(new View.OnClickListener(){

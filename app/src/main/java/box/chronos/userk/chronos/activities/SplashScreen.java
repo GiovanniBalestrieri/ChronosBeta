@@ -44,12 +44,12 @@ public class SplashScreen extends Activity {
                     startActivity(i);
                     finish();
                     overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                } else if (sharePrefs.getCode_status().equals("0")) {
+                } /* else if (sharePrefs.getCode_status().equals("0")) {
                     i = new Intent(SplashScreen.this, Code.class);
                     startActivity(i);
                     finish();
                     overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                } else {
+                } */ else {
                     i = new Intent(SplashScreen.this, LoginActivity.class);
                     startActivity(i);
                     finish();

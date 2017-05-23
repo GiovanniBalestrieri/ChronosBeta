@@ -87,7 +87,7 @@ public class Code extends Activity {
         procedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Benvenuto", Toast.LENGTH_LONG).show();
                 requestCodeCheck(1);
             }
         });

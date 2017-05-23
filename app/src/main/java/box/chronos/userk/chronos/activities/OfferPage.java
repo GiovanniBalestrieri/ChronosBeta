@@ -8,7 +8,11 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.FloatProperty;
 import android.util.Log;
 import android.view.MenuItem;
@@ -62,7 +66,7 @@ import static box.chronos.userk.chronos.utils.algebra.MathUtils.fixFloatFormat;
  * Created by userk on 10/12/16.
  */
 
-public class OfferPage extends Activity {
+public class OfferPage extends AppCompatActivity {
     TextView offCat;
     TextView offTitle;
     TextView finalPrice;
@@ -70,6 +74,7 @@ public class OfferPage extends Activity {
     TextView offDesc;
     TextView offDiscount;
     TextView doveShop;
+    TextView shopName;
     TextView distance;
     ImageView offImage;
     LinearLayout checkInside;
@@ -79,11 +84,12 @@ public class OfferPage extends Activity {
     String offId;
     private UserSharedPreference sharePrefs;
     final Handler handler = new Handler();
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.offer_new);
+        setContentView(R.layout.offer_new_v1);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -152,17 +158,20 @@ public class OfferPage extends Activity {
         offDesc = (TextView) findViewById(R.id.offer_description);
         distance = (TextView) findViewById(R.id.distance_offer_page_tv);
         doveShop = (TextView) findViewById(R.id.dove_si_trova);
+        shopName = ( TextView ) findViewById(R.id.offer_page_shop_name);
         offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
 
     }
 
     private void fillViews(Offer offX) {
-        offCat.setText(offX.getCategory());
+        //offCat.setText(offX.getCategory());
+        getSupportActionBar().setTitle(offX.getCategory());
         offDesc.setText(offX.getOfferdescription());
         offTitle.setText(offX.getTitle());
         offTitle.setTypeface(null, Typeface.BOLD);
 
-        doveShop.setText(offX.getBusinessname());
+        shopName.setText(offX.getBusinessname());
+        doveShop.setText(offX.getBusinessaddress());
         distance.setText(prepareDistance(offX.getDistance()));
 
 
@@ -204,6 +213,26 @@ public class OfferPage extends Activity {
     // Get user and session info
     private void setupOfferPage() {
         sharePrefs = AppController.getPreference();
+
+        toolbar = (Toolbar) findViewById(R.id.offer_toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //do something you want
+                NavUtils.navigateUpFromSameTask(OfferPage.this);
+                Log.d("OfferPage","CLICKED");
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     // api hit view timer not used for android
@@ -332,10 +361,14 @@ public class OfferPage extends Activity {
         shops.put(s3.getShopId(),s3);
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        //Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-        //startActivityForResult(myIntent, 0);
-        return true;
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

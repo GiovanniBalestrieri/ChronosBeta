@@ -105,6 +105,8 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         return new MyViewHolder(itemView);
     }
 
+
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
