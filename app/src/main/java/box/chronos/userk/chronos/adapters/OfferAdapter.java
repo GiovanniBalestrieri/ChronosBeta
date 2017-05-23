@@ -221,7 +221,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         String res = "";
 
         Float ini = Float.valueOf(fixFloatFormat(init));
-        Float disc = Float.valueOf(sconto);
+        Float disc = Float.valueOf(fixFloatFormat(sconto));
         Float fin = ini*(1- disc/100.f);
         res = String.format("%.2f",fin) + EUR_SIGN;
         return res;

@@ -56,6 +56,7 @@ import static box.chronos.userk.chronos.utils.AppConstant.SPENT_MORE_THAN_TEN_ME
 import static box.chronos.userk.chronos.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.chronos.utils.AppController.TAG;
+import static box.chronos.userk.chronos.utils.algebra.MathUtils.fixFloatFormat;
 
 /**
  * Created by userk on 10/12/16.
@@ -246,8 +247,8 @@ public class OfferPage extends Activity {
 
     public String computeFinalPrice(String init, String sconto){
         String res = "";
-        Float ini = Float.valueOf(init);
-        Float disc = Float.valueOf(sconto);
+        Float ini = Float.valueOf(fixFloatFormat(init));
+        Float disc = Float.valueOf(fixFloatFormat(sconto));
         Float fin = ini*(1- disc/100.f);
         res = String.format("%.2f",fin) + EUR_SIGN;
         return res;
