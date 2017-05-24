@@ -455,9 +455,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         pairs.put("username", userName);
         pairs.put("email", email);
         pairs.put("gender", gender);
-        pairs.put("birthday", "0000-00-00");
+        //
+        // pairs.put("birthday", "0000-00-00");
         // TODO change usertype
-        pairs.put("usertype", "4");
+        pairs.put("usertype", "6");
         pairs.put("devicetype", DEVICE_TYPE);
         pairs.put("devicetoken", sharePrefs.getDeviceToken());
         pairs.put("latitude", sharePrefs.getLatitude());

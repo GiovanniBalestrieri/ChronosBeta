@@ -40,18 +40,18 @@ public final class R {
         public static final int textSeparation = 0x7f010059;
     }
     public static final class id {
-        public static final int ADD = 0x7f10001e;
-        public static final int MULTIPLY = 0x7f10001f;
-        public static final int SCREEN = 0x7f100020;
-        public static final int SRC_ATOP = 0x7f100021;
-        public static final int SRC_IN = 0x7f100022;
-        public static final int SRC_OVER = 0x7f100023;
-        public static final int bold = 0x7f10002d;
-        public static final int italic = 0x7f10002e;
-        public static final int monospace = 0x7f100030;
-        public static final int normal = 0x7f10002f;
-        public static final int sans = 0x7f100031;
-        public static final int serif = 0x7f100032;
+        public static final int ADD = 0x7f11001e;
+        public static final int MULTIPLY = 0x7f11001f;
+        public static final int SCREEN = 0x7f110020;
+        public static final int SRC_ATOP = 0x7f110021;
+        public static final int SRC_IN = 0x7f110022;
+        public static final int SRC_OVER = 0x7f110023;
+        public static final int bold = 0x7f11002d;
+        public static final int italic = 0x7f11002e;
+        public static final int monospace = 0x7f110030;
+        public static final int normal = 0x7f11002f;
+        public static final int sans = 0x7f110031;
+        public static final int serif = 0x7f110032;
     }
     public static final class styleable {
         public static final int[] PromptView = { 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000f, 0x7f010010, 0x7f010011, 0x7f01003e, 0x7f01004b, 0x7f01004c, 0x7f01004d, 0x7f01004e, 0x7f01004f, 0x7f010050, 0x7f010051, 0x7f010052, 0x7f010053, 0x7f010054, 0x7f010055, 0x7f010056, 0x7f010057, 0x7f010058, 0x7f010059 };

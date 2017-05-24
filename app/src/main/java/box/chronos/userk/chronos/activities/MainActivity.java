@@ -95,17 +95,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
 
-        //initCollapsingToolbar();
         setupEnvironment();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
-        }
-        requestForGps();
+        //requestForGps();
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -157,6 +149,10 @@ public class MainActivity extends AppCompatActivity
      * Setup environment
      */
     public void setupEnvironment() {
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
         //stackFragment = new Stack<Fragment>();
         self = this;
         imm = (InputMethodManager) self.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -185,6 +181,13 @@ public class MainActivity extends AppCompatActivity
         email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
 
         updateProfilePictureNav();
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
+        }
     }
 
     public void updateProfilePictureNav(){
@@ -223,7 +226,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
