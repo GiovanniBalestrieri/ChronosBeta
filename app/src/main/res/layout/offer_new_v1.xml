@@ -255,7 +255,7 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.2"
                         android:paddingLeft="16dp"
                         android:src="@drawable/ic_call_black_24dp"/>
 
@@ -263,7 +263,7 @@
                         android:id="@+id/tv_telephone_shop_offer_page"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.9"
                         android:gravity="center"
                         android:text="0686206055"
                         android:textColor="@color/grey_midx2"
