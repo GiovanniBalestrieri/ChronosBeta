@@ -221,7 +221,60 @@
                         android:id="@+id/textClock" />
                     -->
 
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="#bebebe"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="6dp"/>
+
+                <LinearLayout
+                    android:id="@+id/phoneLayout"
+                    android:clickable="true"
+                    android:layout_height="70dp"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="10"
+                    android:gravity="left">
+
+                    <!--
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:paddingLeft="16dp"
+                        android:textColor="@color/grey_midx2"
+                        android:textStyle="normal"
+                        android:textSize="18dp"
+                        android:text="Telefono"/>
+
+                        -->
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:paddingLeft="16dp"
+                        android:src="@drawable/ic_call_black_24dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_telephone_shop_offer_page"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="0686206055"
+                        android:textColor="@color/grey_midx2"
+                        android:textSize="@dimen/article_title_card"
+                        android:textStyle="bold" />
+
                 </LinearLayout>
+
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

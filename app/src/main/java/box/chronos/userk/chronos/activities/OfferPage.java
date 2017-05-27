@@ -1,14 +1,19 @@
 package box.chronos.userk.chronos.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import box.chronos.userk.chronos.callbacks.IAsyncResponse;
@@ -76,8 +82,9 @@ public class OfferPage extends AppCompatActivity {
     TextView doveShop;
     TextView shopName;
     TextView distance;
+    TextView phone;
     ImageView offImage;
-    LinearLayout checkInside;
+    LinearLayout checkInside, phoneLayout;
     String urlImage;
     HashMap<String,Shop> shops;
     String shopId;
@@ -108,6 +115,23 @@ public class OfferPage extends AppCompatActivity {
         shopId = offX.getShopId();
         offId = offX.getId_offer();
 
+        phoneLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // StartActivity Shop and pass data
+                /*
+                if ( ContextCompat.checkSelfPermission( getApplicationContext(), Manifest.permission.CALL_PHONE ) != PackageManager.PERMISSION_GRANTED ) {
+
+                    ActivityCompat.requestPermissions( this, new String[] {  Manifest.permission.CALL_PHONE  },
+                            String number = offX.getBusinessphone();
+                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+                            callIntent.setData(Uri.parse("tel:" + number));
+                            startActivity(callIntent);
+
+                }
+                */
+            }
+        });
 
         checkInside.setOnClickListener(new View.OnClickListener(){
              @Override
@@ -136,6 +160,20 @@ public class OfferPage extends AppCompatActivity {
         }
     }
 
+    private boolean addPermission(List<String> permissionsList, String permission) {
+        if (Build.VERSION.SDK_INT >= 23)
+
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsList.add(permission);
+
+                // Check for Rationale Option
+                if (!shouldShowRequestPermissionRationale(permission))
+                    return false;
+            }
+        return true;
+    }
+
+
     private void hitApiAfterDelay() {
         handler.postDelayed(new Runnable() {
             /*
@@ -150,6 +188,7 @@ public class OfferPage extends AppCompatActivity {
 
     private void getViews(){
         checkInside = (LinearLayout) findViewById(R.id.checkInsideLayout);
+        phoneLayout = (LinearLayout) findViewById(R.id.phoneLayout);
         finalPrice = (TextView) findViewById(R.id.final_price_offer_page);
         offCat = (TextView) findViewById(R.id.upper_bar_category_title);
         offTitle = (TextView) findViewById(R.id.offer_title_overlay);
@@ -160,6 +199,7 @@ public class OfferPage extends AppCompatActivity {
         doveShop = (TextView) findViewById(R.id.dove_si_trova);
         shopName = ( TextView ) findViewById(R.id.offer_page_shop_name);
         offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
+        phone = (TextView) findViewById(R.id.tv_telephone_shop_offer_page);
 
     }
 
@@ -173,6 +213,7 @@ public class OfferPage extends AppCompatActivity {
         shopName.setText(offX.getBusinessname());
         doveShop.setText(offX.getBusinessaddress());
         distance.setText(prepareDistance(offX.getDistance()));
+        phone.setText(offX.getBusinessphone());
 
 
 
