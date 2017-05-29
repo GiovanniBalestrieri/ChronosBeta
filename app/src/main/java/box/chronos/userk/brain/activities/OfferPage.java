@@ -217,8 +217,8 @@ public class OfferPage extends AppCompatActivity {
 
 
 
-        Log.d("OfferAdapter","Discount: " + Float.valueOf(offX.getDiscount()));
-        if (Float.valueOf(offX.getDiscount()) > 0.0f) {
+        Log.d("OfferAdapter","Discount: " + Float.valueOf(fixFloatFormat(offX.getDiscount())));
+        if (Float.valueOf(fixFloatFormat(offX.getDiscount())) > 0.0f) {
             offPrice.setVisibility(View.VISIBLE);
             offPrice.setText(offX.getPrice() + EUR_SIGN);
             offPrice.setPaintFlags(offPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

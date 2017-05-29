@@ -47,14 +47,17 @@ import box.chronos.userk.brain.utils.VideoUtility;
 import static box.chronos.userk.brain.settings.Includes.all_categories;
 import static box.chronos.userk.brain.utils.AppConstant.ALL_CATS;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_ID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.GET_OFFERS_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.ONE_KM_BOUND;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SIX_KM_BOUND;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.WORLD_PARAM;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
@@ -206,74 +209,10 @@ public class OffersListFragment extends Fragment {
      */
     private void prepareOffers() {
         if (Includes.staticContent) {
-            /*
-            int[] covers = new int[]{
-                    R.drawable.giacca_u,
-                    R.drawable.giacca_d,
-                    R.drawable.drone,
-                    R.drawable.scarpa_d};
-
-            Offer a = new Offer("1","Vogstyle Uomo Cappotto Trench Giacca", covers[0], "Abbigliamento Uomo");
-            a.setShopId("1");
-            a.setDescription("Modello: Altezza:185cm,Peso:73 kg\n" +
-                    "Cotone\n" +
-                    "XL:Lunghezza:28.9\",Manica:25.6\",Busto:48\",Spalla:18.5\"\n" +
-                    "giacca blouson\n" +
-                    "Materiale:90% Cotone,10% Altri ");
-            a.setPrice("240€");
-
-            offerList.add(a);
-
-            Offer a1 = new Offer("2","DELEY Autunno Giacca Slim Fit Elegante Ufficio ", covers[1], "Abbigliamento Donna");
-            a1.setShopId("1");
-            a1.setDescription("\n" +
-                    "Stile unico, creare l'illusione di curve mozzafiato\n" +
-                    "Elegante, capace e di esperienza\n" +
-                    "Cotone E Poliestere\n" +
-                    "Confortevole e morbido, materiale, moda, lo stile europeo\n" +
-                    "Adatta per: Sping/Autunno/Inverno\n" +
-                    "Dimensione: Formato asiatico è più piccolo di formato di UE. Si prega di controllare i dettagli dimensioni nella descrizione qui sotto\n");
-            a1.setPrice("135€");
-            a1.setDiscount("12%");
-            offerList.add(a1);
-
-            Offer a2 = new Offer("3","Drone Syma X5SW 4CH 2.4G 6-Asse Giroscopio RC Wifi FPV ", covers[2], "Tech");
-            a2.setShopId("2");
-            a2.setDescription("\n" +
-                    "Il velivolo FPV può volare indoor o outdoor,\n"+
-                    "3D rolling: 360 gradi di sostegno\n" +
-                    "Versione Wi-Fi, foto e video, supporto agli utenti IOS/Android\n" +
-                    "Con 0.3 MP fotocamera HD.\n" +
-                    "Pronto a volare\n");
-            a2.setPrice("455€");
-            a2.setDiscount("21%");
-            offerList.add(a2);
-
-            Offer a3 = new Offer("4","Decollete in pelle bianca", covers[3], "Scarpe Donna");
-            a3.setPrice("59,90€");
-            a3.setShopId("1");
-            a3.setDiscount("10%");
-            a3.setDescription("Altri colori disponibili" +
-                    "\n" +
-                    "- sintetico soletta" +
-                    "\n" +
-                    "- sintetico suola" +
-                    "\n" +
-                    "- sintetico fodera" +
-                    "\n" +
-                    "- 9,5 centimetri altezza tacco" +
-                    "\n" +
-                    "- 9 centimetri larghezza suola" +
-                    "\n" +
-                    "* 5 cm altezza albero" +
-                    "\n" +
-                    "* misure del prodotto sono state scattate con dimensioni della uk 7. si prega di notare che le misure di cui sopra possono variare in base alle dimensioni. ");
-            offerList.add(a3);
-
-            */
             adapter.notifyDataSetChanged();
         } else {
             requestAllGeoOffers();
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -320,9 +259,10 @@ public class OffersListFragment extends Fragment {
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
         // If world not empty
         if (world != null && !world.equals("")) {
-            pairs.put("world", SIX_KM_BOUND);
+            //pairs.put(WORLD_PARAM, SIX_KM_BOUND);
         }
-        // pairs.put(WORLD_PARAM, SIX_KM_BOUND);
+
+        pairs.put(WORLD_PARAM, ONE_KM_BOUND);
         pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
         pairs.put(LON_PARAM, sharePrefs.getLongitude()); /*"12.516753"*/
         if (cat != null && !cat.equals("")) {
