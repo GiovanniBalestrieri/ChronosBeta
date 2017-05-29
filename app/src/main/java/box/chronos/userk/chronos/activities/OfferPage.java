@@ -30,8 +30,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +49,8 @@ import box.chronos.userk.chronos.utils.UserSharedPreference;
 import box.chronos.userk.chronos.utils.Utility;
 
 import static box.chronos.userk.chronos.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.chronos.utils.AppConstant.APERTO_SHOP;
+import static box.chronos.userk.chronos.utils.AppConstant.CHIUSO_SHOP;
 import static box.chronos.userk.chronos.utils.AppConstant.DELAY_TEN_SEC;
 import static box.chronos.userk.chronos.utils.AppConstant.EUR_SIGN;
 import static box.chronos.userk.chronos.utils.AppConstant.FIVE_KM;
@@ -62,6 +66,8 @@ import static box.chronos.userk.chronos.utils.AppConstant.ONE_KM_INT;
 import static box.chronos.userk.chronos.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.chronos.utils.AppConstant.PERC_SIGN;
 import static box.chronos.userk.chronos.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.chronos.utils.AppConstant.SHOP_START_HOUR;
+import static box.chronos.userk.chronos.utils.AppConstant.SHOP_STOP_HOUR;
 import static box.chronos.userk.chronos.utils.AppConstant.SPENT_MORE_THAN_TEN_METHOD;
 import static box.chronos.userk.chronos.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.chronos.utils.AppConstant.USERID_PARAM;
@@ -83,6 +89,7 @@ public class OfferPage extends AppCompatActivity {
     TextView shopName;
     TextView distance;
     TextView phone;
+    TextView shop_status;
     ImageView offImage;
     LinearLayout checkInside, phoneLayout;
     String urlImage;
@@ -200,6 +207,7 @@ public class OfferPage extends AppCompatActivity {
         shopName = ( TextView ) findViewById(R.id.offer_page_shop_name);
         offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
         phone = (TextView) findViewById(R.id.tv_telephone_shop_offer_page);
+        shop_status = (TextView) findViewById(R.id.shop_open_close);
 
     }
 
@@ -214,6 +222,8 @@ public class OfferPage extends AppCompatActivity {
         doveShop.setText(offX.getBusinessaddress());
         distance.setText(prepareDistance(offX.getDistance()));
         phone.setText(offX.getBusinessphone());
+
+        setShopStatus();
 
 
 
@@ -249,6 +259,15 @@ public class OfferPage extends AppCompatActivity {
         }
 
 
+    }
+
+    private void setShopStatus() {
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        if (hour >= SHOP_START_HOUR && hour <= SHOP_STOP_HOUR) {
+            shop_status.setText(APERTO_SHOP);
+        } else {
+            shop_status.setText(CHIUSO_SHOP);
+        }
     }
 
     // Get user and session info

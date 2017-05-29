@@ -63,6 +63,8 @@ public class AppConstant {
 
 
 
+    public static final String APERTO_SHOP = "APERTO";
+    public static final String CHIUSO_SHOP = "CHIUSO";
 
 
 
@@ -151,6 +153,8 @@ public class AppConstant {
     public static int FIFTEEN_MIN = 15;
     public static int ZERO_MIN = 0;
     public static int DELAY_TEN_SEC = 10000;
+    public static final int SHOP_START_HOUR = 7;
+    public static final int SHOP_STOP_HOUR = 20;
 
 
 

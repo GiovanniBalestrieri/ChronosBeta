@@ -143,52 +143,79 @@
                         android:layout_marginBottom="6dp" />
 
 
+                <LinearLayout
+                    android:id="@+id/shop_details_offer_page"
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="10"
+                    android:clickable="true"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+
                     <TextView
-                        android:layout_gravity="center"
                         android:id="@+id/offer_page_shop_name"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
                         android:paddingLeft="16dp"
-                        android:paddingTop="16dp"
+                        android:text="DOVE SI TROVA"
                         android:textColor="@color/blue"
-                        android:textStyle="bold"
                         android:textSize="18dp"
-                        android:text="DOVE SI TROVA"/>
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/shop_open_close"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="APERTO"
+                        android:textColor="@color/orange2"
+                        android:textSize="@dimen/article_title_card"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
 
                     <!-- This will be the link to the shop's profile. Ignore it for the moment-->
-                    <LinearLayout
-                        android:clickable="true"
-                        android:id="@+id/checkInsideLayout"
-                        android:layout_height="70dp"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="10"
-                        android:gravity="left">
+                <LinearLayout
+                    android:id="@+id/checkInsideLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="10"
+                    android:clickable="true"
+                    android:gravity="left">
 
-                        <TextView
-                            android:id="@+id/dove_si_trova"
-                            android:layout_gravity="center"
-                            android:layout_width="0dip"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
-                            android:paddingLeft="16dp"
-                            android:textColor="@color/grey_midx2"
-                            android:textStyle="normal"
-                            android:textSize="18dp"
-                            android:text="DOVE SI TROVA"/>
+                    <TextView
+                        android:id="@+id/dove_si_trova"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:paddingLeft="16dp"
+                        android:text="DOVE SI TROVA"
+                        android:textColor="@color/grey_midx2"
+                        android:textSize="18dp"
+                        android:textStyle="normal" />
 
 
-                        <TextView
-                            android:id="@+id/distance_offer_page_tv"
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:gravity="center"
-                            android:text="20m"
-                            android:textColor="@color/orange2"
-                            android:textSize="@dimen/article_title_card"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/distance_offer_page_tv"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="20m"
+                        android:textColor="@color/orange2"
+                        android:textSize="@dimen/article_title_card"
+                        android:textStyle="bold" />
 
-                    </LinearLayout>
+                </LinearLayout>
 
                     <View
                         android:layout_width="fill_parent"
