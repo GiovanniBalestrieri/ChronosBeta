@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="box.chronos.userk.chronos.test" >
+    package="box.chronos.userk.brain.test" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -10,8 +10,8 @@
         android:name="android.support.test.runner.AndroidJUnitRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
-        android:label="Tests for box.chronos.userk.chronos"
-        android:targetPackage="box.chronos.userk.chronos" />
+        android:label="Tests for box.chronos.userk.brain"
+        android:targetPackage="box.chronos.userk.brain" />
 
     <application>
         <uses-library android:name="android.test.runner" />
