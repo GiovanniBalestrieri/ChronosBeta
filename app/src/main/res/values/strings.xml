@@ -18,7 +18,7 @@
     <string name="register_main_text">Registrazione</string>
     <string name="register_main_action">Join</string>
     <string name="register_form_email">Email</string>
-    <string name="register_form_user">Nome utente</string>
+    <string name="register_form_user">Email</string>
     <string name="register_form_pass">Password</string>
     <string name="register_form_pass_show">Mostra</string>
     <string name="register_already_registered">Già registrato?</string>
