@@ -106,18 +106,24 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
         holder.shop_name.setText(off.getBusinessname()/*.toUpperCase()*/);
 
-        Log.d("OfferAdapter","Discount: " + Float.valueOf(fixFloatFormat(off.getDiscount())));
-        if (Float.valueOf(fixFloatFormat(off.getDiscount())) == 0.0f){
+        if (off.getDiscount().isEmpty()) {
             holder.price.setVisibility(View.GONE);
             holder.discount.setText(off.getPrice() + EUR_SIGN);
             holder.finalPrice.setVisibility(View.GONE);
         } else {
-            holder.price.setVisibility(View.VISIBLE);
-            holder.price.setText(off.getPrice() + EUR_SIGN);
-            holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.discount.setText(fixFloatFormat(off.getDiscount()) + PERC_SIGN);
-            holder.finalPrice.setVisibility(View.VISIBLE);
-            holder.finalPrice.setText(computeFinalPrice(off.getPrice(), off.getDiscount()));
+            Log.d("OfferAdapter", "Discount: " + Float.valueOf(fixFloatFormat(off.getDiscount())));
+            if (Float.valueOf(fixFloatFormat(off.getDiscount())) == 0.0f) {
+                holder.price.setVisibility(View.GONE);
+                holder.discount.setText(off.getPrice() + EUR_SIGN);
+                holder.finalPrice.setVisibility(View.GONE);
+            } else {
+                holder.price.setVisibility(View.VISIBLE);
+                holder.price.setText(off.getPrice() + EUR_SIGN);
+                holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.discount.setText(fixFloatFormat(off.getDiscount()) + PERC_SIGN);
+                holder.finalPrice.setVisibility(View.VISIBLE);
+                holder.finalPrice.setText(computeFinalPrice(off.getPrice(), off.getDiscount()));
+            }
         }
         holder.distance.setText(prepareDistance(off.getDistance()));
 

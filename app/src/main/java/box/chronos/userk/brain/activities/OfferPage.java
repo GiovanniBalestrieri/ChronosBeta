@@ -216,19 +216,24 @@ public class OfferPage extends AppCompatActivity {
         setShopStatus();
 
 
-
-        Log.d("OfferAdapter","Discount: " + Float.valueOf(fixFloatFormat(offX.getDiscount())));
-        if (Float.valueOf(fixFloatFormat(offX.getDiscount())) > 0.0f) {
-            offPrice.setVisibility(View.VISIBLE);
-            offPrice.setText(offX.getPrice() + EUR_SIGN);
-            offPrice.setPaintFlags(offPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            offDiscount.setText(offX.getDiscount() + PERC_SIGN);
-            finalPrice.setVisibility(View.VISIBLE);
-            finalPrice.setText(computeFinalPrice(offX.getPrice(), offX.getDiscount()));
-        } else {
+        if (offX.getDiscount().isEmpty()) {
             offPrice.setVisibility(View.GONE);
             offDiscount.setText(offX.getPrice() + EUR_SIGN);
             finalPrice.setVisibility(View.GONE);
+        } else {
+            Log.d("OfferAdapter", "Discount: " + Float.valueOf(fixFloatFormat(offX.getDiscount())));
+            if (Float.valueOf(fixFloatFormat(offX.getDiscount())) > 0.0f) {
+                offPrice.setVisibility(View.VISIBLE);
+                offPrice.setText(offX.getPrice() + EUR_SIGN);
+                offPrice.setPaintFlags(offPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                offDiscount.setText(offX.getDiscount() + PERC_SIGN);
+                finalPrice.setVisibility(View.VISIBLE);
+                finalPrice.setText(computeFinalPrice(offX.getPrice(), offX.getDiscount()));
+            } else {
+                offPrice.setVisibility(View.GONE);
+                offDiscount.setText(offX.getPrice() + EUR_SIGN);
+                finalPrice.setVisibility(View.GONE);
+            }
         }
 
 

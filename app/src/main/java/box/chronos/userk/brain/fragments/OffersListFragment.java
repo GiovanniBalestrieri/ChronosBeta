@@ -312,10 +312,9 @@ public class OffersListFragment extends Fragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Offer ld = new Offer();
+
                 ld.setCategoryid(jsonObject.getString("categoryid").toString());
                 ld.setCategory(jsonObject.getString("category").toString());
-
-
 
                 JSONArray picArray = jsonObject.optJSONArray("offerPictures");
                 if (picArray.length()>0) {
