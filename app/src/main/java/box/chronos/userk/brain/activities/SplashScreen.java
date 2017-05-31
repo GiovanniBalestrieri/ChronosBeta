@@ -15,6 +15,8 @@ import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.utils.AppController;
 import box.chronos.userk.brain.utils.UserSharedPreference;
 
+import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
+
 /**
  * Created by userK on 9/16/16.
  */
@@ -39,7 +41,7 @@ public class SplashScreen extends Activity {
             public void run() {
                 Intent i;
                 boolean a = sharePrefs.getIsFirstTimeUser();
-                if (a && sharePrefs.getCode_status().equals("1")) {
+                if (a && sharePrefs.getCode_status().equals(ONE_RESP)) {
                     i = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(i);
                     finish();

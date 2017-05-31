@@ -48,10 +48,16 @@ import box.chronos.userk.brain.utils.Utility;
 import static box.chronos.userk.brain.utils.AppConstant.ADDRESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.BIRTHDAY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.CODE_RESP;
+import static box.chronos.userk.brain.utils.AppConstant.DEV_TOKEN_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.DEV_TYPE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.EMAIL_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.GENDER_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MAX_OFF_DIST_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MAX_OFF_VIEW_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.PASS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PHOTO_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.REPEAT_OFF_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SEL_CAT_PARAM;
@@ -219,18 +225,18 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     // request for signup
     private void requestSignUp() {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", SIGNUP_METHOD);
-        pairs.put("username", etName.getText().toString().trim());
-        pairs.put("email", etEmail.getText().toString().trim());
-        pairs.put("gender", gender);
+        pairs.put(METHOD_PARAM, SIGNUP_METHOD);
+        pairs.put(USERNAME_PARAM, etName.getText().toString().trim());
+        pairs.put(EMAIL_PARAM, etEmail.getText().toString().trim());
+        pairs.put(GENDER_PARAM, gender);
         //pairs.put("birthday", et_dateBirth.getText().toString());
-        pairs.put("devicetype", AppConstant.DEVICE_TYPE);
-        pairs.put("devicetoken", sharePrefs.getDeviceToken());
-        pairs.put("latitude", sharePrefs.getLatitude());
-        pairs.put("longitude", sharePrefs.getLongitude());
-        pairs.put("usertype", "4");
+        pairs.put(DEV_TYPE_PARAM, AppConstant.DEVICE_TYPE);
+        pairs.put(DEV_TOKEN_PARAM, sharePrefs.getDeviceToken());
+        pairs.put(LAT_PARAM, sharePrefs.getLatitude());
+        pairs.put(LON_PARAM, sharePrefs.getLongitude());
+        pairs.put(USER_TYPE_PARAM, "4");
         pairs.put("option", "3");
-        pairs.put("password", etPassword.getText().toString());
+        pairs.put(PASS_PARAM, etPassword.getText().toString());
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {

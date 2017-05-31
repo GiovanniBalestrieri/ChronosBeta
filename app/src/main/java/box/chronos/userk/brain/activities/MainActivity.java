@@ -61,6 +61,7 @@ import box.chronos.userk.brain.utils.Utility;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity
         self = this;
         imm = (InputMethodManager) self.getSystemService(Context.INPUT_METHOD_SERVICE);
         sharePrefs = AppController.getPreference();
+
+        sharePrefs.setCodeStatus(ONE_RESP);
 
         if (Build.VERSION.SDK_INT >= 23) {
             isReadContactPermissionGranted();
