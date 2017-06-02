@@ -279,12 +279,13 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_container, fragment,"Categories");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-
-
-
-        } /*else if (id == R.id.nav_slideshow) {
-
-        } */else if (id == R.id.nav_offers) {
+        } else if (id == R.id.nav_slideshow) {
+            Intent intent = new Intent(MainActivity.self, IntroActivity.class);
+            startActivity(intent);
+            //finish();
+            //sharePrefs.clearPrefrence();
+            MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+        } else if (id == R.id.nav_offers) {
             Toast.makeText(this,"Intorno a te",Toast.LENGTH_SHORT);
 
             FragmentManager fragmentManager = getFragmentManager();

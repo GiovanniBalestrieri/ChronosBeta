@@ -5731,7 +5731,7 @@ containing a value of this type.
         public static final int StatisticheText=0x7f110217;
         public static final int StatisticheView=0x7f110218;
         public static final int action0=0x7f110199;
-        public static final int action_add_favourite=0x7f110228;
+        public static final int action_add_favourite=0x7f110229;
         public static final int action_bar=0x7f1100d4;
         public static final int action_bar_activity_content=0x7f110000;
         public static final int action_bar_container=0x7f1100d3;
@@ -5750,9 +5750,9 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f1100d1;
         public static final int action_mode_bar_stub=0x7f1100d0;
         public static final int action_mode_close_button=0x7f1100b3;
-        public static final int action_play_next=0x7f110229;
-        public static final int action_search=0x7f110227;
-        public static final int action_settings=0x7f110226;
+        public static final int action_play_next=0x7f11022a;
+        public static final int action_search=0x7f110228;
+        public static final int action_settings=0x7f110227;
         public static final int action_text=0x7f110198;
         public static final int actions=0x7f1101a6;
         public static final int activity_chooser_view_content=0x7f1100b4;
@@ -6055,8 +6055,9 @@ containing a value of this type.
         public static final int mr_volume_item_icon=0x7f11018b;
         public static final int mr_volume_slider=0x7f11018c;
         public static final int multiply=0x7f110041;
-        public static final int nav_logout=0x7f110225;
+        public static final int nav_logout=0x7f110226;
         public static final int nav_offers=0x7f110224;
+        public static final int nav_slideshow=0x7f110225;
         public static final int nav_view=0x7f1100e4;
         public static final int navigation_header_container=0x7f110136;
         public static final int navigation_view=0x7f1100e8;

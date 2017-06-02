@@ -280,7 +280,9 @@ public class OfferPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //do something you want
-                NavUtils.navigateUpFromSameTask(OfferPage.this);
+                //NavUtils.navigateUpFromSameTask(OfferPage.this);
+
+                onBackPressed();
                 Log.d("OfferPage","CLICKED");
             }
         });
@@ -417,14 +419,18 @@ public class OfferPage extends AppCompatActivity {
         shops.put(s3.getShopId(),s3);
     }
 
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                //NavUtils.navigateUpFromSameTask(this);
+                // Make the Up navigation button behave like the back button
+                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+    */
 }
