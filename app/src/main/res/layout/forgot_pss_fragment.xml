@@ -48,7 +48,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
 
-
         </LinearLayout>
 
     </ScrollView>

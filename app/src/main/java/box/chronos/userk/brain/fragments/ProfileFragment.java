@@ -215,7 +215,11 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
         pairs.put(BIRTHDAY_PARAM, birthdayUser.getText().toString());
         // TODO check if genderToSend is always valid
         pairs.put(GENDER_PARAM, genderToSend);
-        pairs.put(PHONE_PARAM, busphoneET.getText().toString());
+
+
+        if (sharePrefs.getUserType().equals(SHOP_USER)) {
+            pairs.put(PHONE_PARAM, busphoneET.getText().toString());
+        }
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {
@@ -495,7 +499,12 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
 
         fillGender();
 
-        birthdayUser.setText(sharePrefs.getBirthday());
+        if (sharePrefs.getBirthday().equals("0000-0000")){
+            Log.d("Profile","Birthday non valid");
+            birthdayUser.setText(sharePrefs.getBirthday());
+        } else {
+            birthdayUser.setText(sharePrefs.getBirthday());
+        }
 
         if (sharePrefs.getUserType().equals(SHOP_USER)){
             Log.d(TAG,"\tadd: " + sharePrefs.getBusinessaddress() + "\t phone:" + sharePrefs.getBusinessphone() + "\tname: " +sharePrefs.getBusinessname());
@@ -512,6 +521,8 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
             userGender.setText(genders[0]);
         } else if (sharePrefs.getGender().equals(FEMALE_STRING)) {
             userGender.setText(genders[1]);
+        } else {
+            userGender.setText("Uomo o Donna?");
         }
     }
 

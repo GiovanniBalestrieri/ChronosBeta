@@ -99,6 +99,7 @@
     <color name="viewBg">#f1f5f8</color>
     <color name="city_title">#fcfcfc</color>
     <color name="city_card_overlay">#80000000</color>
+    <color name="city_card_overlay_light">#91000000</color>
     <color name="city_card_no_overlay">#000000</color>
 
     <!-- CardView Offers -->

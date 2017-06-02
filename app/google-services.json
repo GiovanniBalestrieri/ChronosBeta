@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "480221783779",
-    "project_id": "chronosbox-169106"
+    "project_number": "206098441779",
+    "project_id": "chronosbox-d8da6"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:480221783779:android:97a570fa91f74ec7",
+        "mobilesdk_app_id": "1:206098441779:android:905d3b66d202e411",
         "android_client_info": {
-          "package_name": "box.chronos.userk.brain"
+          "package_name": "box.chronos.userk.chronos"
         }
       },
       "oauth_client": [
         {
-          "client_id": "480221783779-9n1n412qkl2ejdr8u0dpecoqm3ta950q.apps.googleusercontent.com",
+          "client_id": "206098441779-qnt0kpapouikffmqn81m67shtf236p43.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "box.chronos.userk.brain",
+            "package_name": "box.chronos.userk.chronos",
             "certificate_hash": "68b8db4c8034031742ef996efda49e8dac01e053"
           }
         },
         {
-          "client_id": "480221783779-0l7t8dbhmqi9gasme01c6v6328hjp123.apps.googleusercontent.com",
+          "client_id": "206098441779-r7aspq1om9pstav7shg39m9m8vn15sms.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC3fcPEnp_D1DVw7EYUa5dKGBMHOYEai5M"
+          "current_key": "AIzaSyBybrA3hBPvuoFzUlzUQImLFeE1YYqrHBI"
         }
       ],
       "services": {
@@ -35,6 +35,48 @@
           "status": 2,
           "analytics_property": {
             "tracking_id": "UA-99870094-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206098441779:android:97a570fa91f74ec7",
+        "android_client_info": {
+          "package_name": "box.chronos.userk.brain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206098441779-gpiaqjc26f3h7bvpuv02l9b8ro4si017.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "box.chronos.userk.brain",
+            "certificate_hash": "c7718e902c6f4d7629e3dd99c27513fc39a8185d"
+          }
+        },
+        {
+          "client_id": "206098441779-r7aspq1om9pstav7shg39m9m8vn15sms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBybrA3hBPvuoFzUlzUQImLFeE1YYqrHBI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-99870094-2"
           }
         },
         "appinvite_service": {

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fb="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/red"
+    android:background="@color/black"
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
@@ -11,9 +11,8 @@
         android:id="@+id/transparentOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/city_card_overlay" />
+        android:background="@color/city_card_overlay_light" />
 
-    <!--android:background="@color/city_card_overlay" -->
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,6 +24,7 @@
 
 
             <ImageView
+                android:id="@+id/logo_chronos_login"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/logo_height"
                 android:layout_marginBottom="@dimen/logo_margin_bottom"
@@ -116,6 +116,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/socialLayout"
                 android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:layout_centerInParent="true"
-    android:gravity="center">
+    android:background="@color/red2"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--
+
+    <RelativeLayout
+        android:id="@+id/transparentOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/city_card_overlay"/>
+    -->
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout">
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
 
-                <ImageView
-                    android:layout_marginBottom="@dimen/logo_margin_bottom"
-                    android:gravity="center"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/logo"/>
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/logo_margin_bottom"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/logo" />
 
             <!--
             <TextView
@@ -43,18 +51,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#000"
-                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
-                android:theme="@style/TextLabel">
+                android:theme="@style/TextLabel"
+                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
 
                 <EditText
                     android:id="@+id/code"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:inputType="textPassword"
-                    android:singleLine="true"
-                    android:hint="@string/hint_invito" />
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:hint="@string/hint_invito"
+                    android:maxLines="1"
+                    android:textSize="20sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -76,24 +84,24 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <Button
-                    android:text="Accedi"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:background="@drawable/button_selector"
+                    android:id="@+id/action_code"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/linearLayout"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="45dp"
-                    android:id="@+id/action_code" />
+                    android:background="@drawable/button_selector"
+                    android:text="@string/code_invito_manda"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
         </LinearLayout>
 
+        <!--
 
         <LinearLayout
             android:id="@+id/layout_invito"
@@ -122,11 +130,32 @@
 
         </LinearLayout>
 
+        -->
 
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/layout_invito"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="#6000"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/code_skip"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/register_main_text_action"
+            android:textStyle="bold" />
 
     </LinearLayout>
-
-
 
 
 </RelativeLayout>

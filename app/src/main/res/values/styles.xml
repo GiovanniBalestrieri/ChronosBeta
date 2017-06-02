@@ -36,7 +36,7 @@
     </style>
 
     <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/orange</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="ActionDialog" parent="@android:style/Theme.Dialog">

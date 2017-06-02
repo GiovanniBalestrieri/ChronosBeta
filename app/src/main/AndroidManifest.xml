@@ -67,7 +67,7 @@
         </activity>
 
         <activity
-            android:theme="@style/MyMaterialTheme"
+            android:theme="@style/Theme.Intro"
             android:name="box.chronos.userk.brain.activities.Code">
         </activity>
 

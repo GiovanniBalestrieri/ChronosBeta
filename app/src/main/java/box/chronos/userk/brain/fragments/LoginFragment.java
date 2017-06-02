@@ -41,7 +41,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +62,7 @@ import box.chronos.userk.brain.utils.FieldsValidator;
 import box.chronos.userk.brain.utils.UserSharedPreference;
 import box.chronos.userk.brain.utils.Utility;
 
+import static android.view.View.GONE;
 import static box.chronos.userk.brain.utils.AppConstant.ADDRESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.BIRTHDAY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.BUSINESSNAME_PARAM;
@@ -110,10 +113,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;private String mParam2;
-    private ImageView img_Google, img_Facebook;
+    private ImageView img_Google, img_Facebook, logo_chronos;
+    private int countLogo;
     LoginButton loginButton;
     private EditText et_registredPassword, et_registredEmailId;
-    private LinearLayout ll_login;
+    private LinearLayout ll_login, socialLL;
     private TextView tv_SignUp, tv_ForgotPassword;
     private UserSharedPreference sharePrefs;
     private FieldsValidator fv;
@@ -166,9 +170,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         Log.d(TAG,"FACEBOOK ATTEMPT ERROR");
                     }
                 });
-        try {;
+
+        try {
             PackageInfo info = getActivity().getPackageManager().getPackageInfo(
-                    "com.example.packagename",
+                    "com.chronos.userk.brain",
                     PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
@@ -195,8 +200,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         findViews(view);
         setupLoginBtnFB();
         attachListeners();
-
         customizeBackground();
+
+        // reset Counter
+        countLogo = 0;
+        socialLL.setVisibility(GONE);
 
         return view;
     }
@@ -212,6 +220,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         img_Google.setOnClickListener(this);
         img_Facebook.setOnClickListener(this);
         ll_login.setOnClickListener(this);
+        logo_chronos.setOnClickListener(this);
     }
 
     @Override
@@ -241,6 +250,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                 // ((LoginActivity)(getActivity())).onFbloginMethod();
                 // ((LoginActivity)(getActivity())).doFblogin();
+                break;
+
+
+            case R.id.logo_chronos_login:
+                //  triple click trigger
+                countLogo++;
+                if (countLogo>=3){
+                    socialLL.setVisibility(View.VISIBLE);
+                }
                 break;
 
             case R.id.tv_ForgotPassword:
@@ -368,15 +386,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         tv_SignUp = (TextView) view.findViewById(R.id.tv_SignUp);
 
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
-
+        logo_chronos = (ImageView) view.findViewById(R.id.logo_chronos_login);
+        socialLL = (LinearLayout) view.findViewById(R.id.socialLayout);
 
     }
 
     private void setupLoginBtnFB() {
 
-        List<String> permissionNeeds = Arrays.asList("user_photos", "email",
-                "user_birthday", "public_profile", "AccessToken");
-        loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
+        //List<String> permissionNeeds = Arrays.asList("user_photos", "email","user_birthday", "public_profile");
+        loginButton.setReadPermissions(Arrays.asList("public_profile"));
+
+        // Forces Login with Fb
+        //LoginManager.getInstance().logInWithReadPermissions(this,permissionNeeds);
         //login_button.setReadPermissions(Arrays.asList("public_profile","email"));
         // If using in a fragment
         loginButton.setFragment(this);
@@ -415,7 +436,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                             String name = object.getString(NAME_PARAM);
                                             String email = object.getString(EMAIL_PARAM);
                                             String gender = object.getString(GENDER_PARAM);
-                                            String birthday = object.getString(BIRTHDAY_PARAM);
+
+                                            // Convert date facebook format to Chronos'
+                                            String dat = object.getString(BIRTHDAY_PARAM);
+
+                                            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                                            Date testDate = null;
+                                            try {
+                                                testDate = sdf.parse(dat);
+                                            }catch(Exception ex){
+                                                ex.printStackTrace();
+                                            }
+                                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
+                                            String newFormat = formatter.format(testDate);
+                                            System.out.println(".....Date..."+newFormat);
+
+                                            String birthday = newFormat;
 
                                             sendRequestForFacebookLogin(name, email, gender, birthday, AppConstant.FACEBOOK);
 
@@ -425,7 +461,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields","id,name,email,gender,user_birthday,picture");
+                        parameters.putString("fields","id,name,email,gender,birthday,picture");
                         request.setParameters(parameters);
                         request.executeAsync();
                     }
