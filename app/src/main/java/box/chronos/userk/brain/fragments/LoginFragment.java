@@ -156,18 +156,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     public void onSuccess(LoginResult loginResult) {
                         // App code
                         Log.d(TAG,"FACEBOOK OK ATTEMPT");
+                        Toast.makeText(getActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancel() {
                         // App code
                         Log.d(TAG,"FACEBOOK ATTEMPT CANCELLED");
+                        Toast.makeText(getActivity(), "CANCEL", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
                         Log.d(TAG,"FACEBOOK ATTEMPT ERROR");
+                        Toast.makeText(getActivity(), "ON ERROR", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -254,7 +257,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.logo_chronos_login:
-                //  triple click trigger
+                //  Triple click trigger
                 countLogo++;
                 if (countLogo>=3){
                     socialLL.setVisibility(View.VISIBLE);
@@ -297,6 +300,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
+
                         getJsonData(object);
                     } else {
                         Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
@@ -309,6 +313,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onRestInteractionError(String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Al MAre 2", Toast.LENGTH_SHORT).show();
             }
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
@@ -513,12 +518,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     JSONObject object = new JSONObject(response);
                     if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                         //Utility.showAlertDialog(getActivity(), object.getString("message"));
+                        Toast.makeText(getActivity(), "SUCCESS 2", Toast.LENGTH_SHORT).show();
                         getJsonDataFromFacebook(object);
                     } else {
-                        Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
+                        //Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
+                        Toast.makeText(getActivity(), "Problem 2" + object.getString(MESSAGE_KEY), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getActivity(), "Se esce questo è sgravata", Toast.LENGTH_SHORT).show();
                 }
             }
 
