@@ -11,6 +11,7 @@ public class AppConstant {
 
     // Api methods
     public static final String LOGIN_METHOD = "userLogin";
+    public static final String LOGOUT_METHOD = "userLogOut";
     public static final String UPDATE_PROFILE_METHOD = "updateProfile";
     public static final String SIGNUP_METHOD = "userSignUp";
     public static final String CODE_VALIDATION_METHOD = "validateCode";
@@ -33,9 +34,11 @@ public class AppConstant {
     public static final String METHOD_PARAM = "method";
     public static final String USERID_PARAM = "userid";
     public static final String USERNAME_PARAM = "username";
+    public static final String NAME_PARAM = "name";
     public static final String BIRTHDAY_PARAM = "birthday";
     public static final String GENDER_PARAM = "gender";
     public static final String PHOTO_PARAM = "photo";
+    public static final String PICTURE_FB_PARAM = "picture";
     public static final String BUSINESSNAME_PARAM = "businessname";
     public static final String PHONE_PARAM = "phonenumber";
     public static final String ADDRESS_PARAM = "address";
@@ -44,10 +47,12 @@ public class AppConstant {
     public static final String ONE_KM_BOUND = "1";
     public static final String SIX_KM_BOUND = "2";
     public static final String UID_PARAM = "uid";
+    public static final String ID_FB_PARAM = "id";
     public static final String CODE_PARAM = "code";
     public static final String PSS_PARAM = "password";
     public static final String EMAIL_PARAM = "email";
     public static final String PASS_PARAM = "password";
+    public static final String OPTION_PARAM = "option";
     public static final String DEV_TYPE_PARAM = "devicetype";
     public static final String CAT_ID_PARAM = "categoryid";
     public static final String MAX_OFF_DIST_PARAM = "maxofferdistance";
@@ -56,6 +61,7 @@ public class AppConstant {
     public static final String USER_TYPE_PARAM = "usertype";
     public static final String SEL_CAT_PARAM = "selctedcategory";
     public static final String OFF_ID_PARAM = "offerid";
+    public static final String URL_PARAM = "url";
 
 
 

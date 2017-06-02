@@ -63,6 +63,7 @@ import box.chronos.userk.brain.utils.Utility;
 import static box.chronos.userk.brain.utils.AppConstant.ADDRESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.BIRTHDAY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.BUSINESSNAME_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_SELECTED;
 import static box.chronos.userk.brain.utils.AppConstant.CODE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.DATA_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.DEVICE_TYPE;
@@ -70,6 +71,7 @@ import static box.chronos.userk.brain.utils.AppConstant.DEV_TOKEN_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.DEV_TYPE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.EMAIL_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.GENDER_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.ID_FB_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.LOGIN_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
@@ -77,15 +79,19 @@ import static box.chronos.userk.brain.utils.AppConstant.MAX_OFF_DIST_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MAX_OFF_VIEW_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.NAME_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.brain.utils.AppConstant.OPTION_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PASS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PHONE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PHOTO_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.PICTURE_FB_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.REPEAT_OFF_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SEL_CAT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SIGNUP_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.URL_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERNAME_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USER_TYPE_PARAM;
@@ -136,6 +142,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        // chiama CallbackManager.Factory.create per creare un sistema di
+        // gestione delle callback per gestire le risposte all'accesso.
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager,
@@ -229,7 +237,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             case R.id.img_Facebook:
                 //((LoginActivity) (getActivity())).onFblogin();
-                    loginButton.performClick();
+                loginButton.performClick();
 
                 // ((LoginActivity)(getActivity())).onFbloginMethod();
                 // ((LoginActivity)(getActivity())).doFblogin();
@@ -391,9 +399,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                         Log.i("LoginActivity",response.toString());
 
                                         try {
-                                            String id = object.getString("id");
-                                            if (object.has("picture")) {
-                                                String picture = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                                            String id = object.getString(ID_FB_PARAM);
+                                            if (object.has(PICTURE_FB_PARAM)) {
+                                                String picture = object.getJSONObject(PICTURE_FB_PARAM).getJSONObject(DATA_RESP).getString(URL_PARAM);
                                             }
 
                                             try {
@@ -404,12 +412,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                             } catch (MalformedURLException e) {
                                                 e.printStackTrace();
                                             }
-                                            String name = object.getString("name");
-                                            String email = object.getString("email");
-                                            String gender = object.getString("gender");
-                                            //String birthday = object.getString("birthday");
+                                            String name = object.getString(NAME_PARAM);
+                                            String email = object.getString(EMAIL_PARAM);
+                                            String gender = object.getString(GENDER_PARAM);
+                                            String birthday = object.getString(BIRTHDAY_PARAM);
 
-                                            sendRequestForFacebookLogin(name, email, gender, AppConstant.FACEBOOK);
+                                            sendRequestForFacebookLogin(name, email, gender, birthday, AppConstant.FACEBOOK);
 
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -417,7 +425,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields","id,name,email,gender,age_range,picture");
+                        parameters.putString("fields","id,name,email,gender,user_birthday,picture");
                         request.setParameters(parameters);
                         request.executeAsync();
                     }
@@ -445,21 +453,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     }
     // send request for facebook
-    private void sendRequestForFacebookLogin(String userName, String email, String gender, String type) {
+    private void sendRequestForFacebookLogin(String userName, String email, String gender, String birthday, String type) {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", SIGNUP_METHOD);
-        pairs.put("username", userName);
-        pairs.put("email", email);
-        pairs.put("gender", gender);
-        //
-        // pairs.put("birthday", "0000-00-00");
+        pairs.put(METHOD_PARAM, SIGNUP_METHOD);
+        pairs.put(USERNAME_PARAM, userName);
+        pairs.put(EMAIL_PARAM, email);
+        pairs.put(GENDER_PARAM, gender);
+
+        pairs.put(BIRTHDAY_PARAM, birthday);
         // TODO change usertype
-        pairs.put("usertype", "6");
-        pairs.put("devicetype", DEVICE_TYPE);
-        pairs.put("devicetoken", sharePrefs.getDeviceToken());
-        pairs.put("latitude", sharePrefs.getLatitude());
-        pairs.put("longitude", sharePrefs.getLongitude());
-        pairs.put("option", type);
+        pairs.put(USER_TYPE_PARAM, "6");
+        pairs.put(DEV_TYPE_PARAM, DEVICE_TYPE);
+        pairs.put(DEV_TOKEN_PARAM, sharePrefs.getDeviceToken());
+        pairs.put(LAT_PARAM, sharePrefs.getLatitude());
+        pairs.put(LON_PARAM, sharePrefs.getLongitude());
+        pairs.put(OPTION_PARAM, type);
 
         RestInteraction interaction = new RestInteraction(getActivity());
         interaction.setCallBack(new IAsyncResponse() {
@@ -467,11 +475,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.getString("success").equalsIgnoreCase("1")) {
+                    if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                         //Utility.showAlertDialog(getActivity(), object.getString("message"));
                         getJsonDataFromFacebook(object);
                     } else {
-                        Utility.showAlertDialog(getActivity(), object.getString("message"));
+                        Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -490,27 +498,27 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void getJsonDataFromFacebook(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
-            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
+            JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String codeResp = jsonRootObject.getString(CODE_RESP);
 
 
             String code_status = jsonRootObject.getString(CODE_RESP);
             sharePrefs.setCodeStatus(code_status);
-            sharePrefs.setUserId(jsonObject.getString("userid").toString());
-            sharePrefs.setUserName(jsonObject.getString("username").toString());
-            sharePrefs.setUserEmail(jsonObject.getString("email").toString());
-            sharePrefs.setSessionKey(jsonObject.getString("sessionkey").toString());
-            sharePrefs.setUserImage(jsonObject.getString("photo").toString());
-            sharePrefs.setGender(jsonObject.getString("gender").toString());
-            sharePrefs.setMaxOfferDistance(jsonObject.getString("maxofferdistance").toString());
-            sharePrefs.setMaxOfferView(jsonObject.getString("maxofferview").toString());
-            sharePrefs.setRepeatOffer(jsonObject.getString("repeatoffer").toString());
-            sharePrefs.setUserType(jsonObject.getString("usertype").toString());
-            sharePrefs.setBirthday(jsonObject.getString("birthday").toString());
-            sharePrefs.setSelectedCatrgory(jsonObject.getString("selctedcategory").toString());
-            sharePrefs.setDefaultAddress(jsonObject.getString("address").toString());
-            sharePrefs.setUserPhoneNumber(jsonObject.getString("phonenumber").toString());
+            sharePrefs.setUserId(jsonObject.getString(USERID_PARAM).toString());
+            sharePrefs.setUserName(jsonObject.getString(USERNAME_PARAM).toString());
+            sharePrefs.setUserEmail(jsonObject.getString(EMAIL_PARAM).toString());
+            sharePrefs.setSessionKey(jsonObject.getString(SESSION_KEY_PARAM).toString());
+            sharePrefs.setUserImage(jsonObject.getString(PHOTO_PARAM).toString());
+            sharePrefs.setGender(jsonObject.getString(GENDER_PARAM).toString());
+            sharePrefs.setMaxOfferDistance(jsonObject.getString(MAX_OFF_DIST_PARAM).toString());
+            sharePrefs.setMaxOfferView(jsonObject.getString(MAX_OFF_VIEW_PARAM).toString());
+            sharePrefs.setRepeatOffer(jsonObject.getString(REPEAT_OFF_PARAM).toString());
+            sharePrefs.setUserType(jsonObject.getString(USER_TYPE_PARAM).toString());
+            sharePrefs.setBirthday(jsonObject.getString(BIRTHDAY_PARAM).toString());
+            sharePrefs.setSelectedCatrgory(jsonObject.getString(SEL_CAT_PARAM).toString());
+            sharePrefs.setDefaultAddress(jsonObject.getString(ADDRESS_PARAM).toString());
+            sharePrefs.setUserPhoneNumber(jsonObject.getString(PHONE_PARAM).toString());
 
             if (sharePrefs.getUserType().equals(SHOP_USER)) {
                 // set personal phone to business phone

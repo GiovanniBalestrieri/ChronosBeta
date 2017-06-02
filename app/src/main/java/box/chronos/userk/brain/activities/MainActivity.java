@@ -61,7 +61,12 @@ import box.chronos.userk.brain.utils.Utility;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.brain.utils.AppConstant.LOGOUT_METHOD;
+import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -320,9 +325,9 @@ public class MainActivity extends AppCompatActivity
     // request for logout
     private void requestForLogout() {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put("method", "userLogOut");
-        pairs.put("userid", sharePrefs.getUserId());
-        pairs.put("sessionkey", sharePrefs.getSessionKey());
+        pairs.put(METHOD_PARAM, LOGOUT_METHOD);
+        pairs.put(USERID_PARAM, sharePrefs.getUserId());
+        pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
 
         RestInteraction interaction = new RestInteraction(MainActivity.self);
         interaction.setCallBack(new IAsyncResponse() {
@@ -330,7 +335,7 @@ public class MainActivity extends AppCompatActivity
             public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
-                    if (object.getString("success").equalsIgnoreCase("1")) {
+                    if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
 
                         // Facebook sync
                         //LoginManager.getInstance().logOut();
