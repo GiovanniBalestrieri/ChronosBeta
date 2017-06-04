@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <item
+        android:id="@+id/action_sort_distance_asc"
+        android:orderInCategory="101"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_near"
+        android:title="Distanza crescente" />
+
+
+    <item
+        android:id="@+id/action_sort_distance_desc"
+        android:orderInCategory="102"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_far"
+        android:title="Distanza decrescente" />
+
+
+    <item
+        android:id="@+id/action_sort_price_asc"
+        android:orderInCategory="103"
+        android:icon="@drawable/ic_price_asc"
+        android:title="Prezzo crescente" />
+
+
+    <item
+        android:id="@+id/action_sort_price_desc"
+        android:orderInCategory="104"
+        android:icon="@drawable/ic_price_desc"
+        android:title="Distanza Decrescente" />
+
+
+
+</menu>

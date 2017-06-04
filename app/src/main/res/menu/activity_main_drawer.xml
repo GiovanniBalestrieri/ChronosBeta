@@ -9,13 +9,19 @@
             android:title="Scopri" />
         -->
         <item
-            android:id="@+id/categories"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Categorie" />
-        <item
             android:id="@+id/nav_offers"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Intorno a me" />
+            android:icon="@drawable/ic_near"
+            android:title="Offerte" />
+
+        <item
+            android:id="@+id/nav_article"
+            android:icon="@drawable/ic_article_black_24dp"
+            android:title="Articoli" />
+
+        <item
+            android:id="@+id/categories"
+            android:icon="@drawable/ic_border_all_black_24dp"
+            android:title="Categorie" />
     </group>
 
     <item android:title="Communicate">
