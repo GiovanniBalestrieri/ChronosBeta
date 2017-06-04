@@ -6022,6 +6022,7 @@ containing a value of this type.
         public static final int mdtp_time_picker_dialog=0x7f110172;
         public static final int mdtp_time_picker_header=0x7f110175;
         public static final int media_actions=0x7f11019c;
+        public static final int menu_item_share=0x7f11022a;
         public static final int message=0x7f110205;
         public static final int messenger_send_button=0x7f110177;
         public static final int mid_info_card=0x7f1101ce;
@@ -6438,6 +6439,7 @@ containing a value of this type.
         public static final int activity_main_drawer=0x7f120000;
         public static final int main=0x7f120001;
         public static final int menu_album=0x7f120002;
+        public static final int offer_menu=0x7f120003;
     }
     public static final class mipmap {
         public static final int launcher=0x7f030000;

@@ -10,9 +10,12 @@ import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -63,6 +66,9 @@ import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppController.TAG;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
+import static box.chronos.userk.brain.ux.AppMessage.SHARE_BODY_1;
+import static box.chronos.userk.brain.ux.AppMessage.SHARE_BODY_2;
+import static box.chronos.userk.brain.ux.AppMessage.SHARE_BODY_TITLE;
 
 /**
  * Created by userk on 10/12/16.
@@ -85,10 +91,12 @@ public class OfferPage extends AppCompatActivity {
     String urlImage;
     HashMap<String,Shop> shops;
     String shopId;
-    String offId;
+    String offId, offTitleStr;
     private UserSharedPreference sharePrefs;
     final Handler handler = new Handler();
     Toolbar toolbar;
+    private ShareActionProvider mShareActionProvider;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +119,7 @@ public class OfferPage extends AppCompatActivity {
 
         shopId = offX.getShopId();
         offId = offX.getId_offer();
+        offTitleStr = offX.getTitle();
 
         phoneLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +164,8 @@ public class OfferPage extends AppCompatActivity {
                 }
             });
         }
+
+
     }
 
     private boolean addPermission(List<String> permissionsList, String permission) {
@@ -279,9 +290,7 @@ public class OfferPage extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //do something you want
                 //NavUtils.navigateUpFromSameTask(OfferPage.this);
-
                 onBackPressed();
                 Log.d("OfferPage","CLICKED");
             }
@@ -419,9 +428,10 @@ public class OfferPage extends AppCompatActivity {
         shops.put(s3.getShopId(),s3);
     }
 
-    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Nota: Non entra qui
+
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
@@ -429,8 +439,49 @@ public class OfferPage extends AppCompatActivity {
                 // Make the Up navigation button behave like the back button
                 onBackPressed();
                 return true;
+
+            /*
+            case R.id.menu_item_share:
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, SHARE_BODY_TITLE);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, SHARE_BODY);
+                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.dummy_text)));
+            return true;
+            */
+
         }
         return super.onOptionsItemSelected(item);
     }
-    */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate menu resource file.
+        getMenuInflater().inflate(R.menu.offer_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        mShareActionProvider.setShareIntent(doShare());
+
+        return true;
+    }
+
+
+
+
+    public Intent doShare() {
+        /*
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.dummy_text)));
+        */
+
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, SHARE_BODY_TITLE);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, SHARE_BODY_1 + offTitleStr + SHARE_BODY_2);
+        return sharingIntent;
+    }
 }

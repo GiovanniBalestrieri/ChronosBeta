@@ -13,4 +13,8 @@ public class AppMessage {
     public static final String EMPTY_USER_MSG = "Scegli un nome utente";
     public static final String EMPTY_FIELD_MSG = "Il campo non deve essere vuoto";
     public static final String EMPTY_SEX_MSG = "Sei uomo o donna?";
+    public static final String SHARE_BODY_1 = "Hey ci sono delle offerte che potrebbero interessarti!\nDai un'occhiata all'offerta: ";
+    public static final String SHARE_BODY_2 = "\nScarica ChronosBox per iPhone o Android da:\n\nwww.chronosbox.com\n";
+    public static final String SHARE_BODY_TITLE = "Unisciti a noi di Chronosbox!";
+
 }
