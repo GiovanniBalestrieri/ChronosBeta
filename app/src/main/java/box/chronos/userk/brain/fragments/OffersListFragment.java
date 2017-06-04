@@ -22,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -342,6 +344,14 @@ public class OffersListFragment extends Fragment {
                 ld.setPrice(jsonObject.getString("price").toString());
                 ld.setDiscount(jsonObject.getString("discount").toString());
                 offerList.add(ld);
+            }
+            if (offerList.size()>0) {
+                Collections.sort(offerList, new Comparator<Offer>() {
+                    @Override
+                    public int compare(Offer o1, Offer o2) {
+                        return Float.valueOf(o1.getDistance()).compareTo(Float.valueOf(o2.getDistance()));
+                    }
+                });
             }
         } catch (JSONException e) {
             e.printStackTrace();
