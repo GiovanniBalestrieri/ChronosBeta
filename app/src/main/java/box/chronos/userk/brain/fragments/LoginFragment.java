@@ -442,21 +442,25 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                             String email = object.getString(EMAIL_PARAM);
                                             String gender = object.getString(GENDER_PARAM);
 
-                                            // Convert date facebook format to Chronos'
-                                            String dat = object.getString(BIRTHDAY_PARAM);
+                                            String dat, birthday = "0000-00-00";
+                                            // Convert date facebook format to Chronos
+                                            if (!object.isNull(BIRTHDAY_PARAM)) {
+                                                dat = object.getString(BIRTHDAY_PARAM);
 
-                                            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-                                            Date testDate = null;
-                                            try {
-                                                testDate = sdf.parse(dat);
-                                            }catch(Exception ex){
-                                                ex.printStackTrace();
+                                                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                                                Date testDate = null;
+                                                try {
+                                                    testDate = sdf.parse(dat);
+                                                } catch (Exception ex) {
+                                                    ex.printStackTrace();
+                                                }
+                                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
+                                                String newFormat = formatter.format(testDate);
+                                                System.out.println(".....Date..." + newFormat);
+
+                                                birthday = newFormat;
                                             }
-                                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
-                                            String newFormat = formatter.format(testDate);
-                                            System.out.println(".....Date..."+newFormat);
 
-                                            String birthday = newFormat;
 
                                             sendRequestForFacebookLogin(name, email, gender, birthday, AppConstant.FACEBOOK);
 

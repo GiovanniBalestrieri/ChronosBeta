@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
+<!--
     <item
         android:id="@+id/action_sort_distance_asc"
         android:orderInCategory="101"
@@ -18,7 +18,7 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_far"
         android:title="Distanza decrescente" />
-
+-->
 
     <item
         android:id="@+id/action_sort_price_asc"
@@ -31,8 +31,7 @@
         android:id="@+id/action_sort_price_desc"
         android:orderInCategory="104"
         android:icon="@drawable/ic_price_desc"
-        android:title="Distanza Decrescente" />
-
+        android:title="Prezzo Decrescente" />
 
 
 </menu>

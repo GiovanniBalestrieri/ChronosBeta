@@ -92,38 +92,7 @@ public class Code extends Activity {
         id = sharePrefs.getUserId();
     }
 
-    /**
-     * Retrieve info from Main Activity's Intent if Available or get it from AppController class
-     */
-    private void retrieveInfoFromIntentIfAvailable() {
-        /*
-        if (this.getIntent().getStringExtra(CAR_NAME) != null && !this.getIntent().getStringExtra(CAR_NAME).equals("")) {
-            car_name = this.getIntent().getStringExtra(CAR_NAME);
-        }
-        else {
-            car_name = AppController.getInstance().carNameSelezionata;
-        }
-        if (this.getIntent().getStringExtra(CAR_ID) != null && !this.getIntent().getStringExtra(CAR_ID).equals("")) {
-            car_id = this.getIntent().getStringExtra(CAR_ID);
-        } else {
-            car_id = AppController.getInstance().carSelezionata;
-        }
-        if (this.getIntent().getStringExtra(LIC_ID) != null && !this.getIntent().getStringExtra(LIC_ID).equals("")) {
-            lic_id = this.getIntent().getStringExtra(LIC_ID);
-            AppController.getInstance().patenteSelezionata = lic_id;
-        } else {
-            lic_id = AppController.getInstance().patenteSelezionata;
-        }
-        if (this.getIntent().getStringExtra(MAP_ID) != null && !this.getIntent().getStringExtra(MAP_ID).equals("")) {
-            map_id = this.getIntent().getStringExtra(MAP_ID);
-        } else {
-            map_id = AppController.getInstance().mappaSelezionata;
-        }
-        */
-    }
-
     private void findViewsAndSetup() {
-
         sharePrefs = AppController.getPreference();
         //TextView code = (TextView) findViewById(R.id.code);
         codeInput = (TextInputLayout) findViewById(R.id.input_layout_code);
@@ -136,13 +105,11 @@ public class Code extends Activity {
         codeString.addTextChangedListener(new codeWatcher(codeString));
 
         procedi = (LinearLayout) findViewById(R.id.layout_invito);
-
-
     }
 
     private boolean  validateCode(){
         if (codeString.getText().toString().trim().isEmpty()) {
-        // codeInput.setError(getString(R.string.err_msg_code));
+            // codeInput.setError(getString(R.string.err_msg_code));
             requestFocus(codeString);
             return false;
         } else {
@@ -158,7 +125,6 @@ public class Code extends Activity {
         }
     }
 
-
     private class codeWatcher implements TextWatcher {
 
         private View v;
@@ -169,21 +135,13 @@ public class Code extends Activity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (start==CODE_LEN - 1) {
-                // TODO Remote Code check
-
-                //Toast.makeText(getApplicationContext(),"Yolo",Toast.LENGTH_SHORT).show();
-                //action.setVisibility(View.VISIBLE);
-
+            if (count==CODE_LEN) {
                 requestCodeCheck(0);
-
             }
         }
 
-
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count,
-        int after) {
+        public void beforeTextChanged(CharSequence s, int start, int count,int after) {
         }
 
         @Override
@@ -193,14 +151,6 @@ public class Code extends Activity {
                 case R.id.code:
                     validateCode();
                     break;
-                /*
-                case R.id.input_email:
-                    validateEmail();
-                    break;
-                case R.id.input_password:
-                    validatePassword();
-                    break;
-                    */
             }
         }
     }

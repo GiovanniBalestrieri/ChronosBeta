@@ -58,13 +58,16 @@ import static box.chronos.userk.brain.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.GET_OFFERS_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_KM_BOUND;
+import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SIX_KM_BOUND;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.WORLD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
@@ -290,13 +293,13 @@ public class OffersListFragment extends Fragment {
                     JSONObject object = new JSONObject(response);
                     offerList.clear();
                     if (response != null) {
-                        if (object.getString(SUCCESS_PARAM).equalsIgnoreCase("1")) {
+                        if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                             getJsonData(object);
                         } else {
-                            Utility.showAlertDialog(getActivity(), object.getString("message"));
+                            Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                         }
                     } else {
-                        Utility.showAlertDialog(getActivity(), object.getString("message"));
+                        Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
@@ -315,6 +318,7 @@ public class OffersListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            /*
             case R.id.action_sort_distance_asc:
                 Toast.makeText(this.getActivity(),"Distanza crescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Distance Asc");
@@ -327,6 +331,7 @@ public class OffersListFragment extends Fragment {
                 sortOffersDistanceDesc();
                 // Not implemented here
                 return false;
+                */
 
             case R.id.action_sort_price_asc:
                 Toast.makeText(this.getActivity(),"Prezzo crescente",Toast.LENGTH_SHORT);
@@ -384,8 +389,12 @@ public class OffersListFragment extends Fragment {
                 ld.setTimeout(jsonObject.getString("timer").toString());
                 ld.setPrice(jsonObject.getString("price").toString());
                 ld.setDiscount(jsonObject.getString("discount").toString());
-                offerList.add(ld);
+                if (jsonObject.getString("discount").toString().equals("") || jsonObject.getString("discount").toString().equals(ZERO_RESP))
+                    Log.d(TAG, "Skipping article");
+                else
+                    offerList.add(ld);
             }
+            // Default order by distance
             if (offerList.size()>0) {
                 Collections.sort(offerList, new Comparator<Offer>() {
                     @Override
@@ -423,7 +432,6 @@ public class OffersListFragment extends Fragment {
         }
     }
 
-
     private void sortOffersPriceDesc() {
         if (offerList.size() > 0) {
             Collections.sort(offerList, new Comparator<Offer>() {
@@ -435,7 +443,6 @@ public class OffersListFragment extends Fragment {
             adapter.notifyDataSetChanged();
         }
     }
-
 
     private void sortOffersPriceAsc() {
         if (offerList.size() > 0) {
@@ -449,13 +456,11 @@ public class OffersListFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         // Inflate menu resource file.
         inflater.inflate(R.menu.offer_list_menu, menu);
-
     }
 
 }
