@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--
+
     <item
         android:id="@+id/action_sort_distance_asc"
-        android:orderInCategory="101"
+        android:orderInCategory="103"
         app:showAsAction="always"
         android:icon="@drawable/ic_near"
         android:title="Distanza crescente" />
 
+    <!--
 
     <item
         android:id="@+id/action_sort_distance_desc"
@@ -29,7 +30,7 @@
 
     <item
         android:id="@+id/action_sort_price_desc"
-        android:orderInCategory="104"
+        android:orderInCategory="101"
         android:icon="@drawable/ic_price_desc"
         android:title="Prezzo Decrescente" />
 

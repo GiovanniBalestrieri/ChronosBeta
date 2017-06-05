@@ -114,7 +114,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;private String mParam2;
     private ImageView img_Google, img_Facebook, logo_chronos;
-    private int countLogo;
+    private int countLogo, isBDayAvailable = 0;
     LoginButton loginButton;
     private EditText et_registredPassword, et_registredEmailId;
     private LinearLayout ll_login, socialLL;
@@ -459,10 +459,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                                 System.out.println(".....Date..." + newFormat);
 
                                                 birthday = newFormat;
+                                                isBDayAvailable = 1;
+                                            } else {
+                                                isBDayAvailable = 0;
                                             }
 
 
-                                            sendRequestForFacebookLogin(name, email, gender, birthday, AppConstant.FACEBOOK);
+                                            sendRequestForFacebookLogin(name, email, gender, birthday, AppConstant.FACEBOOK, isBDayAvailable);
 
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -498,14 +501,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     }
     // send request for facebook
-    private void sendRequestForFacebookLogin(String userName, String email, String gender, String birthday, String type) {
+    private void sendRequestForFacebookLogin(String userName, String email, String gender, String birthday, String type , int bdayAvailable) {
         Map<String, String> pairs = new HashMap<>();
         pairs.put(METHOD_PARAM, SIGNUP_METHOD);
         pairs.put(USERNAME_PARAM, userName);
         pairs.put(EMAIL_PARAM, email);
         pairs.put(GENDER_PARAM, gender);
 
-        pairs.put(BIRTHDAY_PARAM, birthday);
+        if (bdayAvailable == 1)
+            pairs.put(BIRTHDAY_PARAM, birthday);
         // TODO change usertype
         pairs.put(USER_TYPE_PARAM, "6");
         pairs.put(DEV_TYPE_PARAM, DEVICE_TYPE);

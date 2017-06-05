@@ -27,6 +27,16 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_marginBottom="@dimen/fourty_dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/up_string_invito"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/register_main_text_action"
+                android:textStyle="bold"/>
+
 
             <ImageView
                 android:layout_width="150dp"
@@ -60,10 +70,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:hint="@string/hint_invito"
                     android:maxLines="1"
+                    android:textColor="@color/Black"
                     android:textSize="20sp" />
 
+                <!--
+                    android:hint="@string/hint_invito" -->
             </android.support.design.widget.TextInputLayout>
 
             <!--

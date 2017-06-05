@@ -61,9 +61,11 @@
     <string name="name_shop">Fendy</string>
     <string name="desc_shop">Descrizione</string>
 
-    <!-- Edit Text fields -->
+
+<!-- Edit Text fields -->
     <string name="hint_name">Nome e Cognomne</string>
-    <string name="hint_invito">Hai un invito?</string>
+    <string name="hint_invito">Invito</string>
+    <string name="up_string_invito">Hai un invito?</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="btn_sign_up">Registrati</string>

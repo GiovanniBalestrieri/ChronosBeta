@@ -74,8 +74,6 @@ import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
  */
 public class OffersListFragment extends Fragment {
     private static final String TAG = OffersListFragment.class.getSimpleName();
-    ArrayList<OffersResponse> arrayListOffers;
-    private String categoryid;
     private OfferAdapter adapter;
     private List<Offer> offerList = new ArrayList<Offer>();
     ArrayList<OffersResponse> arrayListNotification;
@@ -318,13 +316,15 @@ public class OffersListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*
+
             case R.id.action_sort_distance_asc:
                 Toast.makeText(this.getActivity(),"Distanza crescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Distance Asc");
                 sortOffersDistanceAsc();
                 // Do Activity menu item stuff here
                 return true;
+
+            /*
             case R.id.action_sort_distance_desc:
                 Toast.makeText(this.getActivity(),"Distanza decrescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Distance Desc");

@@ -17,4 +17,11 @@ public class AppMessage {
     public static final String SHARE_BODY_2 = "\nScarica ChronosBox per iPhone o Android da:\n\nwww.chronosbox.com\n";
     public static final String SHARE_BODY_TITLE = "Unisciti a noi di Chronosbox!";
 
+
+    public static final String SLIDE_DESC_1 = "Scopri le offerte intorno a te o seleziona le categorie di interesse";
+    public static final String SLIDE_DESC_2 = "Scegli le offerte che ti interessano";
+    public static final String SLIDE_DESC_3 = "Segui le indicazioni per raggiungere il negozio";
+    public static final String SLIDE_DESC_4 = "Scopri i nostri partners e ottieni il codice bonus";
+
+
 }
