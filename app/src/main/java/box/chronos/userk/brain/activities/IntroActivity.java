@@ -102,7 +102,7 @@ public class IntroActivity extends MaterialIntroActivity {
 
     @Override
     public void onFinish() {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, Code.class);
         startActivity(i);
         finish();
     }

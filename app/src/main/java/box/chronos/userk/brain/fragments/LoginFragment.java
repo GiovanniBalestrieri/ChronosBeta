@@ -50,6 +50,7 @@ import java.util.Map;
 
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.activities.Code;
+import box.chronos.userk.brain.activities.IntroActivity;
 import box.chronos.userk.brain.activities.LoginActivity;
 import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
@@ -313,7 +314,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onRestInteractionError(String message) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity(), "Al MAre 2", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Al MAre 2", Toast.LENGTH_SHORT).show();
             }
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
@@ -359,7 +360,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             Intent intent;
             if (codeResp.equals(ZERO_RESP)) {
-                intent = new Intent(LoginActivity.self, Code.class);
+                intent = new Intent(LoginActivity.self, IntroActivity.class);
             } else {
                 intent = new Intent(LoginActivity.self, MainActivity.class);
             }
@@ -451,7 +452,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                                 gender = object.getString(GENDER_PARAM);
                                             }
 
-                                            String dat, birthday = "0000-00-00";
+                                            String dat, birthday = "";
                                             // Convert date facebook format to Chronos
                                             if (!object.isNull(BIRTHDAY_PARAM)) {
                                                 dat = object.getString(BIRTHDAY_PARAM);
@@ -536,11 +537,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     JSONObject object = new JSONObject(response);
                     if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                         //Utility.showAlertDialog(getActivity(), object.getString("message"));
-                        Toast.makeText(getActivity(), "SUCCESS 2", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "SUCCESS 2", Toast.LENGTH_SHORT).show();
                         getJsonDataFromFacebook(object);
                     } else {
                         //Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
-                        Toast.makeText(getActivity(), "Problem 2" + object.getString(MESSAGE_KEY), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Problem 2" + object.getString(MESSAGE_KEY), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -594,7 +595,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             Intent intent;
             if (codeResp.equals(ZERO_RESP)) {
-                intent = new Intent(LoginActivity.self, Code.class);
+                intent = new Intent(LoginActivity.self, IntroActivity.class);
             } else {
                 intent = new Intent(LoginActivity.self, MainActivity.class);
             }

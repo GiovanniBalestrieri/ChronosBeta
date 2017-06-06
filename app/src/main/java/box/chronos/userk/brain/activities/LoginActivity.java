@@ -224,7 +224,7 @@ public class LoginActivity extends AppCompatActivity implements
             userName = acct.getDisplayName();
             email = acct.getEmail();
             //gender = acct.getGender();
-            Toast.makeText(this,"Info: user " + userName + "Display: "+acct.getDisplayName(),Toast.LENGTH_SHORT);
+            //Toast.makeText(this,"Info: user " + userName + "Display: "+acct.getDisplayName(),Toast.LENGTH_SHORT);
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             //updateUI(true);
             loginRequest(userName,email,"",AppConstant.DEVICE_TYPE);
@@ -320,7 +320,7 @@ public class LoginActivity extends AppCompatActivity implements
 
             Intent intent;
             if (codeResp.equals(ZERO_RESP)) {
-                intent = new Intent(LoginActivity.self, Code.class);
+                intent = new Intent(LoginActivity.self, IntroActivity.class);
             } else {
                 intent = new Intent(LoginActivity.self, MainActivity.class);
             }

@@ -33,6 +33,7 @@ import java.util.Map;
 
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.activities.Code;
+import box.chronos.userk.brain.activities.IntroActivity;
 import box.chronos.userk.brain.activities.LoginActivity;
 import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
@@ -97,16 +98,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
     public SignUpFragment() {
         // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static SignUpFragment newInstance(String param1, String param2) {
-        SignUpFragment fragment = new SignUpFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -300,7 +291,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
             Intent intent;
             if (codeResp.equals(ZERO_RESP)) {
-                intent = new Intent(LoginActivity.self, Code.class);
+                intent = new Intent(LoginActivity.self, IntroActivity.class);
             } else {
                 intent = new Intent(LoginActivity.self, MainActivity.class);
             }
