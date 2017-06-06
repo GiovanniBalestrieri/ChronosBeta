@@ -76,7 +76,7 @@ dependencies {
     // ShowCase
     compile 'agency.tango.android:material-intro-screen:0.0.5'
 
-    compile 'com.github.ihsanbal:SlidingIntoView:1.0.1'
+    //compile 'com.github.ihsanbal:SlidingIntoView:1.0.1'
 
 
     // Google SignIn

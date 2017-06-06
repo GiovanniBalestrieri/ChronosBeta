@@ -46,6 +46,7 @@ import box.chronos.userk.brain.serverRequest.AppUrls;
 import box.chronos.userk.brain.serverRequest.RestInteraction;
 import box.chronos.userk.brain.settings.Includes;
 import box.chronos.userk.brain.utils.AppController;
+import box.chronos.userk.brain.utils.Lists.ListUtilities;
 import box.chronos.userk.brain.utils.RecycleItemClickListener;
 import box.chronos.userk.brain.utils.UserSharedPreference;
 import box.chronos.userk.brain.utils.Utility;
@@ -53,18 +54,35 @@ import box.chronos.userk.brain.utils.VideoUtility;
 
 import static box.chronos.userk.brain.settings.Includes.all_categories;
 import static box.chronos.userk.brain.utils.AppConstant.ALL_CATS;
+import static box.chronos.userk.brain.utils.AppConstant.BUSINESSNAME_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.BUSINESS_ADD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.BUSINESS_PHONE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_ID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_NAME;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_ACTIVE;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_DEF;
+import static box.chronos.userk.brain.utils.AppConstant.DATA_RESP;
+import static box.chronos.userk.brain.utils.AppConstant.DISCOUNT_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.DISTANCE;
+import static box.chronos.userk.brain.utils.AppConstant.DISTANCE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.GET_OFFERS_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.ONE_KM_BOUND;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_DESC_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_ID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_NAME_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_ID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PATH_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.PRICE_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.TEN_KM_BOUND;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.SIX_KM_BOUND;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.TIMER_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.WORLD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
@@ -271,7 +289,7 @@ public class OffersListFragment extends Fragment {
             //pairs.put(WORLD_PARAM, SIX_KM_BOUND);
         }
 
-        pairs.put(WORLD_PARAM, ONE_KM_BOUND);
+        pairs.put(WORLD_PARAM, TEN_KM_BOUND);
         pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
         pairs.put(LON_PARAM, sharePrefs.getLongitude()); /*"12.516753"*/
         if (cat != null && !cat.equals("")) {
@@ -320,7 +338,7 @@ public class OffersListFragment extends Fragment {
             case R.id.action_sort_distance_asc:
                 Toast.makeText(this.getActivity(),"Distanza crescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Distance Asc");
-                sortOffersDistanceAsc();
+                ListUtilities.sortOffersDistanceAsc(offerList,adapter);
                 // Do Activity menu item stuff here
                 return true;
 
@@ -336,13 +354,13 @@ public class OffersListFragment extends Fragment {
             case R.id.action_sort_price_asc:
                 Toast.makeText(this.getActivity(),"Prezzo crescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Price Asc");
-                sortOffersPriceAsc();
+                ListUtilities.sortOffersPriceAsc(offerList,adapter);
                 // Do Activity menu item stuff here
                 return true;
             case R.id.action_sort_price_desc:
                 Toast.makeText(this.getActivity(),"Prezzo decrescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Price Desc");
-                sortOffersPriceDesc();
+                ListUtilities.sortOffersPriceDesc(offerList,adapter);
                 // Not implemented here
                 return false;
             default:
@@ -356,40 +374,40 @@ public class OffersListFragment extends Fragment {
     private void getJsonData(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
-            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
+            JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Offer ld = new Offer();
 
-                ld.setCategoryid(jsonObject.getString("categoryid").toString());
-                ld.setCategory(jsonObject.getString("category").toString());
+                ld.setCategoryid(jsonObject.getString(CAT_ID_PARAM).toString());
+                ld.setCategory(jsonObject.getString(CAT_NAME).toString());
 
-                JSONArray picArray = jsonObject.optJSONArray("offerPictures");
+                JSONArray picArray = jsonObject.optJSONArray(OFF_PIC_PARAM);
                 if (picArray.length()>0) {
                     HashMap<String, String> picMap=new LinkedHashMap<>();
                     for (int j = 0; j < picArray.length(); j++) {
                         JSONObject picObj = picArray.getJSONObject(j);
-                        String id = picObj.getString("offerpicId");
-                        String picPath = picObj.getString("offerPicture");
+                        String id = picObj.getString(OFF_PIC_ID_PARAM);
+                        String picPath = picObj.getString(OFF_PIC_PATH_PARAM);
                         picMap.put(id,picPath);
                     }
                     ld.setAvailablePictures(picMap);
                 }
-                ld.setCategoryphoto(jsonObject.getString("categoryphoto").toString());
-                ld.setPhotoactive(jsonObject.getString("photoactive").toString());
-                ld.setId_offer(jsonObject.getString("offerid").toString());
-                ld.setBusinessname(jsonObject.getString("businessname").toString());
-                ld.setLatitude(jsonObject.getString("latitude").toString());
-                ld.setTitle(jsonObject.getString("offername").toString());
-                ld.setLongitude(jsonObject.getString("longitude").toString());
-                ld.setBusinessphone(jsonObject.getString("businessphone").toString());
-                ld.setBusinessaddress(jsonObject.getString("businessaddress").toString());
-                ld.setOfferdescription(jsonObject.getString("offerdescription").toString());
-                ld.setDistance(jsonObject.getString("distance").toString());
-                ld.setTimeout(jsonObject.getString("timer").toString());
-                ld.setPrice(jsonObject.getString("price").toString());
-                ld.setDiscount(jsonObject.getString("discount").toString());
-                if (jsonObject.getString("discount").toString().equals("") || jsonObject.getString("discount").toString().equals(ZERO_RESP))
+                ld.setCategoryphoto(jsonObject.getString(CAT_PHOTO_DEF).toString());
+                ld.setPhotoactive(jsonObject.getString(CAT_PHOTO_ACTIVE).toString());
+                ld.setId_offer(jsonObject.getString(OFF_ID_PARAM).toString());
+                ld.setBusinessname(jsonObject.getString(BUSINESSNAME_PARAM).toString());
+                ld.setLatitude(jsonObject.getString(LAT_PARAM).toString());
+                ld.setTitle(jsonObject.getString(OFF_NAME_PARAM).toString());
+                ld.setLongitude(jsonObject.getString(LON_PARAM).toString());
+                ld.setBusinessphone(jsonObject.getString(BUSINESS_PHONE_PARAM).toString());
+                ld.setBusinessaddress(jsonObject.getString(BUSINESS_ADD_PARAM).toString());
+                ld.setOfferdescription(jsonObject.getString(OFF_DESC_PARAM).toString());
+                ld.setDistance(jsonObject.getString(DISTANCE_PARAM).toString());
+                ld.setTimeout(jsonObject.getString(TIMER_PARAM).toString());
+                ld.setPrice(jsonObject.getString(PRICE_PARAM).toString());
+                ld.setDiscount(jsonObject.getString(DISCOUNT_PARAM).toString());
+                if (jsonObject.getString(DISCOUNT_PARAM).toString().equals("") || jsonObject.getString(DISCOUNT_PARAM).toString().equals(ZERO_RESP))
                     Log.d(TAG, "Skipping article");
                 else
                     offerList.add(ld);
@@ -408,53 +426,6 @@ public class OffersListFragment extends Fragment {
         }
     }
 
-    private void sortOffersDistanceAsc() {
-        if (offerList.size() > 0) {
-            Collections.sort(offerList, new Comparator<Offer>() {
-                @Override
-                public int compare(Offer o1, Offer o2) {
-                    return Float.valueOf(o1.getDistance()).compareTo(Float.valueOf(o2.getDistance()));
-                }
-            });
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    private void sortOffersDistanceDesc() {
-        if (offerList.size() > 0) {
-            Collections.sort(offerList, new Comparator<Offer>() {
-                @Override
-                public int compare(Offer o1, Offer o2) {
-                    return Float.valueOf(o2.getDistance()).compareTo(Float.valueOf(o1.getDistance()));
-                }
-            });
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    private void sortOffersPriceDesc() {
-        if (offerList.size() > 0) {
-            Collections.sort(offerList, new Comparator<Offer>() {
-                @Override
-                public int compare(Offer o1, Offer o2) {
-                    return Float.valueOf(o2.getPrice()).compareTo(Float.valueOf(o1.getPrice()));
-                }
-            });
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    private void sortOffersPriceAsc() {
-        if (offerList.size() > 0) {
-            Collections.sort(offerList, new Comparator<Offer>() {
-                @Override
-                public int compare(Offer o1, Offer o2) {
-                    return Float.valueOf(o1.getPrice()).compareTo(Float.valueOf(o2.getPrice()));
-                }
-            });
-            adapter.notifyDataSetChanged();
-        }
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

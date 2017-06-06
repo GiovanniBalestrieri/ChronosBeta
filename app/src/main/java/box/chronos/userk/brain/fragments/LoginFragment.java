@@ -430,6 +430,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                                 String picture = object.getJSONObject(PICTURE_FB_PARAM).getJSONObject(DATA_RESP).getString(URL_PARAM);
                                             }
 
+                                            String name = "", email = "", gender = "";
                                             try {
                                                 URL profile_pic = new URL(
                                                         "http://graph.facebook.com/" + id + "/picture?type=large");
@@ -438,9 +439,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                             } catch (MalformedURLException e) {
                                                 e.printStackTrace();
                                             }
-                                            String name = object.getString(NAME_PARAM);
-                                            String email = object.getString(EMAIL_PARAM);
-                                            String gender = object.getString(GENDER_PARAM);
+
+                                            if (!object.isNull(NAME_PARAM)) {
+                                                name = object.getString(NAME_PARAM);
+                                            }
+                                            if (!object.isNull(EMAIL_PARAM)) {
+                                                email = object.getString(EMAIL_PARAM);
+                                            }
+
+                                            if (!object.isNull(GENDER_PARAM)) {
+                                                gender = object.getString(GENDER_PARAM);
+                                            }
 
                                             String dat, birthday = "0000-00-00";
                                             // Convert date facebook format to Chronos
@@ -505,6 +514,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Map<String, String> pairs = new HashMap<>();
         pairs.put(METHOD_PARAM, SIGNUP_METHOD);
         pairs.put(USERNAME_PARAM, userName);
+        //if pairs.get(EMAIL_PARAM)
         pairs.put(EMAIL_PARAM, email);
         pairs.put(GENDER_PARAM, gender);
 

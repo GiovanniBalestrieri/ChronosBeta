@@ -49,6 +49,7 @@ import java.util.Stack;
 
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
+import box.chronos.userk.brain.fragments.ArticleListFragment;
 import box.chronos.userk.brain.fragments.CategoriesGridFragment;
 import box.chronos.userk.brain.fragments.OffersListFragment;
 import box.chronos.userk.brain.fragments.ProfileFragment;
@@ -287,7 +288,7 @@ public class MainActivity extends AppCompatActivity
             //sharePrefs.clearPrefrence();
             MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         } else if (id == R.id.nav_offers) {
-            Toast.makeText(this,"Intorno a te",Toast.LENGTH_SHORT);
+            Toast.makeText(this.getApplicationContext(),"Intorno a te",Toast.LENGTH_SHORT);
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -298,10 +299,18 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-        }
-        /*else if (id == R.id.nav_manage) {
+        } else if (id == R.id.articoli_nav) {
+            Toast.makeText(this.getApplicationContext(),"Articoli",Toast.LENGTH_SHORT);
 
-        } else if (id == R.id.nav_share) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            ArticleListFragment fragment = new ArticleListFragment();
+            fragmentTransaction.replace(R.id.fragment_container, fragment,"Articles");
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+        } /*else if (id == R.id.nav_share) {
 
         }*/ else if (id == R.id.nav_logout) {
 

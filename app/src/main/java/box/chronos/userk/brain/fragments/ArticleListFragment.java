@@ -6,42 +6,104 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.activities.OfferPage;
 import box.chronos.userk.brain.adapters.ArticleAdapter;
+import box.chronos.userk.brain.adapters.OfferAdapter;
+import box.chronos.userk.brain.callbacks.IAsyncResponse;
 import box.chronos.userk.brain.objects.Offer;
+import box.chronos.userk.brain.objects.payloads.OffersResponse;
+import box.chronos.userk.brain.serverRequest.AppUrls;
+import box.chronos.userk.brain.serverRequest.RestInteraction;
 import box.chronos.userk.brain.settings.Includes;
+import box.chronos.userk.brain.utils.AppController;
+import box.chronos.userk.brain.utils.Lists.ListUtilities;
 import box.chronos.userk.brain.utils.RecycleItemClickListener;
+import box.chronos.userk.brain.utils.UserSharedPreference;
+import box.chronos.userk.brain.utils.Utility;
 import box.chronos.userk.brain.utils.VideoUtility;
+
+import static box.chronos.userk.brain.settings.Includes.all_categories;
+import static box.chronos.userk.brain.utils.AppConstant.ALL_CATS;
+import static box.chronos.userk.brain.utils.AppConstant.BUSINESSNAME_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.BUSINESS_ADD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.BUSINESS_PHONE_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_ID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_NAME;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_ACTIVE;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_DEF;
+import static box.chronos.userk.brain.utils.AppConstant.DATA_RESP;
+import static box.chronos.userk.brain.utils.AppConstant.DISCOUNT_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.DISTANCE;
+import static box.chronos.userk.brain.utils.AppConstant.GET_OFFERS_METHOD;
+import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
+import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_DESC_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_ID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_NAME_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_ID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PATH_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.brain.utils.AppConstant.PRICE_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.TEN_KM_BOUND;
+import static box.chronos.userk.brain.utils.AppConstant.TIMER_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.WORLD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
 public class ArticleListFragment extends Fragment {
+    private static final String TAG = OffersListFragment.class.getSimpleName();
     private ArticleAdapter adapter;
     private List<Offer> offerList = new ArrayList<Offer>();
+    ArrayList<OffersResponse> arrayListNotification;
+    private UserSharedPreference sharePrefs;
     private ImageView glideHeader;
+    private RecyclerView recyclerView;
+    private String cat, world;
 
     public ArticleListFragment() {
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -51,8 +113,10 @@ public class ArticleListFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.offers_list_main, container, false);
 
+        sharePrefs = AppController.getPreference();
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_offer);
+
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_offer);
         recyclerView.setHasFixedSize(true);
 
         offerList = new ArrayList<>();
@@ -61,15 +125,15 @@ public class ArticleListFragment extends Fragment {
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(10,getActivity()), true));
+        recyclerView.addItemDecoration(new ArticleListFragment.GridSpacingItemDecoration(2, VideoUtility.dpToPx(10,getActivity()), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        retrieveData();
         prepareOffers();
+
         ((MainActivity) getActivity()).requestForGps();
-
         //triggerTutorial(rootView);
-
 
         recyclerView.addOnItemTouchListener(
 
@@ -79,15 +143,25 @@ public class ArticleListFragment extends Fragment {
                         Offer lic = (Offer) offerList.get(position);
                         Log.d("YOLO", "Lincence: " + lic.getTitle() + " clicked");
 
-
-
                         // Create new fragment and transaction
-
 
                         Toast.makeText(getActivity(),"Offer",Toast.LENGTH_SHORT);
                         Intent i = new Intent(getActivity(),OfferPage.class);
 
                         i.putExtra("Offer",offerList.get(position));
+                        if (lic.hasPicture()) {
+                            List<String> list = new ArrayList<>();
+                            for (int j = 0; j < lic.getAvailablePictures().size(); j++) {
+                                Iterator it =lic.getAvailablePictures().entrySet().iterator();
+                                while (it.hasNext()) {
+                                    Map.Entry pair = (Map.Entry)it.next();
+                                    System.out.println(pair.getKey() + " = " + pair.getValue());
+                                    list.add((String) pair.getValue());
+                                }
+                                i.putStringArrayListExtra("pictures", (ArrayList<String>) list);
+
+                            }
+                        }
                         startActivity(i);
 
                         /*
@@ -101,103 +175,40 @@ public class ArticleListFragment extends Fragment {
 
                         // Commit the transaction
                         transaction.commit();
+
                         */
+
                     }
                 }
 
                 )
         );
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Offerte");
+
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         return rootView;
-    }
 
+    }
 
 
     /**
-     * Adding few cities for testing -> Implement dynamic loading
+     * Retrieve intent data from activity
      */
-    private void prepareOffers() {
-        if (Includes.staticContent) {
-            int[] covers = new int[]{
-                    R.drawable.giacca_u,
-                    R.drawable.giacca_d,
-                    R.drawable.drone,
-                    R.drawable.scarpa_d};
+    public void retrieveData(){
+        Bundle arguments = getArguments();
+        if (arguments != null && arguments.containsKey("cat")) {
+            cat = getArguments().getString("cat");
+        }
 
-            Offer a = new Offer("1","Vogstyle Uomo Cappotto Trench Giacca", covers[0], "Abbigliamento Uomo");
-            a.setShopId("1");
-            a.setDescription("Modello: Altezza:185cm,Peso:73 kg\n" +
-                    "Cotone\n" +
-                    "XL:Lunghezza:28.9\",Manica:25.6\",Busto:48\",Spalla:18.5\"\n" +
-                    "giacca blouson\n" +
-                    "Materiale:90% Cotone,10% Altri ");
-            a.setPrice("240€");
-
-            offerList.add(a);
-
-            Offer a1 = new Offer("2","DELEY Autunno Giacca Slim Fit Elegante Ufficio ", covers[1], "Abbigliamento Donna");
-            a1.setShopId("1");
-            a1.setDescription("\n" +
-                    "Stile unico, creare l'illusione di curve mozzafiato\n" +
-                    "Elegante, capace e di esperienza\n" +
-                    "Cotone E Poliestere\n" +
-                    "Confortevole e morbido, materiale, moda, lo stile europeo\n" +
-                    "Adatta per: Sping/Autunno/Inverno\n" +
-                    "Dimensione: Formato asiatico è più piccolo di formato di UE. Si prega di controllare i dettagli dimensioni nella descrizione qui sotto\n");
-            a1.setPrice("135€");
-            a1.setDiscount("12%");
-            offerList.add(a1);
-
-            Offer a2 = new Offer("3","Drone Syma X5SW 4CH 2.4G 6-Asse Giroscopio RC Wifi FPV ", covers[2], "Tech");
-            a2.setShopId("2");
-            a2.setDescription("\n" +
-                    "Il velivolo FPV può volare indoor o outdoor,\n"+
-                    "3D rolling: 360 gradi di sostegno\n" +
-                    "Versione Wi-Fi, foto e video, supporto agli utenti IOS/Android\n" +
-                    "Con 0.3 MP fotocamera HD.\n" +
-                    "Pronto a volare\n");
-            a2.setPrice("455€");
-            a2.setDiscount("21%");
-            offerList.add(a2);
-
-            Offer a3 = new Offer("4","Decollete in pelle bianca", covers[3], "Scarpe Donna");
-            a3.setPrice("59,90€");
-            a3.setShopId("1");
-            a3.setDiscount("10%");
-            a3.setDescription("Altri colori disponibili" +
-                    "\n" +
-                    "- sintetico soletta" +
-                    "\n" +
-                    "- sintetico suola" +
-                    "\n" +
-                    "- sintetico fodera" +
-                    "\n" +
-                    "- 9,5 centimetri altezza tacco" +
-                    "\n" +
-                    "- 9 centimetri larghezza suola" +
-                    "\n" +
-                    "* 5 cm altezza albero" +
-                    "\n" +
-                    "* misure del prodotto sono state scattate con dimensioni della uk 7. si prega di notare che le misure di cui sopra possono variare in base alle dimensioni. ");
-            offerList.add(a3);
-
-            adapter.notifyDataSetChanged();
-        } else {
-            // Retrieve from activity
-            // Get Licences
-
-            /*
-            String a = getActivity().getIntent().getStringExtra(TOT_LICENCES);
-            for (int j = 0; j < Integer.valueOf(a);j++) {
-                Licence licx = (Licence) getActivity().getIntent().getParcelableExtra(LICENCE_LIST + String.valueOf(j));
-                licenceList.add(licx);
-            }
-
-            adapter.notifyDataSetChanged();
-            */
+        if (arguments != null && arguments.containsKey("world")) {
+            world  = getArguments().getString("world");
         }
     }
+
+
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -235,6 +246,169 @@ public class ArticleListFragment extends Fragment {
     }
 
 
+    /**
+     * Adding few cities for testing -> Implement dynamic loading
+     */
+    private void prepareOffers() {
+        if (Includes.staticContent) {
+            adapter.notifyDataSetChanged();
+        } else {
+            requestAllArticles();
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+
+    // request for all notifications
+    private void requestAllArticles() {
+        Map<String, String> pairs = new HashMap<>();
+        pairs.put(METHOD_PARAM, GET_OFFERS_METHOD);
+        pairs.put(USERID_PARAM, sharePrefs.getUserId());
+        pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
+        // If world not empty
+        if (world != null && !world.equals("")) {
+            //pairs.put(WORLD_PARAM, SIX_KM_BOUND);
+        }
+
+        pairs.put(WORLD_PARAM, TEN_KM_BOUND);
+        pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
+        pairs.put(LON_PARAM, sharePrefs.getLongitude()); /*"12.516753"*/
+        if (cat != null && !cat.equals("")) {
+            pairs.put(CAT_ID_PARAM, cat);
+        } else {
+            if (all_categories)
+                pairs.put(CAT_ID_PARAM, ALL_CATS);
+            else
+                pairs.put(CAT_ID_PARAM, sharePrefs.getSelectedCatrgory());
+        }
+
+        RestInteraction interaction = new RestInteraction(getActivity());
+        interaction.setCallBack(new IAsyncResponse() {
+            @Override
+            public void onRestInteractionResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    offerList.clear();
+                    if (response != null) {
+                        if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
+                            getJsonData(object);
+                        } else {
+                            Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
+                        }
+                    } else {
+                        Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
+                    }
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onRestInteractionError(String message) {
+                Utility.showAlertDialog(getActivity(), message);
+            }
+        });
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");
+    }
+
+
+    // get json data
+    private void getJsonData(JSONObject object) {
+        try {
+            JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
+            JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Offer ld = new Offer();
+
+                ld.setCategoryid(jsonObject.getString(CAT_ID_PARAM).toString());
+                ld.setCategory(jsonObject.getString(CAT_NAME).toString());
+
+                JSONArray picArray = jsonObject.optJSONArray(OFF_PIC_PARAM);
+                if (picArray.length()>0) {
+                    HashMap<String, String> picMap=new LinkedHashMap<>();
+                    for (int j = 0; j < picArray.length(); j++) {
+                        JSONObject picObj = picArray.getJSONObject(j);
+                        String id = picObj.getString(OFF_PIC_ID_PARAM);
+                        String picPath = picObj.getString(OFF_PIC_PATH_PARAM);
+                        picMap.put(id,picPath);
+                    }
+                    ld.setAvailablePictures(picMap);
+                }
+                ld.setCategoryphoto(jsonObject.getString(CAT_PHOTO_DEF).toString());
+                ld.setPhotoactive(jsonObject.getString(CAT_PHOTO_ACTIVE).toString());
+                ld.setId_offer(jsonObject.getString(OFF_ID_PARAM).toString());
+                ld.setBusinessname(jsonObject.getString(BUSINESSNAME_PARAM).toString());
+                ld.setLatitude(jsonObject.getString(LAT_PARAM).toString());
+                ld.setTitle(jsonObject.getString(OFF_NAME_PARAM).toString());
+                ld.setLongitude(jsonObject.getString(LON_PARAM).toString());
+                ld.setBusinessphone(jsonObject.getString(BUSINESS_PHONE_PARAM).toString());
+                ld.setBusinessaddress(jsonObject.getString(BUSINESS_ADD_PARAM).toString());
+                ld.setOfferdescription(jsonObject.getString(OFF_DESC_PARAM).toString());
+                ld.setDistance(jsonObject.getString(DISTANCE).toString());
+                ld.setTimeout(jsonObject.getString(TIMER_PARAM).toString());
+                ld.setPrice(jsonObject.getString(PRICE_PARAM).toString());
+                ld.setDiscount(jsonObject.getString(DISCOUNT_PARAM).toString());
+                if (jsonObject.getString(DISCOUNT_PARAM).toString().equals("") || jsonObject.getString(DISCOUNT_PARAM).toString().equals(ZERO_RESP))
+                    Log.d(TAG, "Skipping article");
+                else
+                    offerList.add(ld);
+            }
+            // Default order by distance
+            if (offerList.size()>0) {
+                Collections.sort(offerList, new Comparator<Offer>() {
+                    @Override
+                    public int compare(Offer o1, Offer o2) {
+                        return Float.valueOf(o1.getDistance()).compareTo(Float.valueOf(o2.getDistance()));
+                    }
+                });
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_sort_distance_asc:
+                Toast.makeText(this.getActivity(),"Distanza crescente",Toast.LENGTH_SHORT);
+                Log.d("OffersList","Sort Distance Asc");
+                //ListUtilities.sortOffersDistanceAsc(offerList,adapter);
+                // Do Activity menu item stuff here
+                return true;
+
+            /*
+            case R.id.action_sort_distance_desc:
+                Toast.makeText(this.getActivity(),"Distanza decrescente",Toast.LENGTH_SHORT);
+                Log.d("OffersList","Sort Distance Desc");
+                sortOffersDistanceDesc();
+                // Not implemented here
+                return false;
+                */
+
+            case R.id.action_sort_price_asc:
+                Toast.makeText(this.getActivity(),"Prezzo crescente",Toast.LENGTH_SHORT);
+                Log.d("OffersList","Sort Price Asc");
+                //sortOffersPriceAsc();
+                // Do Activity menu item stuff here
+                return true;
+            case R.id.action_sort_price_desc:
+                Toast.makeText(this.getActivity(),"Prezzo decrescente",Toast.LENGTH_SHORT);
+                Log.d("OffersList","Sort Price Desc");
+                //sortOffersPriceDesc();
+                // Not implemented here
+                return false;
+            default:
+                break;
+        }
+
+        return false;
+    }
 
 
 }

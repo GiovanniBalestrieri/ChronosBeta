@@ -17,6 +17,10 @@ import static box.chronos.userk.brain.ux.AppMessage.SLIDE_DESC_1;
 import static box.chronos.userk.brain.ux.AppMessage.SLIDE_DESC_2;
 import static box.chronos.userk.brain.ux.AppMessage.SLIDE_DESC_3;
 import static box.chronos.userk.brain.ux.AppMessage.SLIDE_DESC_4;
+import static box.chronos.userk.brain.ux.AppMessage.SLIDE_TITLE_1;
+import static box.chronos.userk.brain.ux.AppMessage.SLIDE_TITLE_2;
+import static box.chronos.userk.brain.ux.AppMessage.SLIDE_TITLE_3;
+import static box.chronos.userk.brain.ux.AppMessage.SLIDE_TITLE_4;
 
 /**
  * Created by ChronosTeam on 01/03/2017.
@@ -43,8 +47,8 @@ public class IntroActivity extends MaterialIntroActivity {
                         .buttonsColor(R.color.teal)
                         //.possiblePermissions(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_SMS})
                         //.neededPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
-                        .image(R.drawable.slide_one)
-                        .title("")
+                        .image(R.drawable.p1negozi)
+                        .title(SLIDE_TITLE_1)
                         .description(SLIDE_DESC_1)
                         .build());
         addSlide(new SlideFragmentBuilder()
@@ -52,8 +56,8 @@ public class IntroActivity extends MaterialIntroActivity {
                         .buttonsColor(R.color.orange2)
                         //.possiblePermissions(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_SMS})
                         //.neededPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
-                        .image(R.drawable.slide_two)
-                        .title("")
+                        .image(R.drawable.p2carrello)
+                        .title(SLIDE_TITLE_2)
                         .description(SLIDE_DESC_2)
                         .build());
         addSlide(new SlideFragmentBuilder()
@@ -61,8 +65,8 @@ public class IntroActivity extends MaterialIntroActivity {
                         .buttonsColor(R.color.bluegrey)
                         //.possiblePermissions(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_SMS})
                         //.neededPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
-                        .image(R.drawable.slide_three)
-                        .title("")
+                        .image(R.drawable.p3mappa)
+                        .title(SLIDE_TITLE_3)
                         .description(SLIDE_DESC_3)
                         .build());
         addSlide(new SlideFragmentBuilder()
@@ -70,8 +74,8 @@ public class IntroActivity extends MaterialIntroActivity {
                         .buttonsColor(R.color.indigo)
                         //.possiblePermissions(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_SMS})
                         //.neededPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
-                        .image(R.drawable.slide_four)
-                        .title("")
+                        .image(R.drawable.p4limousine)
+                        .title(SLIDE_TITLE_4)
                         .description(SLIDE_DESC_4)
                         .build(),
                 new MessageButtonBehaviour(new View.OnClickListener() {

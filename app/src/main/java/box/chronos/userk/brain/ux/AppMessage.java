@@ -18,10 +18,17 @@ public class AppMessage {
     public static final String SHARE_BODY_TITLE = "Unisciti a noi di Chronosbox!";
 
 
-    public static final String SLIDE_DESC_1 = "Scopri le offerte intorno a te o seleziona le categorie di interesse";
-    public static final String SLIDE_DESC_2 = "Scegli le offerte che ti interessano";
-    public static final String SLIDE_DESC_3 = "Segui le indicazioni per raggiungere il negozio";
-    public static final String SLIDE_DESC_4 = "Scopri i nostri partners e ottieni il codice bonus";
+    public static final String SLIDE_DESC_1 = "Scopri le offerte intorno a te o\n scegli le categorie che ti interessano.\n\nNiente Spam!";
+    public static final String SLIDE_DESC_2 = "Scegli tra centinaia di offerte ogni giorno.";
+    public static final String SLIDE_DESC_3 = "Recati in negozio seguendo le indicazione e ottieni la tua fantastica offerta.\nPuoi anche condividerla con i tuoi amici interessati!";
+    public static final String SLIDE_DESC_4 = "Trova i nostri partners e richiedi un invito per ottenere ancora più offerte.";
+
+
+
+    public static final String SLIDE_TITLE_1 = "Rivoluziona il tuo shopping!\n\n";
+    public static final String SLIDE_TITLE_2 = "Trova l'offerta su misura per te\n\n";
+    public static final String SLIDE_TITLE_3 = "Tempus Fugit\n\n";
+    public static final String SLIDE_TITLE_4 = "Utilizza il codice Bonus!\n\n";
 
 
 }

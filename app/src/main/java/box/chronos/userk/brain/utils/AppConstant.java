@@ -19,6 +19,7 @@ public class AppConstant {
     public static final String FORGOT_PSS_METHOD = "forgotPassword";
     public static final String GET_CAT_METHOD = "getAllCategories";
     public static final String GET_OFFERS_METHOD = "getNotifications";
+    public static final String GET_ARTICLES_METHOD = "getArticles";
     public static final String GET_PROFILE_INFO_METHOD = "viwProfile";
     public static final String SPENT_MORE_THAN_TEN_METHOD = "spentTimeMoreThanTenSecOnOffer";
 
@@ -39,12 +40,23 @@ public class AppConstant {
     public static final String GENDER_PARAM = "gender";
     public static final String PHOTO_PARAM = "photo";
     public static final String PICTURE_FB_PARAM = "picture";
+    public static final String DISTANCE_PARAM = "distance";
     public static final String BUSINESSNAME_PARAM = "businessname";
+    public static final String TIMER_PARAM = "timer";
+    public static final String DISCOUNT_PARAM = "discount";
+    public static final String PRICE_PARAM = "price";
+    public static final String OFF_DESC_PARAM = "offerdescription";
+    public static final String BUSINESS_PHONE_PARAM = "businessphone";
+    public static final String BUSINESS_ADD_PARAM = "businessaddress";
     public static final String PHONE_PARAM = "phonenumber";
     public static final String ADDRESS_PARAM = "address";
     public static final String SESSION_KEY_PARAM = "sessionkey";
+    public static final String OFF_PIC_PARAM = "offerPictures";
+    public static final String OFF_NAME_PARAM = "offername";
+    public static final String OFF_PIC_PATH_PARAM = "offerPicture";
+    public static final String OFF_PIC_ID_PARAM = "offerpicId";
     public static final String WORLD_PARAM = "world";
-    public static final String ONE_KM_BOUND = "1";
+    public static final String TEN_KM_BOUND = "1";
     public static final String SIX_KM_BOUND = "2";
     public static final String UID_PARAM = "uid";
     public static final String ID_FB_PARAM = "id";
