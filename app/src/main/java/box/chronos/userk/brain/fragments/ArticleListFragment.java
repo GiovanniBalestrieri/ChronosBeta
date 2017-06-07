@@ -61,6 +61,8 @@ import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_DEF;
 import static box.chronos.userk.brain.utils.AppConstant.DATA_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.DISCOUNT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.DISTANCE;
+import static box.chronos.userk.brain.utils.AppConstant.DISTANCE_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.GET_ARTICLES_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.GET_OFFERS_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
@@ -262,7 +264,7 @@ public class ArticleListFragment extends Fragment {
     // request for all notifications
     private void requestAllArticles() {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put(METHOD_PARAM, GET_OFFERS_METHOD);
+        pairs.put(METHOD_PARAM, GET_ARTICLES_METHOD);
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
         // If world not empty
@@ -346,7 +348,7 @@ public class ArticleListFragment extends Fragment {
                 ld.setBusinessphone(jsonObject.getString(BUSINESS_PHONE_PARAM).toString());
                 ld.setBusinessaddress(jsonObject.getString(BUSINESS_ADD_PARAM).toString());
                 ld.setOfferdescription(jsonObject.getString(OFF_DESC_PARAM).toString());
-                ld.setDistance(jsonObject.getString(DISTANCE).toString());
+                ld.setDistance(jsonObject.getString(DISTANCE_PARAM).toString());
                 ld.setTimeout(jsonObject.getString(TIMER_PARAM).toString());
                 ld.setPrice(jsonObject.getString(PRICE_PARAM).toString());
                 ld.setDiscount(jsonObject.getString(DISCOUNT_PARAM).toString());

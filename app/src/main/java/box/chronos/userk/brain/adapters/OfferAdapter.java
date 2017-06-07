@@ -36,6 +36,7 @@ import static box.chronos.userk.brain.utils.AppConstant.STRING_30_MIN;
 import static box.chronos.userk.brain.utils.AppConstant.STRING_45_MIN;
 import static box.chronos.userk.brain.utils.AppConstant.STRING_DUE;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
+import static box.chronos.userk.brain.utils.algebra.MathUtils.prepareDistanceOffers;
 
 
 /**
@@ -125,7 +126,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
                 holder.finalPrice.setText(computeFinalPrice(off.getPrice(), off.getDiscount()));
             }
         }
-        holder.distance.setText(prepareDistance(off.getDistance()));
+        holder.distance.setText(prepareDistanceOffers(off.getDistance()));
 
         // Visibility Gone Action
         holder.actionLL.setVisibility(View.GONE);

@@ -191,7 +191,8 @@
                         android:paddingLeft="@dimen/twenty_dp"
                         android:text="L'atelier des penseurs"
                         android:textColor="@color/grey_midx2"
-                        android:textSize="@dimen/shop_title_card" />
+                        android:textSize="@dimen/shop_title_card"
+                        tools:ignore="RtlSymmetry" />
 
                     <!--
 

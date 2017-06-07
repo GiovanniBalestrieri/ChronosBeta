@@ -104,7 +104,7 @@
     <dimen name="article_content">16dp</dimen>
 
 
-    <dimen name="quiz_multi">18dp</dimen>
+    <dimen name="article_cat_card_big">18dp</dimen>
     <dimen name="quiz_content_padding_top_bot">5dp</dimen>
     <dimen name="quiz_dialog_bar_padding_top_bot">5dp</dimen>
     <dimen name="quiz_content_padding_lateral">10dp</dimen>
