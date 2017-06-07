@@ -165,28 +165,13 @@ public class ArticleListFragment extends Fragment {
                             }
                         }
                         startActivity(i);
-
-                        /*
-                        OfferFragment newLoc = new OfferFragment();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-                        // Replace whatever is in the fragment_container view with this fragment,
-                        // and add the transaction to the back stack
-                        transaction.replace(R.id.fragment_container, newLoc,"location");
-                        transaction.addToBackStack(null);
-
-                        // Commit the transaction
-                        transaction.commit();
-
-                        */
-
                     }
                 }
 
                 )
         );
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Offerte");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Articoli");
 
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
