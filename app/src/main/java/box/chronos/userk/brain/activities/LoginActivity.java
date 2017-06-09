@@ -146,7 +146,6 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
-
     public void replaceFragment(Fragment fragment) {
         String backStateName = fragment.getClass().getName();
         String fragmentTag = backStateName;

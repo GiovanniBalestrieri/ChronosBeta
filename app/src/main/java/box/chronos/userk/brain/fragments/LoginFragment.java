@@ -147,6 +147,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        try {
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo(
+                    "box.chronos.userk.brain",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
         // chiama CallbackManager.Factory.create per creare un sistema di
         // gestione delle callback per gestire le risposte all'accesso.
         callbackManager = CallbackManager.Factory.create();

@@ -75,6 +75,7 @@ import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_ID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PATH_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.brain.utils.AppConstant.PAGE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PRICE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
@@ -96,6 +97,10 @@ public class ArticleListFragment extends Fragment {
     private ImageView glideHeader;
     private RecyclerView recyclerView;
     private String cat, world;
+    private int pages=1;
+    private boolean loading = true;
+    LinearLayoutManager mLayoutManager;
+    int pastVisiblesItems, visibleItemCount, totalItemCount;
 
     public ArticleListFragment() {
     }
@@ -125,7 +130,7 @@ public class ArticleListFragment extends Fragment {
         adapter = new ArticleAdapter(getActivity(), offerList, recyclerView);
 
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new ArticleListFragment.GridSpacingItemDecoration(2, VideoUtility.dpToPx(10,getActivity()), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -170,6 +175,31 @@ public class ArticleListFragment extends Fragment {
 
                 )
         );
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
+                if(dy > 0) //check for scroll down
+                {
+                    visibleItemCount = mLayoutManager.getChildCount();
+                    totalItemCount = mLayoutManager.getItemCount();
+                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+
+                    if (loading)
+                    {
+                        if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount /*&& totalItemCount >= Integer.valueOf(sharePrefs.getMaxOfferView())*/) {
+                            loading = false;
+                            Log.v("...", "Last Item Wow !");
+                            pages++;
+                            requestAllArticles(pages);
+                        }
+                    }
+                }
+            }
+        });
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Articoli");
 
@@ -240,14 +270,14 @@ public class ArticleListFragment extends Fragment {
         if (Includes.staticContent) {
             adapter.notifyDataSetChanged();
         } else {
-            requestAllArticles();
+            requestAllArticles(pages);
             adapter.notifyDataSetChanged();
         }
     }
 
 
     // request for all notifications
-    private void requestAllArticles() {
+    private void requestAllArticles(int page) {
         Map<String, String> pairs = new HashMap<>();
         pairs.put(METHOD_PARAM, GET_ARTICLES_METHOD);
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
@@ -258,6 +288,7 @@ public class ArticleListFragment extends Fragment {
         }
 
         pairs.put(WORLD_PARAM, TEN_KM_BOUND);
+        pairs.put(PAGE_PARAM, Integer.toString(page));
         pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
         pairs.put(LON_PARAM, sharePrefs.getLongitude()); /*"12.516753"*/
         if (cat != null && !cat.equals("")) {
@@ -279,6 +310,7 @@ public class ArticleListFragment extends Fragment {
                     if (response != null) {
                         if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                             getJsonData(object);
+                            loading = true;
                         } else {
                             Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                         }

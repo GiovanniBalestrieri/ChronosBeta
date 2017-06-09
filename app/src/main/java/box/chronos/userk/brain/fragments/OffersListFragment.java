@@ -77,6 +77,7 @@ import static box.chronos.userk.brain.utils.AppConstant.OFF_NAME_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_ID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PATH_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.PAGE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PRICE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.TEN_KM_BOUND;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
@@ -98,7 +99,11 @@ public class OffersListFragment extends Fragment {
     private UserSharedPreference sharePrefs;
     private ImageView glideHeader;
     private RecyclerView recyclerView;
+    private int pages = 1;
     private String cat, world;
+    private boolean loading = true;
+    LinearLayoutManager mLayoutManager;
+    int pastVisiblesItems, visibleItemCount, totalItemCount;
 
     public OffersListFragment() {
     }
@@ -144,11 +149,12 @@ public class OffersListFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_offer);
         recyclerView.setHasFixedSize(true);
 
+
         offerList = new ArrayList<>();
         adapter = new OfferAdapter(getActivity(), offerList, recyclerView);
 
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(10,getActivity()), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -189,25 +195,37 @@ public class OffersListFragment extends Fragment {
                         }
                         startActivity(i);
 
-                        /*
-                        OfferFragment newLoc = new OfferFragment();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-                        // Replace whatever is in the fragment_container view with this fragment,
-                        // and add the transaction to the back stack
-                        transaction.replace(R.id.fragment_container, newLoc,"location");
-                        transaction.addToBackStack(null);
-
-                        // Commit the transaction
-                        transaction.commit();
-
-                        */
-
                     }
                 }
 
                 )
         );
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
+                if(dy > 0) //check for scroll down
+                {
+                    visibleItemCount = mLayoutManager.getChildCount();
+                    totalItemCount = mLayoutManager.getItemCount();
+                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+
+                    if (loading)
+                    {
+                        if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount && totalItemCount >= Integer.valueOf(sharePrefs.getMaxOfferView()))
+                        {
+                            loading = false;
+                            Log.v("...", "Last Item Wow !");
+                            pages++;
+                            requestAllGeoOffers(pages);
+                        }
+                    }
+                }
+            }
+        });
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Offerte");
 
@@ -238,7 +256,7 @@ public class OffersListFragment extends Fragment {
         if (Includes.staticContent) {
             adapter.notifyDataSetChanged();
         } else {
-            requestAllGeoOffers();
+            requestAllGeoOffers(pages);
             adapter.notifyDataSetChanged();
         }
     }
@@ -279,7 +297,7 @@ public class OffersListFragment extends Fragment {
     }
 
     // request for all notifications
-    private void requestAllGeoOffers() {
+    private void requestAllGeoOffers(int page) {
         Map<String, String> pairs = new HashMap<>();
         pairs.put(METHOD_PARAM, GET_OFFERS_METHOD);
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
@@ -288,6 +306,7 @@ public class OffersListFragment extends Fragment {
         if (world != null && !world.equals("")) {
             //pairs.put(WORLD_PARAM, SIX_KM_BOUND);
         }
+        pairs.put(PAGE_PARAM, Integer.toString(page));
 
         pairs.put(WORLD_PARAM, TEN_KM_BOUND);
         pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
@@ -311,6 +330,8 @@ public class OffersListFragment extends Fragment {
                     if (response != null) {
                         if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                             getJsonData(object);
+                            // #bea
+                            loading = false;
                         } else {
                             Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                         }
@@ -342,14 +363,14 @@ public class OffersListFragment extends Fragment {
                 // Do Activity menu item stuff here
                 return true;
 
-            /*
+
             case R.id.action_sort_distance_desc:
                 Toast.makeText(this.getActivity(),"Distanza decrescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Distance Desc");
-                sortOffersDistanceDesc();
+                ListUtilities.sortOffersDistanceDesc(offerList,adapter);
                 // Not implemented here
                 return false;
-                */
+
 
             case R.id.action_sort_price_asc:
                 Toast.makeText(this.getActivity(),"Prezzo crescente",Toast.LENGTH_SHORT);

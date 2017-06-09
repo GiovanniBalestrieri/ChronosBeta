@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-        } /*else if (id == R.id.articoli_nav) {
+        } else if (id == R.id.articoli_nav) {
             Toast.makeText(this.getApplicationContext(),"Articoli",Toast.LENGTH_SHORT);
 
             FragmentManager fragmentManager = getFragmentManager();
@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-        } /*else if (id == R.id.nav_share) {
+        } /* else if (id == R.id.nav_share) {
 
         }*/ else if (id == R.id.nav_logout) {
 

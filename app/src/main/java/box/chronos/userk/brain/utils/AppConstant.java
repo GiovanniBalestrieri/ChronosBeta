@@ -56,6 +56,7 @@ public class AppConstant {
     public static final String OFF_PIC_PATH_PARAM = "offerPicture";
     public static final String OFF_PIC_ID_PARAM = "offerpicId";
     public static final String WORLD_PARAM = "world";
+    public static final String PAGE_PARAM = "page";
     public static final String TEN_KM_BOUND = "1";
     public static final String SIX_KM_BOUND = "2";
     public static final String UID_PARAM = "uid";

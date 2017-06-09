@@ -2,11 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/articoli_nav"
             android:icon="@drawable/ic_menu_camera"
             android:title="Articoli" />
-        -->
+
         <item
             android:id="@+id/nav_offers"
             android:icon="@drawable/ic_near"
@@ -27,12 +28,12 @@
 <item android:title="Communicate">
     <menu>
 
+        <!--
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Slideshow" />
 
-        <!--
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

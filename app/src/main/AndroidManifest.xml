@@ -64,6 +64,8 @@
         <activity
             android:screenOrientation="portrait"
             android:name="box.chronos.userk.brain.activities.MainActivity">
+
+
         </activity>
 
         <activity
