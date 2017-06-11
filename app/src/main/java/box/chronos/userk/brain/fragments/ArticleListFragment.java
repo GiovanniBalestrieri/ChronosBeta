@@ -97,7 +97,7 @@ public class ArticleListFragment extends Fragment {
     private ImageView glideHeader;
     private RecyclerView recyclerView;
     private String cat, world;
-    private int pages=1;
+    private int pages=1, maxPages = 2; // must be 2
     private boolean loading = true;
     LinearLayoutManager mLayoutManager;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
@@ -193,7 +193,8 @@ public class ArticleListFragment extends Fragment {
                         if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount /*&& totalItemCount >= Integer.valueOf(sharePrefs.getMaxOfferView())*/) {
                             loading = false;
                             Log.v("...", "Last Item Wow !");
-                            pages++;
+                            if (pages < maxPages)
+                                pages++;
                             requestAllArticles(pages);
                         }
                     }
@@ -277,7 +278,7 @@ public class ArticleListFragment extends Fragment {
 
 
     // request for all notifications
-    private void requestAllArticles(int page) {
+    private void requestAllArticles(final int page) {
         Map<String, String> pairs = new HashMap<>();
         pairs.put(METHOD_PARAM, GET_ARTICLES_METHOD);
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
@@ -306,7 +307,8 @@ public class ArticleListFragment extends Fragment {
             public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
-                    offerList.clear();
+                    if (pages==1)
+                        offerList.clear();
                     if (response != null) {
                         if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                             getJsonData(object);
@@ -369,10 +371,7 @@ public class ArticleListFragment extends Fragment {
                 ld.setTimeout(jsonObject.getString(TIMER_PARAM).toString());
                 ld.setPrice(jsonObject.getString(PRICE_PARAM).toString());
                 ld.setDiscount(jsonObject.getString(DISCOUNT_PARAM).toString());
-                if (jsonObject.getString(DISCOUNT_PARAM).toString().equals("") || jsonObject.getString(DISCOUNT_PARAM).toString().equals(ZERO_RESP))
-                    Log.d(TAG, "Skipping article");
-                else
-                    offerList.add(ld);
+                offerList.add(ld);
             }
             // Default order by distance
             if (offerList.size()>0) {

@@ -326,7 +326,8 @@ public class OffersListFragment extends Fragment {
             public void onRestInteractionResponse(String response) {
                 try {
                     JSONObject object = new JSONObject(response);
-                    offerList.clear();
+                    if (pages==1)
+                        offerList.clear();
                     if (response != null) {
                         if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                             getJsonData(object);
