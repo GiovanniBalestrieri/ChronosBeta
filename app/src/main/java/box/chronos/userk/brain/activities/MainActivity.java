@@ -104,8 +104,8 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        OffersListFragment fragment = new OffersListFragment();
-        fragmentTransaction.add(R.id.fragment_container, fragment,"Offers");
+        ArticleListFragment fragment = new ArticleListFragment();
+        fragmentTransaction.add(R.id.fragment_container, fragment,"Articles");
 
         fragmentTransaction.commit();
 

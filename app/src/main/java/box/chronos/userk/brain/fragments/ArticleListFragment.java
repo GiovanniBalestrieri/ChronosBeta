@@ -12,6 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -396,29 +398,29 @@ public class ArticleListFragment extends Fragment {
             case R.id.action_sort_distance_asc:
                 Toast.makeText(this.getActivity(),"Distanza crescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Distance Asc");
-                //ListUtilities.sortOffersDistanceAsc(offerList,adapter);
+                ListUtilities.sortArticlesDistanceAsc(offerList,adapter);
                 // Do Activity menu item stuff here
                 return true;
 
-            /*
+
             case R.id.action_sort_distance_desc:
                 Toast.makeText(this.getActivity(),"Distanza decrescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Distance Desc");
-                sortOffersDistanceDesc();
+                ListUtilities.sortArticlesDistanceDesc(offerList,adapter);
                 // Not implemented here
                 return false;
-                */
+
 
             case R.id.action_sort_price_asc:
                 Toast.makeText(this.getActivity(),"Prezzo crescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Price Asc");
-                //sortOffersPriceAsc();
+                ListUtilities.sortArticlesPriceAsc(offerList,adapter);
                 // Do Activity menu item stuff here
                 return true;
             case R.id.action_sort_price_desc:
                 Toast.makeText(this.getActivity(),"Prezzo decrescente",Toast.LENGTH_SHORT);
                 Log.d("OffersList","Sort Price Desc");
-                //sortOffersPriceDesc();
+                ListUtilities.sortArticlesPriceDesc(offerList,adapter);
                 // Not implemented here
                 return false;
             default:
@@ -428,5 +430,12 @@ public class ArticleListFragment extends Fragment {
         return false;
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        // Inflate menu resource file.
+        inflater.inflate(R.menu.offer_list_menu, menu);
+    }
 
 }
