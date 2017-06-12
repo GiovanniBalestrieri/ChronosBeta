@@ -104,6 +104,9 @@ dependencies {
 
     // Facebook
     compile 'com.facebook.android:facebook-android-sdk:4.+'
+
+    // Progress Bar
+    compile 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,5 +1,6 @@
 package box.chronos.userk.brain.utils.Lists;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -78,6 +79,48 @@ public class ListUtilities {
             });
             adapter.notifyDataSetChanged();
         }
+    }
+
+    public static List<Offer> findStringInOffers(Iterable<Offer> listOfOffers, String name) {
+        List<Offer> offerList = new ArrayList<Offer>();
+        for(Offer off : listOfOffers) {
+            if (off.getBusinessname() != null) {
+                if (off.getBusinessname().contains(name)) {
+                    offerList.add(off);
+                }
+            }
+
+            if (off.getTitle() != null) {
+                if (off.getTitle().contains(name)) {
+                    offerList.add(off);
+                }
+            }
+
+            if (off.getDescription() != null) {
+                if (off.getDescription().contains(name)) {
+                    offerList.add(off);
+                }
+            }
+
+            if (off.getPrice() != null) {
+                if (off.getPrice().contains(name)) {
+                    offerList.add(off);
+                }
+            }
+        }
+
+        return offerList;
+    }
+
+    /* Article Utilities */
+    public static void searchArticlesString(List<Offer> offerList, ArticleAdapter adapter, String query) {
+        if (offerList.size() > 0) {
+            List<Offer> a = findStringInOffers(offerList, query);
+            offerList.clear();
+            offerList = a;
+            adapter.notifyDataSetChanged();
+        }
+
     }
 
     public static void sortArticlesDistanceDesc(List<Offer> offerList, ArticleAdapter adapter) {

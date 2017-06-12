@@ -1,6 +1,7 @@
 package box.chronos.userk.brain.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import box.chronos.userk.brain.R;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.brain.utils.AppConstant.EUR_SIGN;
+import static box.chronos.userk.brain.utils.AppConstant.PERC_SIGN;
+import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.prepareDistanceArticle;
 
 
@@ -87,7 +90,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         holder.cat.setText(off.getCategory());
         holder.shop_name.setText(off.getBusinessname());
         holder.distance.setText(prepareDistanceArticle(off.getDistance()));
-        holder.price.setText(off.getPrice() + EUR_SIGN);
+
+
+        holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.price.setText(fixFloatFormat(off.getPrice()) + EUR_SIGN);
+
+
+        //holder.price.setText(off.getPrice() + EUR_SIGN);
 
         //String urlImage = BASE_URL + LICENCES_IMG + lic.getId();
 

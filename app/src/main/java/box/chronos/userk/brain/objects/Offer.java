@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import java.util.HashMap;
 
+import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
+
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
@@ -146,7 +148,7 @@ public class Offer extends Article implements Parcelable {
 
     @Override
     public String getPrice() {
-        return price;
+        return fixFloatFormat(price);
     }
 
     @Override
@@ -316,7 +318,7 @@ public class Offer extends Article implements Parcelable {
     };
 
     public String getDiscount() {
-        return discount;
+        return fixFloatFormat(discount);
     }
 
     public void setDiscount(String discount) {

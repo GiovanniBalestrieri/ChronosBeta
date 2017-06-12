@@ -101,7 +101,7 @@ public class OfferPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.offer_new_v1);
+        setContentView(R.layout.offer_new_v2);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

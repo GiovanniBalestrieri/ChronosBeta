@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,6 +87,7 @@ import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.TEN_KM_BOUND;
 import static box.chronos.userk.brain.utils.AppConstant.TIMER_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.TOT_PAGES_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.WORLD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
@@ -103,6 +108,7 @@ public class ArticleListFragment extends Fragment {
     private boolean loading = true;
     LinearLayoutManager mLayoutManager;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
+    private CircularProgressView progressView;
 
     public ArticleListFragment() {
     }
@@ -123,6 +129,10 @@ public class ArticleListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.offers_list_main, container, false);
 
         sharePrefs = AppController.getPreference();
+
+        //progressView = (CircularProgressView) rootView.findViewById(R.id.progress_view);
+
+        //progressView.startAnimation();
 
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_offer);
@@ -195,9 +205,10 @@ public class ArticleListFragment extends Fragment {
                         if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount /*&& totalItemCount >= Integer.valueOf(sharePrefs.getMaxOfferView())*/) {
                             loading = false;
                             Log.v("...", "Last Item Wow !");
-                            if (pages < maxPages)
+                            if (pages < maxPages) {
                                 pages++;
-                            requestAllArticles(pages);
+                                requestAllArticles(pages);
+                            }
                         }
                     }
                 }
@@ -313,7 +324,11 @@ public class ArticleListFragment extends Fragment {
                         offerList.clear();
                     if (response != null) {
                         if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
+                            maxPages = Integer.valueOf(object.getString(TOT_PAGES_PARAM));
                             getJsonData(object);
+                            //progressView.stopAnimation();
+                            //progressView.setVisibility(View.INVISIBLE);
+
                             loading = true;
                         } else {
                             Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
@@ -340,7 +355,9 @@ public class ArticleListFragment extends Fragment {
     private void getJsonData(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
+
             JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Offer ld = new Offer();
@@ -436,6 +453,36 @@ public class ArticleListFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         // Inflate menu resource file.
         inflater.inflate(R.menu.offer_list_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search_all);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener(){
+
+                    public void OnCloseListener(){
+                        requestAllArticles(pages);
+                    }
+
+                    public boolean onQueryTextChange(String newText){
+                        // Text has changed. Apply filtering?
+
+                        Log.d("SEARCH feature","searching");
+                        return false;
+                    }
+
+
+                    public boolean onQueryTextSubmit(String query){
+                        // Perform the final search
+                        Log.d("SEARCH feature","final search submitted");
+
+                        ListUtilities.searchArticlesString(offerList,adapter,query);
+
+                        return  false;
+                    }
+                }
+        );
+
     }
 
 }

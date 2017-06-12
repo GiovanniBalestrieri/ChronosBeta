@@ -2,6 +2,8 @@ package box.chronos.userk.brain.fragments;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
@@ -11,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,6 +87,7 @@ import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.TIMER_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.TOT_PAGES_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.WORLD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
@@ -99,7 +103,7 @@ public class OffersListFragment extends Fragment {
     private UserSharedPreference sharePrefs;
     private ImageView glideHeader;
     private RecyclerView recyclerView;
-    private int pages = 1;
+    private int pages = 1, maxPages = 2; // must be 2
     private String cat, world;
     private boolean loading = true;
     LinearLayoutManager mLayoutManager;
@@ -219,6 +223,7 @@ public class OffersListFragment extends Fragment {
                         {
                             loading = false;
                             Log.v("...", "Last Item Wow !");
+
                             pages++;
                             requestAllGeoOffers(pages);
                         }
@@ -330,6 +335,7 @@ public class OffersListFragment extends Fragment {
                         offerList.clear();
                     if (response != null) {
                         if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
+                            maxPages = Integer.valueOf(object.getString(TOT_PAGES_PARAM));
                             getJsonData(object);
                             // #bea
                             loading = false;
@@ -454,6 +460,18 @@ public class OffersListFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         // Inflate menu resource file.
         inflater.inflate(R.menu.offer_list_menu, menu);
+
+/*
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+                */
+
     }
 
 }

@@ -68,6 +68,8 @@ public class AppConstant {
     public static final String OPTION_PARAM = "option";
     public static final String DEV_TYPE_PARAM = "devicetype";
     public static final String CAT_ID_PARAM = "categoryid";
+    public static final String TOT_PAGES_PARAM = "totalPages";
+
     public static final String MAX_OFF_DIST_PARAM = "maxofferdistance";
     public static final String MAX_OFF_VIEW_PARAM = "maxofferview";
     public static final String REPEAT_OFF_PARAM = "repeatoffer";
