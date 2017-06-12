@@ -85,25 +85,25 @@ public class ListUtilities {
         List<Offer> offerList = new ArrayList<Offer>();
         for(Offer off : listOfOffers) {
             if (off.getBusinessname() != null) {
-                if (off.getBusinessname().contains(name)) {
+                if (off.getBusinessname().toLowerCase().contains(name.toLowerCase())) {
                     offerList.add(off);
                 }
             }
 
             if (off.getTitle() != null) {
-                if (off.getTitle().contains(name)) {
+                if (off.getTitle().toLowerCase().contains(name.toLowerCase())) {
                     offerList.add(off);
                 }
             }
 
             if (off.getDescription() != null) {
-                if (off.getDescription().contains(name)) {
+                if (off.getDescription().toLowerCase().contains(name.toLowerCase())) {
                     offerList.add(off);
                 }
             }
 
             if (off.getPrice() != null) {
-                if (off.getPrice().contains(name)) {
+                if (off.getPrice().toLowerCase().contains(name.toLowerCase())) {
                     offerList.add(off);
                 }
             }
@@ -113,14 +113,19 @@ public class ListUtilities {
     }
 
     /* Article Utilities */
-    public static void searchArticlesString(List<Offer> offerList, ArticleAdapter adapter, String query) {
+    public static List<Offer> searchArticlesString(List<Offer> offerList, ArticleAdapter adapter, String query) {
+        List<Offer> res = new ArrayList<Offer>();
         if (offerList.size() > 0) {
             List<Offer> a = findStringInOffers(offerList, query);
-            offerList.clear();
-            offerList = a;
-            adapter.notifyDataSetChanged();
+            if (a.size()>0) {
+                // Clear only if needed
+                offerList.clear();
+                res =  a;
+            } else {
+                return offerList;
+            }
         }
-
+        return res;
     }
 
     public static void sortArticlesDistanceDesc(List<Offer> offerList, ArticleAdapter adapter) {

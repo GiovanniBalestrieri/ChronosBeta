@@ -157,4 +157,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
     public int getItemCount() {
         return offerList.size();
     }
+
+    public List<Offer> getOfferList(){
+        return offerList;
+    }
 }

@@ -109,6 +109,7 @@ public class ArticleListFragment extends Fragment {
     LinearLayoutManager mLayoutManager;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     private CircularProgressView progressView;
+    private SearchView searchView;
 
     public ArticleListFragment() {
     }
@@ -223,6 +224,8 @@ public class ArticleListFragment extends Fragment {
         return rootView;
 
     }
+
+
 
 
     /**
@@ -455,14 +458,10 @@ public class ArticleListFragment extends Fragment {
         inflater.inflate(R.menu.offer_list_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search_all);
 
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener(){
-
-                    public void OnCloseListener(){
-                        requestAllArticles(pages);
-                    }
 
                     public boolean onQueryTextChange(String newText){
                         // Text has changed. Apply filtering?
@@ -476,12 +475,24 @@ public class ArticleListFragment extends Fragment {
                         // Perform the final search
                         Log.d("SEARCH feature","final search submitted");
 
-                        ListUtilities.searchArticlesString(offerList,adapter,query);
-
+                        offerList = ListUtilities.searchArticlesString(offerList,adapter,query);
+                        adapter.notifyDataSetChanged();
                         return  false;
                     }
                 }
+
+
         );
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener(){
+            public boolean onClose(){
+                requestAllArticles(pages);
+                if (!searchView.isIconified()) {
+                    searchView.setIconified(true);
+                }
+                return true;
+            }
+        });
 
     }
 
