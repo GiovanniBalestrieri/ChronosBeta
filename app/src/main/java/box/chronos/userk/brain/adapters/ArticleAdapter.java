@@ -41,8 +41,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
     private String TAG = ArticleAdapter.class.getSimpleName();
     private Context mContext;
     private List<Offer> offerList;
-
-
     private List<Offer> filteredData = null;
 
     private LayoutInflater mInflater;
@@ -55,15 +53,17 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         public void onItemClick(View view, int position);
     }
 
-    public ArticleAdapter(Context mContext, List<Offer> mlicenceList, RecyclerView recyclerView) {
+    public ArticleAdapter(Context mContext, List<Offer> mArticlesList, RecyclerView recyclerView) {
         this.mContext = mContext;
         //this.recyclerView = recyclerView;
-        this.offerList = mlicenceList;
+        this.offerList = mArticlesList;
+        this.filteredData = mArticlesList;
     }
 
-    public ArticleAdapter(Context mContext, List<Offer> mlicenceList) {
+    public ArticleAdapter(Context mContext, List<Offer> mArticlesList) {
         this.mContext = mContext;
-        this.offerList = mlicenceList;
+        this.offerList = mArticlesList;
+        this.filteredData = mArticlesList;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -112,7 +112,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
             int count = list.size();
             List<Offer> nlist = new ArrayList<Offer>(count);
 
-            String filterableString ;
 
 
             nlist = ListUtilities.searchArticlesString(list,filterString);
@@ -135,7 +134,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Offer off = offerList.get(position);
+        Offer off = filteredData.get(position);
         holder.title.setText(off.getTitle());
         holder.cat.setText(off.getCategory());
         holder.shop_name.setText(off.getBusinessname());
@@ -151,7 +150,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         //String urlImage = BASE_URL + LICENCES_IMG + lic.getId();
 
         if (off.hasPicture()) {
-            Map.Entry<String,String> entry = offerList.get(position).getAvailablePictures().entrySet().iterator().next();
+            Map.Entry<String,String> entry = filteredData.get(position).getAvailablePictures().entrySet().iterator().next();
             String key = entry.getKey();
             String value = entry.getValue();
             System.out.println(key);
@@ -165,50 +164,20 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         } else {
             Glide.with(mContext).load(R.drawable.empty).placeholder(R.drawable.progress_animation).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);
         }
-
-        /*
-            Glide.with(mContext)
-                    .load(offerList.get(position).getDrawable_thumb())
-                    //.placeholder(R.drawable.piwo_48)
-                    //.transform(new CircleTransform(context))
-                    .into(holder.thumbnail);
-
-                    */
-        /*
-    } else {
-            // make sure Glide doesn't load anything into this view until told otherwise
-            Glide.clear(holder.imageView);
-            // remove the placeholder (optional); read comments below
-            holder.imageView.setImageDrawable(null);
-        }
-
-        */
-        // thumbnail image
-        //Log.d("ADAPTER", " URL: " + urlImage);
-        //holder.thumbnail.setImageResource(offerList.get(position).getDrawable_thumb());
-
     }
-
-
-    /*
-    @Override
-    public void onClick(View v) {
-        Toast.makeText(v.getContext(), "Comment  " , Toast.LENGTH_SHORT).show();
-
-        if (v instanceof ImageView){
-            mListener.onTomato((ImageView)v);
-        } else {
-            mListener.onPotato(v);
-        }
-    }
-    */
 
     @Override
     public int getItemCount() {
-        return offerList.size();
+        return filteredData.size();
     }
 
     public List<Offer> getOfferList(){
-        return offerList;
+        return filteredData;
+    }
+
+    /* Used to restore original content after search dismission */
+    public void restoreList(){
+        this.filteredData = this.offerList;
+        notifyDataSetChanged();
     }
 }

@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,11 +17,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.objects.Offer;
+import box.chronos.userk.brain.utils.Lists.ListUtilities;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.brain.utils.AppConstant.EUR_SIGN;
@@ -42,12 +46,14 @@ import static box.chronos.userk.brain.utils.algebra.MathUtils.prepareDistanceOff
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
-public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder>{
+public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder>  implements Filterable {
 
     private String TAG = "OfferAdapter";
     private Context mContext;
     private List<Offer> offerList;
     private final RecyclerView recyclerView;
+    private List<Offer> filteredData = null;
+    private ItemFilter mFilter = new ItemFilter();
     //private ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
     public interface OnItemClickListener {
@@ -58,6 +64,12 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         this.mContext = mContext;
         this.recyclerView = recyclerView;
         this.offerList = mlicenceList;
+        this.filteredData = mlicenceList;
+    }
+
+
+    public Filter getFilter() {
+        return mFilter;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -103,7 +115,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         Log.d(TAG,"Item position: " + Integer.toString(position));
-        Offer off = offerList.get(position);
+        Offer off = filteredData.get(position);
 
         holder.shop_name.setText(off.getBusinessname()/*.toUpperCase()*/);
 
@@ -161,7 +173,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         Log.d(TAG,"Discount:\t" + off.getDiscount());
 
         if (off.hasPicture()) {
-            Map.Entry<String,String> entry = offerList.get(position).getAvailablePictures().entrySet().iterator().next();
+            Map.Entry<String,String> entry = filteredData.get(position).getAvailablePictures().entrySet().iterator().next();
             String key = entry.getKey();
             String value = entry.getValue();
             System.out.println(key);
@@ -206,19 +218,6 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         return res;
     }
 
-    /*
-    @Override
-    public void onClick(View v) {
-        Toast.makeText(v.getContext(), "Comment  " , Toast.LENGTH_SHORT).show();
-
-        if (v instanceof ImageView){
-            mListener.onTomato((ImageView)v);
-        } else {
-            mListener.onPotato(v);
-        }
-    }
-    */
-
     public void touchIt() {
         notifyDataSetChanged();
     }
@@ -234,8 +233,45 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         return res;
     }
 
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String filterString = constraint.toString().toLowerCase();
+
+            FilterResults results = new FilterResults();
+
+            final List<Offer> list = offerList;
+
+            int count = list.size();
+            List<Offer> nlist = new ArrayList<Offer>(count);
+
+            nlist = ListUtilities.searchArticlesString(list,filterString);
+
+            results.values = nlist;
+            results.count = nlist.size();
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredData = (ArrayList<Offer>) results.values;
+            notifyDataSetChanged();
+        }
+
+    }
+
+    /* Used to restore original content after search dismission */
+    public void restoreList(){
+        this.filteredData = this.offerList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
-        return offerList.size();
+        return filteredData.size();
     }
 }

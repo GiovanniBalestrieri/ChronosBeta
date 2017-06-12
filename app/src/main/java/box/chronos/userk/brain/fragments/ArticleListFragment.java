@@ -107,7 +107,7 @@ public class ArticleListFragment extends Fragment {
     private RecyclerView recyclerView;
     private String cat, world;
     private int pages=1, maxPages = 2; // must be 2
-    private boolean loading = true;
+    private boolean loading = true, searching = false;
     LinearLayoutManager mLayoutManager;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     private CircularProgressView progressView;
@@ -203,7 +203,7 @@ public class ArticleListFragment extends Fragment {
                     totalItemCount = mLayoutManager.getItemCount();
                     pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
 
-                    if (loading)
+                    if (loading && !searching)
                     {
                         if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount /*&& totalItemCount >= Integer.valueOf(sharePrefs.getMaxOfferView())*/) {
                             loading = false;
@@ -460,15 +460,33 @@ public class ArticleListFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         // Inflate menu resource file.
         inflater.inflate(R.menu.offer_list_menu, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search_all);
 
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search_all);
         searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener(){
 
                     public boolean onQueryTextChange(String newText){
                         // Text has changed. Apply filtering?
+
+                        if (newText == null || newText.isEmpty() || newText.equals("")){
+                            Log.d(TAG,"dismissing view");
+                            adapter.restoreList();
+
+                            // Minimize Search view
+                            if (searching) {
+                                //MenuItemCompat.collapseActionView(searchItem);
+                                if (!searchView.isIconified())
+                                    searchView.setIconified(true);
+                            }
+
+                            searching = false;
+                        }  else {
+
+                            searching = true;
+                            adapter.getFilter().filter(newText.toString());
+                        }
 
                         Log.d("SEARCH feature","searching");
                         return false;
@@ -476,6 +494,7 @@ public class ArticleListFragment extends Fragment {
 
 
                     public boolean onQueryTextSubmit(String query){
+                        searching = true;
                         // Perform the final search
                         Log.d("SEARCH feature","final search submitted");
 
@@ -486,19 +505,22 @@ public class ArticleListFragment extends Fragment {
                         return  false;
                     }
                 }
-
-
         );
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener(){
             public boolean onClose(){
 
-                adapter = new ArticleAdapter(getActivity(), offerList, recyclerView);
-                adapter.notifyDataSetChanged();
+                //adapter = new ArticleAdapter(getActivity(), offerList, recyclerView);
+                //adapter.notifyDataSetChanged();
+
+
+
                 //requestAllArticles(pages);
-                if (!searchView.isIconified()) {
-                    searchView.setIconified(true);
-                }
+                //if (!searchView.isIconified()) {
+                //    searchView.setIconified(true);
+                //}
+
+                //searching = false;
                 return true;
             }
         });
