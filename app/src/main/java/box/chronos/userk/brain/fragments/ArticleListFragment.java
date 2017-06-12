@@ -83,6 +83,8 @@ import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PATH_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.PAGE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PRICE_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.ROME_COORD_LAT;
+import static box.chronos.userk.brain.utils.AppConstant.ROME_COORD_LON;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.TEN_KM_BOUND;
@@ -98,7 +100,7 @@ import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
 public class ArticleListFragment extends Fragment {
     private static final String TAG = OffersListFragment.class.getSimpleName();
     private ArticleAdapter adapter;
-    private List<Offer> offerList = new ArrayList<Offer>();
+    private List<Offer> offerList = new ArrayList<Offer>(), offerListTemp = new ArrayList<Offer>();
     ArrayList<OffersResponse> arrayListNotification;
     private UserSharedPreference sharePrefs;
     private ImageView glideHeader;
@@ -306,8 +308,15 @@ public class ArticleListFragment extends Fragment {
 
         pairs.put(WORLD_PARAM, TEN_KM_BOUND);
         pairs.put(PAGE_PARAM, Integer.toString(page));
-        pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
-        pairs.put(LON_PARAM, sharePrefs.getLongitude()); /*"12.516753"*/
+        if (sharePrefs.getLatitude().isEmpty())
+            pairs.put(LAT_PARAM, ROME_COORD_LAT);
+        else
+            pairs.put(LAT_PARAM, sharePrefs.getLatitude());
+
+        if (sharePrefs.getLongitude().isEmpty())
+            pairs.put(LON_PARAM, ROME_COORD_LON);
+        else
+            pairs.put(LON_PARAM, sharePrefs.getLongitude());
         if (cat != null && !cat.equals("")) {
             pairs.put(CAT_ID_PARAM, cat);
         } else {
@@ -397,12 +406,7 @@ public class ArticleListFragment extends Fragment {
             }
             // Default order by distance
             if (offerList.size()>0) {
-                Collections.sort(offerList, new Comparator<Offer>() {
-                    @Override
-                    public int compare(Offer o1, Offer o2) {
-                        return Float.valueOf(o1.getDistance()).compareTo(Float.valueOf(o2.getDistance()));
-                    }
-                });
+                ListUtilities.sortArticlesDistanceAsc(offerList,adapter);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -475,8 +479,10 @@ public class ArticleListFragment extends Fragment {
                         // Perform the final search
                         Log.d("SEARCH feature","final search submitted");
 
-                        offerList = ListUtilities.searchArticlesString(offerList,adapter,query);
-                        adapter.notifyDataSetChanged();
+
+                        adapter.getFilter().filter(query.toString());
+                        //offerListTemp = ListUtilities.searchArticlesString(offerList,query);
+
                         return  false;
                     }
                 }
@@ -486,7 +492,10 @@ public class ArticleListFragment extends Fragment {
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener(){
             public boolean onClose(){
-                requestAllArticles(pages);
+
+                adapter = new ArticleAdapter(getActivity(), offerList, recyclerView);
+                adapter.notifyDataSetChanged();
+                //requestAllArticles(pages);
                 if (!searchView.isIconified()) {
                     searchView.setIconified(true);
                 }

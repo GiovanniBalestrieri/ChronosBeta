@@ -80,7 +80,10 @@ public class AppConstant {
 
 
 
+/* Statis coordinates */
 
+    public static final String ROME_COORD_LAT = "41.886395";
+    public static final String ROME_COORD_LON = "12.516753";
 
 
 

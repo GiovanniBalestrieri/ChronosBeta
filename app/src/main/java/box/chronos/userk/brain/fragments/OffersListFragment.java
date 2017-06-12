@@ -82,6 +82,8 @@ import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.OFF_PIC_PATH_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PAGE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.PRICE_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.ROME_COORD_LAT;
+import static box.chronos.userk.brain.utils.AppConstant.ROME_COORD_LON;
 import static box.chronos.userk.brain.utils.AppConstant.TEN_KM_BOUND;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
@@ -314,8 +316,18 @@ public class OffersListFragment extends Fragment {
         pairs.put(PAGE_PARAM, Integer.toString(page));
 
         pairs.put(WORLD_PARAM, TEN_KM_BOUND);
-        pairs.put(LAT_PARAM, sharePrefs.getLatitude()); /*"41.886395"*/
-        pairs.put(LON_PARAM, sharePrefs.getLongitude()); /*"12.516753"*/
+
+
+        if (sharePrefs.getLatitude().isEmpty())
+            pairs.put(LAT_PARAM, ROME_COORD_LAT);
+        else
+            pairs.put(LAT_PARAM, sharePrefs.getLatitude());
+
+        if (sharePrefs.getLongitude().isEmpty())
+            pairs.put(LON_PARAM, ROME_COORD_LON);
+        else
+            pairs.put(LON_PARAM, sharePrefs.getLongitude());
+
         if (cat != null && !cat.equals("")) {
             pairs.put(CAT_ID_PARAM, cat);
         } else {

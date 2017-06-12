@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,12 +17,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.objects.Offer;
 import box.chronos.userk.brain.R;
+import box.chronos.userk.brain.utils.Lists.ListUtilities;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.brain.utils.AppConstant.EUR_SIGN;
@@ -32,11 +36,18 @@ import static box.chronos.userk.brain.utils.algebra.MathUtils.prepareDistanceArt
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
-public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHolder>{
+public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHolder> implements Filterable{
 
     private String TAG = ArticleAdapter.class.getSimpleName();
     private Context mContext;
     private List<Offer> offerList;
+
+
+    private List<Offer> filteredData = null;
+
+    private LayoutInflater mInflater;
+
+    private ItemFilter mFilter = new ItemFilter();
     //private final RecyclerView recyclerView;
     //private ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
@@ -82,6 +93,45 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
                 .inflate(R.layout.article_card, parent, false);
         return new MyViewHolder(itemView);
     }
+
+
+    public Filter getFilter() {
+        return mFilter;
+    }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String filterString = constraint.toString().toLowerCase();
+
+            FilterResults results = new FilterResults();
+
+            final List<Offer> list = offerList;
+
+            int count = list.size();
+            List<Offer> nlist = new ArrayList<Offer>(count);
+
+            String filterableString ;
+
+
+            nlist = ListUtilities.searchArticlesString(list,filterString);
+
+            results.values = nlist;
+            results.count = nlist.size();
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredData = (ArrayList<Offer>) results.values;
+            notifyDataSetChanged();
+        }
+
+    }
+
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {

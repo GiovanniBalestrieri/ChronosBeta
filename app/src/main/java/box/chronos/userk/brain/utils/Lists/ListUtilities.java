@@ -113,13 +113,13 @@ public class ListUtilities {
     }
 
     /* Article Utilities */
-    public static List<Offer> searchArticlesString(List<Offer> offerList, ArticleAdapter adapter, String query) {
+    public static List<Offer> searchArticlesString(List<Offer> offerList, String query) {
         List<Offer> res = new ArrayList<Offer>();
         if (offerList.size() > 0) {
             List<Offer> a = findStringInOffers(offerList, query);
             if (a.size()>0) {
                 // Clear only if needed
-                offerList.clear();
+                //offerList.clear();
                 res =  a;
             } else {
                 return offerList;
