@@ -38,11 +38,13 @@ import java.util.List;
 import java.util.Map;
 
 import box.chronos.userk.brain.R;
+import box.chronos.userk.brain.activities.ArticlePage;
 import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.activities.OfferPage;
 import box.chronos.userk.brain.adapters.ArticleAdapter;
 import box.chronos.userk.brain.adapters.OfferAdapter;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
+import box.chronos.userk.brain.objects.Article;
 import box.chronos.userk.brain.objects.Offer;
 import box.chronos.userk.brain.objects.payloads.OffersResponse;
 import box.chronos.userk.brain.serverRequest.AppUrls;
@@ -155,7 +157,6 @@ public class ArticleListFragment extends Fragment {
         prepareOffers();
 
         ((MainActivity) getActivity()).requestForGps();
-        //triggerTutorial(rootView);
 
         recyclerView.addOnItemTouchListener(
 
@@ -163,12 +164,11 @@ public class ArticleListFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Offer lic = (Offer) offerList.get(position);
-                        Log.d("YOLO", "Lincence: " + lic.getTitle() + " clicked");
+                        Log.d("YOLO", "Licence: " + lic.getTitle() + " clicked");
 
                         // Create new fragment and transaction
-
                         Toast.makeText(getActivity(),"Offer",Toast.LENGTH_SHORT);
-                        Intent i = new Intent(getActivity(),OfferPage.class);
+                        Intent i = new Intent(getActivity(), ArticlePage.class);
 
                         i.putExtra("Offer",offerList.get(position));
                         if (lic.hasPicture()) {
@@ -181,9 +181,9 @@ public class ArticleListFragment extends Fragment {
                                     list.add((String) pair.getValue());
                                 }
                                 i.putStringArrayListExtra("pictures", (ArrayList<String>) list);
-
                             }
                         }
+
                         startActivity(i);
                     }
                 }

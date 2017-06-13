@@ -217,7 +217,7 @@ public class OfferPage extends AppCompatActivity {
         getSupportActionBar().setTitle(offX.getCategory());
         offDesc.setText(offX.getOfferdescription());
         offTitle.setText(offX.getTitle());
-        offTitle.setTypeface(null, Typeface.BOLD);
+        //offTitle.setTypeface(null, Typeface.BOLD);
 
         shopName.setText(offX.getBusinessname());
         doveShop.setText(offX.getBusinessaddress());

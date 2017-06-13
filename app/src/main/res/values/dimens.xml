@@ -43,6 +43,16 @@
     <dimen name="squared_icon_dimension">38dp</dimen>
 
 
+    <!-- Material design guidelines -->
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="margin_left_listitem">20dp</dimen>
+    <dimen name="margin_right_listitem">20dp</dimen>
+    <dimen name="margin_right_content">24dp</dimen>
+    <dimen name="margin_left_content">24dp</dimen>
+    <dimen name="listitem_height">48dp</dimen>
+    <dimen name="listitem_height_margin_top_bottom">8dp</dimen>
+
+
 
 
     <!-- CardView City -->
@@ -52,7 +62,7 @@
     <dimen name="backdrop_subtitle">18dp</dimen>
     <dimen name="card_margin">5dp</dimen>
     <dimen name="city_cover_height">200dp</dimen>
-    <dimen name="city_title_padding">10dp</dimen>
+    <dimen name="city_title_padding">15dp</dimen>
     <dimen name="city_title">19dp</dimen>
     <dimen name="num_count_padding_bottom">5dp</dimen>
     <dimen name="num_count">12dp</dimen>
@@ -120,7 +130,9 @@
 
     <dimen name="article_title_article_page">18sp</dimen>
     <dimen name="discount_value_article_page">18sp</dimen>
+    <dimen name="distance_value_article_page">16sp</dimen>
     <dimen name="price_value_article_page">18sp</dimen>
+    <dimen name="title_article">20sp</dimen>
 
     <dimen name="article_content_article_page">16dp</dimen>
 
@@ -135,6 +147,7 @@
     <dimen name="logo_margin_bottom">15dp</dimen>
     <dimen name="logo_height">120dp</dimen>
     <dimen name="details_offer_padding_top">12dp</dimen>
+    <dimen name="left_margin">24dp</dimen>
     <dimen name="no_invito_padding_top">90dp</dimen>
 
 

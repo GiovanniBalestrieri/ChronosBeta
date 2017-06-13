@@ -102,6 +102,8 @@ public class ArticlePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.article_view_v1);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -138,6 +140,7 @@ public class ArticlePage extends AppCompatActivity {
             }
         });
 
+        /*
         checkInside.setOnClickListener(new View.OnClickListener(){
              @Override
             public void onClick(View v) {
@@ -152,9 +155,11 @@ public class ArticlePage extends AppCompatActivity {
 
              }
         });
+        */
 
         if (urlImage != null && !urlImage.equals("")) {
             offImage.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(getApplicationContext(), FullImage.class);
@@ -194,20 +199,20 @@ public class ArticlePage extends AppCompatActivity {
     }
 
     private void getViews(){
-        checkInside = (LinearLayout) findViewById(R.id.checkInsideLayout);
+        //checkInside = (LinearLayout) findViewById(R.id.checkInsideLayout);
         phoneLayout = (LinearLayout) findViewById(R.id.phoneLayout);
-        finalPrice = (TextView) findViewById(R.id.final_price_offer_page);
+        finalPrice = (TextView) findViewById(R.id.final_price_article_page);
         offCat = (TextView) findViewById(R.id.upper_bar_category_title);
-        offTitle = (TextView) findViewById(R.id.offer_title_overlay);
-        offPrice = (TextView) findViewById(R.id.price_offer);
-        offDiscount = (TextView) findViewById(R.id.discount_offer);
-        offDesc = (TextView) findViewById(R.id.offer_description);
+        offTitle = (TextView) findViewById(R.id.article_title);
+        offPrice = (TextView) findViewById(R.id.price_article_page);
+        offDiscount = (TextView) findViewById(R.id.discount_article_page);
+        offDesc = (TextView) findViewById(R.id.article_description);
         distance = (TextView) findViewById(R.id.distance_offer_page_tv);
         doveShop = (TextView) findViewById(R.id.dove_si_trova);
         shopName = ( TextView ) findViewById(R.id.offer_page_shop_name);
         offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
         phone = (TextView) findViewById(R.id.tv_telephone_shop_offer_page);
-        shop_status = (TextView) findViewById(R.id.shop_open_close);
+        //shop_status = (TextView) findViewById(R.id.shop_open_close);
 
     }
 
@@ -218,13 +223,10 @@ public class ArticlePage extends AppCompatActivity {
         offTitle.setText(offX.getTitle());
         offTitle.setTypeface(null, Typeface.BOLD);
 
-        shopName.setText(offX.getBusinessname());
+        shopName.setText(offX.getBusinessname()  + getShopStatus());
         doveShop.setText(offX.getBusinessaddress());
         distance.setText(prepareDistance(offX.getDistance()));
         phone.setText(offX.getBusinessphone());
-
-        setShopStatus();
-
 
         if (offX.getDiscount().isEmpty()) {
             offPrice.setVisibility(View.GONE);
@@ -246,15 +248,9 @@ public class ArticlePage extends AppCompatActivity {
             }
         }
 
-
-
-
         ArrayList<String> picList = getIntent().getStringArrayListExtra("pictures");
 
         String urlCat = IMAGE_URL + offX.getCategoryphoto();
-        //
-        // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
-        //Picasso.with(this).load(urlCat).into(shop_logo);
 
         if (picList.size()>0) {
             urlImage = IMAGE_URL + picList.get(0);
@@ -266,14 +262,18 @@ public class ArticlePage extends AppCompatActivity {
 
     }
 
-    private void setShopStatus() {
+    private String getShopStatus() {
+        String res = "";
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         if (hour >= SHOP_START_HOUR && hour <= SHOP_STOP_HOUR) {
-            shop_status.setText(APERTO_SHOP);
-            shop_status.setTextColor(ContextCompat.getColor(this, R.color.green_dark));
+            //shop_status.setText(APERTO_SHOP);
+            //shop_status.setTextColor(ContextCompat.getColor(this, R.color.green_dark));
+            res = APERTO_SHOP;
         } else {
-            shop_status.setText(CHIUSO_SHOP);
+            //shop_status.setText(CHIUSO_SHOP);
+            res = CHIUSO_SHOP;
         }
+        return res;
     }
 
     // Get user and session info
@@ -282,10 +282,9 @@ public class ArticlePage extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.offer_toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
         getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
@@ -411,7 +410,6 @@ public class ArticlePage extends AppCompatActivity {
     }
 
     private void getShops(){
-
         Shop s1 = new Shop("1","Kent","viale Somalia 2","Fondato nel 1955, il Negozio Kent è Bottegha Storica di Roma. Specializzato in abbigliamento ed accessori uomo donna, con servizio di sartoria su misura per la realizzazione di abiti e camicie personalizzate");
         Shop s2 = new Shop("2","WB","viale Somalia 114","Articoli di abbigliamento per uomo donna e bambino. Il massimo della qualità italiana a portata di mano");
         Shop s3 = new Shop("3","UnitK","Piazza del popolo 3","Ingegneria robotica dal 2019, pionieri dell'interazione uomo macchina e dell'intelligenza artificiale");
@@ -470,9 +468,6 @@ public class ArticlePage extends AppCompatActivity {
 
         return true;
     }
-
-
-
 
     public Intent doShare() {
         /*

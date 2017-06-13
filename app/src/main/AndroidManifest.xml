@@ -57,6 +57,16 @@
 
         <activity
             android:theme="@style/MyMaterialTheme"
+            android:name="box.chronos.userk.brain.activities.ArticlePage"
+            android:parentActivityName="box.chronos.userk.brain.activities.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="box.chronos.userk.brain.activities.MainActivity" />
+        </activity>
+
+        <activity
+            android:theme="@style/MyMaterialTheme"
             android:name="box.chronos.userk.brain.activities.ShopPages">
         </activity>
 

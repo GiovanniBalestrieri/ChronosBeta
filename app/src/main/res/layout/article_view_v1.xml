@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/offer_toolbar"
         android:layout_width="match_parent"
@@ -57,21 +58,6 @@
                         android:layout_weight="10"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/offer_title_overlay"
-                            android:background="@color/quiz1_overlay"
-                            android:gravity="center"
-                            android:layout_weight="0.9"
-                            android:layout_width="0dip"
-                            android:layout_height="match_parent"
-                            android:paddingLeft="@dimen/city_title_padding"
-                            android:text="@string/offer_title_main"
-                            android:textColor="@color/quiz_title"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/article_title_article_page"
-                            android:paddingTop="@dimen/offer_dialog_bar_padding_top"
-                            android:paddingBottom="@dimen/offer_dialog_bar_padding_bottom" />
-
                     </LinearLayout>
 
                 </LinearLayout>
@@ -84,6 +70,55 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/info_article_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/article_title"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/details_offer_padding_top"
+                        android:paddingStart="@dimen/city_title_padding"
+                        android:paddingTop="@dimen/details_offer_padding_top"
+                        android:text="Scarpe Adidas"
+                        android:textColor="@color/grey_midx2"
+                        android:textSize="@dimen/title_article"/>
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:layout_marginBottom="@dimen/details_offer_padding_top"
+                        android:layout_marginTop="@dimen/details_offer_padding_top">
+
+                        <ImageView
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"
+                            android:layout_marginStart="@dimen/margin_left_listitem"
+                            android:src="@drawable/ic_near"/>
+
+                        <TextView
+                            android:id="@+id/distance_offer_page_tv"
+                            android:layout_width="0dip"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin_left_listitem"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:text="1200m"
+                            android:textColor="@color/grey_midx2"
+                            android:textSize="@dimen/distance_value_article_page"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/title_quiz"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
@@ -91,7 +126,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/price_offer"
+                        android:id="@+id/price_article_page"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
@@ -105,7 +140,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/discount_offer"
+                        android:id="@+id/discount_article_page"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
@@ -119,7 +154,7 @@
 
 
                     <TextView
-                        android:id="@+id/final_price_offer_page"
+                        android:id="@+id/final_price_article_page"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
@@ -133,110 +168,19 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dip"
-                    android:background="#bebebe"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="6dp" />
-
-
-                <LinearLayout
-                    android:id="@+id/shop_details_offer_page"
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
-                    android:layout_weight="10"
-                    android:clickable="true"
-                    android:gravity="left"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:id="@+id/offer_page_shop_name"
-                        android:layout_width="0dip"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:gravity="center"
-                        android:paddingLeft="16dp"
-                        android:text="DOVE SI TROVA"
-                        android:textColor="@color/blue"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-
-                    <TextView
-                        android:id="@+id/shop_open_close"
-                        android:layout_width="0dip"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:gravity="center"
-                        android:text="APERTO"
-                        android:textColor="@color/orange2"
-                        android:textSize="@dimen/article_title_card"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-
-
-                <!-- This will be the link to the shop's profile. Ignore it for the moment-->
-                <LinearLayout
-                    android:id="@+id/checkInsideLayout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
-                    android:layout_weight="10"
-                    android:clickable="true"
-                    android:gravity="left">
-
-                    <TextView
-                        android:id="@+id/dove_si_trova"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.5"
-                        android:gravity="center"
-                        android:paddingLeft="16dp"
-                        android:text="DOVE SI TROVA"
-                        android:textColor="@color/grey_midx2"
-                        android:textSize="18dp"
-                        android:textStyle="normal" />
-
-
-                    <TextView
-                        android:id="@+id/distance_offer_page_tv"
-                        android:layout_width="0dip"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:gravity="center"
-                        android:text="20m"
-                        android:textColor="@color/orange2"
-                        android:textSize="@dimen/article_title_card"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dip"
-                    android:background="#bebebe"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="6dp"/>
-
                 <TextView
-                    android:id="@+id/offer_description"
+                    android:id="@+id/article_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/quiz_content_padding_top_bot"
-                    android:layout_marginLeft="@dimen/quiz_content_padding_lateral"
-                    android:layout_marginRight="@dimen/quiz_content_padding_lateral"
+                    android:layout_marginBottom="@dimen/margin_left_listitem"
+                    android:layout_marginLeft="@dimen/margin_right_listitem"
+                    android:layout_marginRight="@dimen/margin_right_listitem"
                     android:layout_marginTop="@dimen/quiz_content_padding_top_bot"
                     android:text="Decollete in pelle bianca a punta tacco alto e aperto in un lato."
                     android:textColor="@color/quiz_content"
                     android:textSize="@dimen/article_content_article_page" />
+
+                <!-- This will be the link to the shop's profile. Ignore it for the moment-->
 
                 <!-- Please add the Clock here\
                 <TextClock
@@ -251,16 +195,62 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dip"
-                    android:background="#bebebe"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
                     android:layout_marginTop="1dp"
-                    android:layout_marginBottom="6dp"/>
+                    android:background="#bebebe" />
 
                 <LinearLayout
                     android:id="@+id/phoneLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/listitem_height"
+                    android:layout_marginTop="@dimen/listitem_height_margin_top_bottom"
+                    android:layout_marginBottom="@dimen/listitem_height_margin_top_bottom"
+                    android:layout_weight="10"
                     android:clickable="true"
-                    android:layout_height="70dp"
+                    android:gravity="left">
+
+                    <!--
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:paddingLeft="16dp"
+                        android:textColor="@color/grey_midx2"
+                        android:textStyle="normal"
+                        android:textSize="18dp"
+                        android:text="Telefono"/>
+
+                        -->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.2"
+                        android:paddingLeft="16dp"
+                        android:src="@drawable/ic_call_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/tv_telephone_shop_offer_page"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:gravity="center"
+                        android:text="0686206055"
+                        android:textColor="@color/grey_midx2"
+                        android:textSize="@dimen/article_title_card"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/adressLayout"
+                    android:clickable="true"
+                    android:layout_height="@dimen/listitem_height"
+                    android:layout_marginTop="@dimen/listitem_height_margin_top_bottom"
+                    android:layout_marginBottom="@dimen/listitem_height_margin_top_bottom"
                     android:layout_width="fill_parent"
                     android:layout_weight="10"
                     android:gravity="left">
@@ -284,21 +274,64 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
                         android:paddingLeft="16dp"
-                        android:src="@drawable/ic_call_black_24dp"/>
+                        android:src="@drawable/ic_store_mall_directory_black_24dp"/>
 
                     <TextView
-                        android:id="@+id/tv_telephone_shop_offer_page"
+                        android:id="@+id/offer_page_shop_name"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="0.9"
                         android:gravity="center"
-                        android:text="0686206055"
+                        android:text="Lemlo (CHIUSO)"
                         android:textColor="@color/grey_midx2"
                         android:textSize="@dimen/article_title_card"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/adressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/listitem_height_margin_top_bottom"
+                    android:layout_marginTop="@dimen/listitem_height_margin_top_bottom"
+                    android:layout_weight="10"
+                    android:clickable="true"
+                    android:gravity="left">
+
+                    <!--
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:paddingLeft="16dp"
+                        android:textColor="@color/grey_midx2"
+                        android:textStyle="normal"
+                        android:textSize="18dp"
+                        android:text="Telefono"/>
+
+                        -->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.2"
+                        android:paddingLeft="16dp"
+                        android:src="@drawable/ic_my_location_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/dove_si_trova"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:gravity="center"
+                        android:text="via dei gracchi 2"
+                        android:textColor="@color/grey_midx2"
+                        android:textSize="@dimen/article_title_card"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
 
             </LinearLayout>
