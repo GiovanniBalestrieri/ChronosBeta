@@ -108,6 +108,7 @@
     <!-- Article Card -->
 
     <dimen name="article_title_card">18sp</dimen>
+    <dimen name="article_content_card">16sp</dimen>
     <dimen name="shop_title_card">22sp</dimen>
     <dimen name="timer_text_size_card">19sp</dimen>
     <dimen name="article_cat_card">16sp</dimen>
@@ -129,7 +130,7 @@
     <!-- Article View -->
 
     <dimen name="article_title_article_page">18sp</dimen>
-    <dimen name="discount_value_article_page">18sp</dimen>
+    <dimen name="discount_value_article_page">19sp</dimen>
     <dimen name="distance_value_article_page">16sp</dimen>
     <dimen name="price_value_article_page">18sp</dimen>
     <dimen name="title_article">20sp</dimen>

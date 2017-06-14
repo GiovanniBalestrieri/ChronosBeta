@@ -92,7 +92,7 @@
                     <LinearLayout
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.4"
                         android:layout_marginBottom="@dimen/details_offer_padding_top"
                         android:layout_marginTop="@dimen/details_offer_padding_top">
 
@@ -111,8 +111,7 @@
                             android:gravity="center"
                             android:text="1200m"
                             android:textColor="@color/grey_midx2"
-                            android:textSize="@dimen/distance_value_article_page"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/distance_value_article_page" />
 
                     </LinearLayout>
 
@@ -136,8 +135,7 @@
                         android:paddingTop="@dimen/details_offer_padding_top"
                         android:text="59,90€"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/price_value_article_page"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/price_value_article_page" />
 
                     <TextView
                         android:id="@+id/discount_article_page"
@@ -162,7 +160,7 @@
                         android:paddingBottom="@dimen/details_offer_padding_top"
                         android:paddingTop="@dimen/details_offer_padding_top"
                         android:text="130 €"
-                        android:textColor="@color/black"
+                        android:textColor="@color/blue2"
                         android:textSize="@dimen/discount_value_article_page"
                         android:textStyle="bold" />
 
@@ -237,10 +235,10 @@
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="0.9"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="0686206055"
                         android:textColor="@color/grey_midx2"
-                        android:textSize="@dimen/article_title_card"
+                        android:textSize="@dimen/article_content_card"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -281,10 +279,10 @@
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="0.9"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="Lemlo (CHIUSO)"
                         android:textColor="@color/grey_midx2"
-                        android:textSize="@dimen/article_title_card"
+                        android:textSize="@dimen/article_content_card"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -325,10 +323,10 @@
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="0.9"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="via dei gracchi 2"
                         android:textColor="@color/grey_midx2"
-                        android:textSize="@dimen/article_title_card"
+                        android:textSize="@dimen/article_content_card"
                         android:textStyle="bold" />
 
                 </LinearLayout>

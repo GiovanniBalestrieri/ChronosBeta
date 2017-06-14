@@ -66,6 +66,8 @@ import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppController.TAG;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
+import static box.chronos.userk.brain.ux.AppMessage.EMPTY_FIELD;
+import static box.chronos.userk.brain.ux.AppMessage.EMPTY_FIELD_MSG;
 import static box.chronos.userk.brain.ux.AppMessage.SHARE_BODY_1;
 import static box.chronos.userk.brain.ux.AppMessage.SHARE_BODY_2;
 import static box.chronos.userk.brain.ux.AppMessage.SHARE_BODY_TITLE;
@@ -270,8 +272,9 @@ public class OfferPage extends AppCompatActivity {
     private void setShopStatus() {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         if (hour >= SHOP_START_HOUR && hour <= SHOP_STOP_HOUR) {
-            shop_status.setText(APERTO_SHOP);
-            shop_status.setTextColor(ContextCompat.getColor(this, R.color.green_dark));
+            //shop_status.setText(APERTO_SHOP);
+            shop_status.setText(EMPTY_FIELD);
+            //shop_status.setTextColor(ContextCompat.getColor(this, R.color.green_dark));
         } else {
             shop_status.setText(CHIUSO_SHOP);
         }

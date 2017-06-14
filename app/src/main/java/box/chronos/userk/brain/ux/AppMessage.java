@@ -31,4 +31,7 @@ public class AppMessage {
     public static final String SLIDE_TITLE_4 = "Utilizza il codice Bonus!\n\n";
 
 
+    public static final String EMPTY_FIELD = "";
+
+
 }
