@@ -286,8 +286,8 @@ public class ArticlePage extends AppCompatActivity {
 
 
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
-        getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
+        //getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
         //getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

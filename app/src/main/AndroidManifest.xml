@@ -56,7 +56,7 @@
         </activity>
 
         <activity
-            android:theme="@style/MyMaterialTheme"
+            android:theme="@style/articleTheme"
             android:name="box.chronos.userk.brain.activities.ArticlePage"
             android:parentActivityName="box.chronos.userk.brain.activities.MainActivity">
 

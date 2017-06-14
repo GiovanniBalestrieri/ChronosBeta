@@ -99,10 +99,12 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.5"
                         android:gravity="center"
-                        android:paddingLeft="16dp"
+                        android:paddingLeft="@dimen/margin_left_content"
+                        android:layout_marginTop="@dimen/element_margin_top_bottom"
+                        android:layout_marginBottom="@dimen/element_margin_top_bottom"
                         android:text="DOVE SI TROVA"
                         android:textColor="@color/blue"
-                        android:textSize="18dp"
+                        android:textSize="@dimen/shop_name_offe_page"
                         android:textStyle="bold" />
 
 
@@ -273,7 +275,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
-                        android:paddingLeft="16dp"
+                        android:paddingLeft="@dimen/margin_left_content"
+                        android:paddingRight="@dimen/margin_right_content"
                         android:src="@drawable/ic_call_black_24dp"/>
 
                     <TextView

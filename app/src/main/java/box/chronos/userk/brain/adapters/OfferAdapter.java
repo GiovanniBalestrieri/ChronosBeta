@@ -12,10 +12,14 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +89,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         public TextView finalPrice;
         public TextView timeout;
         public LinearLayout topLL, actionLL;
+        private ProgressBar progressBar;
 
         public MyViewHolder(View view) {
             super(view);
@@ -101,6 +106,8 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             //thumbnail_cat = (ImageView) view.findViewById(R.id.thumbnail_card_article_cat);
             //shop_logo = (ImageView) view.findViewById(R.id.shop_logo_card_article);
             price = (TextView) view.findViewById(R.id.price_card_article);
+
+            progressBar = (ProgressBar) view.findViewById(R.id.progress_offer_card);
         }
     }
 
@@ -182,7 +189,23 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             String urlImage = IMAGE_URL + value;
             Log.d(TAG,"Image:\t" + urlImage);
 
-            Glide.with(mContext).load(urlImage).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);//placeholder(R.drawable.progress_animation)
+            Glide.with(mContext).load(urlImage)
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .into(holder.thumbnail);//placeholder(R.drawable.progress_animation)
 
         } else {
             Glide.with(mContext).load(R.drawable.empty).placeholder(R.drawable.progress_animation).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);

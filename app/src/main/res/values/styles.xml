@@ -147,5 +147,13 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="articleTheme" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/gray_back</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 </resources>
