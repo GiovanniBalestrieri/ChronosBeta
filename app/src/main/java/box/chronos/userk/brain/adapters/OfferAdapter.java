@@ -192,7 +192,8 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             Glide.with(mContext).load(urlImage)
                     .thumbnail(0.5f)
                     .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL).listener(new RequestListener<String, GlideDrawable>() {
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                             holder.progressBar.setVisibility(View.GONE);

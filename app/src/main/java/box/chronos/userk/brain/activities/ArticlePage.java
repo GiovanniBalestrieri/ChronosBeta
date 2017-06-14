@@ -22,10 +22,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONObject;
 
@@ -89,7 +93,7 @@ public class ArticlePage extends AppCompatActivity {
     TextView phone;
     TextView shop_status;
     ImageView offImage;
-    LinearLayout checkInside, phoneLayout;
+    LinearLayout checkInside, phoneLayout, distanceLL, addressLL;
     String urlImage;
     HashMap<String,Shop> shops;
     String shopId;
@@ -103,7 +107,7 @@ public class ArticlePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.article_view_v1);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -140,8 +144,8 @@ public class ArticlePage extends AppCompatActivity {
             }
         });
 
-        /*
-        checkInside.setOnClickListener(new View.OnClickListener(){
+
+        distanceLL.setOnClickListener(new View.OnClickListener(){
              @Override
             public void onClick(View v) {
                  // StartActivity Shop and pass data
@@ -155,7 +159,22 @@ public class ArticlePage extends AppCompatActivity {
 
              }
         });
-        */
+
+        addressLL.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // StartActivity Shop and pass data
+                Intent i = new Intent(getApplicationContext(),MapOffer.class);
+
+                i.putExtra("latitude",offX.getLatitude());
+                i.putExtra("address",offX.getBusinessaddress());
+                i.putExtra("busname",offX.getBusinessname());
+                i.putExtra("longitude",offX.getLongitude());
+                startActivity(i);
+
+            }
+        });
+
 
         if (urlImage != null && !urlImage.equals("")) {
             offImage.setOnClickListener(new View.OnClickListener() {
@@ -212,6 +231,8 @@ public class ArticlePage extends AppCompatActivity {
         shopName = ( TextView ) findViewById(R.id.offer_page_shop_name);
         offImage = ( ImageView ) findViewById(R.id.thumbnail_offer);
         phone = (TextView) findViewById(R.id.tv_telephone_shop_offer_page);
+        distanceLL = (LinearLayout) findViewById(R.id.distance_ll);
+        addressLL = (LinearLayout) findViewById(R.id.addressLayout);
         //shop_status = (TextView) findViewById(R.id.shop_open_close);
 
     }
@@ -223,7 +244,7 @@ public class ArticlePage extends AppCompatActivity {
         offTitle.setText(offX.getTitle());
         offTitle.setTypeface(null, Typeface.BOLD);
 
-        shopName.setText(offX.getBusinessname()  + getShopStatus());
+        shopName.setText(offX.getBusinessname()  + " " + getShopStatus());
         doveShop.setText(offX.getBusinessaddress());
         distance.setText(prepareDistance(offX.getDistance()));
         phone.setText(offX.getBusinessphone());
@@ -252,9 +273,29 @@ public class ArticlePage extends AppCompatActivity {
 
         String urlCat = IMAGE_URL + offX.getCategoryphoto();
 
+
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_article_page);
+
         if (picList.size()>0) {
             urlImage = IMAGE_URL + picList.get(0);
-            Glide.with(this).load(urlImage).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(offImage);//placeholder(R.drawable.progress_animation)
+            Glide.with(this).load(urlImage)
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .into(offImage);//placeholder(R.drawable.progress_animation)
         } else {
             offImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.empty, null));
         }
@@ -268,7 +309,7 @@ public class ArticlePage extends AppCompatActivity {
         if (hour >= SHOP_START_HOUR && hour <= SHOP_STOP_HOUR) {
             //shop_status.setText(APERTO_SHOP);
             //shop_status.setTextColor(ContextCompat.getColor(this, R.color.green_dark));
-            res = APERTO_SHOP;
+            //res = APERTO_SHOP;
         } else {
             //shop_status.setText(CHIUSO_SHOP);
             res = CHIUSO_SHOP;
@@ -286,8 +327,8 @@ public class ArticlePage extends AppCompatActivity {
 
 
 
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
-        //getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#88000000")));
+        getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#88000000")));
         //getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

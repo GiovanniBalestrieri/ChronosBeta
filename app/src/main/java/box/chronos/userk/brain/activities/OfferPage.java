@@ -20,10 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONObject;
 
@@ -251,6 +255,7 @@ public class OfferPage extends AppCompatActivity {
 
 
 
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_offer_page);
 
         ArrayList<String> picList = getIntent().getStringArrayListExtra("pictures");
 
@@ -261,7 +266,24 @@ public class OfferPage extends AppCompatActivity {
 
         if (picList.size()>0) {
             urlImage = IMAGE_URL + picList.get(0);
-            Glide.with(this).load(urlImage).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(offImage);//placeholder(R.drawable.progress_animation)
+            Glide.with(this).load(urlImage)
+                    .thumbnail(0.5f)
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(offImage);//placeholder(R.drawable.progress_animation)
         } else {
             offImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.empty, null));
         }

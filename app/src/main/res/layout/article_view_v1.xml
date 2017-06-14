@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#89969F">
@@ -42,27 +42,16 @@
                 <!--
                     android:background="?attr/selectableItemBackgroundBorderless"-->
 
+                <ProgressBar
+                    android:id="@+id/progress_article_page"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <!-- android:scaleType="centerCrop" -->
 
 
-                <LinearLayout
-                    android:layout_gravity="bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:id="@+id/title_offer_layout"
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="10"
-                        android:layout_height="wrap_content">
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </FrameLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -90,6 +79,7 @@
                         android:textSize="@dimen/title_article"/>
 
                     <LinearLayout
+                        android:id="@+id/distance_ll"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="0.4"
@@ -288,7 +278,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/adressLayout"
+                    android:id="@+id/addressLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/listitem_height_margin_top_bottom"

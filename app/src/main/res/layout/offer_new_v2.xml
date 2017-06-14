@@ -31,6 +31,9 @@
 
                 <!-- <com.android.volley.toolbox.NetworkImageView -->
                 <!-- Thumbnail Image   -->
+
+
+
                 <ImageView
                     android:id="@+id/thumbnail_offer"
                     android:layout_width="match_parent"
@@ -41,6 +44,11 @@
                 <!--
                     android:background="?attr/selectableItemBackgroundBorderless"-->
 
+                <ProgressBar
+                    android:id="@+id/progress_offer_page"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <!-- android:scaleType="centerCrop" -->
 
@@ -86,6 +94,8 @@
                 <LinearLayout
                     android:id="@+id/shop_details_offer_page"
                     android:layout_width="fill_parent"
+                    android:layout_marginTop="@dimen/element_margin_top_bottom"
+                    android:layout_marginBottom="@dimen/element_margin_top_bottom"
                     android:layout_height="48dp"
                     android:layout_weight="10"
                     android:clickable="true"
@@ -100,8 +110,6 @@
                         android:layout_weight="0.5"
                         android:gravity="center"
                         android:paddingLeft="@dimen/margin_left_content"
-                        android:layout_marginTop="@dimen/element_margin_top_bottom"
-                        android:layout_marginBottom="@dimen/element_margin_top_bottom"
                         android:text="DOVE SI TROVA"
                         android:textColor="@color/blue"
                         android:textSize="@dimen/shop_name_offe_page"
