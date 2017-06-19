@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -105,12 +106,18 @@ public class Code extends Activity {
         codeString.addTextChangedListener(new codeWatcher(codeString));
 
         procedi = (LinearLayout) findViewById(R.id.layout_invito);
+
+        InputMethodManager imm = (InputMethodManager) Code.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if(imm.isActive()){
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0); // hide
+            //imm.hideSoftInputFromWindow(getWindow().getDecorView().getRootView().getWindowToken(), 0);
+        }
     }
 
     private boolean  validateCode(){
         if (codeString.getText().toString().trim().isEmpty()) {
             // codeInput.setError(getString(R.string.err_msg_code));
-            requestFocus(codeString);
+            //requestFocus(codeString);
             return false;
         } else {
             codeInput.setErrorEnabled(false);

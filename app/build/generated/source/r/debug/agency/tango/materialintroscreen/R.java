@@ -589,7 +589,7 @@ public final class R {
         public static final int notification_subtext_size = 0x7f0b0150;
         public static final int notification_top_pad = 0x7f0b0151;
         public static final int notification_top_pad_large_text = 0x7f0b0152;
-        public static final int y_offset = 0x7f0b0189;
+        public static final int y_offset = 0x7f0b018a;
     }
     public static final class drawable {
         public static final int abc_ab_share_pack_mtrl_alpha = 0x7f020000;

@@ -77,15 +77,18 @@ public class IntroActivity extends MaterialIntroActivity {
                         .image(R.drawable.p4limousine)
                         .title(SLIDE_TITLE_4)
                         .description(SLIDE_DESC_4)
-                        .build(),
-                new MessageButtonBehaviour(new View.OnClickListener() {
+                        .build()
+
+               /* new MessageButtonBehaviour(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showMessage("Scopri i nostri partners");
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.chronosbox.com/html/partners.html"));
                         startActivity(browserIntent);
                     }
-                }, "Partners"));
+                }, "Partners")
+        */
+        );
 
 
         getBackButtonTranslationWrapper()
