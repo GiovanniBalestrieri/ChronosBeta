@@ -382,8 +382,12 @@ public class ArticleListFragment extends Fragment {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Offer ld = new Offer();
 
-                ld.setCategoryid(jsonObject.getString(CAT_ID_PARAM).toString());
-                ld.setCategory(jsonObject.getString(CAT_NAME).toString());
+
+                if (jsonObject.has(CAT_ID_PARAM))
+                    ld.setCategoryid(jsonObject.getString(CAT_ID_PARAM).toString());
+
+                if (jsonObject.has(CAT_NAME))
+                    ld.setCategory(jsonObject.getString(CAT_NAME).toString());
 
                 JSONArray picArray = jsonObject.optJSONArray(OFF_PIC_PARAM);
                 if (picArray.length()>0) {
@@ -396,20 +400,49 @@ public class ArticleListFragment extends Fragment {
                     }
                     ld.setAvailablePictures(picMap);
                 }
-                ld.setCategoryphoto(jsonObject.getString(CAT_PHOTO_DEF).toString());
-                ld.setPhotoactive(jsonObject.getString(CAT_PHOTO_ACTIVE).toString());
-                ld.setId_offer(jsonObject.getString(OFF_ID_PARAM).toString());
-                ld.setBusinessname(jsonObject.getString(BUSINESSNAME_PARAM).toString());
-                ld.setLatitude(jsonObject.getString(LAT_PARAM).toString());
-                ld.setTitle(jsonObject.getString(OFF_NAME_PARAM).toString());
-                ld.setLongitude(jsonObject.getString(LON_PARAM).toString());
-                ld.setBusinessphone(jsonObject.getString(BUSINESS_PHONE_PARAM).toString());
-                ld.setBusinessaddress(jsonObject.getString(BUSINESS_ADD_PARAM).toString());
-                ld.setOfferdescription(jsonObject.getString(OFF_DESC_PARAM).toString());
-                ld.setDistance(jsonObject.getString(DISTANCE_PARAM).toString());
-                ld.setTimeout(jsonObject.getString(TIMER_PARAM).toString());
-                ld.setPrice(jsonObject.getString(PRICE_PARAM).toString());
-                ld.setDiscount(jsonObject.getString(DISCOUNT_PARAM).toString());
+
+                if (jsonObject.has(CAT_PHOTO_DEF))
+                    ld.setCategoryphoto(jsonObject.getString(CAT_PHOTO_DEF).toString());
+
+                if (jsonObject.has(CAT_PHOTO_ACTIVE))
+                    ld.setPhotoactive(jsonObject.getString(CAT_PHOTO_ACTIVE).toString());
+
+                if (jsonObject.has(OFF_ID_PARAM))
+                    ld.setId_offer(jsonObject.getString(OFF_ID_PARAM).toString());
+
+                if (jsonObject.has(BUSINESSNAME_PARAM))
+                    ld.setBusinessname(jsonObject.getString(BUSINESSNAME_PARAM).toString());
+
+                if (jsonObject.has(LAT_PARAM))
+                    ld.setLatitude(jsonObject.getString(LAT_PARAM).toString());
+
+                if (jsonObject.has(OFF_NAME_PARAM))
+                    ld.setTitle(jsonObject.getString(OFF_NAME_PARAM).toString());
+
+                if (jsonObject.has(LON_PARAM))
+                    ld.setLongitude(jsonObject.getString(LON_PARAM).toString());
+
+                if (jsonObject.has(BUSINESS_PHONE_PARAM))
+                    ld.setBusinessphone(jsonObject.getString(BUSINESS_PHONE_PARAM).toString());
+
+                if (jsonObject.has(BUSINESS_ADD_PARAM))
+                    ld.setBusinessaddress(jsonObject.getString(BUSINESS_ADD_PARAM).toString());
+
+                if (jsonObject.has(OFF_DESC_PARAM))
+                    ld.setOfferdescription(jsonObject.getString(OFF_DESC_PARAM).toString());
+
+                if (jsonObject.has(DISTANCE_PARAM))
+                    ld.setDistance(jsonObject.getString(DISTANCE_PARAM).toString());
+
+                if (jsonObject.has(TIMER_PARAM))
+                    ld.setTimeout(jsonObject.getString(TIMER_PARAM).toString());
+
+                if (jsonObject.has(PRICE_PARAM))
+                    ld.setPrice(jsonObject.getString(PRICE_PARAM).toString());
+
+                if (jsonObject.has(DISCOUNT_PARAM))
+                    ld.setDiscount(jsonObject.getString(DISCOUNT_PARAM).toString());
+
                 offerList.add(ld);
             }
             // Default order by distance

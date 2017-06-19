@@ -57,7 +57,7 @@ public class SplashScreen extends Activity {
                     i = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(i);
                     finish();
-                    Toast.makeText(SplashScreen.this,"we are Anonymous",Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"we are Anonymous",Toast.LENGTH_LONG);
                     overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 }
 
