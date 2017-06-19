@@ -34,4 +34,21 @@ public class AppMessage {
     public static final String EMPTY_FIELD = "";
 
 
+    /* Nav Drawer title String */
+    public static final String LOGIN_TITLE = "Accedi";
+    public static final String LOGOUT_TITLE = "Esci";
+
+    /* User Flow mess */
+
+    public static final String ANONYMOUS_MESSAGE = "We are anonymous";
+    public static final String LOG_OUT_MESSAGE = "Modalità anonima attiva";
+    public static final String LOG_IN_MESSAGE = "Benvenuto ";
+    public static final String ANONYMOUS_PROFILE_CLICK_MESSAGE = "Accedi per visualizzare il tuo profilo";
+    public static final String PROFILE_CLICK_MESSAGE = "Ottieni più punti per modificare il tuo profilo";
+    public static final String PROFILE_IMAGE_CLICK_MESSAGE = "Ottieni più punti per modificare l'immagine del profilo";
+
+
+
+
+
 }

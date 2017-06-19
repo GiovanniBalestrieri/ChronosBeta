@@ -54,6 +54,7 @@ import static box.chronos.userk.brain.utils.AppConstant.DELAY_TEN_SEC;
 import static box.chronos.userk.brain.utils.AppConstant.EUR_SIGN;
 import static box.chronos.userk.brain.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.K_METERS;
+import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
 import static box.chronos.userk.brain.utils.AppConstant.METERS;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MORE_THAN_FIVE_KM;
@@ -342,9 +343,9 @@ public class OfferPage extends AppCompatActivity {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
-                        Log.d("1= SEC","RICEVUTO");
+                        Log.d("10 SEC","RICEVUTO");
                     } else {
-                        Utility.showAlertDialog(getApplicationContext(), object.getString("message"));
+                        Utility.showAlertDialog(OfferPage.this, object.getString(MESSAGE_KEY));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

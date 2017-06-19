@@ -71,6 +71,12 @@ import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SHOW_PROFILE_USER;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.brain.ux.AppMessage.ANONYMOUS_MESSAGE;
+import static box.chronos.userk.brain.ux.AppMessage.ANONYMOUS_PROFILE_CLICK_MESSAGE;
+import static box.chronos.userk.brain.ux.AppMessage.LOGIN_TITLE;
+import static box.chronos.userk.brain.ux.AppMessage.LOGOUT_TITLE;
+import static box.chronos.userk.brain.ux.AppMessage.LOG_OUT_MESSAGE;
+import static box.chronos.userk.brain.ux.AppMessage.PROFILE_CLICK_MESSAGE;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -119,11 +125,11 @@ public class MainActivity extends AppCompatActivity
                 Boolean a = sharePrefs.getIsAnonymous();
                 if (a != null && a) {
                     // Anon
-                    Utility.showAlertDialog(getApplicationContext(),"Accedi per visualizzare il tuo profilo");
+                    Utility.showAlertDialog(MainActivity.this, ANONYMOUS_PROFILE_CLICK_MESSAGE );
                 } else {
                     // Logged in
 
-                    Utility.showAlertDialog(getApplicationContext(),"Ottieni più punti per modificare il tuo profilo");
+                    Utility.showAlertDialog(MainActivity.this, PROFILE_CLICK_MESSAGE);
                     if (SHOW_PROFILE_USER) {
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fm.beginTransaction();
@@ -200,11 +206,11 @@ public class MainActivity extends AppCompatActivity
         Boolean b = sharePrefs.getIsAnonymous();
         if (b){
             // Login
-            loginOut.setTitle("Accedi");
+            loginOut.setTitle(LOGIN_TITLE);
             setAnonProfilePictureNav();
         } else {
             // Logout
-            loginOut.setTitle("Esci");
+            loginOut.setTitle(LOGOUT_TITLE);
             updateProfilePictureNav();
         }
 
@@ -387,7 +393,7 @@ public class MainActivity extends AppCompatActivity
             i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
-            Toast.makeText(MainActivity.this,"we are Anonymous",Toast.LENGTH_LONG);
+            Toast.makeText(MainActivity.this, ANONYMOUS_MESSAGE ,Toast.LENGTH_LONG);
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
 
         } else {
@@ -406,6 +412,7 @@ public class MainActivity extends AppCompatActivity
                         if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
 
                             LoginManager.getInstance().logOut();
+                            Utility.showAlertDialog(MainActivity.this, LOG_OUT_MESSAGE);
                             // Facebook sync
                             //LoginManager.getInstance().logOut();
                             //Utility.showAlertDialog(self, object.getString("message"));

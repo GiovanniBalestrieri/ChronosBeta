@@ -212,9 +212,9 @@
             <LinearLayout
                 android:id="@+id/top_info_card_ll_2_article"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/twenty_five_dp"
-                android:layout_marginTop="@dimen/twenty_five_dp"
+                android:layout_height="@dimen/layout_height_material"
+                android:layout_marginBottom="@dimen/fifteen_dp"
+                android:layout_marginTop="@dimen/fifteen_dp"
                 android:layout_weight="10"
                 android:orientation="horizontal">
 
@@ -222,7 +222,7 @@
                 <LinearLayout
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.7"
                     android:gravity="left|center"
                     android:orientation="vertical">
 
@@ -232,7 +232,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="lobster_regular"
                         android:gravity="center"
-                        android:paddingLeft="@dimen/ten_dp"
+                        android:paddingLeft="@dimen/fifteen_dp"
                         android:text="L'atelier des penseurs"
                         android:textColor="@color/grey_midx2"
                         android:textSize="@dimen/article_title_card" />
@@ -256,10 +256,9 @@
 
                 <LinearLayout
                     android:layout_width="0dip"
-
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:gravity="left|center">
+                    android:layout_weight="0.3"
+                    android:gravity="center">
 
 
                     <TextView

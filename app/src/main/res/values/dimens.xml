@@ -50,6 +50,7 @@
     <dimen name="margin_right_content">24dp</dimen>
     <dimen name="margin_left_content">24dp</dimen>
     <dimen name="listitem_height">48dp</dimen>
+    <dimen name="layout_height_material">64dp</dimen>
     <dimen name="listitem_height_margin_top_bottom">8dp</dimen>
     <dimen name="element_margin_top_bottom">16dp</dimen>
 

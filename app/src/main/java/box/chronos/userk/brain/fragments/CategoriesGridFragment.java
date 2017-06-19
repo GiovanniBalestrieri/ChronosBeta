@@ -286,11 +286,16 @@ public class CategoriesGridFragment extends Fragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Category cat = new Category();
-                cat.setCat_id(jsonObject.getString(CAT_ID).toString());
-                cat.setCat_name(jsonObject.getString(CAT_NAME).toString());
-                cat.setCat_photo(jsonObject.getString(CAT_PHOTO_DEF).toString());
-                cat.setCat_photo_active(jsonObject.getString(CAT_PHOTO_ACTIVE).toString());
-                cat.setIs_selected(jsonObject.getString(CAT_SELECTED).toString());
+                if (jsonObject.has(CAT_ID))
+                    cat.setCat_id(jsonObject.getString(CAT_ID).toString());
+                if (jsonObject.has(CAT_NAME))
+                    cat.setCat_name(jsonObject.getString(CAT_NAME).toString());
+                if (jsonObject.has(CAT_PHOTO_DEF))
+                    cat.setCat_photo(jsonObject.getString(CAT_PHOTO_DEF).toString());
+                if (jsonObject.has(CAT_PHOTO_ACTIVE))
+                    cat.setCat_photo_active(jsonObject.getString(CAT_PHOTO_ACTIVE).toString());
+                if (jsonObject.has(CAT_SELECTED))
+                    cat.setIs_selected(jsonObject.getString(CAT_SELECTED).toString());
                 catList.add(cat);
             }
         } catch (JSONException e) {

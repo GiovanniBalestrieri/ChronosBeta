@@ -198,16 +198,16 @@ public final class R {
         public static final int cast_notification_image_size = 0x7f0b00be;
         public static final int cast_tracks_chooser_dialog_no_message_text_size = 0x7f0b00bf;
         public static final int cast_tracks_chooser_dialog_row_text_size = 0x7f0b00c0;
-        public static final int place_autocomplete_button_padding = 0x7f0b015f;
-        public static final int place_autocomplete_powered_by_google_height = 0x7f0b0160;
-        public static final int place_autocomplete_powered_by_google_start = 0x7f0b0161;
-        public static final int place_autocomplete_prediction_height = 0x7f0b0162;
-        public static final int place_autocomplete_prediction_horizontal_margin = 0x7f0b0163;
-        public static final int place_autocomplete_prediction_primary_text = 0x7f0b0164;
-        public static final int place_autocomplete_prediction_secondary_text = 0x7f0b0165;
-        public static final int place_autocomplete_progress_horizontal_margin = 0x7f0b0166;
-        public static final int place_autocomplete_progress_size = 0x7f0b0167;
-        public static final int place_autocomplete_separator_start = 0x7f0b0168;
+        public static final int place_autocomplete_button_padding = 0x7f0b0160;
+        public static final int place_autocomplete_powered_by_google_height = 0x7f0b0161;
+        public static final int place_autocomplete_powered_by_google_start = 0x7f0b0162;
+        public static final int place_autocomplete_prediction_height = 0x7f0b0163;
+        public static final int place_autocomplete_prediction_horizontal_margin = 0x7f0b0164;
+        public static final int place_autocomplete_prediction_primary_text = 0x7f0b0165;
+        public static final int place_autocomplete_prediction_secondary_text = 0x7f0b0166;
+        public static final int place_autocomplete_progress_horizontal_margin = 0x7f0b0167;
+        public static final int place_autocomplete_progress_size = 0x7f0b0168;
+        public static final int place_autocomplete_separator_start = 0x7f0b0169;
     }
     public static final class drawable {
         public static final int cast_abc_scrubber_control_off_mtrl_alpha = 0x7f02005d;
