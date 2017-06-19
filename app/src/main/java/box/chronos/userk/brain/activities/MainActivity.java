@@ -62,10 +62,13 @@ import box.chronos.userk.brain.utils.Utility;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.brain.utils.AppConstant.ANONYMOUS;
+import static box.chronos.userk.brain.utils.AppConstant.EMPTY_STRING;
 import static box.chronos.userk.brain.utils.AppConstant.LOGOUT_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.SHOW_PROFILE_USER;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 
@@ -113,15 +116,27 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
+                Boolean a = sharePrefs.getIsAnonymous();
+                if (a != null && a) {
+                    // Anon
+                    Utility.showAlertDialog(getApplicationContext(),"Accedi per visualizzare il tuo profilo");
+                } else {
+                    // Logged in
+
+                    Utility.showAlertDialog(getApplicationContext(),"Ottieni più punti per modificare il tuo profilo");
+                    if (SHOW_PROFILE_USER) {
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+
+                        ProfileFragment profileFragment = new ProfileFragment();
+                        fragmentTransaction.add(R.id.fragment_container,profileFragment,"profile");
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                }
+
                 Log.d("NAVIGATION","\t\tPROFILE");
 
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-
-                ProfileFragment profileFragment = new ProfileFragment();
-                fragmentTransaction.add(R.id.fragment_container,profileFragment,"profile");
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
             }
         });
     }
@@ -176,15 +191,22 @@ public class MainActivity extends AppCompatActivity
         //getSupportActionBar().setHomeButtonEnabled(true);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(this);
+        setupHeaderDrawer();
 
-        View vv = navigationView.getHeaderView(0);
+        // Toggle Login or Logout based on user status
+        Menu menu = navigationView.getMenu();
+        MenuItem loginOut = menu.findItem(R.id.nav_logout_login);
 
-        profileNav = (LinearLayout) vv.findViewById(R.id.ll_nav_profile);
-        nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
-        email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
-
-        updateProfilePictureNav();
+        Boolean b = sharePrefs.getIsAnonymous();
+        if (b){
+            // Login
+            loginOut.setTitle("Accedi");
+            setAnonProfilePictureNav();
+        } else {
+            // Logout
+            loginOut.setTitle("Esci");
+            updateProfilePictureNav();
+        }
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -194,10 +216,30 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void setupHeaderDrawer(){
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View vv = navigationView.getHeaderView(0);
+
+        profileNav = (LinearLayout) vv.findViewById(R.id.ll_nav_profile);
+        nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
+        email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
+
+    }
+
     public void updateProfilePictureNav(){
         email_u.setText(sharePrefs.getUserEmail());
         nick_u.setText(sharePrefs.getUserName());
         String urlImage = IMAGE_URL + sharePrefs.getUserImage();
+        //Glide.with(this).load(urlImage).into(profPic);
+        drawer.invalidate();
+    }
+
+    public void setAnonProfilePictureNav(){
+        email_u.setText(EMPTY_STRING);
+        nick_u.setText(ANONYMOUS);
+        //String urlImage = IMAGE_URL + sharePrefs.getUserImage();
         //Glide.with(this).load(urlImage).into(profPic);
         drawer.invalidate();
     }
@@ -315,11 +357,10 @@ public class MainActivity extends AppCompatActivity
 
         } /* else if (id == R.id.nav_share) {
 
-        }*/ else if (id == R.id.nav_logout) {
+        }*/ else if (id == R.id.nav_logout_login) {
 
-            requestForLogout();
+            requestForLogoutOrLogin();
 
-            LoginManager.getInstance().logOut();
             //AppController.currentMode = 1;
             //Intent intent = new Intent(MainActivity.self, LoginActivity.class);
             //startActivity(intent);
@@ -337,45 +378,62 @@ public class MainActivity extends AppCompatActivity
     }
 
     // request for logout
-    private void requestForLogout() {
-        Map<String, String> pairs = new HashMap<>();
-        pairs.put(METHOD_PARAM, LOGOUT_METHOD);
-        pairs.put(USERID_PARAM, sharePrefs.getUserId());
-        pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
+    private void requestForLogoutOrLogin() {
+        // Check if user is Anonymous or loggedIn
+        Boolean b = sharePrefs.getIsAnonymous();
+        if (b){
+            // Login
+            Intent i;
+            i = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish();
+            Toast.makeText(MainActivity.this,"we are Anonymous",Toast.LENGTH_LONG);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
 
-        RestInteraction interaction = new RestInteraction(MainActivity.self);
-        interaction.setCallBack(new IAsyncResponse() {
-            @Override
-            public void onRestInteractionResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
+        } else {
+            // Logout
+            Map<String, String> pairs = new HashMap<>();
+            pairs.put(METHOD_PARAM, LOGOUT_METHOD);
+            pairs.put(USERID_PARAM, sharePrefs.getUserId());
+            pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
 
-                        // Facebook sync
-                        //LoginManager.getInstance().logOut();
-                        //Utility.showAlertDialog(self, object.getString("message"));
+            RestInteraction interaction = new RestInteraction(MainActivity.self);
+            interaction.setCallBack(new IAsyncResponse() {
+                @Override
+                public void onRestInteractionResponse(String response) {
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
 
-                    } else {
-                        //Utility.showAlertDialog(self, object.getString("message"));
+                            LoginManager.getInstance().logOut();
+                            // Facebook sync
+                            //LoginManager.getInstance().logOut();
+                            //Utility.showAlertDialog(self, object.getString("message"));
+
+                        } else {
+                            //Utility.showAlertDialog(self, object.getString("message"));
+                        }
+
+                        AppController.currentMode = 1;
+                        /*
+                        Intent intent = new Intent(MainActivity.self, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                        */
+                        sharePrefs.clearPrefrence();
+                        //MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-
-                    AppController.currentMode = 1;
-                    Intent intent = new Intent(MainActivity.self, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
-                    sharePrefs.clearPrefrence();
-                    MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-            @Override
-            public void onRestInteractionError(String message) {
-                Utility.showAlertDialog(MainActivity.self, message);
-            }
-        });
-        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "no");
+                @Override
+                public void onRestInteractionError(String message) {
+                    Utility.showAlertDialog(MainActivity.self, message);
+                }
+            });
+            interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "no");
+        }
     }
 
     public void isReadContactPermissionGranted() {

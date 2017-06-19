@@ -18,8 +18,11 @@ public class AppConstant {
     public static final String CODE_SKIP_METHOD = "skipCode";
     public static final String FORGOT_PSS_METHOD = "forgotPassword";
     public static final String GET_CAT_METHOD = "getAllCategories";
+    public static final String GET_CAT_METHOD_ANON = "getAllCategoriesAnon";
     public static final String GET_OFFERS_METHOD = "getNotifications";
+    public static final String GET_OFFERS_METHOD_ANON = "getNotificationsAnon";
     public static final String GET_ARTICLES_METHOD = "getArticles";
+    public static final String GET_ARTICLES_METHOD_ANON = "getArticlesAnon";
     public static final String GET_PROFILE_INFO_METHOD = "viwProfile";
     public static final String SPENT_MORE_THAN_TEN_METHOD = "spentTimeMoreThanTenSecOnOffer";
 
@@ -30,6 +33,13 @@ public class AppConstant {
     public static final String MSG_RESP = "message";
     public static final String ZERO_RESP = "0";
     public static final String ONE_RESP = "1";
+
+    // Anonnymous messages
+
+    public static final String ANONYMOUS = "Anon User";
+    public static final String EMPTY_STRING = "";
+
+    public static final Boolean SHOW_PROFILE_USER = false;
 
     // API fields
     public static final String METHOD_PARAM = "method";
@@ -133,6 +143,7 @@ public class AppConstant {
 
     // Gridview image padding
     public static final int GRID_PADDING = 8; // in dp
+    public static final long TOAST_DURATION = 2000; // in dp
 
     // SD card image directory
     public static final boolean DEBUG = true;

@@ -6044,7 +6044,7 @@ containing a value of this type.
         public static final int mr_volume_item_icon=0x7f1101a0;
         public static final int mr_volume_slider=0x7f1101a1;
         public static final int multiply=0x7f110041;
-        public static final int nav_logout=0x7f110231;
+        public static final int nav_logout_login=0x7f110231;
         public static final int nav_offers=0x7f11022f;
         public static final int nav_view=0x7f1100dd;
         public static final int navigation_header_container=0x7f11014d;

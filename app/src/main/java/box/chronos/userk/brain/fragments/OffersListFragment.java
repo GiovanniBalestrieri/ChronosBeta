@@ -70,6 +70,7 @@ import static box.chronos.userk.brain.utils.AppConstant.DISTANCE;
 import static box.chronos.userk.brain.utils.AppConstant.DISTANCE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.GET_OFFERS_METHOD;
+import static box.chronos.userk.brain.utils.AppConstant.GET_OFFERS_METHOD_ANON;
 import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
@@ -307,7 +308,12 @@ public class OffersListFragment extends Fragment {
     // request for all notifications
     private void requestAllGeoOffers(int page) {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put(METHOD_PARAM, GET_OFFERS_METHOD);
+        Boolean b = sharePrefs.getIsAnonymous();
+        if (b != null && b){
+            pairs.put(METHOD_PARAM, GET_OFFERS_METHOD_ANON);
+        } else {
+            pairs.put(METHOD_PARAM, GET_OFFERS_METHOD);
+        }
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
         // If world not empty

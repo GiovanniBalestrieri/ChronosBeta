@@ -25,7 +25,7 @@
         android:title="Categorie" />
 </group>
 
-<item android:title="Communicate">
+<item android:title="Network">
     <menu>
 
         <!--
@@ -45,9 +45,9 @@
             -->
 
             <item
-                android:id="@+id/nav_logout"
+                android:id="@+id/nav_logout_login"
                 android:icon="@drawable/ic_exit"
-                android:title="LogOut" />
+                android:title="Esci" />
         </menu>
     </item>
 <!--

@@ -30,6 +30,8 @@ import java.util.Locale;
 
 import box.chronos.userk.brain.R;
 
+import static box.chronos.userk.brain.utils.AppConstant.TOAST_DURATION;
+
 /**
  * Created by francesco on 17/03/2017.
  */
@@ -77,7 +79,7 @@ public class Utility {
                 public void run() {
                     showDialog.dismiss();
                 }
-            }, 1500);
+            }, TOAST_DURATION);
         } catch (Exception exp) {
             exp.printStackTrace();
         }

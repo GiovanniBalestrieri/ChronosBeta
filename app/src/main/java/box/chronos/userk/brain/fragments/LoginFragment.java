@@ -372,6 +372,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             sharePrefs.setIsFirstTimeUser(true);
             sharePrefs.setIsGroupActive(false);
+            sharePrefs.setIsAnonymous(false);
 
             Intent intent;
             if (codeResp.equals(ZERO_RESP)) {
@@ -607,6 +608,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             sharePrefs.setIsGroupActive(false);
 
             sharePrefs.setIsFirstTimeUser(true);
+            sharePrefs.setIsAnonymous(false);
 
             Intent intent;
             if (codeResp.equals(ZERO_RESP)) {

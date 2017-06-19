@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.utils.AppController;
@@ -41,7 +42,8 @@ public class SplashScreen extends Activity {
             public void run() {
                 Intent i;
                 boolean a = sharePrefs.getIsFirstTimeUser();
-                if (a && sharePrefs.getCode_status().equals(ONE_RESP)) {
+                boolean b = sharePrefs.getIsAnonymous();
+                if (a && sharePrefs.getCode_status().equals(ONE_RESP) && !b) {
                     i = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(i);
                     finish();
@@ -52,9 +54,10 @@ public class SplashScreen extends Activity {
                     finish();
                     overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 } */ else {
-                    i = new Intent(SplashScreen.this, LoginActivity.class);
+                    i = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(i);
                     finish();
+                    Toast.makeText(SplashScreen.this,"we are Anonymous",Toast.LENGTH_LONG);
                     overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 }
 

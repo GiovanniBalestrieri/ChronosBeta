@@ -300,6 +300,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             LoginActivity.self.finish();
 
             sharePrefs.setIsFirstTimeUser(true);
+            sharePrefs.setIsAnonymous(false);
             sharePrefs.setIsGroupActive(true);
         } catch (JSONException e) {
             e.printStackTrace();

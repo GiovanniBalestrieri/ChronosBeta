@@ -316,6 +316,7 @@ public class LoginActivity extends AppCompatActivity implements
             }
 
             sharePrefs.setIsFirstTimeUser(true);
+            sharePrefs.setIsAnonymous(false);
 
             Intent intent;
             if (codeResp.equals(ZERO_RESP)) {

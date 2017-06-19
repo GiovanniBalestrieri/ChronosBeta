@@ -24,7 +24,7 @@ public class UserSharedPreference {
     public static final String UserPreference = "UserDetails";
     private static final String UserLoginByKey = "userLoginBy";
     private static final String UserNameKey = "userName";
-
+    private static final String Anonymous = "anonymous";
 
     private static final String code_status = "codeStatus";
     private static final String GcmId = "Gcm_Id";
@@ -111,6 +111,16 @@ public class UserSharedPreference {
     }
 
 
+    // Keeps track of the user status # bea
+    public void setIsAnonymous(Boolean isAnon) {
+        editor.putBoolean(Anonymous, isAnon);
+        editor.commit();
+    }
+    public Boolean getIsAnonymous() {
+        return userPreference.getBoolean(Anonymous, true);
+    }
+
+
     public void setBusinessname(String businessname) {
         editor.putString(BUSINESSNAME, businessname);
         editor.commit();
@@ -118,6 +128,7 @@ public class UserSharedPreference {
     public String getBusinessname() {
         return userPreference.getString(BUSINESSNAME, "");
     }
+
 
 
     public void setBusinessaddress(String businessaddress) {

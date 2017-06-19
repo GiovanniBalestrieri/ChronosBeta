@@ -48,6 +48,7 @@ import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_ACTIVE;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_DEF;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_SELECTED;
 import static box.chronos.userk.brain.utils.AppConstant.GET_CAT_METHOD;
+import static box.chronos.userk.brain.utils.AppConstant.GET_CAT_METHOD_ANON;
 import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
@@ -236,7 +237,13 @@ public class CategoriesGridFragment extends Fragment {
     // request for all notifications
     private void requestAllCategories() {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put(METHOD_PARAM, GET_CAT_METHOD);
+
+        Boolean b = sharePrefs.getIsAnonymous();
+        if (b != null && b){
+            pairs.put(METHOD_PARAM, GET_CAT_METHOD_ANON);
+        } else {
+            pairs.put(METHOD_PARAM, GET_CAT_METHOD);
+        }
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
 

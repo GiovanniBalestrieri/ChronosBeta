@@ -71,6 +71,7 @@ import static box.chronos.userk.brain.utils.AppConstant.DISCOUNT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.DISTANCE;
 import static box.chronos.userk.brain.utils.AppConstant.DISTANCE_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.GET_ARTICLES_METHOD;
+import static box.chronos.userk.brain.utils.AppConstant.GET_ARTICLES_METHOD_ANON;
 import static box.chronos.userk.brain.utils.AppConstant.GET_OFFERS_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.LAT_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.LON_PARAM;
@@ -298,7 +299,14 @@ public class ArticleListFragment extends Fragment {
     // request for all notifications
     private void requestAllArticles(final int page) {
         Map<String, String> pairs = new HashMap<>();
-        pairs.put(METHOD_PARAM, GET_ARTICLES_METHOD);
+
+        Boolean a = sharePrefs.getIsAnonymous();
+        if (a != null && a) {
+            pairs.put(METHOD_PARAM, GET_ARTICLES_METHOD_ANON);
+        } else {
+            pairs.put(METHOD_PARAM, GET_ARTICLES_METHOD);
+        }
+
         pairs.put(USERID_PARAM, sharePrefs.getUserId());
         pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
         // If world not empty
