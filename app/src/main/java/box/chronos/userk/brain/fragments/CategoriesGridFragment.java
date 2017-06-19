@@ -68,6 +68,7 @@ import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.brain.ux.AppMessage.ARTICLE_TITLE;
 import static box.chronos.userk.brain.ux.AppMessage.CAT_TITLE;
 
 /**
@@ -93,6 +94,7 @@ public class CategoriesGridFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
@@ -153,10 +155,10 @@ public class CategoriesGridFragment extends Fragment {
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                        OffersListFragment fragment = new OffersListFragment();
+                        ArticleListFragment fragment = new ArticleListFragment();
 
                         fragment.setArguments(data);
-                        fragmentTransaction.replace(R.id.fragment_container, fragment,"Categories");
+                        fragmentTransaction.replace(R.id.fragment_container, fragment, ARTICLE_TITLE);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
 
