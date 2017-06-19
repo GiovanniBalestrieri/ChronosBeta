@@ -16,7 +16,9 @@ import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.utils.AppController;
 import box.chronos.userk.brain.utils.UserSharedPreference;
 
+import static box.chronos.userk.brain.utils.AppConstant.ANONYMOUS;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.brain.ux.AppMessage.ANONYMOUS_MESSAGE;
 
 /**
  * Created by userK on 9/16/16.
@@ -57,7 +59,7 @@ public class SplashScreen extends Activity {
                     i = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(i);
                     finish();
-                    Toast.makeText(SplashScreen.this,"we are Anonymous",Toast.LENGTH_LONG);
+                    Toast.makeText(SplashScreen.this, ANONYMOUS_MESSAGE ,Toast.LENGTH_LONG);
                     overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                 }
 

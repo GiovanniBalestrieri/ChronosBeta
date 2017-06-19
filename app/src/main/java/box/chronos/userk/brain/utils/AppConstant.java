@@ -139,7 +139,6 @@ public class AppConstant {
     public static final String STRING_15_MIN = "15 min";
     public static final String STRING_DUE = "10 min";
 
-
     // Number of columns of Grid View
     public static final int NUM_OF_COLUMNS = 3;
 
@@ -186,8 +185,6 @@ public class AppConstant {
     public static final String MALE_STRING_IT = "uomo";
     public static final String FEMALE_STRING_IT = "donna";
 
-
-
     // Utility Int
     public static int FOURTY_5_MIN = 45;
     public static int FIFTEEN_MIN = 15;
@@ -195,5 +192,4 @@ public class AppConstant {
     public static int DELAY_TEN_SEC = 10000;
     public static final int SHOP_START_HOUR = 8;
     public static final int SHOP_STOP_HOUR = 20;
-
 }
