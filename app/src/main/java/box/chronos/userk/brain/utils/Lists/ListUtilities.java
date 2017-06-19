@@ -6,7 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 
 import box.chronos.userk.brain.adapters.ArticleAdapter;
+import box.chronos.userk.brain.adapters.CategoryAdapter;
 import box.chronos.userk.brain.adapters.OfferAdapter;
+import box.chronos.userk.brain.objects.Category;
 import box.chronos.userk.brain.objects.Offer;
 
 /**
@@ -161,6 +163,22 @@ public class ListUtilities {
                 @Override
                 public int compare(Offer o1, Offer o2) {
                     return Float.valueOf(o1.getPrice()).compareTo(Float.valueOf(o2.getPrice()));
+                }
+            });
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+
+    /*
+     * Categories Sort by item number
+     */
+    public static void sortCatItemAsc(List<Category> categoryList, CategoryAdapter adapter) {
+        if (categoryList.size() > 0) {
+            Collections.sort(categoryList, new Comparator<Category>() {
+                @Override
+                public int compare(Category o1, Category o2) {
+                    return Float.valueOf(o1.getCount()).compareTo(Float.valueOf(o2.getCount()));
                 }
             });
             adapter.notifyDataSetChanged();

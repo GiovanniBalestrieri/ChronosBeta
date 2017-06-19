@@ -460,7 +460,7 @@ public class OffersListFragment extends Fragment {
                 else
                     offerList.add(ld);
             }
-            // Default order by distance
+            // Default order by item count
             if (offerList.size()>0) {
                 Collections.sort(offerList, new Comparator<Offer>() {
                     @Override

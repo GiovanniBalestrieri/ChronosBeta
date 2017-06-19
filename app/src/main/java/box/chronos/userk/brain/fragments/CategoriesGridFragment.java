@@ -25,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,11 +35,13 @@ import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.adapters.CategoryAdapter;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
 import box.chronos.userk.brain.objects.Category;
+import box.chronos.userk.brain.objects.Offer;
 import box.chronos.userk.brain.serverRequest.AppUrls;
 import box.chronos.userk.brain.serverRequest.RestInteraction;
 import box.chronos.userk.brain.settings.Includes;
 import box.chronos.userk.brain.utils.AppController;
 import box.chronos.userk.brain.utils.BlurBuilder;
+import box.chronos.userk.brain.utils.Lists.ListUtilities;
 import box.chronos.userk.brain.utils.RecycleItemClickListener;
 import box.chronos.userk.brain.utils.UserSharedPreference;
 import box.chronos.userk.brain.utils.Utility;
@@ -309,10 +313,23 @@ public class CategoriesGridFragment extends Fragment {
                     cat.setCat_photo_active(jsonObject.getString(CAT_PHOTO_ACTIVE).toString());
                 if (jsonObject.has(CAT_SELECTED))
                     cat.setIs_selected(jsonObject.getString(CAT_SELECTED).toString());
-                if (jsonObject.has(CAT_COUNT))
+                if (jsonObject.has(CAT_COUNT)) {
                     cat.setIs_selected(jsonObject.getString(CAT_COUNT).toString());
-                catList.add(cat);
+
+                    // If the item count > 0 add category to the list
+                    if (Integer.valueOf(cat.getCount()) > 0){
+                        catList.add(cat);
+                    } else {
+                        Log.d(TAG," Empty Category -> skip");
+                    }
+                } else {
+                    // If old API version without item counting feature -> just add it to the list
+                    catList.add(cat);
+                }
             }
+
+            // Default order by item count
+            ListUtilities.sortCatItemAsc(catList,adapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }
