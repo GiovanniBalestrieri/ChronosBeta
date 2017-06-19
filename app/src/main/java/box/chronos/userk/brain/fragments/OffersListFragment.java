@@ -512,7 +512,6 @@ public class OffersListFragment extends Fragment {
                         return false;
                     }
 
-
                     public boolean onQueryTextSubmit(String query){
                         searching = true;
                         // Perform the final search

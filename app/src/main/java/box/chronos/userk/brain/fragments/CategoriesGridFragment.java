@@ -17,8 +17,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,6 +82,9 @@ public class CategoriesGridFragment extends Fragment {
     private CategoryAdapter adapter;
     private String commaValues;
     private ArrayList<Category> catList;
+    private Boolean isGridLayout;
+    RecyclerView.LayoutManager mLinearLayoutManager;
+    RecyclerView.LayoutManager mGridLayoutManager;
 
 
     public CategoriesGridFragment() {
@@ -106,14 +113,18 @@ public class CategoriesGridFragment extends Fragment {
         catList = new ArrayList<>();
         adapter = new CategoryAdapter(getActivity(), catList, recyclerView);
 
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        int numberOfColumns = 2;
+        mGridLayoutManager = new GridLayoutManager(getActivity(),numberOfColumns);
+
 
         if (show_grid_layout){
-            int numberOfColumns = 2;
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+            isGridLayout = true;
+            recyclerView.setLayoutManager(mGridLayoutManager);
 
         } else {
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(mLayoutManager);
+            isGridLayout = false;
+            recyclerView.setLayoutManager(mLinearLayoutManager);
         }
 
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(10, getActivity()), true));
@@ -314,7 +325,7 @@ public class CategoriesGridFragment extends Fragment {
                 if (jsonObject.has(CAT_SELECTED))
                     cat.setIs_selected(jsonObject.getString(CAT_SELECTED).toString());
                 if (jsonObject.has(CAT_COUNT)) {
-                    cat.setIs_selected(jsonObject.getString(CAT_COUNT).toString());
+                    cat.setCount(jsonObject.getString(CAT_COUNT).toString());
 
                     // If the item count > 0 add category to the list
                     if (Integer.valueOf(cat.getCount()) > 0){
@@ -336,4 +347,34 @@ public class CategoriesGridFragment extends Fragment {
     }
 
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        // Inflate menu resource file.
+        inflater.inflate(R.menu.cat_list_menu, menu);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_change_layout:
+                Toast.makeText(getActivity(),"Layout modificato",Toast.LENGTH_SHORT);
+                isGridLayout = !isGridLayout;
+                if (isGridLayout)
+                    recyclerView.setLayoutManager(mGridLayoutManager);
+                else
+                    recyclerView.setLayoutManager(mLinearLayoutManager);
+                Log.d("Category List","Changing Layout");
+                // Do Activity menu item stuff here
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
 }
