@@ -33,6 +33,12 @@ public class AppMessage {
 
     public static final String EMPTY_FIELD = "";
 
+    /*  Page Titles */
+    public static final String PROFILE_TITLE = "Profilo";
+    public static final String OFFER_TITLE = "Offerte";
+    public static final String ARTICLE_TITLE = "Articoli";
+    public static final String CAT_TITLE = "Categorie";
+
 
     /* Nav Drawer title String */
     public static final String LOGIN_TITLE = "Accedi";

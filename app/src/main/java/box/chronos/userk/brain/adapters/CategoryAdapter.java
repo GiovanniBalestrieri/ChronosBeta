@@ -16,6 +16,8 @@ import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.objects.Category;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.brain.utils.AppConstant.PARENTESI_DX;
+import static box.chronos.userk.brain.utils.AppConstant.PARENTESI_SX;
 
 
 /**
@@ -74,7 +76,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Category cat = list.get(position);
-        holder.title.setText(cat.getCat_name());
+        holder.title.setText(cat.getCat_name() + PARENTESI_SX + cat.getCount() + PARENTESI_DX);
         //holder.cat_id.setText(cat.getCat_id());
         //holder.shop_name.setText(cat.getCat_photo_active());
 

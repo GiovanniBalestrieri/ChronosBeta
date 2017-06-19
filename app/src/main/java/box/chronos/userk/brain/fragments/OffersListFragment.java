@@ -94,6 +94,7 @@ import static box.chronos.userk.brain.utils.AppConstant.TOT_PAGES_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.WORLD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
+import static box.chronos.userk.brain.ux.AppMessage.OFFER_TITLE;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
@@ -236,7 +237,7 @@ public class OffersListFragment extends Fragment {
             }
         });
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Offerte");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(OFFER_TITLE);
 
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);

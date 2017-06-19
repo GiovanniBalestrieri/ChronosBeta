@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import box.chronos.userk.brain.R;
+import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.adapters.CategoryAdapter;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
 import box.chronos.userk.brain.objects.Category;
@@ -42,11 +44,14 @@ import box.chronos.userk.brain.utils.Utility;
 import box.chronos.userk.brain.utils.VideoUtility;
 
 import static box.chronos.userk.brain.settings.Includes.show_background_categories;
+import static box.chronos.userk.brain.settings.Includes.show_grid_layout;
+import static box.chronos.userk.brain.utils.AppConstant.CAT_COUNT;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_ID;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_NAME;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_ACTIVE;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_DEF;
 import static box.chronos.userk.brain.utils.AppConstant.CAT_SELECTED;
+import static box.chronos.userk.brain.utils.AppConstant.DATA_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.GET_CAT_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.GET_CAT_METHOD_ANON;
 import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
@@ -55,6 +60,7 @@ import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.brain.ux.AppMessage.CAT_TITLE;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
@@ -97,9 +103,16 @@ public class CategoriesGridFragment extends Fragment {
         adapter = new CategoryAdapter(getActivity(), catList, recyclerView);
 
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(10,getActivity()), true));
+        if (show_grid_layout){
+            int numberOfColumns = 2;
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+
+        } else {
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(mLayoutManager);
+        }
+
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, VideoUtility.dpToPx(10, getActivity()), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
@@ -149,7 +162,7 @@ public class CategoriesGridFragment extends Fragment {
             Bitmap image = BlurBuilder.blur(getActivity().getApplicationContext(), bm);
             rootView.setBackground(new BitmapDrawable(getActivity().getResources(), image));
         }
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Categorie");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(CAT_TITLE);
 
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -261,7 +274,7 @@ public class CategoriesGridFragment extends Fragment {
                             Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                         }
                     } else {
-                        Utility.showAlertDialog(getActivity(), object.getString("message"));
+                        Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                     }
                     //dataAdapterNotification.setData(arrayListNotification);
                     adapter.notifyDataSetChanged();
@@ -275,14 +288,14 @@ public class CategoriesGridFragment extends Fragment {
                 Utility.showAlertDialog(getActivity(), message);
             }
         });
-        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Categories");
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, CAT_TITLE);
     }
 
     // get json data
     private void getJsonData(JSONObject object) {
         try {
             JSONObject jsonRootObject = new JSONObject(String.valueOf(object));
-            JSONArray jsonArray = jsonRootObject.optJSONArray("data");
+            JSONArray jsonArray = jsonRootObject.optJSONArray(DATA_RESP);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Category cat = new Category();
@@ -296,6 +309,8 @@ public class CategoriesGridFragment extends Fragment {
                     cat.setCat_photo_active(jsonObject.getString(CAT_PHOTO_ACTIVE).toString());
                 if (jsonObject.has(CAT_SELECTED))
                     cat.setIs_selected(jsonObject.getString(CAT_SELECTED).toString());
+                if (jsonObject.has(CAT_COUNT))
+                    cat.setIs_selected(jsonObject.getString(CAT_COUNT).toString());
                 catList.add(cat);
             }
         } catch (JSONException e) {

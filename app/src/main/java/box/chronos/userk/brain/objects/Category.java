@@ -10,6 +10,7 @@ public class Category {
     private String cat_photo;
     private String cat_photo_active;
     private String is_selected;
+    private String count;
 
     public String getCat_id() {
         return cat_id;
@@ -49,5 +50,13 @@ public class Category {
 
     public void setIs_selected(String is_selected) {
         this.is_selected = is_selected;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
     }
 }

@@ -96,6 +96,7 @@ import static box.chronos.userk.brain.utils.AppConstant.TOT_PAGES_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.WORLD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
+import static box.chronos.userk.brain.ux.AppMessage.ARTICLE_TITLE;
 
 /**
  * Created by ChronosTeam on 27/02/2017.
@@ -219,7 +220,7 @@ public class ArticleListFragment extends Fragment {
             }
         });
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Articoli");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(ARTICLE_TITLE);
 
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);

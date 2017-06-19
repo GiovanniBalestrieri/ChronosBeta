@@ -61,6 +61,7 @@ import static box.chronos.userk.brain.utils.AppConstant.UPDATE_PROFILE_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERNAME_PARAM;
 import static box.chronos.userk.brain.utils.usertypes.TypeOfUsers.SHOP_USER;
+import static box.chronos.userk.brain.ux.AppMessage.PROFILE_IMAGE_CLICK_MESSAGE;
 
 /**
  * Created by userk on 08/03/17.
@@ -131,7 +132,7 @@ public class ProfileFragment extends Fragment implements DatePickerDialog.OnDate
             public void onClick(View view) {
                 //upload();
                 //clickpic();
-                Utility.showAlertDialog(getActivity(),"Ottieni più punti per modificare l'immagine del profilo");
+                Utility.showAlertDialog(getActivity(), PROFILE_IMAGE_CLICK_MESSAGE);
             }
         });
 

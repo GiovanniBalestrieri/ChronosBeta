@@ -115,10 +115,12 @@ public class AppConstant {
     public static final String CAT_PHOTO_DEF = "categoryphoto";
     public static final String CAT_PHOTO_ACTIVE = "photoactive";
     public static final String CAT_SELECTED = "selected";
+    public static final String CAT_COUNT = "count";
 
 
     // Utilities
-
+    public static final String PARENTESI_SX = " ( ";
+    public static final String PARENTESI_DX = " )";
     public static final String EUR_SIGN = " €";
     public static final String PERC_SIGN = " %";
     public static final String ALL_CATS = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16";
@@ -185,6 +187,7 @@ public class AppConstant {
     public static final String FEMALE_STRING_IT = "donna";
 
 
+
     // Utility Int
     public static int FOURTY_5_MIN = 45;
     public static int FIFTEEN_MIN = 15;
@@ -192,7 +195,5 @@ public class AppConstant {
     public static int DELAY_TEN_SEC = 10000;
     public static final int SHOP_START_HOUR = 8;
     public static final int SHOP_STOP_HOUR = 20;
-
-
 
 }
