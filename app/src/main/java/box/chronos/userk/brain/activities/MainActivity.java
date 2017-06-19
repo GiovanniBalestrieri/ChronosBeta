@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity
     public TextView nick_u, email_u;
     LinearLayout profileNav;
     public ImageView profPic;
+    private MenuItem loginOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,13 +202,13 @@ public class MainActivity extends AppCompatActivity
 
         // Toggle Login or Logout based on user status
         Menu menu = navigationView.getMenu();
-        MenuItem loginOut = menu.findItem(R.id.nav_logout_login);
+        loginOut = menu.findItem(R.id.nav_logout_login);
 
         Boolean b = sharePrefs.getIsAnonymous();
         if (b){
             // Login
             loginOut.setTitle(LOGIN_TITLE);
-            setAnonProfilePictureNav();
+            setAnonNavigation();
         } else {
             // Logout
             loginOut.setTitle(LOGOUT_TITLE);
@@ -223,15 +224,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupHeaderDrawer(){
-
         navigationView.setNavigationItemSelectedListener(this);
-
         View vv = navigationView.getHeaderView(0);
-
         profileNav = (LinearLayout) vv.findViewById(R.id.ll_nav_profile);
         nick_u = (TextView) vv.findViewById(R.id.tv_UserName);
         email_u = (TextView) vv.findViewById(R.id.tv_UserEmail);
-
     }
 
     public void updateProfilePictureNav(){
@@ -242,12 +239,17 @@ public class MainActivity extends AppCompatActivity
         drawer.invalidate();
     }
 
-    public void setAnonProfilePictureNav(){
+    public void setAnonNavigation(){
         email_u.setText(EMPTY_STRING);
         nick_u.setText(ANONYMOUS);
         //String urlImage = IMAGE_URL + sharePrefs.getUserImage();
         //Glide.with(this).load(urlImage).into(profPic);
         drawer.invalidate();
+
+
+        loginOut.setTitle(LOGIN_TITLE);
+
+
     }
 
     /**
@@ -413,9 +415,7 @@ public class MainActivity extends AppCompatActivity
 
                             LoginManager.getInstance().logOut();
                             Utility.showAlertDialog(MainActivity.this, LOG_OUT_MESSAGE);
-                            // Facebook sync
-                            //LoginManager.getInstance().logOut();
-                            //Utility.showAlertDialog(self, object.getString("message"));
+                            setAnonNavigation();
 
                         } else {
                             //Utility.showAlertDialog(self, object.getString("message"));

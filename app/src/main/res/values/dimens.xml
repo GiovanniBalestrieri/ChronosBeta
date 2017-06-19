@@ -103,6 +103,8 @@
     <dimen name="lic_ic_overflow_margin_top">5dp</dimen>
     <dimen name="lic_ic_overflow_margin_right">3dp</dimen>
 
+    <dimen name="off_content_text">16dp</dimen>
+
     <!-- Car Selection -->
 
     <dimen name="car_title">22dp</dimen>
@@ -110,12 +112,13 @@
     <!-- Article Card -->
 
     <dimen name="article_title_card">18sp</dimen>
-    <dimen name="article_content_card">16sp</dimen>
+    <dimen name="article_content_card">14sp</dimen>
     <dimen name="shop_name_offe_page">21sp</dimen>
     <dimen name="shop_title_card">22sp</dimen>
     <dimen name="timer_text_size_card">19sp</dimen>
     <dimen name="article_cat_card">16sp</dimen>
     <dimen name="article_content">16dp</dimen>
+
 
 
     <dimen name="article_cat_card_big">18dp</dimen>

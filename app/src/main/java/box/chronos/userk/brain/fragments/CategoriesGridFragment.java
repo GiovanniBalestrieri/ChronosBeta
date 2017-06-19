@@ -365,10 +365,13 @@ public class CategoriesGridFragment extends Fragment {
             case R.id.action_change_layout:
                 Toast.makeText(getActivity(),"Layout modificato",Toast.LENGTH_SHORT);
                 isGridLayout = !isGridLayout;
-                if (isGridLayout)
+                if (isGridLayout){
                     recyclerView.setLayoutManager(mGridLayoutManager);
-                else
+                    item.setIcon(R.drawable.ic_drag_handle_black_24dp);
+                } else {
                     recyclerView.setLayoutManager(mLinearLayoutManager);
+                    item.setIcon(R.drawable.ic_border_all_black_24dp);
+                }
                 Log.d("Category List","Changing Layout");
                 // Do Activity menu item stuff here
                 return true;
