@@ -415,6 +415,7 @@ public class MainActivity extends AppCompatActivity
 
                             LoginManager.getInstance().logOut();
                             Utility.showAlertDialog(MainActivity.this, LOG_OUT_MESSAGE);
+
                             setAnonNavigation();
 
                         } else {
