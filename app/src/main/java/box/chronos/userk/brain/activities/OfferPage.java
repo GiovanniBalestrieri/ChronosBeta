@@ -59,6 +59,7 @@ import static box.chronos.userk.brain.utils.AppConstant.METERS;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MORE_THAN_FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.MORE_THAN_ONE_KM;
+import static box.chronos.userk.brain.utils.AppConstant.OFFER_CLICKED_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.OFF_ID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
@@ -127,6 +128,8 @@ public class OfferPage extends AppCompatActivity {
         shopId = offX.getShopId();
         offId = offX.getId_offer();
         offTitleStr = offX.getTitle();
+
+        apiOfferClicked();
 
         phoneLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -321,6 +324,8 @@ public class OfferPage extends AppCompatActivity {
                 Log.d("OfferPage","CLICKED");
             }
         });
+
+        // Log offer clicked
     }
 
     @Override
@@ -359,6 +364,45 @@ public class OfferPage extends AppCompatActivity {
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "hit");
     }
+
+
+    // api hit view timer not used for android
+    private void apiOfferClicked() {
+        Map<String, String> pairs = new HashMap<>();
+        pairs.put(METHOD_PARAM, OFFER_CLICKED_METHOD);
+        Boolean a = sharePrefs.getIsAnonymous();
+        if (a != null && !a) {
+            // User logged in
+            pairs.put(USERID_PARAM, sharePrefs.getUserId());
+            pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
+        }
+
+        pairs.put(OFF_ID_PARAM, offId);
+
+        RestInteraction interaction = new RestInteraction(this);
+        interaction.setCallBack(new IAsyncResponse() {
+            @Override
+            public void onRestInteractionResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
+                        Log.d("Offer CLicked","RICEVUTO");
+                    } else {
+                        Utility.showAlertDialog(OfferPage.this, object.getString(MESSAGE_KEY));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onRestInteractionError(String message) {
+                Utility.showAlertDialog(getApplicationContext(), message);
+            }
+        });
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, OFFER_CLICKED_METHOD);
+    }
+
 
     @Override
     public void onDestroy() {

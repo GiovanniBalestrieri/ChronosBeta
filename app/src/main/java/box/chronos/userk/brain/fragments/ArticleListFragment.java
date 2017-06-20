@@ -448,7 +448,7 @@ public class ArticleListFragment extends Fragment {
             }
             // Default order by distance
             if (offerList.size()>0) {
-                ListUtilities.sortArticlesDistanceAsc(offerList,adapter);
+                //ListUtilities.sortArticlesDistanceAsc(offerList,adapter);
             }
         } catch (JSONException e) {
             e.printStackTrace();

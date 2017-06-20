@@ -157,6 +157,9 @@ public class Code extends Activity {
             switch (v.getId()) {
                 case R.id.code:
                     validateCode();
+                    if (s.length()==CODE_LEN) {
+                        requestCodeCheck(0);
+                    }
                     break;
             }
         }

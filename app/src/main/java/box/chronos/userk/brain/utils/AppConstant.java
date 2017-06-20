@@ -25,6 +25,9 @@ public class AppConstant {
     public static final String GET_ARTICLES_METHOD_ANON = "getArticlesAnon";
     public static final String GET_PROFILE_INFO_METHOD = "viwProfile";
     public static final String SPENT_MORE_THAN_TEN_METHOD = "spentTimeMoreThanTenSecOnOffer";
+    public static final String OFFER_CLICKED_METHOD = "offerClicked";
+
+
 
     // Api responses
     public static final String DATA_RESP = "data";

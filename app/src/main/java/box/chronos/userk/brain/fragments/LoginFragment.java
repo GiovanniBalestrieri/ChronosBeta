@@ -462,6 +462,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                             }
                                             if (!object.isNull(EMAIL_PARAM)) {
                                                 email = object.getString(EMAIL_PARAM);
+                                            } else {
+                                                email = id;
                                             }
 
                                             if (!object.isNull(GENDER_PARAM)) {

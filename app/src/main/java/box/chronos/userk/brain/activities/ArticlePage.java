@@ -41,6 +41,7 @@ import java.util.Map;
 
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
+import box.chronos.userk.brain.objects.Article;
 import box.chronos.userk.brain.objects.Offer;
 import box.chronos.userk.brain.objects.Shop;
 import box.chronos.userk.brain.serverRequest.AppUrls;
@@ -56,10 +57,12 @@ import static box.chronos.userk.brain.utils.AppConstant.DELAY_TEN_SEC;
 import static box.chronos.userk.brain.utils.AppConstant.EUR_SIGN;
 import static box.chronos.userk.brain.utils.AppConstant.FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.K_METERS;
+import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
 import static box.chronos.userk.brain.utils.AppConstant.METERS;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.MORE_THAN_FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.MORE_THAN_ONE_KM;
+import static box.chronos.userk.brain.utils.AppConstant.OFFER_CLICKED_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.OFF_ID_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
@@ -125,6 +128,9 @@ public class ArticlePage extends AppCompatActivity {
         shopId = offX.getShopId();
         offId = offX.getId_offer();
         offTitleStr = offX.getTitle();
+
+
+        apiArticleClicked();
 
         phoneLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,6 +208,44 @@ public class ArticlePage extends AppCompatActivity {
                     return false;
             }
         return true;
+    }
+
+
+    // api hit view timer not used for android
+    private void apiArticleClicked() {
+        Map<String, String> pairs = new HashMap<>();
+        pairs.put(METHOD_PARAM, OFFER_CLICKED_METHOD);
+        Boolean a = sharePrefs.getIsAnonymous();
+        if (a != null && !a) {
+            // User logged in
+            pairs.put(USERID_PARAM, sharePrefs.getUserId());
+            pairs.put(SESSION_KEY_PARAM, sharePrefs.getSessionKey());
+        }
+
+        pairs.put(OFF_ID_PARAM, offId);
+
+        RestInteraction interaction = new RestInteraction(this);
+        interaction.setCallBack(new IAsyncResponse() {
+            @Override
+            public void onRestInteractionResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
+                        Log.d("Offer CLicked","RICEVUTO");
+                    } else {
+                        Utility.showAlertDialog(ArticlePage.this, object.getString(MESSAGE_KEY));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onRestInteractionError(String message) {
+                Utility.showAlertDialog(getApplicationContext(), message);
+            }
+        });
+        interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, OFFER_CLICKED_METHOD);
     }
 
 
