@@ -11,5 +11,6 @@ public class AppUrls {
     //public static final String IMAGE_URL =  "http://techwinlabs.in/chronos/";
     //public static final String IMAGE_URL = "http://techwinlabs.co.in/chronos/";
     public static final String IMAGE_URL =  "http://www.chronosbox.com/back/chronos/";
+    public static final String FAQ_URL =  "http://www.chronosbox.com/faq/info.html";
 }
 

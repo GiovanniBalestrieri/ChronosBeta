@@ -51,6 +51,7 @@ import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
 import box.chronos.userk.brain.fragments.ArticleListFragment;
 import box.chronos.userk.brain.fragments.CategoriesGridFragment;
+import box.chronos.userk.brain.fragments.HelpFAQ;
 import box.chronos.userk.brain.fragments.OffersListFragment;
 import box.chronos.userk.brain.fragments.ProfileFragment;
 import box.chronos.userk.brain.serverRequest.AppUrls;
@@ -73,10 +74,14 @@ import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.ux.AppMessage.ANONYMOUS_MESSAGE;
 import static box.chronos.userk.brain.ux.AppMessage.ANONYMOUS_PROFILE_CLICK_MESSAGE;
+import static box.chronos.userk.brain.ux.AppMessage.ARTICLE_TITLE;
+import static box.chronos.userk.brain.ux.AppMessage.CAT_TITLE;
+import static box.chronos.userk.brain.ux.AppMessage.FAQ_TITLE;
 import static box.chronos.userk.brain.ux.AppMessage.LOGIN_TITLE;
 import static box.chronos.userk.brain.ux.AppMessage.LOGOUT_TITLE;
 import static box.chronos.userk.brain.ux.AppMessage.LOG_OUT_MESSAGE;
 import static box.chronos.userk.brain.ux.AppMessage.PROFILE_CLICK_MESSAGE;
+import static box.chronos.userk.brain.ux.AppMessage.PROFILE_TITLE;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -109,13 +114,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         setupEnvironment();
-        //requestForGps();
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         ArticleListFragment fragment = new ArticleListFragment();
-        fragmentTransaction.add(R.id.fragment_container, fragment,"Articles");
+        fragmentTransaction.add(R.id.fragment_container, fragment, ARTICLE_TITLE);
 
         fragmentTransaction.commit();
 
@@ -129,21 +133,18 @@ public class MainActivity extends AppCompatActivity
                     Utility.showAlertDialog(MainActivity.this, ANONYMOUS_PROFILE_CLICK_MESSAGE );
                 } else {
                     // Logged in
-
                     Utility.showAlertDialog(MainActivity.this, PROFILE_CLICK_MESSAGE);
                     if (SHOW_PROFILE_USER) {
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fm.beginTransaction();
 
                         ProfileFragment profileFragment = new ProfileFragment();
-                        fragmentTransaction.add(R.id.fragment_container,profileFragment,"profile");
+                        fragmentTransaction.add(R.id.fragment_container,profileFragment, PROFILE_TITLE);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
                     }
                 }
-
                 Log.d("NAVIGATION","\t\tPROFILE");
-
             }
         });
     }
@@ -151,8 +152,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPause(){
         super.onPause();
-        // Dismiss Dialog
-        ///Utility.showAlertDialog();
     }
 
     @Override
@@ -173,11 +172,9 @@ public class MainActivity extends AppCompatActivity
      * Setup environment
      */
     public void setupEnvironment() {
-
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        //stackFragment = new Stack<Fragment>();
         self = this;
         imm = (InputMethodManager) self.getSystemService(Context.INPUT_METHOD_SERVICE);
         sharePrefs = AppController.getPreference();
@@ -215,7 +212,6 @@ public class MainActivity extends AppCompatActivity
             updateProfilePictureNav();
         }
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -245,11 +241,7 @@ public class MainActivity extends AppCompatActivity
         //String urlImage = IMAGE_URL + sharePrefs.getUserImage();
         //Glide.with(this).load(urlImage).into(profPic);
         drawer.invalidate();
-
-
         loginOut.setTitle(LOGIN_TITLE);
-
-
     }
 
     /**
@@ -321,16 +313,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.categories) {
-            Toast.makeText(this,"Categories",Toast.LENGTH_SHORT);
+            Toast.makeText(this, CAT_TITLE , Toast.LENGTH_SHORT);
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             CategoriesGridFragment fragment = new CategoriesGridFragment();
-            fragmentTransaction.replace(R.id.fragment_container, fragment,"Categories");
+            fragmentTransaction.replace(R.id.fragment_container, fragment, CAT_TITLE);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-
         } /*else if (id == R.id.nav_slideshow) {
 
            // DO not open IntroActivity from here or the code activity will show up
@@ -346,35 +337,35 @@ public class MainActivity extends AppCompatActivity
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-
             OffersListFragment fragment = new OffersListFragment();
             fragmentTransaction.replace(R.id.fragment_container, fragment,"Categories");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
         } else if (id == R.id.articoli_nav) {
-            Toast.makeText(this.getApplicationContext(),"Articoli",Toast.LENGTH_SHORT);
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             ArticleListFragment fragment = new ArticleListFragment();
-            fragmentTransaction.replace(R.id.fragment_container, fragment,"Articles");
+            fragmentTransaction.replace(R.id.fragment_container, fragment,ARTICLE_TITLE);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-        } /* else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_help) {
 
-        }*/ else if (id == R.id.nav_logout_login) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            HelpFAQ fragment = new HelpFAQ();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, FAQ_TITLE);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+        } else if (id == R.id.nav_logout_login) {
 
             requestForLogoutOrLogin();
 
-            //AppController.currentMode = 1;
-            //Intent intent = new Intent(MainActivity.self, LoginActivity.class);
-            //startActivity(intent);
-            //finish();
-            //sharePrefs.clearPrefrence();
-            //MainActivity.self.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         } /*else if (id == R.id.nav_switch) {
             Toast.makeText(MainActivity.self,"SWITCH",Toast.LENGTH_SHORT);
             Log.d("NAVIGATION","Switch Selected");

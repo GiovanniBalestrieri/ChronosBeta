@@ -25,7 +25,6 @@ public class OfferFragment extends Fragment {
     private TextView category;
     private TextView genre;
 
-
     public OfferFragment() {
     }
 

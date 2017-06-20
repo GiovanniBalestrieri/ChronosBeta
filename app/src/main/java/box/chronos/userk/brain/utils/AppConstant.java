@@ -38,10 +38,8 @@ public class AppConstant {
     public static final String ONE_RESP = "1";
 
     // Anonnymous messages
-
     public static final String ANONYMOUS = "Anon User";
     public static final String EMPTY_STRING = "";
-
     public static final Boolean SHOW_PROFILE_USER = false;
 
     // API fields
@@ -93,13 +91,11 @@ public class AppConstant {
 
 
 
-/* Statis coordinates */
-
+    /* Statis coordinates */
     public static final String ROME_COORD_LAT = "41.886395";
     public static final String ROME_COORD_LON = "12.516753";
 
-
-
+    /* Shop Status */
     public static final String APERTO_SHOP = "APERTO";
     public static final String CHIUSO_SHOP = "CHIUSO";
 

@@ -37,6 +37,7 @@ public class AppMessage {
     public static final String PROFILE_TITLE = "Profilo";
     public static final String OFFER_TITLE = "Offerte";
     public static final String ARTICLE_TITLE = "Articoli";
+    public static final String FAQ_TITLE = "Faq";
     public static final String CAT_TITLE = "Categorie";
 
 
