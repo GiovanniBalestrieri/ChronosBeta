@@ -30,6 +30,7 @@ import box.chronos.userk.brain.objects.Offer;
 import box.chronos.userk.brain.utils.Lists.ListUtilities;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.brain.utils.AppConstant.EMPTY_STRING;
 import static box.chronos.userk.brain.utils.AppConstant.EUR_SIGN;
 import static box.chronos.userk.brain.utils.AppConstant.FIFTEEN_MIN;
 import static box.chronos.userk.brain.utils.AppConstant.FIVE_KM;
@@ -45,6 +46,7 @@ import static box.chronos.userk.brain.utils.AppConstant.STRING_45_MIN;
 import static box.chronos.userk.brain.utils.AppConstant.STRING_DUE;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.prepareDistanceOffers;
+import static box.chronos.userk.brain.ux.AppMessage.NO_OFFER_MSG;
 
 
 /**
@@ -88,7 +90,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         public TextView discount;
         public TextView finalPrice;
         public TextView timeout;
-        public LinearLayout topLL, actionLL;
+        public LinearLayout topLL, actionLL,midLL;
         private ProgressBar progressBar;
 
         public MyViewHolder(View view) {
@@ -101,8 +103,9 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             discount = (TextView) view.findViewById(R.id.tv_discount_offer_card);
             timeout = (TextView) view.findViewById(R.id.timeout_card_offer);
             finalPrice = (TextView) view.findViewById(R.id.tv_final_price_card);
-            //topLL = (LinearLayout) view.findViewById(R.id.top_info_card);
             actionLL = (LinearLayout) view.findViewById(R.id.action_info_card);
+            midLL = (LinearLayout) view.findViewById(R.id.mid_info_card);
+            topLL = (LinearLayout) view.findViewById(R.id.top_info_card_ll);
             //thumbnail_cat = (ImageView) view.findViewById(R.id.thumbnail_card_article_cat);
             //shop_logo = (ImageView) view.findViewById(R.id.shop_logo_card_article);
             price = (TextView) view.findViewById(R.id.price_card_article);
@@ -214,6 +217,14 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         } else {
             // No offer available
             Log.d("OfferAdapter","No offer");
+            holder.actionLL.setVisibility(View.GONE);
+            holder.topLL.setVisibility(View.GONE);
+            holder.midLL.setVisibility(View.GONE);
+            holder.shop_name.setText(NO_OFFER_MSG);
+            holder.distance.setText(EMPTY_STRING);
+            Glide.with(mContext).load(R.drawable.test4).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);
+            holder.progressBar.setVisibility(View.GONE);
+
         }
 
     }
