@@ -22,7 +22,7 @@ public class ListUtilities {
 
     /* Offers Utilities */
     public static void sortOffersDistanceAsc(List<Offer> offerList, OfferAdapter adapter) {
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             Collections.sort(offerList, new Comparator<Offer>() {
                 @Override
                 public int compare(Offer o1, Offer o2) {
@@ -34,7 +34,7 @@ public class ListUtilities {
     }
 
     public static void sortOffersDistanceDesc(List<Offer> offerList, OfferAdapter adapter) {
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             Collections.sort(offerList, new Comparator<Offer>() {
                 @Override
                 public int compare(Offer o1, Offer o2) {
@@ -46,7 +46,7 @@ public class ListUtilities {
     }
 
     public static void sortOffersPriceDesc(List<Offer> offerList, OfferAdapter adapter) {
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             Collections.sort(offerList, new Comparator<Offer>() {
                 @Override
                 public int compare(Offer o1, Offer o2) {
@@ -58,7 +58,7 @@ public class ListUtilities {
     }
 
     public static void sortOffersPriceAsc(List<Offer> offerList, OfferAdapter adapter) {
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             Collections.sort(offerList, new Comparator<Offer>() {
                 @Override
                 public int compare(Offer o1, Offer o2) {
@@ -72,7 +72,7 @@ public class ListUtilities {
 
     /* Article Utilities */
     public static void sortArticlesDistanceAsc(List<Offer> offerList, ArticleAdapter adapter) {
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             Collections.sort(offerList, new Comparator<Offer>() {
                 @Override
                 public int compare(Offer o1, Offer o2) {
@@ -120,7 +120,7 @@ public class ListUtilities {
     /* Article Utilities */
     public static List<Offer> searchArticlesString(List<Offer> offerList, String query) {
         List<Offer> res = new ArrayList<Offer>();
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             List<Offer> a = findStringInOffers(offerList, query);
             if (a.size()>0) {
                 // Clear only if needed
@@ -134,7 +134,7 @@ public class ListUtilities {
     }
 
     public static void sortArticlesDistanceDesc(List<Offer> offerList, ArticleAdapter adapter) {
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             Collections.sort(offerList, new Comparator<Offer>() {
                 @Override
                 public int compare(Offer o1, Offer o2) {
@@ -146,7 +146,7 @@ public class ListUtilities {
     }
 
     public static void sortArticlesPriceDesc(List<Offer> offerList, ArticleAdapter adapter) {
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             Collections.sort(offerList, new Comparator<Offer>() {
                 @Override
                 public int compare(Offer o1, Offer o2) {
@@ -158,7 +158,7 @@ public class ListUtilities {
     }
 
     public static void sortArticlesPriceAsc(List<Offer> offerList, ArticleAdapter adapter) {
-        if (offerList.size() > 0) {
+        if (offerList.size() > 2) {
             Collections.sort(offerList, new Comparator<Offer>() {
                 @Override
                 public int compare(Offer o1, Offer o2) {
@@ -173,12 +173,12 @@ public class ListUtilities {
     /*
      * Categories Sort by item number
      */
-    public static void sortCatItemAsc(List<Category> categoryList, CategoryAdapter adapter) {
-        if (categoryList.size() > 0) {
+    public static void sortCatItemDesc(List<Category> categoryList, CategoryAdapter adapter) {
+        if (categoryList.size() > 2) {
             Collections.sort(categoryList, new Comparator<Category>() {
                 @Override
                 public int compare(Category o1, Category o2) {
-                    return Float.valueOf(o1.getCount()).compareTo(Float.valueOf(o2.getCount()));
+                    return Float.valueOf(o2.getCount()).compareTo(Float.valueOf(o1.getCount()));
                 }
             });
             adapter.notifyDataSetChanged();

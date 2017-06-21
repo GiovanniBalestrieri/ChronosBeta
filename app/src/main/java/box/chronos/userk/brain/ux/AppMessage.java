@@ -54,9 +54,7 @@ public class AppMessage {
     public static final String PROFILE_CLICK_MESSAGE = "Ottieni più punti per modificare il tuo profilo";
     public static final String PROFILE_IMAGE_CLICK_MESSAGE = "Ottieni più punti per modificare l'immagine del profilo";
 
-
     public static final String NO_OFFER_MSG = "Non ci sono offerte nella tua zona.";
-
-
+    public static final String NO_OFFER_MSG_NOTTE = "Non ci sono offerte a quest'ora.";
 
 }

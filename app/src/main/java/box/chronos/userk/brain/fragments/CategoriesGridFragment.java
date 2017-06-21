@@ -342,7 +342,7 @@ public class CategoriesGridFragment extends Fragment {
             }
 
             // Default order by item count
-            ListUtilities.sortCatItemAsc(catList,adapter);
+            ListUtilities.sortCatItemDesc(catList,adapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }

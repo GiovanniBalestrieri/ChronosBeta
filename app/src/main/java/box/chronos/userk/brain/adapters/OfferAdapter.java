@@ -22,6 +22,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ import box.chronos.userk.brain.objects.Offer;
 import box.chronos.userk.brain.utils.Lists.ListUtilities;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
+import static box.chronos.userk.brain.utils.AppConstant.CHIUSO_SHOP;
 import static box.chronos.userk.brain.utils.AppConstant.EMPTY_STRING;
 import static box.chronos.userk.brain.utils.AppConstant.EUR_SIGN;
 import static box.chronos.userk.brain.utils.AppConstant.FIFTEEN_MIN;
@@ -40,13 +42,17 @@ import static box.chronos.userk.brain.utils.AppConstant.METERS;
 import static box.chronos.userk.brain.utils.AppConstant.MORE_THAN_FIVE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_KM;
 import static box.chronos.userk.brain.utils.AppConstant.PERC_SIGN;
+import static box.chronos.userk.brain.utils.AppConstant.SHOP_START_HOUR;
+import static box.chronos.userk.brain.utils.AppConstant.SHOP_STOP_HOUR;
 import static box.chronos.userk.brain.utils.AppConstant.STRING_15_MIN;
 import static box.chronos.userk.brain.utils.AppConstant.STRING_30_MIN;
 import static box.chronos.userk.brain.utils.AppConstant.STRING_45_MIN;
 import static box.chronos.userk.brain.utils.AppConstant.STRING_DUE;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.prepareDistanceOffers;
+import static box.chronos.userk.brain.ux.AppMessage.EMPTY_FIELD;
 import static box.chronos.userk.brain.ux.AppMessage.NO_OFFER_MSG;
+import static box.chronos.userk.brain.ux.AppMessage.NO_OFFER_MSG_NOTTE;
 
 
 /**
@@ -220,7 +226,18 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             holder.actionLL.setVisibility(View.GONE);
             holder.topLL.setVisibility(View.GONE);
             holder.midLL.setVisibility(View.GONE);
-            holder.shop_name.setText(NO_OFFER_MSG);
+
+
+            int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+            if (hour >= SHOP_START_HOUR && hour <= SHOP_STOP_HOUR) {
+                //shop_status.setText(APERTO_SHOP);
+                holder.shop_name.setText(NO_OFFER_MSG);
+                //shop_status.setTextColor(ContextCompat.getColor(this, R.color.green_dark));
+            } else {
+                holder.shop_name.setText(NO_OFFER_MSG_NOTTE);
+            }
+
+
             holder.distance.setText(EMPTY_STRING);
             Glide.with(mContext).load(R.drawable.test4).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);
             holder.progressBar.setVisibility(View.GONE);
