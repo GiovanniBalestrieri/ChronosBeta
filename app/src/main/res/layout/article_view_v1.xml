@@ -82,6 +82,7 @@
                         android:id="@+id/distance_ll"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="0.4"
                         android:layout_marginBottom="@dimen/details_offer_padding_top"
                         android:layout_marginTop="@dimen/details_offer_padding_top">
@@ -99,7 +100,7 @@
                             android:layout_marginRight="@dimen/margin_left_listitem"
                             android:layout_weight="0.3"
                             android:gravity="center"
-                            android:text="1200m"
+                            android:text="5+ km"
                             android:textColor="@color/grey_midx2"
                             android:textSize="@dimen/distance_value_article_page" />
 

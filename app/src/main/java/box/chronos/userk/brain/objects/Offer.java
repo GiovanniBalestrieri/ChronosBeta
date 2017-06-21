@@ -43,11 +43,12 @@ public class Offer extends Article implements Parcelable {
     String distance;
     String price;
     int progressValue;
-
+    int isDummy;
 
     public Offer(){
         super();
         this.availablePictures = new HashMap<>();
+        this.isDummy = 0;
     }
 
     public boolean isChecked() {
@@ -244,6 +245,7 @@ public class Offer extends Article implements Parcelable {
         this.latitude = parcel.readString();
         this.longitude = parcel.readString();
         this.distance = parcel.readString();
+        this.isDummy = parcel.readInt();
 
         //Bundle b = parcel.readBundle();
         //if(b != null) {
@@ -302,6 +304,7 @@ public class Offer extends Article implements Parcelable {
         parcel.writeString(this.getLatitude());
         parcel.writeString(this.getLongitude());
         parcel.writeString(this.getDistance());
+        parcel.writeInt(this.isDummy());
         //Bundle extras = new Bundle();
         //    extras.putSerializable("HashMap",this.getAvailablePictures());
         //parcel.writeBundle(extras);
@@ -323,5 +326,14 @@ public class Offer extends Article implements Parcelable {
 
     public void setDiscount(String discount) {
         this.discount = discount;
+    }
+
+
+    public int isDummy() {
+        return this.isDummy;
+    }
+
+    public void setDummy(int dummy) {
+        this.isDummy = dummy;
     }
 }

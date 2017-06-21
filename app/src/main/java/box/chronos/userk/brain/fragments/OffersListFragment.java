@@ -361,6 +361,8 @@ public class OffersListFragment extends Fragment {
                             loading = false;
                         } else {
                             Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
+                            fillWithDefaultCard();
+                            loading = false;
                         }
                     } else {
                         Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
@@ -455,6 +457,7 @@ public class OffersListFragment extends Fragment {
                 ld.setTimeout(jsonObject.getString(TIMER_PARAM).toString());
                 ld.setPrice(jsonObject.getString(PRICE_PARAM).toString());
                 ld.setDiscount(jsonObject.getString(DISCOUNT_PARAM).toString());
+                ld.setDummy(0);
                 if (jsonObject.getString(DISCOUNT_PARAM).toString().equals("") || jsonObject.getString(DISCOUNT_PARAM).toString().equals(ZERO_RESP))
                     Log.d(TAG, "Skipping article");
                 else
@@ -474,9 +477,19 @@ public class OffersListFragment extends Fragment {
         }
     }
 
+    // Fills the view with default card
+    private void fillWithDefaultCard(){
+        Offer ld = new Offer();
+        ld.setDummy(1);
+        offerList.add(ld);
+    }
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
         // Inflate menu resource file.
         inflater.inflate(R.menu.offer_list_menu, menu);

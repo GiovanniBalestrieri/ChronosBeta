@@ -126,7 +126,7 @@ public class AppConstant {
     public static final String ONE_KM = "1";
     public static final String FIVE_KM = "5";
     public static final String TEN_KM = "10";
-    public static final int ONE_KM_INT = 1000;
+    public static final int ONE_KM_INT = 1000, NUM_CLICK_TO_UNLOCK_PROFILE = 4;
     public static final float ONE_KM_FLOAT = 1000.0f;
     public static final String MORE_THAN_ONE_KM = "1+ km";
     public static final String MORE_THAN_FIVE_KM = "5+ km";

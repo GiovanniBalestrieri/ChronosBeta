@@ -123,93 +123,97 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
         Log.d(TAG,"Item position: " + Integer.toString(position));
         Offer off = filteredData.get(position);
+        if (off.isDummy() == 0) {
+            holder.shop_name.setText(off.getBusinessname()/*.toUpperCase()*/);
 
-        holder.shop_name.setText(off.getBusinessname()/*.toUpperCase()*/);
-
-        if (off.getDiscount().isEmpty()) {
-            holder.price.setVisibility(View.GONE);
-            holder.discount.setText(off.getPrice() + EUR_SIGN);
-            holder.finalPrice.setVisibility(View.GONE);
-        } else {
-            Log.d("OfferAdapter", "Discount: " + Float.valueOf(fixFloatFormat(off.getDiscount())));
-            if (Float.valueOf(fixFloatFormat(off.getDiscount())) == 0.0f) {
+            if (off.getDiscount().isEmpty()) {
                 holder.price.setVisibility(View.GONE);
                 holder.discount.setText(off.getPrice() + EUR_SIGN);
                 holder.finalPrice.setVisibility(View.GONE);
             } else {
-                holder.price.setVisibility(View.VISIBLE);
-                holder.price.setText(off.getPrice() + EUR_SIGN);
-                holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                holder.discount.setText(fixFloatFormat(off.getDiscount()) + PERC_SIGN);
-                holder.finalPrice.setVisibility(View.VISIBLE);
-                holder.finalPrice.setText(computeFinalPrice(off.getPrice(), off.getDiscount()));
+                Log.d("OfferAdapter", "Discount: " + Float.valueOf(fixFloatFormat(off.getDiscount())));
+                if (Float.valueOf(fixFloatFormat(off.getDiscount())) == 0.0f) {
+                    holder.price.setVisibility(View.GONE);
+                    holder.discount.setText(off.getPrice() + EUR_SIGN);
+                    holder.finalPrice.setVisibility(View.GONE);
+                } else {
+                    holder.price.setVisibility(View.VISIBLE);
+                    holder.price.setText(off.getPrice() + EUR_SIGN);
+                    holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    holder.discount.setText(fixFloatFormat(off.getDiscount()) + PERC_SIGN);
+                    holder.finalPrice.setVisibility(View.VISIBLE);
+                    holder.finalPrice.setText(computeFinalPrice(off.getPrice(), off.getDiscount()));
+                }
             }
-        }
-        holder.distance.setText(prepareDistanceOffers(off.getDistance()));
+            holder.distance.setText(prepareDistanceOffers(off.getDistance()));
 
-        // Visibility Gone Action
-        holder.actionLL.setVisibility(View.GONE);
+            // Visibility Gone Action
+            holder.actionLL.setVisibility(View.GONE);
 
-        String[] time = off.getTimeout().split ( ":" );
-        int min = Integer.parseInt ( time[0].trim() );
-        holder.timeout.setText(prepareTimeout(min));
+            String[] time = off.getTimeout().split(":");
+            int min = Integer.parseInt(time[0].trim());
+            holder.timeout.setText(prepareTimeout(min));
 
-        if (min >= FOURTY_5_MIN){
-            //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
-            holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
-        } else if (min < FOURTY_5_MIN && min >= FIFTEEN_MIN) {
-            //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
-            holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
-        } else if (min < FIFTEEN_MIN) {
-            //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
-            holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
+            if (min >= FOURTY_5_MIN) {
+                //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+                holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+            } else if (min < FOURTY_5_MIN && min >= FIFTEEN_MIN) {
+                //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
+                holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
+            } else if (min < FIFTEEN_MIN) {
+                //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
+                holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
+            } else {
+                //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+                holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
+            }
+
+
+            String urlCat = IMAGE_URL + off.getCategoryphoto();
+            //
+            // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
+            //Picasso.with(mContext).load(urlCat).into(holder.shop_logo);
+
+
+            Log.d(TAG, "Price:\t" + off.getPrice());
+            Log.d(TAG, "BusinessName:\t" + off.getBusinessname());
+            Log.d(TAG, "Discount:\t" + off.getDiscount());
+
+            if (off.hasPicture()) {
+                Map.Entry<String, String> entry = filteredData.get(position).getAvailablePictures().entrySet().iterator().next();
+                String key = entry.getKey();
+                String value = entry.getValue();
+                System.out.println(key);
+                System.out.println(value);
+
+                String urlImage = IMAGE_URL + value;
+                Log.d(TAG, "Image:\t" + urlImage);
+
+                Glide.with(mContext).load(urlImage)
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .listener(new RequestListener<String, GlideDrawable>() {
+                            @Override
+                            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                holder.progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                holder.progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .into(holder.thumbnail);//placeholder(R.drawable.progress_animation)
+
+            } else {
+                Glide.with(mContext).load(R.drawable.empty).placeholder(R.drawable.progress_animation).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);
+            }
         } else {
-            //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
-            holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
-        }
-
-
-        String urlCat = IMAGE_URL + off.getCategoryphoto();
-        //
-        // Picasso.with(mContext).load(urlCat).into(holder.thumbnail_cat);
-        //Picasso.with(mContext).load(urlCat).into(holder.shop_logo);
-
-
-        Log.d(TAG,"Price:\t" + off.getPrice());
-        Log.d(TAG,"BusinessName:\t" + off.getBusinessname());
-        Log.d(TAG,"Discount:\t" + off.getDiscount());
-
-        if (off.hasPicture()) {
-            Map.Entry<String,String> entry = filteredData.get(position).getAvailablePictures().entrySet().iterator().next();
-            String key = entry.getKey();
-            String value = entry.getValue();
-            System.out.println(key);
-            System.out.println(value);
-
-            String urlImage = IMAGE_URL + value;
-            Log.d(TAG,"Image:\t" + urlImage);
-
-            Glide.with(mContext).load(urlImage)
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            holder.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            holder.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(holder.thumbnail);//placeholder(R.drawable.progress_animation)
-
-        } else {
-            Glide.with(mContext).load(R.drawable.empty).placeholder(R.drawable.progress_animation).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);
+            // No offer available
+            Log.d("OfferAdapter","No offer");
         }
 
     }

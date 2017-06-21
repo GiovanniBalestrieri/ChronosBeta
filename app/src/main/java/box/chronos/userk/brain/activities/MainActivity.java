@@ -67,6 +67,7 @@ import static box.chronos.userk.brain.utils.AppConstant.ANONYMOUS;
 import static box.chronos.userk.brain.utils.AppConstant.EMPTY_STRING;
 import static box.chronos.userk.brain.utils.AppConstant.LOGOUT_METHOD;
 import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.brain.utils.AppConstant.NUM_CLICK_TO_UNLOCK_PROFILE;
 import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
 import static box.chronos.userk.brain.utils.AppConstant.SHOW_PROFILE_USER;
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-    private boolean doubleBackToExitPressedOnce = false;
+    private boolean doubleBackToExitPressedOnce = false, tripleProfileClick = false;
     private UserSharedPreference sharePrefs;
     public static MainActivity self;
     private String locationValue, latitudeValue, longitudeValue;
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity
     LinearLayout profileNav;
     public ImageView profPic;
     private MenuItem loginOut;
+    private int profileCountClick = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,14 +129,21 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
+                if (profileCountClick <= NUM_CLICK_TO_UNLOCK_PROFILE){
+                    profileCountClick++;
+                }
+
+                if (profileCountClick >= NUM_CLICK_TO_UNLOCK_PROFILE) {
+                    tripleProfileClick = true;
+                }
+
                 Boolean a = sharePrefs.getIsAnonymous();
                 if (a != null && a) {
                     // Anon
                     Utility.showAlertDialog(MainActivity.this, ANONYMOUS_PROFILE_CLICK_MESSAGE );
                 } else {
                     // Logged in
-                    Utility.showAlertDialog(MainActivity.this, PROFILE_CLICK_MESSAGE);
-                    if (SHOW_PROFILE_USER) {
+                    if (SHOW_PROFILE_USER || tripleProfileClick) {
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fm.beginTransaction();
 
@@ -142,6 +151,8 @@ public class MainActivity extends AppCompatActivity
                         fragmentTransaction.add(R.id.fragment_container,profileFragment, PROFILE_TITLE);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
+                    } else {
+                        Utility.showAlertDialog(MainActivity.this, PROFILE_CLICK_MESSAGE);
                     }
                 }
                 Log.d("NAVIGATION","\t\tPROFILE");
@@ -522,5 +533,13 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        profileCountClick = 0;
+        tripleProfileClick = false;
+
+    }
 
 }

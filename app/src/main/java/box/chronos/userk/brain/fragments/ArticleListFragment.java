@@ -499,6 +499,8 @@ public class ArticleListFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
         // Inflate menu resource file.
         inflater.inflate(R.menu.offer_list_menu, menu);
