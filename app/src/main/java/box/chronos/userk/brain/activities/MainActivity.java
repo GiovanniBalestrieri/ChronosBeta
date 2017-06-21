@@ -252,6 +252,7 @@ public class MainActivity extends AppCompatActivity
         //Glide.with(this).load(urlImage).into(profPic);
         drawer.invalidate();
         loginOut.setTitle(LOGIN_TITLE);
+        profileNav.setVisibility(View.GONE);
     }
 
     /**
