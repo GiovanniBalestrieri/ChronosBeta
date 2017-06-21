@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import box.chronos.userk.brain.utils.AppController;
 import box.chronos.userk.brain.utils.UserSharedPreference;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.FAQ_URL;
+import static box.chronos.userk.brain.ux.AppMessage.FAQ_TITLE;
 
 /**
  * Created by userk on 20/06/17.
@@ -45,6 +47,10 @@ public class HelpFAQ extends Fragment {
         ((MainActivity) getActivity()).drawer.closeDrawer(Gravity.LEFT);
         WebView myWebView = (WebView) view.findViewById(R.id.webview);
         myWebView.loadUrl(FAQ_URL);
+
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(FAQ_TITLE);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         return view;
     }
