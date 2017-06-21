@@ -29,8 +29,10 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import box.chronos.userk.brain.R;
+import box.chronos.userk.brain.utils.constants.AppConstant;
+import box.chronos.userk.brain.utils.position.GpsTracker;
 
-import static box.chronos.userk.brain.utils.AppConstant.TOAST_DURATION;
+import static box.chronos.userk.brain.utils.constants.AppConstant.TOAST_DURATION;
 
 /**
  * Created by francesco on 17/03/2017.

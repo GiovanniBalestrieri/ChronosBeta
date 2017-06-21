@@ -13,11 +13,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import box.chronos.userk.brain.R;
-import box.chronos.userk.brain.utils.AppController;
-import box.chronos.userk.brain.utils.UserSharedPreference;
+import box.chronos.userk.brain.utils.application.AppController;
+import box.chronos.userk.brain.utils.application.UserSharedPreference;
 
-import static box.chronos.userk.brain.utils.AppConstant.ANONYMOUS;
-import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
+import static box.chronos.userk.brain.utils.constants.AppConstant.ONE_RESP;
 import static box.chronos.userk.brain.ux.AppMessage.ANONYMOUS_MESSAGE;
 
 /**

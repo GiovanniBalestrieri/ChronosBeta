@@ -29,45 +29,41 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
 import box.chronos.userk.brain.R;
-import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.adapters.CategoryAdapter;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
 import box.chronos.userk.brain.objects.Category;
-import box.chronos.userk.brain.objects.Offer;
 import box.chronos.userk.brain.serverRequest.AppUrls;
 import box.chronos.userk.brain.serverRequest.RestInteraction;
 import box.chronos.userk.brain.settings.Includes;
-import box.chronos.userk.brain.utils.AppController;
-import box.chronos.userk.brain.utils.BlurBuilder;
+import box.chronos.userk.brain.utils.application.AppController;
+import box.chronos.userk.brain.utils.images.BlurBuilder;
 import box.chronos.userk.brain.utils.Lists.ListUtilities;
-import box.chronos.userk.brain.utils.RecycleItemClickListener;
-import box.chronos.userk.brain.utils.UserSharedPreference;
+import box.chronos.userk.brain.utils.Lists.RecycleItemClickListener;
+import box.chronos.userk.brain.utils.application.UserSharedPreference;
 import box.chronos.userk.brain.utils.Utility;
-import box.chronos.userk.brain.utils.VideoUtility;
+import box.chronos.userk.brain.utils.video.VideoUtility;
 
 import static box.chronos.userk.brain.settings.Includes.show_background_categories;
 import static box.chronos.userk.brain.settings.Includes.show_grid_layout;
-import static box.chronos.userk.brain.utils.AppConstant.CAT_COUNT;
-import static box.chronos.userk.brain.utils.AppConstant.CAT_ID;
-import static box.chronos.userk.brain.utils.AppConstant.CAT_NAME;
-import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_ACTIVE;
-import static box.chronos.userk.brain.utils.AppConstant.CAT_PHOTO_DEF;
-import static box.chronos.userk.brain.utils.AppConstant.CAT_SELECTED;
-import static box.chronos.userk.brain.utils.AppConstant.DATA_RESP;
-import static box.chronos.userk.brain.utils.AppConstant.GET_CAT_METHOD;
-import static box.chronos.userk.brain.utils.AppConstant.GET_CAT_METHOD_ANON;
-import static box.chronos.userk.brain.utils.AppConstant.MESSAGE_KEY;
-import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
-import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CAT_COUNT;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CAT_ID;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CAT_NAME;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CAT_PHOTO_ACTIVE;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CAT_PHOTO_DEF;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CAT_SELECTED;
+import static box.chronos.userk.brain.utils.constants.AppConstant.DATA_RESP;
+import static box.chronos.userk.brain.utils.constants.AppConstant.GET_CAT_METHOD;
+import static box.chronos.userk.brain.utils.constants.AppConstant.GET_CAT_METHOD_ANON;
+import static box.chronos.userk.brain.utils.constants.AppConstant.MESSAGE_KEY;
+import static box.chronos.userk.brain.utils.constants.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.ONE_RESP;
+import static box.chronos.userk.brain.utils.constants.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.ux.AppMessage.ARTICLE_TITLE;
 import static box.chronos.userk.brain.ux.AppMessage.CAT_TITLE;
 
@@ -352,6 +348,7 @@ public class CategoriesGridFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
         // Inflate menu resource file.
         inflater.inflate(R.menu.cat_list_menu, menu);
     }

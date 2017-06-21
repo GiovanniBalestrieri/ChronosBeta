@@ -19,20 +19,16 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import box.chronos.userk.brain.activities.MainActivity;
 import box.chronos.userk.brain.objects.Offer;
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.utils.Lists.ListUtilities;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
-import static box.chronos.userk.brain.utils.AppConstant.EUR_SIGN;
-import static box.chronos.userk.brain.utils.AppConstant.PERC_SIGN;
+import static box.chronos.userk.brain.utils.constants.AppConstant.EUR_SIGN;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.prepareDistanceArticle;
 
@@ -146,9 +142,17 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         holder.shop_name.setText(off.getBusinessname());
         holder.distance.setText(prepareDistanceArticle(off.getDistance()));
 
-
-        holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        holder.price.setText(fixFloatFormat(off.getPrice()) + EUR_SIGN);
+        if (off.getDiscount().isEmpty()) {
+            holder.price.setText(fixFloatFormat(off.getPrice()) + EUR_SIGN);
+        } else {
+            Log.d("OfferAdapter", "Discount: " + Float.valueOf(fixFloatFormat(off.getDiscount())));
+            if (Float.valueOf(fixFloatFormat(off.getDiscount())) > 0.0f) {
+                holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.price.setText(fixFloatFormat(off.getPrice()) + EUR_SIGN);
+            } else {
+                holder.price.setText(fixFloatFormat(off.getPrice()) + EUR_SIGN);
+            }
+        }
 
 
         //holder.price.setText(off.getPrice() + EUR_SIGN);

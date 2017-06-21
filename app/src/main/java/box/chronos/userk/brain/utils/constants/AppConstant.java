@@ -1,4 +1,4 @@
-package box.chronos.userk.brain.utils;
+package box.chronos.userk.brain.utils.constants;
 
 import java.util.Arrays;
 import java.util.List;

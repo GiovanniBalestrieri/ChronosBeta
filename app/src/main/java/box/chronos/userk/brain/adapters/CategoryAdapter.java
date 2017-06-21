@@ -16,8 +16,8 @@ import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.objects.Category;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
-import static box.chronos.userk.brain.utils.AppConstant.PARENTESI_DX;
-import static box.chronos.userk.brain.utils.AppConstant.PARENTESI_SX;
+import static box.chronos.userk.brain.utils.constants.AppConstant.PARENTESI_DX;
+import static box.chronos.userk.brain.utils.constants.AppConstant.PARENTESI_SX;
 
 
 /**

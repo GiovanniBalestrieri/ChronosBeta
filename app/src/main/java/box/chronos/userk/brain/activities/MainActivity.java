@@ -56,23 +56,22 @@ import box.chronos.userk.brain.fragments.OffersListFragment;
 import box.chronos.userk.brain.fragments.ProfileFragment;
 import box.chronos.userk.brain.serverRequest.AppUrls;
 import box.chronos.userk.brain.serverRequest.RestInteraction;
-import box.chronos.userk.brain.utils.AppController;
-import box.chronos.userk.brain.utils.GpsTracker;
-import box.chronos.userk.brain.utils.UserSharedPreference;
+import box.chronos.userk.brain.utils.application.AppController;
+import box.chronos.userk.brain.utils.position.GpsTracker;
+import box.chronos.userk.brain.utils.application.UserSharedPreference;
 import box.chronos.userk.brain.utils.Utility;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
-import static box.chronos.userk.brain.utils.AppConstant.ANONYMOUS;
-import static box.chronos.userk.brain.utils.AppConstant.EMPTY_STRING;
-import static box.chronos.userk.brain.utils.AppConstant.LOGOUT_METHOD;
-import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.NUM_CLICK_TO_UNLOCK_PROFILE;
-import static box.chronos.userk.brain.utils.AppConstant.ONE_RESP;
-import static box.chronos.userk.brain.utils.AppConstant.SESSION_KEY_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.SHOW_PROFILE_USER;
-import static box.chronos.userk.brain.utils.AppConstant.SUCCESS_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.USERID_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.ANONYMOUS;
+import static box.chronos.userk.brain.utils.constants.AppConstant.EMPTY_STRING;
+import static box.chronos.userk.brain.utils.constants.AppConstant.LOGOUT_METHOD;
+import static box.chronos.userk.brain.utils.constants.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.NUM_CLICK_TO_UNLOCK_PROFILE;
+import static box.chronos.userk.brain.utils.constants.AppConstant.ONE_RESP;
+import static box.chronos.userk.brain.utils.constants.AppConstant.SESSION_KEY_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.SHOW_PROFILE_USER;
+import static box.chronos.userk.brain.utils.constants.AppConstant.SUCCESS_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.USERID_PARAM;
 import static box.chronos.userk.brain.ux.AppMessage.ANONYMOUS_MESSAGE;
 import static box.chronos.userk.brain.ux.AppMessage.ANONYMOUS_PROFILE_CLICK_MESSAGE;
 import static box.chronos.userk.brain.ux.AppMessage.ARTICLE_TITLE;
@@ -536,10 +535,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume(){
         super.onResume();
-
         profileCountClick = 0;
         tripleProfileClick = false;
-
     }
-
 }

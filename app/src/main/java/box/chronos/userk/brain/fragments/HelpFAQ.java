@@ -2,20 +2,20 @@ package box.chronos.userk.brain.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
-import agency.tango.materialintroscreen.animations.ViewTranslationWrapper;
 import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.activities.MainActivity;
-import box.chronos.userk.brain.utils.AppController;
-import box.chronos.userk.brain.utils.UserSharedPreference;
+import box.chronos.userk.brain.utils.application.AppController;
+import box.chronos.userk.brain.utils.application.UserSharedPreference;
 
 import static box.chronos.userk.brain.serverRequest.AppUrls.FAQ_URL;
 import static box.chronos.userk.brain.ux.AppMessage.FAQ_TITLE;
@@ -33,6 +33,7 @@ public class HelpFAQ extends Fragment {
         super.onCreate(savedInstanceState);
 
         sharePrefs = AppController.getPreference();
+        setHasOptionsMenu(false);
 
     }
 
@@ -53,5 +54,11 @@ public class HelpFAQ extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

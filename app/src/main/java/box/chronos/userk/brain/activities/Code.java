@@ -26,20 +26,20 @@ import box.chronos.userk.brain.R;
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
 import box.chronos.userk.brain.serverRequest.AppUrls;
 import box.chronos.userk.brain.serverRequest.RestInteraction;
-import box.chronos.userk.brain.utils.AppController;
-import box.chronos.userk.brain.utils.UserSharedPreference;
+import box.chronos.userk.brain.utils.application.AppController;
+import box.chronos.userk.brain.utils.application.UserSharedPreference;
 import box.chronos.userk.brain.utils.Utility;
 
 import static box.chronos.userk.brain.settings.Intro.CODE_LEN;
-import static box.chronos.userk.brain.utils.AppConstant.CODE_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.CODE_SKIP_METHOD;
-import static box.chronos.userk.brain.utils.AppConstant.CODE_VALIDATION_METHOD;
-import static box.chronos.userk.brain.utils.AppConstant.EMAIL_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.ERROR_RESP;
-import static box.chronos.userk.brain.utils.AppConstant.METHOD_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.MSG_RESP;
-import static box.chronos.userk.brain.utils.AppConstant.UID_PARAM;
-import static box.chronos.userk.brain.utils.AppConstant.ZERO_RESP;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CODE_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CODE_SKIP_METHOD;
+import static box.chronos.userk.brain.utils.constants.AppConstant.CODE_VALIDATION_METHOD;
+import static box.chronos.userk.brain.utils.constants.AppConstant.EMAIL_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.ERROR_RESP;
+import static box.chronos.userk.brain.utils.constants.AppConstant.METHOD_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.MSG_RESP;
+import static box.chronos.userk.brain.utils.constants.AppConstant.UID_PARAM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.ZERO_RESP;
 
 /**
  * Created by userk on 14/12/16.

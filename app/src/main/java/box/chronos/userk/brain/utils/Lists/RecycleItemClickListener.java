@@ -1,4 +1,4 @@
-package box.chronos.userk.brain.utils;
+package box.chronos.userk.brain.utils.Lists;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

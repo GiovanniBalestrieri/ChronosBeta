@@ -1,4 +1,4 @@
-package box.chronos.userk.brain.utils;
+package box.chronos.userk.brain.utils.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

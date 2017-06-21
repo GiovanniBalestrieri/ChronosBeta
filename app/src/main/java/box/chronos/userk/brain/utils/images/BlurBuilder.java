@@ -1,4 +1,4 @@
-package box.chronos.userk.brain.utils;
+package box.chronos.userk.brain.utils.images;
 
 import android.content.Context;
 import android.graphics.Bitmap;

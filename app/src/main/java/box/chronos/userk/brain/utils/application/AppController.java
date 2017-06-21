@@ -1,4 +1,4 @@
-package box.chronos.userk.brain.utils;
+package box.chronos.userk.brain.utils.application;
 
 import android.content.Context;
 import android.os.Handler;
@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+
+import box.chronos.userk.brain.utils.forms.FieldsValidator;
 
 /**
  * Created by userk on 14/12/16.

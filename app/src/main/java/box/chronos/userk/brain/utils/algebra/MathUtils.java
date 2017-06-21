@@ -1,14 +1,12 @@
 package box.chronos.userk.brain.utils.algebra;
 
-import android.util.Log;
-
-import static box.chronos.userk.brain.utils.AppConstant.FIVE_KM;
-import static box.chronos.userk.brain.utils.AppConstant.K_METERS;
-import static box.chronos.userk.brain.utils.AppConstant.METERS;
-import static box.chronos.userk.brain.utils.AppConstant.MORE_THAN_FIVE_KM;
-import static box.chronos.userk.brain.utils.AppConstant.MORE_THAN_TEN_KM;
-import static box.chronos.userk.brain.utils.AppConstant.ONE_KM;
-import static box.chronos.userk.brain.utils.AppConstant.TEN_KM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.FIVE_KM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.K_METERS;
+import static box.chronos.userk.brain.utils.constants.AppConstant.METERS;
+import static box.chronos.userk.brain.utils.constants.AppConstant.MORE_THAN_FIVE_KM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.MORE_THAN_TEN_KM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.ONE_KM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.TEN_KM;
 
 /**
  * Created by userk on 20/05/17.

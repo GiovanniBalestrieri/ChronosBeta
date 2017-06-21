@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import box.chronos.userk.brain.callbacks.IAsyncResponse;
-import box.chronos.userk.brain.utils.AppController;
-import box.chronos.userk.brain.utils.ConnectionUtility;
+import box.chronos.userk.brain.utils.application.AppController;
+import box.chronos.userk.brain.utils.network.ConnectionUtility;
 
 /**
  * Created by francesco on 20/03/2017.

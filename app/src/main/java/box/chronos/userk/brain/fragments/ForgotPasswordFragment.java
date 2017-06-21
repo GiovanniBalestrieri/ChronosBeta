@@ -24,7 +24,7 @@ import box.chronos.userk.brain.serverRequest.AppUrls;
 import box.chronos.userk.brain.serverRequest.RestInteraction;
 import box.chronos.userk.brain.utils.Utility;
 
-import static box.chronos.userk.brain.utils.AppConstant.FORGOT_PSS_METHOD;
+import static box.chronos.userk.brain.utils.constants.AppConstant.FORGOT_PSS_METHOD;
 
 /**
  * Created by francesco on 27/03/2017.

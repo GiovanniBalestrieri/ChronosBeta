@@ -1,4 +1,4 @@
-package box.chronos.userk.brain.utils;
+package box.chronos.userk.brain.utils.position;
 
 import android.Manifest;
 import android.app.AlertDialog;
