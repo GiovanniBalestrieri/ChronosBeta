@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -94,7 +95,7 @@ import static box.chronos.userk.brain.ux.AppMessage.OFFER_TITLE;
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
-public class OffersListFragment extends Fragment {
+public class OffersListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = OffersListFragment.class.getSimpleName();
     private OfferAdapter adapter;
     private List<Offer> offerList = new ArrayList<Offer>();
@@ -108,6 +109,8 @@ public class OffersListFragment extends Fragment {
     LinearLayoutManager mLayoutManager;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     private SearchView searchView;
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     public OffersListFragment() {
     }
@@ -164,8 +167,17 @@ public class OffersListFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        // SwipeRefreshLayout
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container_offers);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
+
+
         retrieveData();
-        prepareOffers();
+        //prepareOffers();
 
         ((MainActivity) getActivity()).requestForGps();
         //triggerTutorial(rootView);
@@ -175,29 +187,37 @@ public class OffersListFragment extends Fragment {
                 new RecycleItemClickListener(getActivity(), new RecycleItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Offer lic = (Offer) offerList.get(position);
-                        Log.d("YOLO", "Lincence: " + lic.getTitle() + " clicked");
+                        if (offerList.size()>0) {
+                            Offer lic = (Offer) offerList.get(position);
+                            if (lic.isDummy() == 0) {
+                                Log.d("YOLO", "Lincence: " + lic.getTitle() + " clicked");
 
-                        // Create new fragment and transaction
+                                // Create new fragment and transaction
 
-                        Toast.makeText(getActivity(),"Offer",Toast.LENGTH_SHORT);
-                        Intent i = new Intent(getActivity(),OfferPage.class);
+                                Toast.makeText(getActivity(), "Offer", Toast.LENGTH_SHORT);
+                                Intent i = new Intent(getActivity(), OfferPage.class);
 
-                        i.putExtra("Offer",offerList.get(position));
-                        if (lic.hasPicture()) {
-                            List<String> list = new ArrayList<>();
-                            for (int j = 0; j < lic.getAvailablePictures().size(); j++) {
-                                Iterator it =lic.getAvailablePictures().entrySet().iterator();
-                                while (it.hasNext()) {
-                                    Map.Entry pair = (Map.Entry)it.next();
-                                    System.out.println(pair.getKey() + " = " + pair.getValue());
-                                    list.add((String) pair.getValue());
+                                i.putExtra("Offer", offerList.get(position));
+                                if (lic.hasPicture()) {
+                                    List<String> list = new ArrayList<>();
+                                    for (int j = 0; j < lic.getAvailablePictures().size(); j++) {
+                                        Iterator it = lic.getAvailablePictures().entrySet().iterator();
+                                        while (it.hasNext()) {
+                                            Map.Entry pair = (Map.Entry) it.next();
+                                            System.out.println(pair.getKey() + " = " + pair.getValue());
+                                            list.add((String) pair.getValue());
+                                        }
+                                        i.putStringArrayListExtra("pictures", (ArrayList<String>) list);
+
+                                    }
                                 }
-                                i.putStringArrayListExtra("pictures", (ArrayList<String>) list);
-
+                                startActivity(i);
+                            } else {
+                                Log.d(TAG,"Clicked banner 1");
                             }
+                        } else {
+                            Log.d(TAG,"Clicked banner 2");
                         }
-                        startActivity(i);
 
                     }
                 }
@@ -232,17 +252,56 @@ public class OffersListFragment extends Fragment {
             }
         });
 
+        /**
+         * Showing Swipe Refresh animation on activity create
+         * As animation won't start on onCreate, post runnable is used
+         */
+        mSwipeRefreshLayout.post(new Runnable() {
+
+            @Override
+            public void run() {
+
+                mSwipeRefreshLayout.setRefreshing(true);
+
+                // Fetching data from server
+                loadRecyclerViewData();
+            }
+        });
+
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(OFFER_TITLE);
 
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 
+
+
         return rootView;
     }
 
     /**
-     * Retrieve intent data from activity
+     * This method is called when swipe refresh is pulled down
      */
+    @Override
+    public void onRefresh() {
+
+        // Fetching data from server
+        loadRecyclerViewData();
+
+        pages = 1;
+        offerList.clear();
+        prepareOffers();
+    }
+
+    private void loadRecyclerViewData() {
+        // Showing refresh animation before making http call
+        mSwipeRefreshLayout.setRefreshing(true);
+        prepareOffers();
+
+    }
+
+        /**
+         * Retrieve intent data from activity
+         */
     public void retrieveData(){
         Bundle arguments = getArguments();
         if (arguments != null && arguments.containsKey("cat")) {
@@ -354,23 +413,34 @@ public class OffersListFragment extends Fragment {
                             getJsonData(object);
                             // #bea
                             loading = false;
+
+                            if (mSwipeRefreshLayout.isRefreshing())
+                                mSwipeRefreshLayout.setRefreshing(false);
                         } else {
                             Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
                             fillWithDefaultCard();
                             loading = false;
+                            if (mSwipeRefreshLayout.isRefreshing())
+                                mSwipeRefreshLayout.setRefreshing(false);
                         }
                     } else {
                         Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
+                        if (mSwipeRefreshLayout.isRefreshing())
+                            mSwipeRefreshLayout.setRefreshing(false);
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    if (mSwipeRefreshLayout.isRefreshing())
+                        mSwipeRefreshLayout.setRefreshing(false);
                 }
             }
 
             @Override
             public void onRestInteractionError(String message) {
                 Utility.showAlertDialog(getActivity(), message);
+                if (mSwipeRefreshLayout.isRefreshing())
+                    mSwipeRefreshLayout.setRefreshing(false);
             }
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");

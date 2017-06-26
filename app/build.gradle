@@ -107,6 +107,9 @@ dependencies {
 
     // Progress Bar
     compile 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+
+    // Charts
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

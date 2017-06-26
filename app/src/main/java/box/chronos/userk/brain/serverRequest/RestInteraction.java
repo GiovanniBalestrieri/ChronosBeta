@@ -67,13 +67,13 @@ public class RestInteraction<K> {
                                    String actionDialog) {
         if (ConnectionUtility.isConnectedToNetwork(mContext)) {
             Log.e(serviceTAG, serviceURL + params);
-            getProgressDialog(mContext, actionDialog);
+            //getProgressDialog(mContext, actionDialog);
             StringRequest jsonObjReq = new StringRequest(Request.Method.POST, serviceURL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
-                    if (mProgressHUD != null)
-                        mProgressHUD.dismiss();
+                    //if (mProgressHUD != null)
+                    //    mProgressHUD.dismiss();
 
                     Log.e(serviceURL + " Url Response== ", response);
 
@@ -85,8 +85,8 @@ public class RestInteraction<K> {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
-                    if (mProgressHUD != null)
-                        mProgressHUD.dismiss();
+                    //if (mProgressHUD != null)
+                    //    mProgressHUD.dismiss();
 
                     Log.e(serviceURL + " Url Response== ", String.valueOf(error));
 

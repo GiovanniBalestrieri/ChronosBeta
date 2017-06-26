@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -93,7 +94,7 @@ import static box.chronos.userk.brain.ux.AppMessage.ARTICLE_TITLE;
 /**
  * Created by ChronosTeam on 27/02/2017.
  */
-public class ArticleListFragment extends Fragment {
+public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = OffersListFragment.class.getSimpleName();
     private ArticleAdapter adapter;
     private List<Offer> offerList = new ArrayList<Offer>(), offerListTemp = new ArrayList<Offer>();
@@ -108,6 +109,7 @@ public class ArticleListFragment extends Fragment {
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     private CircularProgressView progressView;
     private SearchView searchView;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     public ArticleListFragment() {
     }
@@ -130,7 +132,6 @@ public class ArticleListFragment extends Fragment {
         sharePrefs = AppController.getPreference();
 
         //progressView = (CircularProgressView) rootView.findViewById(R.id.progress_view);
-
         //progressView.startAnimation();
 
 
@@ -147,10 +148,37 @@ public class ArticleListFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+
+        // SwipeRefreshLayout
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container_offers);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
+
+
+
         retrieveData();
-        prepareOffers();
+        //prepareOffers();
 
         ((MainActivity) getActivity()).requestForGps();
+
+        /**
+         * Showing Swipe Refresh animation on activity create
+         * As animation won't start on onCreate, post runnable is used
+         */
+        mSwipeRefreshLayout.post(new Runnable() {
+
+            @Override
+            public void run() {
+
+                mSwipeRefreshLayout.setRefreshing(true);
+
+                // Fetching data from server
+                loadRecyclerViewData();
+            }
+        });
 
         recyclerView.addOnItemTouchListener(
 
@@ -238,6 +266,26 @@ public class ArticleListFragment extends Fragment {
         }
     }
 
+    /**
+     * This method is called when swipe refresh is pulled down
+     */
+    @Override
+    public void onRefresh() {
+
+        // Fetching data from server
+        loadRecyclerViewData();
+
+        pages = 1;
+        offerList.clear();
+        prepareOffers();
+    }
+
+    private void loadRecyclerViewData() {
+        // Showing refresh animation before making http call
+        mSwipeRefreshLayout.setRefreshing(true);
+        prepareOffers();
+
+    }
 
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -343,11 +391,20 @@ public class ArticleListFragment extends Fragment {
                             //progressView.setVisibility(View.INVISIBLE);
 
                             loading = true;
+
+                            if (mSwipeRefreshLayout.isRefreshing())
+                                mSwipeRefreshLayout.setRefreshing(false);
                         } else {
                             Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
+
+                            if (mSwipeRefreshLayout.isRefreshing())
+                                mSwipeRefreshLayout.setRefreshing(false);
                         }
                     } else {
                         Utility.showAlertDialog(getActivity(), object.getString(MESSAGE_KEY));
+
+                        if (mSwipeRefreshLayout.isRefreshing())
+                            mSwipeRefreshLayout.setRefreshing(false);
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
@@ -358,6 +415,9 @@ public class ArticleListFragment extends Fragment {
             @Override
             public void onRestInteractionError(String message) {
                 Utility.showAlertDialog(getActivity(), message);
+
+                if (mSwipeRefreshLayout.isRefreshing())
+                    mSwipeRefreshLayout.setRefreshing(false);
             }
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "Dialog");

@@ -133,6 +133,12 @@ public class AppConstant {
     public static final String MORE_THAN_TEN_KM = "10+ km";
     public static final String METERS = " m";
     public static final String K_METERS = " km";
+    public static final String STRING_TWO_HOUR = "2 ore";
+    public static final String STRING_5_HOUR = "5 ore";
+    public static final String STRING_60_MIN = "1 ora";
+    public static final String STRING_3_HOUR = "3 ora";
+    public static final String STRING_4_HOUR = "4 ora";
+    public static final String STRING_6_HOUR = "6 ora";
     public static final String STRING_45_MIN = "45 min";
     public static final String STRING_30_MIN = "30 min";
     public static final String STRING_15_MIN = "15 min";
@@ -186,7 +192,14 @@ public class AppConstant {
 
     // Utility Int
     public static int FOURTY_5_MIN = 45;
+    public static int TWO_HOUR = 120;
+    public static int THREE_HOUR = 180;
+    public static int FOUR_HOUR = 240;
+    public static int SIX_HOUR = 360;
+    public static int FIVE_HOUR = 300;
     public static int FIFTEEN_MIN = 15;
+    public static int THIRTY_MIN = 30;
+    public static int ONE_HOUR = 30;
     public static int ZERO_MIN = 0;
     public static int DELAY_TEN_SEC = 10000;
     public static final int SHOP_START_HOUR = 8;

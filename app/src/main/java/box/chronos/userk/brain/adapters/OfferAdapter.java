@@ -34,21 +34,32 @@ import static box.chronos.userk.brain.serverRequest.AppUrls.IMAGE_URL;
 import static box.chronos.userk.brain.utils.constants.AppConstant.EMPTY_STRING;
 import static box.chronos.userk.brain.utils.constants.AppConstant.EUR_SIGN;
 import static box.chronos.userk.brain.utils.constants.AppConstant.FIFTEEN_MIN;
+import static box.chronos.userk.brain.utils.constants.AppConstant.FIVE_HOUR;
 import static box.chronos.userk.brain.utils.constants.AppConstant.FIVE_KM;
 import static box.chronos.userk.brain.utils.constants.AppConstant.FOURTY_5_MIN;
+import static box.chronos.userk.brain.utils.constants.AppConstant.FOUR_HOUR;
 import static box.chronos.userk.brain.utils.constants.AppConstant.K_METERS;
 import static box.chronos.userk.brain.utils.constants.AppConstant.METERS;
 import static box.chronos.userk.brain.utils.constants.AppConstant.MORE_THAN_FIVE_KM;
+import static box.chronos.userk.brain.utils.constants.AppConstant.ONE_HOUR;
 import static box.chronos.userk.brain.utils.constants.AppConstant.ONE_KM;
 import static box.chronos.userk.brain.utils.constants.AppConstant.PERC_SIGN;
 import static box.chronos.userk.brain.utils.constants.AppConstant.SHOP_START_HOUR;
 import static box.chronos.userk.brain.utils.constants.AppConstant.SHOP_STOP_HOUR;
 import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_15_MIN;
 import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_30_MIN;
+import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_3_HOUR;
 import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_45_MIN;
+import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_4_HOUR;
+import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_5_HOUR;
+import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_60_MIN;
 import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_DUE;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.fixFloatFormat;
 import static box.chronos.userk.brain.utils.algebra.MathUtils.prepareDistanceOffers;
+import static box.chronos.userk.brain.utils.constants.AppConstant.STRING_TWO_HOUR;
+import static box.chronos.userk.brain.utils.constants.AppConstant.THIRTY_MIN;
+import static box.chronos.userk.brain.utils.constants.AppConstant.THREE_HOUR;
+import static box.chronos.userk.brain.utils.constants.AppConstant.TWO_HOUR;
 import static box.chronos.userk.brain.ux.AppMessage.NO_OFFER_MSG;
 import static box.chronos.userk.brain.ux.AppMessage.NO_OFFER_MSG_NOTTE;
 
@@ -161,13 +172,13 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
             int min = Integer.parseInt(time[0].trim());
             holder.timeout.setText(prepareTimeout(min));
 
-            if (min >= FOURTY_5_MIN) {
+            if (min >= TWO_HOUR) {
                 //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
                 holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_green));
-            } else if (min < FOURTY_5_MIN && min >= FIFTEEN_MIN) {
+            } else if (min < TWO_HOUR && min >= THIRTY_MIN) {
                 //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
                 holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_orange));
-            } else if (min < FIFTEEN_MIN) {
+            } else if (min < THIRTY_MIN) {
                 //holder.topLL.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
                 holder.timeout.setTextColor(ContextCompat.getColor(this.mContext, R.color.top_card_timeout_red));
             } else {
@@ -246,9 +257,19 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
 
     private String prepareTimeout(int min) {
         String res;
-        if (min >= FOURTY_5_MIN){
+        if (min >= FIVE_HOUR){
+            res = STRING_5_HOUR;
+        } else if (min < FIVE_HOUR && min >= FOUR_HOUR){
+            res = STRING_4_HOUR;
+        } else if (min < FOUR_HOUR && min >= THREE_HOUR){
+            res = STRING_3_HOUR;
+        } else if (min < THREE_HOUR && min >= TWO_HOUR){
+            res = STRING_TWO_HOUR;
+        } else if (min < TWO_HOUR && min >= ONE_HOUR){
+            res = STRING_60_MIN;
+        } else if (min < FOURTY_5_MIN && min >= THIRTY_MIN) {
             res = STRING_45_MIN;
-        } else if (min < FOURTY_5_MIN && min >= FIFTEEN_MIN) {
+        } else if (min < THIRTY_MIN && min >= FIFTEEN_MIN) {
             res = STRING_30_MIN;
         } else if (min < FIFTEEN_MIN) {
             res = STRING_15_MIN;

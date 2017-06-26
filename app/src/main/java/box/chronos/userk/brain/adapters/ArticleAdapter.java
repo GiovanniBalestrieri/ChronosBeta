@@ -187,7 +187,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
                 }
             })
                     .into(holder.thumbnail);//placeholder(R.drawable.progress_animation)
-
         } else {
             Glide.with(mContext).load(R.drawable.empty).placeholder(R.drawable.progress_animation).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.thumbnail);
         }
