@@ -114,8 +114,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
             int count = list.size();
             List<Offer> nlist = new ArrayList<Offer>(count);
 
-
-
             nlist = ListUtilities.searchArticlesString(list,filterString);
 
             results.values = nlist;

@@ -86,7 +86,7 @@ public class ListUtilities {
     public static List<Offer> findStringInOffers(Iterable<Offer> listOfOffers, String name) {
         List<Offer> offerList = new ArrayList<Offer>();
 
-        // TODO handle multiple results: string present in title  and description
+        // TODO handle multiple results: string present in title and description
         // will the offer be displayed twice?
         for(Offer off : listOfOffers) {
             if (off.getBusinessname() != null) {

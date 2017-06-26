@@ -283,7 +283,6 @@ public class OffersListFragment extends Fragment implements SwipeRefreshLayout.O
      */
     @Override
     public void onRefresh() {
-
         // Fetching data from server
         loadRecyclerViewData();
 
@@ -296,7 +295,6 @@ public class OffersListFragment extends Fragment implements SwipeRefreshLayout.O
         // Showing refresh animation before making http call
         mSwipeRefreshLayout.setRefreshing(true);
         prepareOffers();
-
     }
 
         /**
