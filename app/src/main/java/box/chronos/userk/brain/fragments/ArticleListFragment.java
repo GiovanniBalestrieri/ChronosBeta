@@ -496,6 +496,7 @@ public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.
                 if (jsonObject.has(DISCOUNT_PARAM))
                     ld.setDiscount(jsonObject.getString(DISCOUNT_PARAM).toString());
 
+
                 offerList.add(ld);
             }
             // Default order by distance
