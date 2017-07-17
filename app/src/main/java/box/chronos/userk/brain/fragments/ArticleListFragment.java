@@ -185,14 +185,14 @@ public class ArticleListFragment extends Fragment implements SwipeRefreshLayout.
                 new RecycleItemClickListener(getActivity(), new RecycleItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Offer lic = (Offer) offerList.get(position);
+                        Offer lic = adapter.getItem(position);
                         Log.d("YOLO", "Licence: " + lic.getTitle() + " clicked");
 
                         // Create new fragment and transaction
                         Toast.makeText(getActivity(),"Offer",Toast.LENGTH_SHORT);
                         Intent i = new Intent(getActivity(), ArticlePage.class);
 
-                        i.putExtra("Offer",offerList.get(position));
+                        i.putExtra("Offer",adapter.getItem(position));
                         if (lic.hasPicture()) {
                             List<String> list = new ArrayList<>();
                             for (int j = 0; j < lic.getAvailablePictures().size(); j++) {

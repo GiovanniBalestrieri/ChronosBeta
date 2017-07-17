@@ -345,6 +345,11 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyViewHolder
         notifyDataSetChanged();
     }
 
+
+    public Offer getItem(int position){
+        return filteredData.get(position);
+    }
+
     @Override
     public int getItemCount() {
         return filteredData.size();

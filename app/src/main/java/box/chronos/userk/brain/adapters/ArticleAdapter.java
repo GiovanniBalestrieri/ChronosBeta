@@ -128,9 +128,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
             filteredData = (ArrayList<Offer>) results.values;
             notifyDataSetChanged();
         }
-
     }
 
+    public Offer getItem(int position){
+        return filteredData.get(position);
+    }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
