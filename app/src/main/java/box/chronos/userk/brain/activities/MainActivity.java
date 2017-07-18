@@ -439,7 +439,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 @Override
                 public void onRestInteractionError(String message) {
-                    Utility.showAlertDialog(MainActivity.self, message);
+                    Utility.showAlertDialog(MainActivity.this, message);
                 }
             });
             interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "no");

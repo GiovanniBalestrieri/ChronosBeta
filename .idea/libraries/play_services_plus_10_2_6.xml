@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="play-services-plus-10.2.6">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/f8bd60882a414311f3418d0160a3792984886210/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/f8bd60882a414311f3418d0160a3792984886210/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/790600c9f9fab19932ca5568cf6a21115e54a33e/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/790600c9f9fab19932ca5568cf6a21115e54a33e/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

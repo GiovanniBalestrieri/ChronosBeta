@@ -239,7 +239,7 @@ public class ArticlePage extends AppCompatActivity {
 
             @Override
             public void onRestInteractionError(String message) {
-                Utility.showAlertDialog(getApplicationContext(), message);
+                Utility.showAlertDialog(ArticlePage.this,  message);
             }
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, OFFER_CLICKED_METHOD);
@@ -404,7 +404,7 @@ public class ArticlePage extends AppCompatActivity {
                     if (object.getString(SUCCESS_PARAM).equalsIgnoreCase(ONE_RESP)) {
                         Log.d("1= SEC","RICEVUTO");
                     } else {
-                        Utility.showAlertDialog(getApplicationContext(), object.getString("message"));
+                        Utility.showAlertDialog(ArticlePage.this, object.getString("message"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -413,7 +413,7 @@ public class ArticlePage extends AppCompatActivity {
 
             @Override
             public void onRestInteractionError(String message) {
-                Utility.showAlertDialog(getApplicationContext(), message);
+                Utility.showAlertDialog(ArticlePage.this,  message);
             }
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "hit");

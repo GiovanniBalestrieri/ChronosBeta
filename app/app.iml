@@ -92,7 +92,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
@@ -122,13 +121,10 @@
     <orderEntry type="library" exported="" name="support-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
-    <orderEntry type="library" exported="" name="facebook-android-sdk-4.23.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-safetynet-10.2.6" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-integration-1.3" level="project" />
     <orderEntry type="library" exported="" name="firebase-auth-10.2.6" level="project" />
-    <orderEntry type="library" exported="" name="bolts-tasks-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="customtabs-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-base-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="firebase-iid-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="glide-3.7.0" level="project" />
@@ -145,6 +141,7 @@
     <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="volley-1.0.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" name="facebook-android-sdk-4.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-nearby-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-cast-10.2.6" level="project" />
@@ -156,7 +153,6 @@
     <orderEntry type="library" exported="" name="play-services-places-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-location-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-wearable-10.2.6" level="project" />
-    <orderEntry type="library" exported="" name="bolts-android-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-crash-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="firebase-config-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-plus-10.2.6" level="project" />
@@ -168,7 +164,6 @@
     <orderEntry type="library" exported="" name="play-services-basement-10.2.6" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javawriter-2.1.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-games-10.2.6" level="project" />
-    <orderEntry type="library" exported="" name="bolts-applinks-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-fitness-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="PinchToZoom-6ed982fe58" level="project" />
@@ -182,6 +177,7 @@
     <orderEntry type="library" exported="" name="play-services-vision-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="support-v13-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-awareness-10.2.6" level="project" />
+    <orderEntry type="library" exported="" name="bolts-android-1.1.4" level="project" />
     <orderEntry type="library" exported="" name="firebase-appindexing-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-ads-lite-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="play-services-clearcut-10.2.6" level="project" />

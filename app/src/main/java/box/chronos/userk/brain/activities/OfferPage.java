@@ -354,7 +354,7 @@ public class OfferPage extends AppCompatActivity {
 
             @Override
             public void onRestInteractionError(String message) {
-                Utility.showAlertDialog(getApplicationContext(), message);
+                Utility.showAlertDialog(OfferPage.this, message);
             }
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, "hit");
@@ -392,7 +392,7 @@ public class OfferPage extends AppCompatActivity {
 
             @Override
             public void onRestInteractionError(String message) {
-                Utility.showAlertDialog(getApplicationContext(), message);
+                Utility.showAlertDialog(OfferPage.this,message);
             }
         });
         interaction.makeServiceRequest(AppUrls.COMMON_URL, pairs, TAG, OFFER_CLICKED_METHOD);
